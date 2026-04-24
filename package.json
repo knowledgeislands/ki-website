@@ -1,0 +1,29 @@
+{
+  "name": "arcadia-website",
+  "description": "The public facing portal of Arcadia, designed to share knowledge outward and provide access to key resources from the principal island",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5",
+    "eslint": "^9.39.3",
+    "json5": "^2.2.3",
+    "markdownlint-cli2": "^0.17.2",
+    "prettier": "^3.8.3",
+    "syncpack": "^14.3.0",
+    "typescript": "^5.7.3",
+    "zod": "^4.3.6",
+    "zod-validation-error": "^5.0.0"
+  },
+  "private": true,
+  "scripts": {
+    "build": "node --import tsx/esm node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
+    "clean": "rm -rf node_modules",
+    "lint:code": "npx eslint .",
+    "lint:deps:missing": "npx depcheck --json | npx node-jq --sort-keys '.' | npx node-jq '.missing | keys | .[]' | xargs npm add -D",
+    "lint:deps:unused": "npx depcheck --json | npx node-jq --sort-keys '.' | npx node-jq '.devDependencies[]' | xargs npm uninstall",
+    "lint:md": "npx prettier --write \"**/*.md\" --ignore-path .gitignore && npx markdownlint-cli2",
+    "lint:package": "npx syncpack format",
+    "lint:types": "npx tsc --noEmit",
+    "update:libs": "npx ncu"
+  },
+  "type": "module"
+}
