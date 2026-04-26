@@ -102,7 +102,7 @@ export default function(eleventyConfig: UserConfig) {
   // Allows .json5 files in src/_data/ to be used as global data files.
   // Uses read:false to receive the file path rather than contents, which
   // allows selective exclusion of sub-paths that are aggregated elsewhere
-  // (see the comment below — add any such paths here).
+  // (see the comment below - add any such paths here).
   eleventyConfig.addDataExtension('json5', {
     read: false,
     parser: (filePath: string) => {
@@ -114,16 +114,16 @@ export default function(eleventyConfig: UserConfig) {
 
   // ── Filters ──────────────────────────────────────────────────────────────
 
-  // JSON dump — useful for debugging data in templates: {{ myData | jsonDump }}
+  // JSON dump - useful for debugging data in templates: {{ myData | jsonDump }}
   eleventyConfig.addFilter('jsonDump', (val: unknown) => JSON.stringify(val));
 
-  // unique — deduplicate an array: {{ tags | unique }}
+  // unique - deduplicate an array: {{ tags | unique }}
   eleventyConfig.addFilter('unique', (arr: unknown) => {
     if (!Array.isArray(arr)) return arr;
     return [...new Set(arr)];
   });
 
-  // groupBy — group an array of objects by a key:
+  // groupBy - group an array of objects by a key:
   // {% set grouped = items | groupBy("category") %}
   // {% for group in grouped %}{{ group.key }}: {{ group.values | length }}{% endfor %}
   eleventyConfig.addFilter('groupBy', (arr: unknown, key: string) => {
