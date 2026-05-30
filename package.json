@@ -1,39 +1,66 @@
 {
-  "name": "arcadia-website",
+  "name": "@knowledgeislands/arcadia-website",
   "description": "The public facing portal of Arcadia, designed to share knowledge outward and provide access to key resources from the principal island",
   "version": "1.0.0",
+  "author": "kris@kris.me.uk",
+  "bugs": {
+    "url": "https://github.com/knowledgeislands/arcadia-website/issues"
+  },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "@stylistic/eslint-plugin": "^5.10.0",
+    "@biomejs/biome": "2.4.15",
     "@tailwindcss/cli": "^4.2.4",
-    "@types/node": "^25.6.0",
-    "@typescript-eslint/utils": "^8.59.0",
+    "@types/node": "^25.8.0",
     "concurrently": "^9.2.1",
-    "eslint": "^9.39.3",
-    "eslint-config-love": "^153.0.0",
-    "eslint-plugin-canonical": "^5.1.3",
-    "eslint-plugin-perfectionist": "^5.9.0",
-    "eslint-plugin-unused-imports": "^4.4.1",
+    "husky": "^9.1.7",
     "json5": "^2.2.3",
+    "lint-staged": "^17.0.4",
     "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.3",
-    "syncpack": "^14.3.0",
+    "syncpack": "^15.1.2",
     "typescript": "^6.0.3"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "homepage": "https://github.com/knowledgeislands/arcadia-website#readme",
+  "keywords": [
+    "arcadia",
+    "eleventy",
+    "knowledge-islands",
+    "tailwindcss",
+    "website"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "*.{ts,js,mjs,json,jsonc}": "bunx @biomejs/biome check --write --no-errors-on-unmatched",
+    "*.md": [
+      "bunx prettier --write",
+      "bunx markdownlint-cli2"
+    ]
+  },
+  "packageManager": "bun@1.3.14",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/knowledgeislands/arcadia-website.git"
+  },
   "scripts": {
     "build": "node --experimental-strip-types node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
-    "clean": "rm -rf dist node_modules package.lock.json",
-    "dev": "concurrently --names css,11ty --prefix-colors cyan,yellow \"npm run dev:css\" \"npm run dev:serve\"",
-    "dev:css": "npx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --watch",
+    "clean": "rm -rf dist node_modules",
+    "deps:missing": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.missing | keys | .[]' | xargs bun add -D",
+    "deps:unused": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.devDependencies[]' | xargs bun remove",
+    "deps:update": "bun update",
+    "dev": "concurrently --names css,11ty --prefix-colors cyan,yellow \"bun run dev:css\" \"bun run dev:serve\"",
+    "dev:css": "bunx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --watch",
     "dev:serve": "node --experimental-strip-types node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
-    "lint:code": "npx eslint .",
-    "lint:deps:missing": "npx depcheck --json | npx node-jq --sort-keys '.' | npx node-jq '.missing | keys | .[]' | xargs npm add -D",
-    "lint:deps:unused": "npx depcheck --json | npx node-jq --sort-keys '.' | npx node-jq '.devDependencies[]' | xargs npm uninstall",
-    "lint:md": "npx prettier --write \"**/*.md\" --ignore-path .gitignore && npx markdownlint-cli2",
-    "lint:package": "npx syncpack format",
-    "lint:types": "npx tsc --noEmit",
-    "update:libs": "npx npm-check-updates"
+    "lint:check": "bunx @biomejs/biome check",
+    "lint:fix": "bunx @biomejs/biome check --write --unsafe",
+    "lint:format": "bunx @biomejs/biome format --write",
+    "lint:md": "bunx prettier --write \"**/*.md\" --ignore-path .gitignore && bunx markdownlint-cli2",
+    "lint:package": "bunx syncpack format",
+    "lint:types": "tsc --noEmit",
+    "prepare": "husky"
   },
   "type": "module"
 }
