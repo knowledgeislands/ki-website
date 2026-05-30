@@ -9,15 +9,15 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
     "@biomejs/biome": "2.4.15",
-    "@tailwindcss/cli": "^4.2.4",
-    "@types/node": "^25.8.0",
+    "@tailwindcss/cli": "^4.3.0",
+    "@types/node": "^25.9.1",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "json5": "^2.2.3",
-    "lint-staged": "^17.0.4",
+    "lint-staged": "^17.0.6",
     "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.3",
-    "syncpack": "^15.1.2",
+    "syncpack": "^15.3.1",
     "typescript": "^6.0.3"
   },
   "engines": {
