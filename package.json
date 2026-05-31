@@ -8,10 +8,10 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.4.16",
     "@tailwindcss/cli": "^4.3.0",
     "@types/node": "^25.9.1",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.0",
     "husky": "^9.1.7",
     "json5": "^2.2.3",
     "lint-staged": "^17.0.7",
@@ -47,7 +47,7 @@
   },
   "scripts": {
     "build": "node --experimental-strip-types node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
-    "clean": "rm -rf dist node_modules",
+    "clean": "rm -rf {dist,node_modules}",
     "deps:missing": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.missing | keys | .[]' | xargs bun add -D",
     "deps:unused": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.devDependencies[]' | xargs bun remove",
     "deps:update": "bun update",
