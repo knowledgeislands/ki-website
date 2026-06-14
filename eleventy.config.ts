@@ -1,8 +1,8 @@
+import { execSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
+import { dirname, relative, resolve, sep } from 'node:path'
 import type { UserConfig } from '@11ty/eleventy'
-import { execSync } from 'child_process'
-import { readFileSync } from 'fs'
 import JSON5 from 'json5'
-import { dirname, relative, resolve, sep } from 'path'
 
 // ─── Eleventy config ──────────────────────────────────────────────────────────
 
@@ -126,7 +126,7 @@ export default function (eleventyConfig: UserConfig) {
     for (const item of arr) {
       const k = String((item as Record<string, unknown>)[key] ?? '')
       if (!map.has(k)) map.set(k, [])
-      map.get(k)!.push(item)
+      map.get(k)?.push(item)
     }
     return [...map.entries()].map(([k, values]) => ({ key: k, values }))
   })
