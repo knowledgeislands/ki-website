@@ -9,3 +9,7 @@ visibility = "private"   # "public" | "private"
 [knowledgeislands-engineering]
 # This repo fully conforms, so it declares no check overrides. To diverge, add a
 # [knowledgeislands-engineering.checks] table with one boolean per check (true = enforce).
+
+# Read by the knowledgeislands-11ty-websites skill (the Eleventy + Tailwind site-build standard).
+# Presence of this table opts the repo into that standard; it takes no per-repo keys today.
+[knowledgeislands-11ty-websites]
