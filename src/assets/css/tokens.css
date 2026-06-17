@@ -1,0 +1,29 @@
+/* Semantic design tokens — CSS custom properties consumed both by raw CSS and,
+   via @theme inline below, by Tailwind utilities, so the two share one palette.
+   A neutral shadcn/ui-style starting set; resample from brand/hero imagery once
+   the site gains a visual identity. Templates use these tokens, never raw hex. */
+@layer base {
+  :root {
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(240 10% 4%);
+    --muted: hsl(240 5% 96%);
+    --muted-foreground: hsl(240 4% 46%);
+    --primary: hsl(240 6% 10%);
+    --primary-foreground: hsl(0 0% 98%);
+    --border: hsl(240 6% 90%);
+    --ring: hsl(240 5% 65%);
+    --radius: 0.5rem;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-md: var(--radius);
+}

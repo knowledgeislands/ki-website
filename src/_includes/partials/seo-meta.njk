@@ -1,0 +1,18 @@
+{# SEO meta — emitted into <head> from `site` data + page front matter. Included by base.njk. #}
+{%- set pageTitle = title or site.title -%}
+{%- set pageDesc = description or site.description -%}
+<meta name="description" content="{{ pageDesc }}" />
+{%- if noindex %}
+<meta name="robots" content="noindex, nofollow" />
+{%- else %}
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ pageTitle }}" />
+<meta property="og:description" content="{{ pageDesc }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ pageTitle }}" />
+<meta name="twitter:description" content="{{ pageDesc }}" />
+{%- if site.url %}
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+{%- endif %}
+{%- endif %}
