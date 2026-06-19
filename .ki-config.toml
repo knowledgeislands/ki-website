@@ -13,3 +13,9 @@ visibility = "private"   # "public" | "private"
 # Read by the knowledgeislands-11ty-websites skill (the Eleventy + Tailwind site-build standard).
 # Presence of this table opts the repo into that standard; it takes no per-repo keys today.
 [knowledgeislands-11ty-websites]
+
+# Read by the knowledgeislands-cloudflare-hosting skill (Workers + Static Assets serving dist/).
+# site-root is the path (relative to the repo root) where wrangler.jsonc lives.
+# "." for the flat layout (wrangler.jsonc at repo root).
+[knowledgeislands-cloudflare-hosting]
+site-root = "."

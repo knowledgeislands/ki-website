@@ -16,8 +16,8 @@ any root.
 - **The toolchain** (package.json scripts, `tsconfig`, `biome`) follows `knowledgeislands-engineering`; the `bun run lint:*` family is the
   gate.
 - **Markdown / TOML style** follows `knowledgeislands-authoring`; `bun run lint:md` is the mechanical gate.
-- **Hosting**, once the site is deployed, follows `knowledgeislands-cloudflare-hosting` (Workers + Static Assets serving `dist/`); add its
-  `[knowledgeislands-cloudflare-hosting]` opt-in table to `.ki-config.toml` at that point.
+- **Hosting** follows `knowledgeislands-cloudflare-hosting` (Workers + Static Assets serving `dist/`); `wrangler.jsonc` is at the repo root
+  (flat layout, `./dist`), and the `site:deploy` / `site:preview` / `site:clean` scripts are the entry points.
 
 ## Toolchain
 

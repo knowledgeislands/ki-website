@@ -18,7 +18,8 @@
     "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.8.4",
     "syncpack": "^15.3.2",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.102.0"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -61,7 +62,10 @@
     "lint:md:check": "bunx prettier --check \"**/*.md\" --ignore-path .gitignore && bunx markdownlint-cli2",
     "lint:package": "bunx syncpack format",
     "lint:types": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "site:clean": "rm -rf dist .wrangler",
+    "site:deploy": "bunx wrangler deploy",
+    "site:preview": "bun run build && bunx wrangler dev"
   },
   "type": "module"
 }
