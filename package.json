@@ -63,6 +63,7 @@
     "lint:package": "bunx syncpack format",
     "lint:types": "tsc --noEmit",
     "prepare": "husky",
+    "skills:link:project": "bun $HOME/.claude/skills/knowledgeislands-bootstrap/scripts/link-skills.ts",
     "site:clean": "rm -rf dist .wrangler",
     "site:deploy": "bunx wrangler deploy",
     "site:preview": "bun run build && bunx wrangler dev"
