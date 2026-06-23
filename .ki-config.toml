@@ -19,3 +19,13 @@ visibility = "private"   # "public" | "private"
 # "." for the flat layout (wrangler.jsonc at repo root).
 [knowledgeislands-cloudflare-hosting]
 site-root = "."
+
+# Tokenomics governance — audits the standing context surface for this environment.
+# MCP server count is user-scoped (not repo-controlled); the raised budget documents
+# the acknowledged state (same as the harness).
+[knowledgeislands-tokenomics]
+headroom = "recommended"
+preferred_model = "sonnet"
+
+[knowledgeislands-tokenomics.budgets]
+mcp_servers = 20   # 19 user-scoped at time of first audit (2026-06-22); revisit when scoped
