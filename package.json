@@ -42,31 +42,34 @@
   },
   "packageManager": "bun@1.3.14",
   "private": true,
+  "workspaces": [
+    "site"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/knowledgeislands/arcadia-website.git"
   },
   "scripts": {
-    "build": "node --experimental-strip-types node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "clean": "rm -rf {dist,node_modules}",
     "deps:missing": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.missing | keys | .[]' | xargs bun add -D",
     "deps:unused": "bunx depcheck --json | bunx node-jq --sort-keys '.' | bunx node-jq '.devDependencies[]' | xargs bun remove",
     "deps:update": "bun update --latest",
-    "dev": "concurrently --names css,11ty --prefix-colors cyan,yellow \"bun run dev:css\" \"bun run dev:serve\"",
-    "dev:css": "bunx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --watch",
-    "dev:serve": "node --experimental-strip-types node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "lint:check": "bunx @biomejs/biome check",
     "lint:fix": "bunx @biomejs/biome check --write --unsafe",
     "lint:format": "bunx @biomejs/biome format --write",
     "lint:md": "bunx prettier --write \"**/*.md\" --ignore-path .gitignore && bunx markdownlint-cli2",
     "lint:md:check": "bunx prettier --check \"**/*.md\" --ignore-path .gitignore && bunx markdownlint-cli2",
     "lint:package": "bunx syncpack format",
-    "lint:types": "tsc --noEmit",
+    "lint:types": "bunx tsc --noEmit -p site",
     "prepare": "husky",
-    "skills:link:project": "bun $HOME/.claude/skills/knowledgeislands-bootstrap/scripts/link-skills.ts",
-    "site:clean": "rm -rf dist .wrangler",
-    "site:deploy": "bunx wrangler deploy",
-    "site:preview": "bun run build && bunx wrangler dev"
+    "site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
+    "site:clean": "rm -rf dist site/.wrangler",
+    "site:deploy": "cd site && bunx wrangler deploy",
+    "site:dev": "concurrently --names css,11ty --prefix-colors cyan,yellow \"bun run site:dev:css\" \"bun run site:dev:serve\"",
+    "site:dev:css": "cd site && bunx tailwindcss -i src/assets/css/main.css -o ../dist/assets/css/main.css --watch",
+    "site:dev:serve": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
+    "site:preview": "bun run site:build && cd site && bunx wrangler dev",
+    "skills:link:project": "bun $HOME/.claude/skills/knowledgeislands-bootstrap/scripts/link-skills.ts"
   },
   "type": "module"
 }

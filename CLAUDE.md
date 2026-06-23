@@ -16,18 +16,21 @@ any root.
 - **The toolchain** (package.json scripts, `tsconfig`, `biome`) follows `knowledgeislands-engineering`; the `bun run lint:*` family is the
   gate.
 - **Markdown / TOML style** follows `knowledgeislands-authoring`; `bun run lint:md` is the mechanical gate.
-- **Hosting** follows `knowledgeislands-cloudflare-hosting` (Workers + Static Assets serving `dist/`); `wrangler.jsonc` is at the repo root
-  (flat layout, `./dist`), and the `site:deploy` / `site:preview` / `site:clean` scripts are the entry points.
+- **The repo shape** is a **monorepo** (`knowledgeislands-engineering` §0): the root `package.json` declares `"workspaces": ["site"]` and
+  the site lives in the `site/` workspace (`site/eleventy.config.ts`, `site/src/`, `site/tsconfig.json`). `dist/` is built to the repo root;
+  all site scripts carry the `site:` prefix.
+- **Hosting** follows `knowledgeislands-cloudflare-hosting` (Workers + Static Assets serving `dist/`); `wrangler.jsonc` lives in `site/`
+  (`assets.directory: "../dist"`), and the `site:deploy` / `site:preview` / `site:clean` scripts are the entry points.
 
 ## Toolchain
 
 [Bun](https://bun.sh) for install/dev.
 
 ```bash
-bun install        # install deps and wire the husky pre-commit hook
-bun run dev        # Tailwind watch + Eleventy serve on http://localhost:3000
-bun run build      # compile the site to dist/
-bun run lint:check # Biome (TypeScript + JSON)
-bun run lint:md    # Prettier + markdownlint over Markdown
-bun run lint:types # tsc --noEmit
+bun install         # install deps and wire the husky pre-commit hook
+bun run site:dev    # Tailwind watch + Eleventy serve on http://localhost:3000
+bun run site:build  # compile the site to dist/
+bun run lint:check  # Biome (TypeScript + JSON)
+bun run lint:md     # Prettier + markdownlint over Markdown
+bun run lint:types  # tsc --noEmit -p site
 ```

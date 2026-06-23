@@ -7,7 +7,9 @@ import JSON5 from 'json5'
 // ─── Eleventy config ──────────────────────────────────────────────────────────
 
 export default function (eleventyConfig: UserConfig) {
-  const outputRoot = resolve(process.cwd(), 'dist')
+  // The build runs from the site/ workspace (cwd = site/), so dist/ at the repo
+  // root is one level up. src/ is addressed relative to site/; dist/ via ../dist.
+  const outputRoot = resolve(process.cwd(), '../dist')
 
   // ── Relative URL helper ──────────────────────────────────────────────────
   // Converts absolute internal URLs to relative paths from the current output
@@ -32,7 +34,7 @@ export default function (eleventyConfig: UserConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/images')
   eleventyConfig.addPassthroughCopy('src/assets/js')
   // Vendor Lucide UMD bundle from node_modules so we don't depend on a CDN in production.
-  eleventyConfig.addPassthroughCopy({ 'node_modules/lucide/dist/umd/lucide.min.js': 'assets/js/lucide.min.js' })
+  eleventyConfig.addPassthroughCopy({ '../node_modules/lucide/dist/umd/lucide.min.js': 'assets/js/lucide.min.js' })
 
   // ── Transform: inject external-link icons ────────────────────────────────
   // Adds a Lucide external-link icon to any prose <a href="https://..."> link.
@@ -67,12 +69,12 @@ export default function (eleventyConfig: UserConfig) {
   // the browser whenever Tailwind writes a new dist/assets/css/main.css.
   eleventyConfig.on('eleventy.before', ({ runMode }: { runMode: string }) => {
     if (runMode !== 'serve' && runMode !== 'watch') {
-      execSync('npx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --minify', { stdio: 'inherit' })
+      execSync('npx tailwindcss -i src/assets/css/main.css -o ../dist/assets/css/main.css --minify', { stdio: 'inherit' })
     }
   })
   // Watch the compiled CSS so the dev server reloads the browser whenever
   // the Tailwind --watch process writes a new dist/assets/css/main.css.
-  eleventyConfig.addWatchTarget('./dist/assets/css/main.css')
+  eleventyConfig.addWatchTarget('../dist/assets/css/main.css')
 
   // eleventyConfig.addPassthroughCopy('src/assets');
   // Note: image assets embedded as base64 data URIs via _data files (mount restrictions
@@ -154,7 +156,7 @@ export default function (eleventyConfig: UserConfig) {
   return {
     dir: {
       input: 'src',
-      output: 'dist',
+      output: '../dist',
       includes: '_includes',
       data: '_data'
     },
