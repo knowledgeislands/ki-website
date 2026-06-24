@@ -16,9 +16,14 @@
         "markdownlint-cli2": "^0.22.1",
         "prettier": "^3.8.4",
         "syncpack": "^15.3.2",
+        "tailwindcss": "^4.3.1",
         "typescript": "^6.0.3",
         "wrangler": "^4.103.0",
       },
+    },
+    "site": {
+      "name": "@knowledgeislands/arcadia-site",
+      "version": "1.0.0",
     },
   },
   "packages": {
@@ -187,6 +192,8 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
+
+    "@knowledgeislands/arcadia-site": ["@knowledgeislands/arcadia-site@workspace:site"],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
