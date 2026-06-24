@@ -1,6 +1,6 @@
 {
   "name": "@knowledgeislands/arcadia-website",
-  "description": "The public facing portal of Arcadia, designed to share knowledge outward and provide access to key resources from the principal island",
+  "description": "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources.",
   "version": "1.0.0",
   "author": "kris@kris.me.uk",
   "bugs": {
