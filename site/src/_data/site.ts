@@ -1,6 +1,12 @@
 const site = {
   title: 'Knowledge Islands',
-  description: 'Knowledge Islands are self-governing, values-driven communities that preserve and share practical wisdom across domains like learning, culture, governance, and technology'
+  tagline: 'Knowledge as a civilisation question.',
+  description:
+    'Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.',
+  nav: [
+    { label: 'Philosophy', href: '/philosophy/' },
+    { label: 'Model', href: '/model/' },
+  ],
 }
 
 export default site

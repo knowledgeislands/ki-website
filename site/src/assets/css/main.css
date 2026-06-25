@@ -1,2 +1,252 @@
 @import "tailwindcss";
 @import "./tokens.css";
+
+@layer base {
+  html {
+    font-family: var(--font-body);
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    color: var(--color-ocean);
+    line-height: 1.15;
+  }
+
+  a {
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-forest);
+    text-decoration: underline;
+  }
+}
+
+@layer components {
+  /* Section backgrounds */
+  .section-parchment {
+    background-color: var(--color-parchment);
+  }
+
+  .section-mist {
+    background-color: var(--color-mist);
+  }
+
+  .section-ocean {
+    background-color: var(--color-ocean);
+    color: var(--color-parchment);
+  }
+
+  .section-navy {
+    background-color: var(--color-navy);
+    color: var(--color-parchment);
+  }
+
+  /* Typography utilities */
+  .heading-display {
+    font-family: var(--font-heading);
+    color: var(--color-ocean);
+  }
+
+  .heading-display-light {
+    font-family: var(--font-heading);
+    color: var(--color-parchment);
+  }
+
+  .text-body {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    line-height: 1.75;
+  }
+
+  .text-body-light {
+    font-family: var(--font-body);
+    color: var(--color-parchment);
+    opacity: 0.85;
+    line-height: 1.75;
+  }
+
+  /* Cards */
+  .card-ki {
+    background-color: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: 0 1px 4px rgb(26 32 48 / 6%);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .card-ki:hover {
+    box-shadow: 0 4px 16px rgb(26 32 48 / 10%);
+  }
+
+  .card-ocean {
+    background-color: var(--color-ocean);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    color: var(--color-parchment);
+  }
+
+  /* Gold accent line used for pull quotes and dividers */
+  .accent-gold {
+    border-left: 3px solid var(--color-gold);
+    padding-left: 1.25rem;
+  }
+
+  /* Button styles */
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--color-forest);
+    color: var(--color-parchment);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      transform 0.1s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-moss);
+    color: var(--color-parchment);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-ocean);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--color-ocean);
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease,
+      transform 0.1s ease;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-ocean);
+    color: var(--color-parchment);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost-light {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-parchment);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius-md);
+    border: 1.5px solid rgb(245 239 224 / 50%);
+    text-decoration: none;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .btn-ghost-light:hover {
+    background-color: rgb(245 239 224 / 10%);
+    border-color: var(--color-parchment);
+    text-decoration: none;
+  }
+
+  /* Icon symbol containers */
+  .symbol-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--color-mist);
+    color: var(--color-ocean);
+    margin-bottom: 1rem;
+  }
+
+  .symbol-circle-forest {
+    background-color: rgb(45 90 61 / 12%);
+    color: var(--color-forest);
+  }
+
+  .symbol-circle-gold {
+    background-color: rgb(200 150 60 / 15%);
+    color: var(--color-gold);
+  }
+
+  .symbol-circle-teal {
+    background-color: rgb(61 138 138 / 12%);
+    color: var(--color-teal);
+  }
+
+  /* Divider */
+  .divider-gold {
+    width: 3rem;
+    height: 2px;
+    background-color: var(--color-gold);
+    margin: 1.5rem 0;
+  }
+
+  /* Page container */
+  .page-container {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  /* Prose for content pages */
+  .prose-ki {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    line-height: 1.8;
+    max-width: 65ch;
+  }
+
+  .prose-ki h2 {
+    font-family: var(--font-heading);
+    color: var(--color-ocean);
+    font-size: 1.75rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-ki h3 {
+    font-family: var(--font-heading);
+    color: var(--color-ocean);
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-ki p {
+    margin-bottom: 1.25rem;
+  }
+
+  .prose-ki ul {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    list-style: disc;
+  }
+
+  .prose-ki li {
+    margin-bottom: 0.5rem;
+  }
+}

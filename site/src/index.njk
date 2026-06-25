@@ -1,8 +1,321 @@
 ---
 layout: layouts/base.njk
+description: Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.
 ---
 
-<main>
-  <h1>{{ site.title }}</h1>
-  <p>{{ site.description }}</p>
-</main>
+<!-- ═══ HERO ═══ -->
+<section class="section-navy" style="padding: 6rem 0 5rem; position: relative; overflow: hidden;">
+  <!-- Subtle cartographic grid overlay -->
+  <div aria-hidden="true" style="position: absolute; inset: 0; background-image: radial-gradient(circle at 1px 1px, rgb(245 239 224 / 4%) 1px, transparent 0); background-size: 32px 32px; pointer-events: none;"></div>
+
+  <div class="page-container" style="position: relative; text-align: center;">
+    <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-gold); margin-bottom: 1.5rem;">Knowledge Islands</p>
+
+    <h1 style="font-family: var(--font-heading); font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; color: var(--color-parchment); line-height: 1.1; margin-bottom: 1.5rem; max-width: 18ch; margin-inline: auto;">
+      Knowledge is a civilisation&nbsp;question.
+    </h1>
+
+    <p style="font-family: var(--font-body); font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 52ch; margin-inline: auto; line-height: 1.7; margin-bottom: 2.5rem;">
+      Not a filing problem. Not a search problem. Not a productivity hack. Knowledge Islands is a model for building, governing, and evolving knowledge — across individuals, teams, and generations.
+    </p>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/philosophy/" class="btn-primary">Explore the Philosophy</a>
+      <a href="/model/" class="btn-ghost-light">See the Model</a>
+    </div>
+
+    <!-- Decorative island SVG -->
+    <div aria-hidden="true" style="margin-top: 4rem; opacity: 0.15;">
+      <svg width="480" height="120" viewBox="0 0 480 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 100%;">
+        <!-- Ocean surface -->
+        <path d="M0 80 Q60 70 120 80 Q180 90 240 80 Q300 70 360 80 Q420 90 480 80 L480 120 L0 120 Z" fill="#3d8a8a" opacity="0.5"/>
+        <path d="M0 88 Q60 78 120 88 Q180 98 240 88 Q300 78 360 88 Q420 98 480 88 L480 120 L0 120 Z" fill="#3d8a8a" opacity="0.3"/>
+        <!-- Main island -->
+        <path d="M160 80 Q180 50 200 40 Q220 28 240 24 Q260 28 280 40 Q300 50 320 80 Z" fill="#4a7a5a"/>
+        <path d="M175 80 Q195 55 210 45 Q225 36 240 32 Q255 36 270 45 Q285 55 305 80 Z" fill="#2d5a3d"/>
+        <!-- Hills -->
+        <path d="M185 80 Q200 62 215 58 Q225 54 235 52 Q245 54 255 58 Q270 62 285 80 Z" fill="#3d6b4a" opacity="0.7"/>
+        <!-- Lighthouse -->
+        <rect x="238" y="14" width="4" height="12" fill="#c4a882" rx="1"/>
+        <polygon points="236,14 244,14 242,10 240,10" fill="#c4a882"/>
+        <rect x="237" y="20" width="6" height="2" fill="#c8963c" rx="0.5"/>
+        <!-- Light rays -->
+        <line x1="240" y1="12" x2="270" y2="2" stroke="#c8963c" stroke-width="1.5" opacity="0.6"/>
+        <line x1="240" y1="12" x2="210" y2="2" stroke="#c8963c" stroke-width="1.5" opacity="0.6"/>
+        <!-- Small island right -->
+        <ellipse cx="390" cy="82" rx="40" ry="8" fill="#4a7a5a" opacity="0.6"/>
+        <path d="M368 80 Q380 66 390 62 Q400 66 412 80 Z" fill="#2d5a3d" opacity="0.7"/>
+        <!-- Small island left -->
+        <ellipse cx="90" cy="84" rx="30" ry="6" fill="#4a7a5a" opacity="0.5"/>
+        <path d="M72 82 Q82 70 90 66 Q98 70 108 82 Z" fill="#2d5a3d" opacity="0.6"/>
+        <!-- Route between islands -->
+        <path d="M130 82 Q180 75 240 80 Q300 75 350 82" stroke="#c8963c" stroke-width="1" stroke-dasharray="6 4" opacity="0.4" fill="none"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE THREE LAYERS ═══ -->
+<section class="section-parchment" style="padding: 5rem 0;">
+  <div class="page-container">
+    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
+      <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-teal); margin-bottom: 1rem;">The Foundation</p>
+      <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Three layers. One journey.</h2>
+      <p style="color: var(--color-ink-light); line-height: 1.7;">Knowledge Islands distinguishes carefully between information, knowledge, and wisdom — because the work of moving between them is precisely what islands are for.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+
+      <!-- Information -->
+      <div class="card-ki">
+        <div class="symbol-circle">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="12" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="3" y="12" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="12" y="12" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="divider-gold"></div>
+        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Information</h3>
+        <p style="color: var(--color-ink-light); line-height: 1.7; margin-bottom: 1rem;">Organised data. It exists independently of the reader — databases, documents, feeds, records. Structure without meaning.</p>
+        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The terrain before it is charted.</p>
+      </div>
+
+      <!-- Knowledge -->
+      <div class="card-ki" style="border-color: var(--color-teal); box-shadow: 0 1px 4px rgb(61 138 138 / 12%);">
+        <div class="symbol-circle symbol-circle-teal">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="7" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="15" cy="11" r="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M10 11 L12 11" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 7 Q11 3 18 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M4 15 Q11 19 18 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="divider-gold"></div>
+        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Knowledge</h3>
+        <p style="color: var(--color-ink-light); line-height: 1.7; margin-bottom: 1rem;">Information interpreted and applied. It requires you — your context, your connections, your lived experience. It changes when you do.</p>
+        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The island as it is inhabited.</p>
+      </div>
+
+      <!-- Wisdom -->
+      <div class="card-ki">
+        <div class="symbol-circle symbol-circle-forest">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M11 3 L11 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M11 16 L11 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M3 11 L6 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 11 L19 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="11" cy="11" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="divider-gold"></div>
+        <h3 style="font-size: 1.375rem; margin-bottom: 0.75rem;">Wisdom</h3>
+        <p style="color: var(--color-ink-light); line-height: 1.7; margin-bottom: 1rem;">Knowledge used well. It is distinctly human, and it outlives you. It emerges through reflection over time — and across generations.</p>
+        <p style="font-style: italic; color: var(--color-sandstone); font-family: var(--font-heading); font-size: 0.9375rem;">The ancient forest at the island's heart.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE CYCLE ═══ -->
+<section class="section-mist" style="padding: 5rem 0;">
+  <div class="page-container">
+    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
+      <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-teal); margin-bottom: 1rem;">The Cycle</p>
+      <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Knowledge needs tending.</h2>
+      <p style="color: var(--color-ink-light); line-height: 1.7;">Information doesn't become knowledge by itself. Islands stay alive through a continuous cycle — running at different cadences, in parallel.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0; border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden;">
+
+      <div style="padding: 2.5rem; background: white; border-right: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">01</span>
+          <div>
+            <p style="font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Harbour</p>
+            <h3 style="font-size: 1.25rem; margin: 0;">Capture</h3>
+          </div>
+        </div>
+        <p style="color: var(--color-ink-light); line-height: 1.7;">Information arrives without immediate judgment. The harbour receives everything before the library decides what belongs. No filtering at the gate — only routing.</p>
+      </div>
+
+      <div style="padding: 2.5rem; background: white; border-right: 1px solid var(--color-border);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">02</span>
+          <div>
+            <p style="font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Routes</p>
+            <h3 style="font-size: 1.25rem; margin: 0;">Connect</h3>
+          </div>
+        </div>
+        <p style="color: var(--color-ink-light); line-height: 1.7;">Material is contextualised and linked to existing knowledge. This is the transformation step — where received information becomes owned knowledge. Links form. Meaning emerges.</p>
+      </div>
+
+      <div style="padding: 2.5rem; background: white;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <span style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--color-border); line-height: 1;">03</span>
+          <div>
+            <p style="font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-teal);">The Observatory</p>
+            <h3 style="font-size: 1.25rem; margin: 0;">Reflect</h3>
+          </div>
+        </div>
+        <p style="color: var(--color-ink-light); line-height: 1.7;">Periodic review surfaces what's stale, updates what's changed, retires what's obsolete. Reflection is how the island stays honest — about what it knows and what it no longer does.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE GEOGRAPHY ═══ -->
+<section class="section-parchment" style="padding: 5rem 0;">
+  <div class="page-container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;">
+
+      <div>
+        <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-teal); margin-bottom: 1rem;">The Home</p>
+        <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1.25rem;">An island has structure.</h2>
+        <p style="color: var(--color-ink-light); line-height: 1.7; margin-bottom: 1.5rem;">
+          A Knowledge Island isn't a folder. It has a <strong>Capital</strong> — a civic centre with a Library at its heart and a Council Hall for governance. Knowledge enters through the <strong>Harbour</strong>, moves through <strong>Streams</strong> while it's in motion, and settles into the Library when it's canonical.
+        </p>
+        <div class="accent-gold" style="margin-bottom: 1.5rem;">
+          <p style="color: var(--color-ink); font-style: italic; font-family: var(--font-heading);">"The structure is not bureaucracy. It's cartography — a map that tells you where you are."</p>
+        </div>
+        <a href="/philosophy/" style="font-family: var(--font-body); font-size: 0.9375rem; color: var(--color-forest); font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem;">
+          Read the full philosophy
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 8 L13 8 M9 4 L13 8 L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Geography diagram -->
+      <div>
+        <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 2px 12px rgb(26 32 48 / 6%);">
+
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border-light);">
+            <div style="width: 10px; height: 10px; background: var(--color-gold); border-radius: 50%;"></div>
+            <span style="font-family: var(--font-heading); font-size: 1rem; color: var(--color-ocean);">The Capital</span>
+          </div>
+
+          <!-- Library -->
+          <div style="background: var(--color-mist); border-radius: 0.5rem; padding: 1.25rem; margin-bottom: 1rem;">
+            <p style="font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ocean); margin-bottom: 0.75rem;">Library</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem;">
+              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
+                <p style="font-size: 0.75rem; color: var(--color-teal); margin-bottom: 0.125rem;">📅</p>
+                <p style="font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Calendar</p>
+                <p style="font-family: var(--font-body); font-size: 0.625rem; color: var(--color-ink-light);">Time-bound</p>
+              </div>
+              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
+                <p style="font-size: 0.75rem; color: var(--color-ocean); margin-bottom: 0.125rem;">⛰</p>
+                <p style="font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Pillars</p>
+                <p style="font-family: var(--font-body); font-size: 0.625rem; color: var(--color-ink-light);">Owned knowledge</p>
+              </div>
+              <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
+                <p style="font-size: 0.75rem; color: var(--color-forest); margin-bottom: 0.125rem;">🗺</p>
+                <p style="font-family: var(--font-body); font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Resources</p>
+                <p style="font-family: var(--font-body); font-size: 0.625rem; color: var(--color-ink-light);">External reference</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Council Hall -->
+          <div style="background: var(--color-mist); border-radius: 0.5rem; padding: 0.875rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 0.875rem;">🏛</span>
+            <div>
+              <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Council Hall</p>
+              <p style="font-family: var(--font-body); font-size: 0.6875rem; color: var(--color-ink-light);">Governance space — decisions, not storage</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div style="border-top: 2px dashed var(--color-border); margin: 1.25rem 0;"></div>
+
+          <!-- Streams + Harbour -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
+              <p style="font-size: 0.75rem; margin-bottom: 0.25rem;">〜</p>
+              <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Streams</p>
+              <p style="font-family: var(--font-body); font-size: 0.6875rem; color: var(--color-ink-light);">Knowledge in motion</p>
+            </div>
+            <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
+              <p style="font-size: 0.75rem; margin-bottom: 0.25rem;">⚓</p>
+              <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Harbour</p>
+              <p style="font-family: var(--font-body); font-size: 0.6875rem; color: var(--color-ink-light);">Port of entry</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TERRITORIES & AGENTS ═══ -->
+<section class="section-ocean" style="padding: 5rem 0;">
+  <div class="page-container">
+    <div style="text-align: center; max-width: 52ch; margin-inline: auto; margin-bottom: 3.5rem;">
+      <p style="font-family: var(--font-body); font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-gold); margin-bottom: 1rem;">The Wider Picture</p>
+      <h2 class="heading-display-light" style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Islands don't stand alone.</h2>
+      <p style="color: rgb(245 239 224 / 75%); line-height: 1.7;">Knowledge Islands form territories. Territories connect into archipelagos. And within each island, humans and artificial agents work together — through different interfaces, with different roles, but in the same cycle.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+
+      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🏝</div>
+        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Island</h3>
+        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">A discrete, self-contained body of knowledge with defined boundaries and internal geography. Operates its own cycle independently.</p>
+      </div>
+
+      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🗺</div>
+        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Territory</h3>
+        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Islands organised and governed together. One island holds governance infrastructure for the whole — the Principal Island.</p>
+      </div>
+
+      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🌐</div>
+        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Archipelago</h3>
+        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">The larger structure when territories connect. A federated knowledge ecosystem with shared language but independent governance.</p>
+      </div>
+
+      <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
+        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🤝</div>
+        <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Agents</h3>
+        <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Human agents originate meaning and hold ratification authority. AI agents extend scale and recall. Both work in the same cycle — through different interfaces.</p>
+      </div>
+
+    </div>
+
+    <div style="text-align: center;">
+      <a href="/model/" class="btn-ghost-light">Explore the Model</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ARCADIA CTA ═══ -->
+<section class="section-parchment" style="padding: 5rem 0;">
+  <div class="page-container" style="text-align: center; max-width: 52ch; margin-inline: auto;">
+    <div style="display: inline-block; background: var(--color-mist); border: 1px solid var(--color-border); border-radius: 50%; width: 4rem; height: 4rem; display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.5rem;">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M14 3 L14 7" stroke="var(--color-ocean)" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="9" stroke="var(--color-ocean)" stroke-width="1.5"/>
+        <path d="M8 14 Q11 10 14 14 Q17 18 20 14" stroke="var(--color-teal)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+        <circle cx="14" cy="14" r="2" fill="var(--color-gold)"/>
+      </svg>
+    </div>
+    <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); margin-bottom: 1rem;">Arcadia is the living instance.</h2>
+    <p style="color: var(--color-ink-light); line-height: 1.7; margin-bottom: 2rem;">
+      The canonical Knowledge Island of Knowledge Islands — a working example of the model in practice. Every standard described here is implemented in Arcadia.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="/philosophy/" class="btn-primary">Start with Philosophy</a>
+      <a href="/model/" class="btn-ghost">Explore the Model</a>
+    </div>
+  </div>
+</section>

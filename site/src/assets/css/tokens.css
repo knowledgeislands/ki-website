@@ -1,29 +1,35 @@
-/* Semantic design tokens — CSS custom properties consumed both by raw CSS and,
-   via @theme inline below, by Tailwind utilities, so the two share one palette.
-   A neutral shadcn/ui-style starting set; resample from brand/hero imagery once
-   the site gains a visual identity. Templates use these tokens, never raw hex. */
+/* Knowledge Islands design tokens.
+   Templates and custom CSS use var(--color-*) directly.
+   Tailwind utilities (bg-ocean, text-forest, font-heading, etc.) come from @theme inline. */
+
 @layer base {
   :root {
-    --background: hsl(0 0% 100%);
-    --foreground: hsl(240 10% 4%);
-    --muted: hsl(240 5% 96%);
-    --muted-foreground: hsl(240 4% 46%);
-    --primary: hsl(240 6% 10%);
-    --primary-foreground: hsl(0 0% 98%);
-    --border: hsl(240 6% 90%);
-    --ring: hsl(240 5% 65%);
     --radius: 0.5rem;
+    --radius-lg: 1rem;
   }
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-border: var(--border);
-  --color-ring: var(--ring);
-  --radius-md: var(--radius);
+  /* Colour palette */
+  --color-ocean: #1b3a5c;
+  --color-navy: #0f2440;
+  --color-forest: #2d5a3d;
+  --color-moss: #4a7a5a;
+  --color-sandstone: #c4a882;
+  --color-parchment: #f5efe0;
+  --color-teal: #3d8a8a;
+  --color-gold: #c8963c;
+  --color-mist: #eef1f5;
+  --color-ink: #1a2030;
+  --color-ink-light: #4a5568;
+  --color-border: #d4c9b4;
+  --color-border-light: #e8e0d0;
+
+  /* Typography */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  /* Shape */
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
 }
