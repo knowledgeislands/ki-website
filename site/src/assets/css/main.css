@@ -250,6 +250,36 @@
     margin-bottom: 0.5rem;
   }
 
+  /* Overline labels — small uppercase section/component tags */
+  .overline {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-teal);
+    margin-bottom: 1rem;
+  }
+
+  .overline-gold {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+  }
+
+  /* Muted body text — ink-light colour with comfortable leading */
+  .text-muted {
+    color: var(--color-ink-light);
+    line-height: 1.7;
+  }
+
+  /* Default section vertical padding */
+  .section-pad {
+    padding: 5rem 0;
+  }
+
   /* Responsive grid layouts — class replaces inline grid-template-columns */
   .grid-2col {
     display: grid;
