@@ -2,6 +2,7 @@
 layout: layouts/base.njk
 description: Knowledge Islands is a model for building, governing, and evolving knowledge across individuals, teams, and generations — treating knowledge not as a filing problem but as a civilisation question.
 ---
+{% from "macros/icons.njk" import kiIcon %}
 
 <!-- ═══ HERO ═══ -->
 <section class="section-navy hero-section" style="padding: 6rem 0 5rem; position: relative; overflow: hidden;">
@@ -210,12 +211,12 @@ description: Knowledge Islands is a model for building, governing, and evolving 
                 <p style="font-size: 0.625rem; color: var(--color-ink-light);">Time-bound</p>
               </div>
               <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
-                <p style="font-size: 0.75rem; color: var(--color-ocean); margin-bottom: 0.125rem;">⛰</p>
+                <p style="margin-bottom: 0.125rem; color: var(--color-ocean);">{{ kiIcon("compass", 14) }}</p>
                 <p style="font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Pillars</p>
                 <p style="font-size: 0.625rem; color: var(--color-ink-light);">Owned knowledge</p>
               </div>
               <div style="background: white; border: 1px solid var(--color-border-light); border-radius: 0.375rem; padding: 0.5rem 0.625rem; text-align: center;">
-                <p style="font-size: 0.75rem; color: var(--color-forest); margin-bottom: 0.125rem;">🗺</p>
+                <p style="margin-bottom: 0.125rem; color: var(--color-forest);">{{ kiIcon("route", 14) }}</p>
                 <p style="font-size: 0.6875rem; font-weight: 600; color: var(--color-ink);">Resources</p>
                 <p style="font-size: 0.625rem; color: var(--color-ink-light);">External reference</p>
               </div>
@@ -224,7 +225,7 @@ description: Knowledge Islands is a model for building, governing, and evolving 
 
           <!-- Council Hall -->
           <div style="background: var(--color-mist); border-radius: 0.5rem; padding: 0.875rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-            <span style="font-size: 0.875rem;">🏛</span>
+            <span style="color: var(--color-ocean);">{{ kiIcon("lighthouse", 16) }}</span>
             <div>
               <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Council Hall</p>
               <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Governance space — decisions, not storage</p>
@@ -237,12 +238,12 @@ description: Knowledge Islands is a model for building, governing, and evolving 
           <!-- Streams + Harbour -->
           <div class="grid-2col" style="gap: 0.75rem;">
             <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
-              <p style="font-size: 0.75rem; margin-bottom: 0.25rem;">〜</p>
+              <p style="margin-bottom: 0.25rem; color: var(--color-teal);">{{ kiIcon("current", 14) }}</p>
               <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Streams</p>
               <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Knowledge in motion</p>
             </div>
             <div style="border: 1px solid var(--color-border-light); border-radius: 0.5rem; padding: 0.875rem; background: white;">
-              <p style="font-size: 0.75rem; margin-bottom: 0.25rem;">⚓</p>
+              <p style="margin-bottom: 0.25rem; color: var(--color-teal);">{{ kiIcon("harbour", 14) }}</p>
               <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-ink);">Harbour</p>
               <p style="font-size: 0.6875rem; color: var(--color-ink-light);">Port of entry</p>
             </div>
@@ -266,25 +267,25 @@ description: Knowledge Islands is a model for building, governing, and evolving 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
 
       <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🏝</div>
+        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("island", 28) }}</div>
         <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Island</h3>
         <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">A discrete, self-contained body of knowledge with defined boundaries and internal geography. Operates its own cycle independently.</p>
       </div>
 
       <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🗺</div>
+        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("archipelago", 28) }}</div>
         <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Territory</h3>
         <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Islands organised and governed together. One island holds governance infrastructure for the whole — the Principal Island.</p>
       </div>
 
       <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🌐</div>
+        <div style="margin-bottom: 1rem; color: var(--color-sandstone);">{{ kiIcon("compass", 28) }}</div>
         <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Archipelago</h3>
         <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">The larger structure when territories connect. A federated knowledge ecosystem with shared language but independent governance.</p>
       </div>
 
       <div style="border: 1px solid rgb(245 239 224 / 15%); border-radius: var(--radius-lg); padding: 2rem; background: rgb(245 239 224 / 4%);">
-        <div style="font-size: 1.5rem; margin-bottom: 1rem;">🤝</div>
+        <div style="margin-bottom: 1rem; color: var(--color-parchment);">{{ kiIcon("route", 28) }}</div>
         <h3 class="heading-display-light" style="font-size: 1.25rem; margin-bottom: 0.625rem;">Agents</h3>
         <p style="color: rgb(245 239 224 / 65%); font-size: 0.9375rem; line-height: 1.6;">Human agents originate meaning and hold ratification authority. AI agents extend scale and recall. Both work in the same cycle — through different interfaces.</p>
       </div>
