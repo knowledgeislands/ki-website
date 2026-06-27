@@ -5,7 +5,7 @@ description: The Knowledge Islands philosophy — treating knowledge as a civili
 ---
 
 <!-- Page header -->
-<section class="section-navy" style="padding: 4rem 0 3.5rem;">
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
   <div class="page-container">
     <p class="overline-gold">Knowledge Islands</p>
     <h1 class="heading-display-light" style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; max-width: 18ch; margin-bottom: 1.25rem;">The Philosophy</h1>
@@ -99,6 +99,44 @@ description: The Knowledge Islands philosophy — treating knowledge as a civili
             <p>Islands keep themselves alive through a continuous cycle running at different cadences, in parallel. Both <em>informational change</em> (new input arriving) and <em>reflective change</em> (existing knowledge reframed) are necessary.</p>
           </div>
 
+          <!-- Cycle diagram: triangular flow -->
+          <div style="margin: 2.5rem 0 2rem;">
+            <svg width="100%" viewBox="0 0 420 270" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px; display: block; margin: 0 auto;" role="img" aria-label="The Knowledge Cycle: Capture feeds the Harbour, Connect grows the Libraries, Reflect keeps islands honest">
+              <defs>
+                <marker id="cyc-arr-teal" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#3d8a8a" fill-opacity="0.65"/>
+                </marker>
+                <marker id="cyc-arr-ocean" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#1b3a5c" fill-opacity="0.65"/>
+                </marker>
+                <marker id="cyc-arr-forest" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#2d5a3d" fill-opacity="0.65"/>
+                </marker>
+              </defs>
+              <!-- Faint background ring -->
+              <circle cx="210" cy="148" r="90" stroke="#d4c9b4" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
+              <!-- Connecting arcs (bezier curves approximating the circular arc) -->
+              <!-- Capture (210,58) → Connect (288,193): control at (327,78) -->
+              <path d="M 223 80 Q 327 78 276 171" stroke="#3d8a8a" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-teal)"/>
+              <!-- Connect (288,193) → Reflect (132,193): control at (210,280) -->
+              <path d="M 262 193 Q 210 278 158 193" stroke="#1b3a5c" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-ocean)"/>
+              <!-- Reflect (132,193) → Capture (210,58): control at (93,78) -->
+              <path d="M 145 171 Q 93 78 197 80" stroke="#2d5a3d" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-forest)"/>
+              <!-- Node circles -->
+              <circle cx="210" cy="58" r="26" fill="#3d8a8a"/>
+              <circle cx="288" cy="193" r="26" fill="#1b3a5c"/>
+              <circle cx="132" cy="193" r="26" fill="#2d5a3d"/>
+              <!-- Node numbers -->
+              <text x="210" y="58" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">1</text>
+              <text x="288" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">2</text>
+              <text x="132" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">3</text>
+              <!-- Labels -->
+              <text x="210" y="16" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#3d8a8a">CAPTURE</text>
+              <text x="328" y="190" text-anchor="start" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#1b3a5c">CONNECT</text>
+              <text x="92" y="190" text-anchor="end" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#2d5a3d">REFLECT</text>
+            </svg>
+          </div>
+
           <div style="margin: 2rem 0; border-left: 3px solid var(--color-border); padding-left: 2rem; display: flex; flex-direction: column; gap: 2rem;">
             <div>
               <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem;">
@@ -135,6 +173,53 @@ description: The Knowledge Islands philosophy — treating knowledge as a civili
           <h2 style="font-size: 1.875rem; margin-bottom: 1.25rem;">The Home of Knowledge</h2>
           <div class="prose-ki">
             <p>A Knowledge Island is not a folder hierarchy. It has physical-logical geography — a structure that maps the nature of knowledge rather than the convenience of the file system.</p>
+          </div>
+
+          <!-- Home geography diagram: vertical flow from outside world to canonical library -->
+          <div style="margin: 2.5rem 0 2rem;">
+            <svg width="100%" viewBox="0 0 500 330" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 500px; display: block; margin: 0 auto;" role="img" aria-label="Island geography: material enters via Harbour, matures through Streams, and becomes canonical in the Library, which is governed by the Council Hall">
+              <defs>
+                <marker id="geo-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0 0 L7 4 L0 8 Z" fill="#9ca3af"/>
+                </marker>
+                <marker id="geo-gov-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                  <path d="M0 0 L7 4 L0 8 Z" fill="#1b3a5c" fill-opacity="0.5"/>
+                </marker>
+              </defs>
+              <!-- OUTSIDE WORLD (dashed) -->
+              <rect x="175" y="10" width="150" height="42" rx="6" stroke="#c4a882" stroke-width="1.5" stroke-dasharray="4 3" fill="#faf8f2"/>
+              <text x="250" y="29" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.07em" fill="#9ca3af">OUTSIDE WORLD</text>
+              <text x="250" y="44" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#d1d5db">email · notes · links · conversations</text>
+              <!-- Arrow: outside → harbour -->
+              <line x1="250" y1="52" x2="250" y2="66" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <!-- HARBOUR -->
+              <rect x="140" y="68" width="220" height="60" rx="8" fill="white" stroke="#1b3a5c" stroke-width="1.5"/>
+              <text x="250" y="91" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#1b3a5c">Harbour</text>
+              <text x="250" y="109" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">port of entry · material is assessed &amp; routed</text>
+              <!-- Arrow: harbour → streams -->
+              <line x1="250" y1="128" x2="250" y2="143" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <!-- STREAMS -->
+              <rect x="90" y="145" width="320" height="60" rx="8" fill="white" stroke="#3d8a8a" stroke-width="1.5"/>
+              <text x="250" y="168" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#3d8a8a">Streams</text>
+              <text x="250" y="186" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">knowledge forming · living edge · not yet canonical</text>
+              <!-- Arrow: streams → library (angled left-center) -->
+              <line x1="228" y1="205" x2="186" y2="224" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <!-- LIBRARY (larger, left) -->
+              <rect x="20" y="226" width="265" height="90" rx="8" fill="white" stroke="#2d5a3d" stroke-width="2"/>
+              <text x="152" y="251" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#2d5a3d">Library</text>
+              <text x="152" y="269" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">canonical knowledge</text>
+              <text x="152" y="284" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#9ca3af">Calendar · Pillars · Resources</text>
+              <text x="152" y="299" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="#c4a882" font-style="italic">nothing enters without consideration</text>
+              <!-- COUNCIL HALL (right, same level) -->
+              <rect x="305" y="226" width="175" height="90" rx="8" fill="white" stroke="#1b3a5c" stroke-width="1.5"/>
+              <text x="392" y="255" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="700" fill="#1b3a5c">Council Hall</text>
+              <text x="392" y="273" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">governance</text>
+              <text x="392" y="289" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#9ca3af">charter · decisions · conventions</text>
+              <text x="392" y="305" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="#9ca3af" font-style="italic">not storage</text>
+              <!-- Governs arrow: Council Hall → Library (short dashed horizontal) -->
+              <line x1="304" y1="268" x2="287" y2="268" stroke="#1b3a5c" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="4 2" marker-end="url(#geo-gov-arrow)"/>
+              <text x="296" y="262" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8" letter-spacing="0.04em" fill="#1b3a5c" fill-opacity="0.5">governs</text>
+            </svg>
           </div>
 
           <div style="margin: 2rem 0; background: var(--color-mist); border-radius: var(--radius-lg); padding: 2rem;">
