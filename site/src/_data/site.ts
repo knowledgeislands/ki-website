@@ -6,6 +6,7 @@ const site = {
   nav: [
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
+    { label: 'Get Started', href: '/get-started/' },
   ],
 }
 
