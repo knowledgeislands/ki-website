@@ -307,6 +307,109 @@
   }
 }
 
+/* ─── Dark mode ─────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Override light surface tokens */
+    --color-mist: #1a2235;
+    /* Ink and border tokens */
+    --color-ink: #ddd6c6;
+    --color-ink-light: #8a99b0;
+    --color-border: #2a3850;
+    --color-border-light: #1e2d42;
+    /* Slightly brightened accent tokens so they stay visible */
+    --color-teal: #52b8b8;
+    --color-gold: #d9a840;
+  }
+
+  /* Page background */
+  html {
+    background-color: #141c28;
+    color: var(--color-ink);
+  }
+
+  /* Swap light surfaces to dark; dark sections stay unchanged */
+  .section-parchment {
+    background-color: #141c28;
+  }
+
+  /* .section-mist already pulls var(--color-mist) which is now dark ✓ */
+
+  /* Headings — ocean (#1b3a5c) is invisible on dark bg; use a lighter tint */
+  h1,
+  h2,
+  h3,
+  h4,
+  .heading-display {
+    color: #7ab0d8;
+  }
+
+  /* Restore parchment headings inside already-dark sections */
+  .section-ocean h1,
+  .section-ocean h2,
+  .section-ocean h3,
+  .section-ocean h4,
+  .section-ocean .heading-display,
+  .section-navy h1,
+  .section-navy h2,
+  .section-navy h3,
+  .section-navy h4,
+  .section-navy .heading-display {
+    color: var(--color-parchment);
+  }
+
+  /* Cards: white bg → dark surface */
+  .card-ki {
+    background-color: #1c2840;
+    border-color: var(--color-border);
+  }
+
+  .card-ki:hover {
+    box-shadow: 0 4px 16px rgb(0 0 0 / 30%);
+  }
+
+  /* Symbol circles: mist bg → dark; icon color override for teal variant */
+  .symbol-circle {
+    background-color: #1e2d42;
+    color: var(--color-teal);
+  }
+
+  .symbol-circle-forest {
+    background-color: rgb(45 90 61 / 20%);
+  }
+
+  .symbol-circle-gold {
+    background-color: rgb(200 150 60 / 20%);
+  }
+
+  .symbol-circle-teal {
+    background-color: rgb(61 138 138 / 20%);
+  }
+
+  /* Prose */
+  .prose-ki {
+    color: var(--color-ink);
+  }
+
+  .prose-ki h2,
+  .prose-ki h3 {
+    color: #7ab0d8;
+  }
+
+  /* Links: teal is already brightened via token override above */
+
+  /* Accent quote / border */
+  .accent-gold {
+    border-left-color: var(--color-gold);
+  }
+
+  /* Overline: teal is already overridden */
+
+  /* The cycle diagram SVG background ring */
+  /* (uses hardcoded stroke="#d4c9b4" — barely visible; acceptable) */
+}
+
+/* ─── Mobile breakpoints ──────────────────────────────────────── */
 @media (max-width: 768px) {
   .grid-2col,
   .grid-3col,
