@@ -13,14 +13,14 @@ any root.
 - **The build standard** is the `knowledgeislands-11ty-websites` skill — the Eleventy/Nunjucks/Tailwind layout, the
   `src/_includes/{layouts,partials}/` structure, `tokens.css` design tokens, the portable-`dist/` URL transform, and SEO. Run its AUDIT
   before shipping a structural change.
-- **The toolchain** (package.json scripts, `tsconfig`, `biome`) follows `knowledgeislands-engineering`; the `bun run lint:*` family is the
-  gate.
-- **Markdown / TOML style** follows `knowledgeislands-authoring`; `bun run lint:md` is the mechanical gate.
+- **The toolchain** (package.json scripts, `tsconfig`, `biome`) follows `knowledgeislands-engineering`; the `bun run ki:lint:*` family is
+  the gate.
+- **Markdown / TOML style** follows `knowledgeislands-authoring`; `bun run ki:lint:md` is the mechanical gate.
 - **The repo shape** is a **monorepo** (`knowledgeislands-engineering` §0): the root `package.json` declares `"workspaces": ["site"]` and
   the site lives in the `site/` workspace (`site/eleventy.config.ts`, `site/src/`, `site/tsconfig.json`). `dist/` is built to the repo root;
   all site scripts carry the `site:` prefix.
 - **Hosting** follows `knowledgeislands-cloudflare-hosting` (Workers + Static Assets serving `dist/`); `wrangler.jsonc` lives in `site/`
-  (`assets.directory: "../dist"`), and the `site:deploy` / `site:preview` / `site:clean` scripts are the entry points.
+  (`assets.directory: "../dist"`), and the `ki:site:deploy` / `ki:site:preview` / `ki:site:clean` scripts are the entry points.
 
 ## Toolchain
 
@@ -28,9 +28,9 @@ any root.
 
 ```bash
 bun install         # install deps and wire the husky pre-commit hook
-bun run site:dev    # Tailwind watch + Eleventy serve on http://localhost:3000
-bun run site:build  # compile the site to dist/
-bun run lint:check  # Biome (TypeScript + JSON)
-bun run lint:md     # Prettier + markdownlint over Markdown
-bun run lint:types  # tsc --noEmit -p site
+bun run ki:site:dev    # Tailwind watch + Eleventy serve on http://localhost:3000
+bun run ki:site:build  # compile the site to dist/
+bun run ki:lint:check  # Biome (TypeScript + JSON)
+bun run ki:lint:md     # Prettier + markdownlint over Markdown
+bun run ki:lint:types  # tsc --noEmit -p site
 ```
