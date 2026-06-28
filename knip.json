@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignore": [".ncurc.cjs"],
+  "ignoreDependencies": ["tailwindcss"],
+  "ignoreExportsUsedInFile": true,
+  "workspaces": {
+    "site": {
+      "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!"],
+      "project": ["**/*.ts"],
+      "ignore": ["src/assets/**"]
+    }
+  }
+}
