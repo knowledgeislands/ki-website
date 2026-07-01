@@ -1,30 +1,30 @@
-# Knowledge Islands repo config — read by the knowledgeislands-repo skill.
+# Knowledge Islands repo config — read by the ki-repo skill.
 # One [table] per skill that needs per-repo options.
-[knowledgeislands-repo]
+[ki-repo]
 visibility = "private"   # "public" | "private"
 # This repo fully conforms, so it declares no check overrides. To diverge, add a
-# [knowledgeislands-repo.checks] table with one boolean per check (true = enforce).
+# [ki-repo.checks] table with one boolean per check (true = enforce).
 
-# Read by the knowledgeislands-engineering skill (the common build/lint/test toolchain).
-[knowledgeislands-engineering]
+# Read by the ki-engineering skill (the common build/lint/test toolchain).
+[ki-engineering]
 # This repo fully conforms, so it declares no check overrides. To diverge, add a
-# [knowledgeislands-engineering.checks] table with one boolean per check (true = enforce).
+# [ki-engineering.checks] table with one boolean per check (true = enforce).
 
-# Read by the knowledgeislands-11ty-websites skill (the Eleventy + Tailwind site-build standard).
+# Read by the ki-11ty-websites skill (the Eleventy + Tailwind site-build standard).
 # Presence of this table opts the repo into that standard; it takes no per-repo keys today.
-[knowledgeislands-11ty-websites]
+[ki-11ty-websites]
 
-# Read by the knowledgeislands-cloudflare-hosting skill (Workers + Static Assets serving dist/).
+# Read by the ki-cloudflare-hosting skill (Workers + Static Assets serving dist/).
 # Monorepo layout: wrangler.jsonc lives in the site/ workspace and is auto-detected, so
 # no site-root override is declared (it would only be needed for a one-off flat consumer).
-[knowledgeislands-cloudflare-hosting]
+[ki-cloudflare-hosting]
 
 # Tokenomics governance — audits the standing context surface for this environment.
 # MCP server count is user-scoped (not repo-controlled); the raised budget documents
 # the acknowledged state (same as the harness).
-[knowledgeislands-tokenomics]
+[ki-tokenomics]
 headroom = "recommended"
 preferred_model = "sonnet"
 
-[knowledgeislands-tokenomics.budgets]
+[ki-tokenomics.budgets]
 mcp_servers = 20   # 19 user-scoped at time of first audit (2026-06-22); revisit when scoped
