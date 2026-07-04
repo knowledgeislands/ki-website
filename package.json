@@ -49,10 +49,11 @@
   },
   "scripts": {
     "clean": "rm -rf {dist,node_modules}",
-    "ki:conform": "bun run ki:deps:update && bun run ki:lint:package && bun run ki:lint:format && bun run ki:lint:fix && bun run ki:lint:md && bun run ki:site:build",
+    "ki:conform": "bun run ki:deps:refresh && bun run ki:lint:package && bun run ki:lint:format && bun run ki:lint:fix && bun run ki:lint:md && bun run ki:site:build",
     "ki:deps:check": "bunx knip --dependencies --no-config-hints",
     "ki:deps:fix": "bunx knip --dependencies --fix --no-config-hints",
-    "ki:deps:update": "bun update --latest",
+    "ki:deps:refresh": "bun update --force",
+    "ki:deps:update": "bun update --latest && bun install",
     "ki:knip": "bunx knip --no-config-hints",
     "ki:lint:check": "bunx @biomejs/biome check",
     "ki:lint:fix": "bunx @biomejs/biome check --write --unsafe",

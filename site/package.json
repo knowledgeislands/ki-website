@@ -1,9 +1,9 @@
 {
   "name": "@knowledgeislands/arcadia-site",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
   "devDependencies": {
     "json5": "^2.2.3"
-  }
+  },
+  "private": true,
+  "type": "module"
 }
