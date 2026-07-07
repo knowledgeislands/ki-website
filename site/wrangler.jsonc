@@ -1,6 +1,6 @@
 {
-  // arcadia-website — Cloudflare Workers deployment (Workers + Static Assets, not Pages).
-  "name": "arcadia-website",
+  // ki-website — Cloudflare Workers deployment (Workers + Static Assets, not Pages).
+  "name": "ki-website",
   "compatibility_date": "2026-06-19",
   // Eleventy builds to dist/ at the repo root; the Worker serves it directly.
   // Path is relative to THIS file — "../dist" (monorepo: wrangler.jsonc under site/).

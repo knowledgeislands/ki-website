@@ -1,4 +1,4 @@
-# CLAUDE.md — arcadia-website
+# CLAUDE.md — ki-website
 
 Always-loaded orientation for an agent working in this repo. The full picture is in [README.md](README.md); this file is the short anchor.
 

@@ -1,10 +1,10 @@
 {
-  "name": "@knowledgeislands/arcadia-website",
+  "name": "@knowledgeislands/ki-website",
   "description": "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources.",
   "version": "1.0.0",
   "author": "kris@kris.me.uk",
   "bugs": {
-    "url": "https://github.com/knowledgeislands/arcadia-website/issues"
+    "url": "https://github.com/knowledgeislands/ki-website/issues"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
@@ -25,7 +25,7 @@
   "engines": {
     "node": ">=22.0.0"
   },
-  "homepage": "https://github.com/knowledgeislands/arcadia-website#readme",
+  "homepage": "https://github.com/knowledgeislands/ki-website#readme",
   "keywords": [
     "arcadia",
     "eleventy",
@@ -45,7 +45,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/knowledgeislands/arcadia-website.git"
+    "url": "git+https://github.com/knowledgeislands/ki-website.git"
   },
   "scripts": {
     "clean": "rm -rf {dist,node_modules}",
