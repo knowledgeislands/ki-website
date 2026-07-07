@@ -10,6 +10,6 @@
     { "pattern": "knowledgeislands.info", "custom_domain": true },
     { "pattern": "www.knowledgeislands.info", "custom_domain": true }
   ],
-  // Persist Workers logs in the dashboard (Workers & Pages → arcadia-website → Logs).
+  // Persist Workers logs in the dashboard (Workers & Pages → ki-website → Logs).
   "observability": { "enabled": true }
 }

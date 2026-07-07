@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "@knowledgeislands/arcadia-website",
+      "name": "@knowledgeislands/ki-website",
       "devDependencies": {
         "@11ty/eleventy": "^3.1.6",
         "@biomejs/biome": "2.5.2",
@@ -22,7 +22,7 @@
       },
     },
     "site": {
-      "name": "@knowledgeislands/arcadia-site",
+      "name": "@knowledgeislands/ki-site",
       "version": "1.0.0",
       "devDependencies": {
         "json5": "^2.2.3",
@@ -200,7 +200,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
 
-    "@knowledgeislands/arcadia-site": ["@knowledgeislands/arcadia-site@workspace:site"],
+    "@knowledgeislands/ki-site": ["@knowledgeislands/ki-site@workspace:site"],
 
     "@napi-rs/wasm-runtime": ["@napi-rs/wasm-runtime@1.1.6", "", { "dependencies": { "@tybys/wasm-util": "^0.10.3" }, "peerDependencies": { "@emnapi/core": "^1.7.1", "@emnapi/runtime": "^1.7.1" } }, "sha512-ZLv/JdUfkvOy9eCnnBaGfiO+XimbjebAeO+MRQqD/B+FR1tnRN0tpKSJHRbE8sFfS6aqsXZ67TQjfwfsxULVbg=="],
 

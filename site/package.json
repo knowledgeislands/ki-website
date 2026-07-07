@@ -1,5 +1,5 @@
 {
-  "name": "@knowledgeislands/arcadia-site",
+  "name": "@knowledgeislands/ki-site",
   "version": "1.0.0",
   "devDependencies": {
     "json5": "^2.2.3"
