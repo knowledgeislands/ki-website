@@ -13,14 +13,14 @@
     "@types/node": "^26.1.0",
     "concurrently": "^10.0.3",
     "husky": "^9.1.7",
-    "knip": "^6.24.0",
+    "knip": "^6.25.0",
     "lint-staged": "^17.0.8",
     "markdownlint-cli2": "^0.23.0",
     "prettier": "^3.9.4",
     "syncpack": "^15.3.2",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
-    "wrangler": "^4.107.0"
+    "wrangler": "^4.107.1"
   },
   "engines": {
     "node": ">=22.0.0"
@@ -49,11 +49,14 @@
   },
   "scripts": {
     "clean": "rm -rf {dist,node_modules}",
+    "ki:authoring:audit": "bun .claude/skills/ki-authoring/scripts/audit-authoring.ts .",
     "ki:conform": "bun run ki:deps:refresh && bun run ki:lint:package && bun run ki:lint:format && bun run ki:lint:fix && bun run ki:lint:md && bun run ki:site:build",
     "ki:deps:check": "bunx knip --dependencies --no-config-hints",
     "ki:deps:fix": "bunx knip --dependencies --fix --no-config-hints",
     "ki:deps:refresh": "bun update --force",
     "ki:deps:update": "bun update --latest && bun install",
+    "ki:engineering:audit": "bun .claude/skills/ki-engineering/scripts/audit-engineering.ts .",
+    "ki:hosting-cloudflare:audit": "bun .claude/skills/ki-hosting-cloudflare/scripts/audit-cloudflare-hosting.ts .",
     "ki:knip": "bunx knip --no-config-hints",
     "ki:lint:check": "bunx @biomejs/biome check",
     "ki:lint:fix": "bunx @biomejs/biome check --write --unsafe",
@@ -62,6 +65,7 @@
     "ki:lint:md:check": "bunx prettier --check \"**/*.md\" --ignore-path .gitignore && bunx markdownlint-cli2",
     "ki:lint:package": "bunx syncpack format",
     "ki:lint:types": "bunx tsc --noEmit -p site",
+    "ki:repo:audit": "bun .claude/skills/ki-repo/scripts/audit-repo.ts .",
     "ki:site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "ki:site:clean": "rm -rf dist site/.wrangler",
     "ki:site:deploy": "cd site && bunx wrangler deploy",
@@ -70,14 +74,10 @@
     "ki:site:dev:serve": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "ki:site:preview": "bun run ki:site:build && cd site && bunx wrangler dev",
     "ki:skills:link:project": "bun $HOME/.claude/skills/knowledgeislands-bootstrap/scripts/link-skills.ts",
-    "ki:verify": "bun run ki:lint:check && bun run ki:lint:types && bun run ki:lint:md:check && bun run ki:knip && bun run ki:site:build",
-    "prepare": "husky",
-    "ki:authoring:audit": "bun .claude/skills/ki-authoring/scripts/audit-authoring.ts .",
-    "ki:engineering:audit": "bun .claude/skills/ki-engineering/scripts/audit-engineering.ts .",
-    "ki:hosting-cloudflare:audit": "bun .claude/skills/ki-hosting-cloudflare/scripts/audit-cloudflare-hosting.ts .",
-    "ki:repo:audit": "bun .claude/skills/ki-repo/scripts/audit-repo.ts .",
     "ki:tokenomics:audit": "bun .claude/skills/ki-tokenomics/scripts/audit-tokenomics.ts .",
-    "ki:websites-11ty:audit": "bun .claude/skills/ki-websites-11ty/scripts/audit-websites.ts ."
+    "ki:verify": "bun run ki:lint:check && bun run ki:lint:types && bun run ki:lint:md:check && bun run ki:knip && bun run ki:site:build",
+    "ki:websites-11ty:audit": "bun .claude/skills/ki-websites-11ty/scripts/audit-websites.ts .",
+    "prepare": "husky"
   },
   "type": "module",
   "workspaces": [
