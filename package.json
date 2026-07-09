@@ -8,9 +8,9 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "@biomejs/biome": "2.5.2",
+    "@biomejs/biome": "2.5.3",
     "@tailwindcss/cli": "^4.3.2",
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "concurrently": "^10.0.3",
     "husky": "^9.1.7",
     "knip": "^6.25.0",
@@ -19,7 +19,7 @@
     "prettier": "^3.9.4",
     "syncpack": "^15.3.2",
     "tailwindcss": "^4.3.2",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "wrangler": "^4.107.1"
   },
   "engines": {
