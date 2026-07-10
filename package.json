@@ -49,6 +49,7 @@
   },
   "scripts": {
     "clean": "rm -rf {dist,node_modules}",
+    "ki:audit": "bun scripts/ki/aggregate.ts audit",
     "ki:authoring:audit": "bun .claude/skills/ki-authoring/scripts/audit-authoring.ts .",
     "ki:conform": "bun run ki:deps:refresh && bun run ki:lint:package && bun run ki:lint:format && bun run ki:lint:fix && bun run ki:lint:md && bun run ki:site:build",
     "ki:deps:check": "bunx knip --dependencies --no-config-hints",
@@ -57,6 +58,7 @@
     "ki:deps:update": "bun update --latest && bun install",
     "ki:engineering:audit": "bun .claude/skills/ki-engineering/scripts/audit-engineering.ts .",
     "ki:hosting-cloudflare:audit": "bun .claude/skills/ki-hosting-cloudflare/scripts/audit-cloudflare-hosting.ts .",
+    "ki:init": "bun scripts/ki/aggregate.ts init",
     "ki:knip": "bunx knip --no-config-hints",
     "ki:lint:check": "bunx @biomejs/biome check",
     "ki:lint:fix": "bunx @biomejs/biome check --write --unsafe",
@@ -66,6 +68,7 @@
     "ki:lint:package": "bunx syncpack format",
     "ki:lint:types": "bunx tsc --noEmit -p site",
     "ki:repo:audit": "bun .claude/skills/ki-repo/scripts/audit-repo.ts .",
+    "ki:repo:conform": "bun scripts/ki/ki-repo/conform-repo.ts .",
     "ki:site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "ki:site:clean": "rm -rf dist site/.wrangler",
     "ki:site:deploy": "cd site && bunx wrangler deploy",
