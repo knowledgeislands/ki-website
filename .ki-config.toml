@@ -14,14 +14,14 @@ visibility = "private"   # "public" | "private"
 # This repo fully conforms, so it declares no check overrides. To diverge, add a
 # [ki-engineering.checks] table with one boolean per check (true = enforce).
 
-# Read by the ki-websites-11ty skill (the Eleventy + Tailwind site-build standard).
+# Read by the ki-website skill (the Eleventy + Tailwind site-build standard).
 # Presence of this table opts the repo into that standard; it takes no per-repo keys today.
-[ki-websites-11ty]
+[ki-website]
 
-# Read by the ki-hosting-cloudflare skill (Workers + Static Assets serving dist/).
+# Read by the ki-website-cloudflare skill (Workers + Static Assets serving dist/).
 # Monorepo layout: wrangler.jsonc lives in the site/ workspace and is auto-detected, so
 # no site-root override is declared (it would only be needed for a one-off flat consumer).
-[ki-hosting-cloudflare]
+[ki-website-cloudflare]
 
 # Tokenomics governance — audits the standing context surface for this environment.
 # MCP server count is user-scoped (not repo-controlled); the raised budget documents
