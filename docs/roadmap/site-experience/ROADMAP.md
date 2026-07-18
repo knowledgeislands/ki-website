@@ -8,10 +8,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-### Technical V2 AI capability simulator
-
-Preserve the existing simulator as V1 and build a visibly distinct, standalone V2 instrument. Add a simulator landing page that clearly links to the V1 conceptual experience and the V2 technical experience. V2 must use a fixed graph coordinate system, with only the trajectory, uncertainty envelope, and numerical readouts animating as conditions change. It must first make the model explicit: human-condition controls begin at a neutral midpoint and contribute declared effects to starting state, capability, precision, and effective amplification; governance and guard rails govern precision; AI power remains the distinct amplification factor. The finished interface should use a large central graph with technical control instruments around it, without the normal Website navigation or footer chrome.
-
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
