@@ -8,10 +8,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-### AI capability amplification simulator
-
-Create a self-contained, client-side interactive visualisation that frames AI as an amplifier rather than an inherently positive force. It must let a visitor vary raw intelligence, learning ability, skills and knowledge, governance, and AI power; show an expected value-over-time trajectory with a visible zero line and an uncertainty envelope; and make capability, precision, and effective amplification intuitive without presenting the model as a scientific prediction.
-
 ### Technical V2 AI capability simulator
 
 Preserve the existing simulator as V1 and build a visibly distinct, standalone V2 instrument. V2 must use a fixed graph coordinate system, with only the trajectory, uncertainty envelope, and numerical readouts animating as conditions change. It must first make the model explicit: human-condition controls begin at a neutral midpoint and contribute declared effects to starting state, capability, precision, and effective amplification; governance and guard rails govern precision; AI power remains the distinct amplification factor. The finished interface should use a large central graph with technical control instruments around it, without the normal Website navigation or footer chrome.
