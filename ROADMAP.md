@@ -10,7 +10,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-- [Ecosystem Publication: Vendor canonical content from the three source repositories](docs/roadmap/ecosystem-publication/ROADMAP.md#vendor-canonical-content-from-the-three-source-repositories)
 - [Site Experience: Homepage -> Get Started CTA](docs/roadmap/site-experience/ROADMAP.md#homepage---get-started-cta)
 - [Site Experience: Inline SVG diagram polish](docs/roadmap/site-experience/ROADMAP.md#inline-svg-diagram-polish)
 
