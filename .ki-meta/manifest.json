@@ -1,5 +1,5 @@
 {
-  "ref": "270974653c9afdcbeb971e4baa32dc9c04f1da9b",
+  "ref": "f284993996838c78de133c8d6ba06bad5892ff3b",
   "files": {
     ".ki-meta/checkers/ki-authoring/scripts/audit.ts": "4236346582d4ffefdcce65739c6b0d4b805eeb0ac7624dc9ca6e292fae3bdd57",
     ".ki-meta/checkers/ki-authoring/scripts/conform.ts": "0d0ecb4fb9df3f4b4ec84201ef2af51191a0ac9b05ee563f89c033b1b485603a",
@@ -49,6 +49,6 @@
     ".ki-meta/checkers/ki-website-cloudflare/scripts/vendored/ki-skills/checker-reporter.ts": "41d95a0c1759278f87812a91d283b85cc036349be1010eb0cc53580e3ba22344",
     ".ki-meta/checkers/ki-website-cloudflare/help.md": "68d071e2df74da96f3105b7dda74895380092b584976ea6515911c9f255a4ffb",
     ".ki-meta/educators/ki-website-cloudflare/educate.ts": "139af06e234ab0c283e1227278ba94c86b780ce42b4ad7a61cf73a793d3f3628",
-    ".ki-meta/bin/aggregate.ts": "7466c0d9386c90fb430873367db9a827fa98a4e9acb8c2387061f9f73da6299f"
+    ".ki-meta/bin/aggregate.ts": "e3f70280aa80eb1b9c327f29c775ae28e4b4dda56cdeebc885cc71ce1de02ec6"
   }
 }
