@@ -11,6 +11,7 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
 - [Site Experience: AI capability amplification simulator](docs/roadmap/site-experience/ROADMAP.md#ai-capability-amplification-simulator)
+- [Site Experience: Technical V2 AI capability simulator](docs/roadmap/site-experience/ROADMAP.md#technical-v2-ai-capability-simulator)
 
 ## Soon
 
