@@ -10,18 +10,6 @@ export default function (eleventyConfig: UserConfig) {
   // The build runs from the site/ workspace (cwd = site/), which owns dist/.
   const outputRoot = resolve(process.cwd(), 'dist')
 
-  // Some editor and agent writes arrive as atomic file replacements rather than
-  // native filesystem events. Polling keeps the development server rebuilding
-  // reliably without a manual restart.
-  eleventyConfig.setChokidarConfig({
-    usePolling: true,
-    interval: 250,
-    awaitWriteFinish: {
-      stabilityThreshold: 100,
-      pollInterval: 50
-    }
-  })
-
   // ── Relative URL helper ──────────────────────────────────────────────────
   // Converts absolute internal URLs to relative paths from the current output
   // file. This makes the dist/ folder fully portable (no assumed root).
@@ -88,6 +76,9 @@ export default function (eleventyConfig: UserConfig) {
   // Watch the compiled CSS so the dev server reloads the browser whenever
   // the Tailwind --watch process writes a new dist/assets/css/main.css.
   eleventyConfig.addWatchTarget('dist/assets/css/main.css')
+  // The simulator is a standalone Nunjucks page with inline interaction code.
+  // Watch it explicitly so a source edit rebuilds the served page before reload.
+  eleventyConfig.addWatchTarget('src/simulator')
 
   // eleventyConfig.addPassthroughCopy('src/assets');
   // Note: image assets embedded as base64 data URIs via _data files (mount restrictions

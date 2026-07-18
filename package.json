@@ -68,7 +68,7 @@
     "ki:site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "ki:site:clean": "rm -rf site/dist site/.wrangler",
     "ki:site:deploy": "cd site && bunx wrangler deploy",
-    "ki:site:dev": "concurrently --names css,11ty --prefix-colors cyan,yellow \"bun run ki:site:dev:css\" \"bun run ki:site:dev:serve\"",
+    "ki:site:dev": "concurrently --kill-others-on-fail --names css,11ty --prefix-colors cyan,yellow \"bun run ki:site:dev:css\" \"bun run ki:site:dev:serve\"",
     "ki:site:dev:css": "cd site && bunx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --watch",
     "ki:site:dev:serve": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "ki:site:preview": "bun run ki:site:build && cd site && bunx wrangler dev",
