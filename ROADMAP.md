@@ -10,6 +10,7 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
+- [Site Experience: AI capability amplification simulator](docs/roadmap/site-experience/ROADMAP.md#ai-capability-amplification-simulator)
 - [Site Experience: Publish stable harness installation entry points](docs/roadmap/site-experience/ROADMAP.md#publish-stable-harness-installation-entry-points)
 
 ## Soon
@@ -27,6 +28,7 @@ Worth doing, but presently blocked on an external dependency or decision. Revisi
 
 Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass (or a decision to drop them) before they're actionable.
 
+- [Site Experience: Capability amplification simulator scenarios and multi-actor models _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#capability-amplification-simulator-scenarios-and-multi-actor-models-candidate)
 - [Site Experience: Contribution / Community page _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#contribution--community-page-candidate)
 - [Site Experience: Interactive island geography diagram _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram-candidate)
 - [Site Experience: Multilingual support _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#multilingual-support-candidate)

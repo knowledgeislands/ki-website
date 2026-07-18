@@ -8,10 +8,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-## Soon
-
-Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
-
 ### Publish stable harness installation entry points
 
 Origin: `ki-agentic-harness` FND-001. This is an independently executable, non-blocking cross-repository hand-off.
@@ -22,6 +18,14 @@ Publish these stable user-facing routes for shell installation:
 - `https://knowledgeislands.info/harness/bootstrap` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh`.
 
 The routes are the documented contract. The raw GitHub script paths are implementation locations and may change only with a corresponding route-binding update. Both shell entry points must retain their own caller-supplied arguments, including a pinned ref.
+
+### AI capability amplification simulator
+
+Create a self-contained, client-side interactive visualisation that frames AI as an amplifier rather than an inherently positive force. It must let a visitor vary raw intelligence, learning ability, skills and knowledge, governance, and AI power; show an expected value-over-time trajectory with a visible zero line and an uncertainty envelope; and make capability, precision, and effective amplification intuitive without presenting the model as a scientific prediction.
+
+## Soon
+
+Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
 ### Homepage -> Get Started CTA
 
@@ -50,3 +54,7 @@ An external-facing page explaining how other islands and teams can propose addit
 ### Multilingual support _(candidate)_
 
 The model is language-agnostic; the website could support additional languages using Eleventy's i18n plugin.
+
+### Capability amplification simulator scenarios and multi-actor models _(candidate)_
+
+After Phase 1 establishes the core thought experiment, explore scenario presets, multiple people or teams, AI-agent interactions, configurable equations, and Monte Carlo or organisation-level views without diluting the simulator's central message.
