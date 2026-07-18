@@ -8,17 +8,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-### Publish stable harness installation entry points
-
-Origin: `ki-agentic-harness` FND-001. This is an independently executable, non-blocking cross-repository hand-off.
-
-Publish these stable user-facing routes for shell installation:
-
-- `https://knowledgeislands.info/harness/install` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/user-install.sh`.
-- `https://knowledgeislands.info/harness/bootstrap` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh`.
-
-The routes are the documented contract. The raw GitHub script paths are implementation locations and may change only with a corresponding route-binding update. Both shell entry points must retain their own caller-supplied arguments, including a pinned ref.
-
 ### AI capability amplification simulator
 
 Create a self-contained, client-side interactive visualisation that frames AI as an amplifier rather than an inherently positive force. It must let a visitor vary raw intelligence, learning ability, skills and knowledge, governance, and AI power; show an expected value-over-time trajectory with a visible zero line and an uncertainty envelope; and make capability, precision, and effective amplification intuitive without presenting the model as a scientific prediction.

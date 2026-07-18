@@ -1,7 +1,7 @@
 ---
 id: '002'
 title: Build AI capability amplification simulator
-status: open
+status: in-progress
 roadmap: site-experience/ai-capability-amplification-simulator
 blocks: —
 blocked-by: —
@@ -14,6 +14,8 @@ The Website needs an interactive thought experiment that makes one idea tangible
 ## Current state
 
 The Website has static explanatory pages but no interactive simulator or client-side graphing surface. The existing site is built with Eleventy and served as static assets, so the simulator must add no framework or runtime dependency and must remain fully usable in the delivered static page.
+
+Phase 1 will use a focused native SVG renderer: it will draw only this model's axes, zero line, expected curve, and uncertainty envelope, rather than introduce a generic charting dependency or a reusable drawing layer.
 
 ## Steps
 
