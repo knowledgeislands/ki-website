@@ -41,5 +41,5 @@ Cross-repository work is choreographed rather than centrally orchestrated. Each 
 - Reusable tooling realisations begin in the harness after the underlying pattern is established.
 - Specifications receive conceptual input from Arcadia and implementation evidence from the harness; applicable Active specifications then constrain conforming implementations.
 - The website can publish all three source repositories while remaining independently deployable and non-authoritative.
-- The Website owns stable public routes such as `https://knowledgeislands.info/harness/install`; the Harness owns the bootstrap artifact to which that route resolves.
+- The Website owns the stable public routes `https://knowledgeislands.info/harness/install` for user installation and `https://knowledgeislands.info/harness/bootstrap` for repository bootstrap; the Harness owns the executable artifacts to which those routes resolve.
 - Every primary repository states its place in this ecosystem near the top of its README and carries the shared progress, commit, and choreography conventions in runtime-neutral guidance.

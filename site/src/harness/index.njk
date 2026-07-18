@@ -23,11 +23,22 @@ layout: layouts/base.njk
         <p><a href="https://github.com/knowledgeislands/ki-agentic-harness">Explore the harness repository</a></p>
       </div>
       <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 2px 12px rgb(26 32 48 / 6%);">
-        <p class="overline">Repository bootstrap</p>
-        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Install the governance machinery</h2>
-        <p class="text-muted" style="margin-bottom: 1.25rem;">Run this from the repository you want to govern. It creates that repository's governance machinery and does not alter the rest of your user environment.</p>
-        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL https://knowledgeislands.info/harness/install | sh</code></pre>
-        <p class="text-muted" style="font-size: 0.875rem; margin: 1rem 0 0;">The stable Knowledge Islands URL redirects to the harness-owned bootstrap script. <code>-L</code> makes curl follow that redirect.</p>
+        <p class="overline">Installation</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Start from the right place</h2>
+        <p class="text-muted" style="margin-bottom: 1.25rem;">Install the harness once for your user environment, then bootstrap each repository you want to govern. The two stable Knowledge Islands URLs remain the public contract while the harness owns the executable scripts.</p>
+        <div style="display: grid; gap: 1.25rem;">
+          <div>
+            <h3 style="font-size: 1.0625rem; margin-bottom: 0.5rem;">Install for your user</h3>
+            <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.75rem;">Adds the user-level harness payload. Run once before governing repositories.</p>
+            <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL https://knowledgeislands.info/harness/install | sh</code></pre>
+          </div>
+          <div>
+            <h3 style="font-size: 1.0625rem; margin-bottom: 0.5rem;">Bootstrap a repository</h3>
+            <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 0.75rem;">Run from the repository you want to govern. It creates that repository's governance machinery without changing the rest of your user environment.</p>
+            <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL https://knowledgeislands.info/harness/bootstrap | sh</code></pre>
+          </div>
+        </div>
+        <p class="text-muted" style="font-size: 0.875rem; margin: 1rem 0 0;">Both commands follow the redirect with <code>-L</code>. Supply any script arguments, including a supported pinned ref, after <code>sh -s --</code>.</p>
       </div>
     </div>
   </div>
