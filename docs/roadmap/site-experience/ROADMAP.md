@@ -8,14 +8,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-### Homepage -> Get Started CTA
-
-The homepage currently only links to Philosophy and Model in the footer CTA. Add a "Get Started" card or link in the hero / territories section to complete the reading funnel.
-
-### Inline SVG diagram polish
-
-The cycle and home geography diagrams use hardcoded hex fills - they remain legible in dark mode but their white box fills and light ring strokes are visually inverted. Add `@media (prefers-color-scheme: dark)` rules scoped to the diagram containers, or switch fill values to `currentColor`-based tokens.
-
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
@@ -30,6 +22,14 @@ Publish these stable user-facing routes for shell installation:
 - `https://knowledgeislands.info/harness/bootstrap` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh`.
 
 The routes are the documented contract. The raw GitHub script paths are implementation locations and may change only with a corresponding route-binding update. Both shell entry points must retain their own caller-supplied arguments, including a pinned ref.
+
+### Homepage -> Get Started CTA
+
+The homepage currently only links to Philosophy and Model in the footer CTA. Add a "Get Started" card or link in the hero / territories section to complete the reading funnel.
+
+### Inline SVG diagram polish
+
+The cycle and home geography diagrams use hardcoded hex fills - they remain legible in dark mode but their white box fills and light ring strokes are visually inverted. Add `@media (prefers-color-scheme: dark)` rules scoped to the diagram containers, or switch fill values to `currentColor`-based tokens.
 
 ## Waiting for
 

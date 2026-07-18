@@ -10,14 +10,14 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
-- [Site Experience: Homepage -> Get Started CTA](docs/roadmap/site-experience/ROADMAP.md#homepage---get-started-cta)
-- [Site Experience: Inline SVG diagram polish](docs/roadmap/site-experience/ROADMAP.md#inline-svg-diagram-polish)
+- [Site Experience: Publish stable harness installation entry points](docs/roadmap/site-experience/ROADMAP.md#publish-stable-harness-installation-entry-points)
 
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
-- [Site Experience: Publish stable harness installation entry points](docs/roadmap/site-experience/ROADMAP.md#publish-stable-harness-installation-entry-points)
+- [Site Experience: Homepage -> Get Started CTA](docs/roadmap/site-experience/ROADMAP.md#homepage---get-started-cta)
+- [Site Experience: Inline SVG diagram polish](docs/roadmap/site-experience/ROADMAP.md#inline-svg-diagram-polish)
 
 ## Waiting for
 
