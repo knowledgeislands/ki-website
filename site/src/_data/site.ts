@@ -8,8 +8,10 @@ const site = {
   nav: [
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
-    { label: 'Get Started', href: '/get-started/' },
-  ],
+    { label: 'Harness', href: '/harness/' },
+    { label: 'Specifications', href: '/specifications/' },
+    { label: 'Get Started', href: '/get-started/' }
+  ]
 }
 
 export default site

@@ -32,5 +32,5 @@
   "globs": ["src/**/*.md", "docs/**/*.md", "README.md"],
 
   // Never lint generated output or dependencies.
-  "ignores": ["dist/**", "node_modules/**", ".ki-meta/**", ".claude/skills/**"]
+  "ignores": ["dist/**", "**/node_modules/**", ".ki-meta/**", ".claude/skills/**"]
 }

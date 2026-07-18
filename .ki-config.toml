@@ -1,7 +1,8 @@
 # Knowledge Islands repo config — read by the ki-repo skill.
 # One [table] per skill that needs per-repo options.
 [ki-repo]
-visibility = "private"   # "public" | "private"
+visibility = "public"   # "public" | "private"
+license = "proprietary" # SPDX id, "UNLICENSED", or "proprietary"
 # This repo fully conforms, so it declares no check overrides. To diverge, add a
 # [ki-repo.checks] table with one boolean per check (true = enforce).
 
@@ -18,6 +19,14 @@ visibility = "private"   # "public" | "private"
 # Presence of this table opts the repo into that standard; it takes no per-repo keys today.
 [ki-website]
 
+# Decision Records describe significant, durable website decisions. Presence is the
+# compliance marker; the records live in docs/decisions/ for this code repository.
+[ki-decision-records]
+
+# This repository uses the thematic project-roadmap profile for multi-file and
+# multi-step work. The canonical roadmaps and plans live in docs/roadmap/.
+[ki-project-roadmap]
+
 # Read by the ki-website-cloudflare skill (Workers + Static Assets serving dist/).
 # Monorepo layout: wrangler.jsonc lives in the site/ workspace and is auto-detected, so
 # no site-root override is declared (it would only be needed for a one-off flat consumer).
@@ -28,7 +37,7 @@ visibility = "private"   # "public" | "private"
 # the acknowledged state (same as the harness).
 [ki-tokenomics]
 headroom = "recommended"
-preferred_model = "sonnet"
+preferred_model_type = "standard"
 
 [ki-tokenomics.budgets]
 mcp_servers = 20   # 19 user-scoped at time of first audit (2026-06-22); revisit when scoped

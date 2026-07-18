@@ -2,6 +2,8 @@
 
 Always-loaded orientation for an agent working in this repo. The full picture is in [README.md](README.md); this file is the short anchor.
 
+Read [AGENTS.md](AGENTS.md) first for the shared runtime-neutral progress and commit convention.
+
 ## What this repo is
 
 The public-facing **Knowledge Islands** website — a static site built with the house web stack: **Eleventy 3 + Nunjucks + Markdown, TypeScript run natively on Bun, Tailwind 4 (config-less, semantic design tokens)** — compiled to a portable `dist/` that can be served from any root.

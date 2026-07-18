@@ -1,0 +1,34 @@
+---
+title: KI Agentic Harness - Knowledge Islands
+description: "The KI Agentic Harness is reusable governance tooling for Knowledge Islands work: skills, agents, MCP wrappers, evals, and hooks."
+layout: layouts/base.njk
+---
+
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Practical realisation</p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 24ch;">The KI Agentic Harness</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 54ch; line-height: 1.7;">Reusable skills, agents, MCP wrappers, evals, and hooks for putting the Knowledge Islands approach into practice.</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 3rem; align-items: start;">
+      <div class="prose-ki" style="max-width: none;">
+        <p class="overline">Role</p>
+        <h2>The tooling follows the model.</h2>
+        <p>The harness is the canonical source for the reusable tooling. It generalises patterns proven in Arcadia Principal; it does not define the Knowledge Islands philosophy or model.</p>
+        <p>This website publishes an accessible orientation to the harness. The harness repository remains canonical for its documentation, releases, and executable artifacts.</p>
+        <p><a href="https://github.com/knowledgeislands/ki-agentic-harness">Explore the harness repository</a></p>
+      </div>
+      <div style="background: white; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2rem; box-shadow: 0 2px 12px rgb(26 32 48 / 6%);">
+        <p class="overline">Repository bootstrap</p>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1rem;">Install the governance machinery</h2>
+        <p class="text-muted" style="margin-bottom: 1.25rem;">Run this from the repository you want to govern. It creates that repository's governance machinery and does not alter the rest of your user environment.</p>
+        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL https://knowledgeislands.info/harness/install | sh</code></pre>
+        <p class="text-muted" style="font-size: 0.875rem; margin: 1rem 0 0;">The stable Knowledge Islands URL redirects to the harness-owned bootstrap script. <code>-L</code> makes curl follow that redirect.</p>
+      </div>
+    </div>
+  </div>
+</section>
