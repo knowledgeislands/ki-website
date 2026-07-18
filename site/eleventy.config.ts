@@ -35,6 +35,7 @@ export default function (eleventyConfig: UserConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/_redirects': '_redirects' })
   // Vendor Lucide UMD bundle from node_modules so we don't depend on a CDN in production.
   eleventyConfig.addPassthroughCopy({ '../node_modules/lucide/dist/umd/lucide.min.js': 'assets/js/lucide.min.js' })
+  eleventyConfig.addPassthroughCopy({ '../node_modules/d3/dist/d3.min.js': 'assets/js/d3.min.js' })
 
   // ── Transform: inject external-link icons ────────────────────────────────
   // Adds a Lucide external-link icon to any prose <a href="https://..."> link.

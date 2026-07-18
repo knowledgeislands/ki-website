@@ -15,23 +15,26 @@ The Website needs an interactive thought experiment that makes one idea tangible
 
 The Website has static explanatory pages but no interactive simulator or client-side graphing surface. The existing site is built with Eleventy and served as static assets, so the simulator must add no framework or runtime dependency and must remain fully usable in the delivered static page.
 
-Phase 1 will use a focused native SVG renderer: it will draw only this model's axes, zero line, expected curve, and uncertainty envelope, rather than introduce a generic charting dependency or a reusable drawing layer.
+Phase 1 will use D3 only for the focused SVG renderer: it draws this model's axes, zero line, expected curve, and uncertainty envelope without introducing a framework or a reusable drawing layer.
 
 ## Steps
 
-1. Define and document a deterministic, deliberately illustrative model that normalises the five controls into capability, precision, and effective amplification; make low precision plus high AI power widen the downside envelope while capability and learning improve the expected trajectory over time.
-2. Add a dedicated simulator route with an SVG or Canvas graph that renders time and value/impact axes, an unmistakable zero line, a central expected trajectory, upper and lower bounds, and a translucent uncertainty envelope.
-3. Implement labelled, keyboard-operable sliders for raw intelligence, learning ability, skills and knowledge, governance or guard rails, and AI power; display the derived values and a concise live interpretation without exposing the model as a factual forecast.
-4. Recalculate and smoothly redraw the graph as controls change, honour reduced-motion preferences, preserve readable contrast at narrow widths, and ensure low-precision configurations visibly demonstrate below-zero risk.
-5. Keep the application self-contained at its public route, integrate it with the existing Website shell and discovery paths, and add only the minimal explanatory copy needed to establish the simulator as a conceptual experiment.
-6. Manually exercise representative configurations: high capability/high precision/high power; low capability/low precision/high power; and governance changes at otherwise fixed settings. Confirm the graph and explanatory state make the intended amplification relationship clear in each case.
+1. ✓ Defined and documented a deterministic, deliberately illustrative model that normalises the five controls into capability, precision, and effective amplification; low precision plus high AI power widens the downside envelope while capability and learning improve the expected trajectory over time.
+2. ✓ Added a dedicated simulator route with a D3-rendered SVG graph for time and value/impact axes, an unmistakable zero line, a central expected trajectory, upper and lower bounds, and a translucent uncertainty envelope.
+3. ✓ Implemented labelled, keyboard-operable sliders for raw intelligence, learning ability, skills and knowledge, governance or guard rails, and AI power; the page displays the derived values and a concise live interpretation without presenting the model as a factual forecast.
+4. ✓ Recalculated and smoothly redrew the graph as controls change, honoured reduced-motion preferences, preserved readable contrast at narrow widths, and made low-precision configurations visibly demonstrate below-zero risk.
+5. ✓ Kept the application self-contained at its public route, integrated it with the existing Website shell and homepage discovery path, and added only the explanatory copy necessary to establish it as a conceptual experiment.
+6. ✓ Manually exercised high capability/high precision/high power; low capability/low precision/high power; and governance changes at otherwise fixed settings. The graph and explanatory state make the intended amplification relationship clear in each case.
 
 ## Files touched
 
 - `site/src/simulator/index.njk`
-- `site/src/_data/site.ts`
 - `site/src/index.njk`
 - `site/src/assets/css/main.css`
+- `site/src/_includes/partials/nav.njk`
+- `site/eleventy.config.ts`
+- `package.json`
+- `bun.lock`
 
 ## Verify
 

@@ -1,5 +1,5 @@
-<header style="background-color: var(--color-navy); border-bottom: 1px solid rgb(255 255 255 / 8%);">
-  <div class="page-container" style="display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; padding-bottom: 1rem;">
+<header class="site-header" style="background-color: var(--color-navy); border-bottom: 1px solid rgb(255 255 255 / 8%);">
+  <div class="page-container site-header-inner" style="display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; padding-bottom: 1rem;">
     <a href="/" style="display: flex; align-items: center; gap: 0.625rem; text-decoration: none;">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <!-- Island silhouette: water, landmass, lighthouse beam -->
@@ -18,8 +18,8 @@
       <span style="font-family: var(--font-heading); font-size: 1.125rem; font-weight: 600; color: var(--color-parchment); letter-spacing: -0.01em;">Knowledge Islands</span>
     </a>
 
-    <nav aria-label="Main navigation">
-      <ul style="display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0;">
+    <nav class="site-nav" aria-label="Main navigation">
+      <ul class="site-nav-list" style="display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0;">
         {% for item in site.nav %}
           <li>
             <a href="{{ item.href }}" style="font-size: 0.9375rem; color: rgb(245 239 224 / 80%); text-decoration: none; transition: color 0.15s ease;"
