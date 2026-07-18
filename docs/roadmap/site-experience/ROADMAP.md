@@ -20,6 +20,17 @@ The cycle and home geography diagrams use hardcoded hex fills - they remain legi
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
+### Publish stable harness installation entry points
+
+Origin: `ki-agentic-harness` FND-001. This is an independently executable, non-blocking cross-repository hand-off.
+
+Publish these stable user-facing routes for shell installation:
+
+- `https://knowledgeislands.info/harness/install` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/user-install.sh`.
+- `https://knowledgeislands.info/harness/bootstrap` serves or redirects to `https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh`.
+
+The routes are the documented contract. The raw GitHub script paths are implementation locations and may change only with a corresponding route-binding update. Both shell entry points must retain their own caller-supplied arguments, including a pinned ref.
+
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.

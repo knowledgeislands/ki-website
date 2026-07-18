@@ -17,6 +17,8 @@ Scoped and ready to start — the immediate queue, picked up before anything in 
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
+- [Site Experience: Publish stable harness installation entry points](docs/roadmap/site-experience/ROADMAP.md#publish-stable-harness-installation-entry-points)
+
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
