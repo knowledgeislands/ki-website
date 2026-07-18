@@ -1,10 +1,11 @@
 #!/usr/bin/env bun
+
 // Mechanical auditor for the Knowledge Islands tokenomics standard.
 //
 //   bun scripts/audit.ts [target]    # default: cwd — a project or a KB base
 //   bun scripts/audit.ts --no-user    # audit the project layer alone
 //   bun scripts/audit.ts --user <dir> # point the user layer elsewhere (testing)
-//   bun scripts/audit.ts --init       # print the .ki-config.toml table block
+//   bun scripts/audit.ts --educate       # print the .ki-config.toml table block
 //
 // Tokenomics is the cost of the context the model carries on EVERY turn, and
 // that cost is a COMPOSITION of two configuration layers, not one file:
@@ -27,12 +28,17 @@
 //
 // No npm dependencies — Bun/Node builtins only. Exit code is non-zero if any FAIL.
 
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { homedir } from 'node:os'
 import { basename, dirname, isAbsolute, join, resolve } from 'node:path'
-
-const C = { reset: '\x1b[0m', dim: '\x1b[2m', green: '\x1b[32m', yellow: '\x1b[33m', red: '\x1b[31m', cyan: '\x1b[36m' }
-const paint = (c: string, s: string): string => `${c}${s}${C.reset}`
+import { fileURLToPath } from 'node:url'
+import {
+  type CheckerFinding,
+  checkerReporterExitCode,
+  emitCheckerReporter,
+  judgmentFindingsFromRubric
+} from './vendored/ki-skills/checker-reporter.ts'
 
 // ── token estimate ────────────────────────────────────────────────────────
 // chars/4 is the house budgeting proxy for Claude's tokenizer on English + code.
@@ -41,7 +47,7 @@ const paint = (c: string, s: string): string => `${c}${s}${C.reset}`
 const approxTokens = (s: string): number => Math.ceil(s.length / 4)
 const tok = (n: number): string => `~${n.toLocaleString('en-US')} tok`
 
-// ── budgets (keep in sync with references/tokenomics-standard.md §3) ───
+// ── budgets (keep in sync with references/standards.md §3) ───
 type BudgetKey = 'claude_md' | 'memory_index' | 'skills_surface' | 'mcp_servers' | 'total'
 const BUDGET_DEFAULTS: Record<BudgetKey, number> = {
   claude_md: 2500, //       each CLAUDE.md incl. @imports
@@ -52,7 +58,23 @@ const BUDGET_DEFAULTS: Record<BudgetKey, number> = {
 }
 const HEADROOM_VALUES = ['required', 'recommended', 'off'] as const
 type HeadroomExpectation = (typeof HEADROOM_VALUES)[number]
-const MODEL_TIER_VALUES = ['opus', 'sonnet', 'haiku', 'fable'] as const
+// Portable, purpose-based model *types* (ADR-KI-HARNESS-009). The concrete model
+// each type resolves to is runtime-specific and lives in docs/guides/prompting/
+// (Claude aliases, GPT-5.6 tiers, …), not here — this checker holds no model ids.
+const MODEL_TIER_VALUES = ['frontier', 'reasoning', 'standard', 'fast'] as const
+// Default binding per type, for the [ki-tokenomics.model_tier_bindings] example
+// only — a repo overrides these with the concrete models its runtime supports.
+const DEFAULT_BINDINGS: Record<(typeof MODEL_TIER_VALUES)[number], string> = {
+  frontier: 'fable',
+  reasoning: 'opus',
+  standard: 'sonnet',
+  fast: 'haiku'
+}
+// Reverse of the Claude defaults — maps a legacy `preferred_model` alias to the
+// portable type it becomes, so the CFG-4 migration finding can suggest the rename.
+const LEGACY_ALIAS_TO_TYPE: Record<string, string> = Object.fromEntries(
+  Object.entries(DEFAULT_BINDINGS).map(([type, alias]) => [alias, type])
+)
 
 const KI_SECTION = 'ki-tokenomics'
 const KI_DEFAULT = `[${KI_SECTION}]
@@ -60,7 +82,17 @@ const KI_DEFAULT = `[${KI_SECTION}]
 headroom = "recommended"          # "required" | "recommended" | "off"
 # Optional — the real context window, so the total budget reads as a headroom %.
 # context_window_tokens = 200000
-# preferred_model = "sonnet"        # "opus" | "sonnet" | "haiku" | "fable" — default tier for this environment
+# preferred_model_type = "standard" # "frontier" | "reasoning" | "standard" | "fast" — default *type* for this environment
+#
+# Optional — rebind each portable type to the concrete model(s) this environment's
+# runtime supports. Values are an ordered, comma-separated preference list; each
+# runtime resolves to the first entry it recognises (Claude Code → the alias,
+# Codex → the GPT-5.6 tier). Omit a type to take its documented default.
+# [${KI_SECTION}.model_tier_bindings]
+# frontier  = "fable, gpt-5.6-sol"
+# reasoning = "opus, gpt-5.6-sol"
+# standard  = "sonnet, gpt-5.6-terra"
+# fast      = "haiku, gpt-5.6-luna"
 
 # Per-component token budgets (estimates, chars/4). Omit any to take the default.
 # [${KI_SECTION}.budgets]
@@ -73,16 +105,20 @@ headroom = "recommended"          # "required" | "recommended" | "off"
 
 // ── findings ────────────────────────────────────────────────────────────────
 // Unified severity ladder — shared by every KI checker (enforcement-framework §2).
-type Level = 'FAIL' | 'WARN' | 'POLISH' | 'ADVISORY' | 'INFO' | 'NA' | 'PASS'
-const LADDER: Level[] = ['FAIL', 'WARN', 'POLISH', 'ADVISORY', 'INFO', 'NA', 'PASS']
-const ICON: Record<Level, string> = { FAIL: '❌', WARN: '⚠️ ', POLISH: '✨', ADVISORY: '🧭', INFO: 'ℹ️ ', NA: '⊘', PASS: '✅' }
-type Area = 'COMP' | 'SURF' | 'MCP' | 'BUDG' | 'RUN' | 'TOOL' | 'CFG'
-const AREA_ORDER: Area[] = ['COMP', 'SURF', 'MCP', 'BUDG', 'RUN', 'TOOL', 'CFG']
-type Finding = { level: Level; area: Area; msg: string }
-const findings: Finding[] = []
-const fail = (area: Area, msg: string): void => void findings.push({ level: 'FAIL', area, msg })
-const warn = (area: Area, msg: string): void => void findings.push({ level: 'WARN', area, msg })
-const note = (area: Area, msg: string): void => void findings.push({ level: 'INFO', area, msg })
+const RUBRIC = 'references/rubric.md'
+const findings: CheckerFinding[] = []
+const fail = (code: string, message: string, ref?: string, file?: string): void =>
+  void findings.push({ type: 'M', level: 'FAIL', code, message, ...(ref ? { ref } : {}), ...(file ? { file } : {}) })
+const warn = (code: string, message: string, ref?: string, file?: string): void =>
+  void findings.push({ type: 'M', level: 'WARN', code, message, ...(ref ? { ref } : {}), ...(file ? { file } : {}) })
+const note = (code: string, message: string, ref?: string, file?: string): void =>
+  void findings.push({ type: 'M', level: 'INFO', code, message, ...(ref ? { ref } : {}), ...(file ? { file } : {}) })
+
+function localRubricPath(): string {
+  const scriptDir = dirname(fileURLToPath(import.meta.url))
+  const skillRoot = basename(scriptDir) === 'scripts' ? dirname(scriptDir) : scriptDir
+  return join(skillRoot, 'references', 'rubric.md')
+}
 
 // ── small IO helpers ─────────────────────────────────────────────────────────
 const readText = (p: string): string | null => {
@@ -100,6 +136,77 @@ const readJSON = (p: string): Record<string, unknown> | null => {
   } catch {
     return null
   }
+}
+
+const SAFE_PROJECT_SLUG = /^[A-Za-z0-9](?:[A-Za-z0-9._-]*[A-Za-z0-9])?$/
+function safeProjectSlug(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const unscoped = value.startsWith('@') ? value.slice(value.indexOf('/') + 1) : value
+  return SAFE_PROJECT_SLUG.test(unscoped) ? unscoped : null
+}
+
+function expectedProjectSlug(target: string): string {
+  // A linked worktree's directory is commonly named for the branch, not the repo.
+  // Use the origin basename only in that case; normal repos retain their target basename.
+  const gitMarker = join(target, '.git')
+  if (readText(gitMarker) != null) {
+    const result = spawnSync('git', ['-C', target, 'remote', 'get-url', 'origin'], { encoding: 'utf8' })
+    if (result.status === 0) {
+      const remoteName = result.stdout
+        .trim()
+        .replace(/[\\/]$/, '')
+        .split(/[\\/:]/)
+        .at(-1)
+        ?.replace(/\.git$/, '')
+      const fromRemote = safeProjectSlug(remoteName)
+      if (fromRemote) return fromRemote
+    }
+  }
+  return safeProjectSlug(basename(target)) ?? basename(target)
+}
+
+type HeadroomProjectUrl = { recognized: false } | { recognized: true; valid: boolean; actualSlug: string | null; corrected: string }
+
+function inspectHeadroomProjectUrl(raw: string, expectedSlug: string): HeadroomProjectUrl {
+  let url: URL
+  try {
+    url = new URL(raw)
+  } catch {
+    return { recognized: false }
+  }
+  if (url.protocol !== 'http:' && url.protocol !== 'https:') return { recognized: false }
+  const host = url.hostname.replace(/^\[|\]$/g, '').toLowerCase()
+  if (!['127.0.0.1', 'localhost', '::1'].includes(host)) return { recognized: false }
+
+  const match = url.pathname.match(/^\/p\/([^/]+)\/?$/)
+  const cleanRoot = url.pathname === '/' && url.search === '' && url.hash === ''
+  if (!match && !(url.port === '8787' && cleanRoot)) return { recognized: false }
+  let actualSlug: string | null = null
+  if (match) {
+    try {
+      actualSlug = decodeURIComponent(match[1] as string)
+    } catch {
+      actualSlug = null
+    }
+  }
+  url.pathname = `/p/${encodeURIComponent(expectedSlug)}`
+  return { recognized: true, valid: actualSlug === expectedSlug, actualSlug, corrected: url.toString() }
+}
+
+function headroomProjectHeader(raw: unknown): { present: boolean; project: string; malformedEncoding: boolean } {
+  if (typeof raw !== 'string') return { present: false, project: '', malformedEncoding: false }
+  for (const line of raw.split(/\r?\n/)) {
+    const match = line.match(/^\s*X-Headroom-Project\s*:\s*(.*?)\s*$/i)
+    if (match) {
+      const encoded = match[1] as string
+      try {
+        return { present: true, project: decodeURIComponent(encoded), malformedEncoding: false }
+      } catch {
+        return { present: true, project: encoded, malformedEncoding: true }
+      }
+    }
+  }
+  return { present: false, project: '', malformedEncoding: false }
 }
 const stripCode = (md: string): string => md.replace(/```[\s\S]*?```/g, '').replace(/`[^`\n]*`/g, '')
 
@@ -198,12 +305,22 @@ const REGISTRY: Tool[] = [
 // `key = <number>` on one line, `#` comments. NOT a full TOML parser. Returns the
 // skill's config (or absent), the unknown keys seen (validate-down → WARN), and any
 // malformed budget value (non-numeric → FAIL).
+type ModelType = (typeof MODEL_TIER_VALUES)[number]
 type KiConfig = {
   present: boolean
   headroom?: string
   headroomBad?: string
-  modelTier?: string
-  modelTierBad?: string
+  modelTierType?: string
+  modelTierTypeBad?: string
+  // A lingering pre-ADR-008 `preferred_model` alias, if present — drives the CFG-4
+  // migration finding. Holds the raw value so the finding can name the mapping.
+  legacyModelTier?: string
+  // Resolved [ki-tokenomics.model_tier_bindings] — each declared type's ordered
+  // comma-list of candidate models. Keys outside the type set / empty values are
+  // collected separately for CFG-5 findings; individual model names stay open.
+  bindings: Partial<Record<ModelType, string[]>>
+  bindingBadKeys: string[]
+  bindingEmptyKeys: string[]
   contextWindow?: number
   budgets: Partial<Record<BudgetKey, number>>
   unknownKeys: string[]
@@ -211,19 +328,28 @@ type KiConfig = {
 }
 const BUDGET_KEYS = new Set<string>(['claude_md', 'memory_index', 'skills_surface', 'mcp_servers', 'total'])
 function parseKiConfig(text: string): KiConfig {
-  const cfg: KiConfig = { present: false, budgets: {}, unknownKeys: [], badBudgets: [] }
+  const cfg: KiConfig = {
+    present: false,
+    bindings: {},
+    bindingBadKeys: [],
+    bindingEmptyKeys: [],
+    budgets: {},
+    unknownKeys: [],
+    badBudgets: []
+  }
   let section = ''
   const BUDGETS = `${KI_SECTION}.budgets`
+  const BINDINGS = `${KI_SECTION}.model_tier_bindings`
   for (const raw of text.split(/\r?\n/)) {
     const line = raw.replace(/#.*$/, '').trim()
     if (!line) continue
     const header = line.match(/^\[(.+)\]$/)
     if (header) {
       section = (header[1] as string).trim()
-      if (section === KI_SECTION || section === BUDGETS) cfg.present = true
+      if (section === KI_SECTION || section === BUDGETS || section === BINDINGS) cfg.present = true
       continue
     }
-    if (section !== KI_SECTION && section !== BUDGETS) continue
+    if (section !== KI_SECTION && section !== BUDGETS && section !== BINDINGS) continue
     const eq = line.indexOf('=')
     if (eq === -1) continue
     const key = line.slice(0, eq).trim()
@@ -235,14 +361,30 @@ function parseKiConfig(text: string): KiConfig {
       if (key === 'headroom') {
         if ((HEADROOM_VALUES as readonly string[]).includes(val)) cfg.headroom = val
         else cfg.headroomBad = val
+      } else if (key === 'preferred_model_type') {
+        if ((MODEL_TIER_VALUES as readonly string[]).includes(val)) cfg.modelTierType = val
+        else cfg.modelTierTypeBad = val
       } else if (key === 'preferred_model') {
-        if ((MODEL_TIER_VALUES as readonly string[]).includes(val)) cfg.modelTier = val
-        else cfg.modelTierBad = val
+        // Pre-ADR-008 key — recognised only to emit a loud migration finding.
+        cfg.legacyModelTier = val
       } else if (key === 'context_window_tokens') {
         const n = Number(val)
         if (Number.isFinite(n) && n > 0) cfg.contextWindow = n
         else cfg.badBudgets.push(key)
       } else cfg.unknownKeys.push(key)
+    } else if (section === BINDINGS) {
+      // Keys strict (must be a portable type); values open, comma-separated,
+      // ≥1 non-empty entry (ADR-KI-HARNESS-009 / rubric CFG-5).
+      if (!(MODEL_TIER_VALUES as readonly string[]).includes(key)) {
+        cfg.bindingBadKeys.push(key)
+        continue
+      }
+      const entries = val
+        .split(',')
+        .map((e) => e.trim())
+        .filter(Boolean)
+      if (entries.length === 0) cfg.bindingEmptyKeys.push(key)
+      else cfg.bindings[key as ModelType] = entries
     } else if (!BUDGET_KEYS.has(key)) {
       cfg.unknownKeys.push(key)
     } else {
@@ -256,7 +398,7 @@ function parseKiConfig(text: string): KiConfig {
 
 // ── run ──────────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2)
-if (argv.includes('--init')) {
+if (argv.includes('--educate')) {
   process.stdout.write(KI_DEFAULT)
   process.exit(0)
 }
@@ -265,22 +407,11 @@ const userIdx = argv.indexOf('--user')
 const userDir = userIdx !== -1 ? resolve(argv[userIdx + 1] ?? '') : join(homedir(), '.claude')
 const target = resolve(argv.find((a, i) => !a.startsWith('-') && argv[i - 1] !== '--user') ?? '.')
 
-if (!argv.includes('--json')) {
-  console.log(paint(C.dim, `target: ${target}`))
-  console.log(paint(C.dim, `user layer: ${noUser ? '(skipped)' : userDir}`))
-  console.log(
-    paint(
-      C.dim,
-      'standard: standing surface (CLAUDE.md+@imports · memory · skills · MCP tool surface · settings) + runtime levers; budgets WARN-only; figures ~chars/4 estimates'
-    )
-  )
-}
-
 // COMP — which layers were read
-if (noUser) note('COMP', 'user-wide layer skipped (--no-user) — auditing the project layer alone')
-else if (existsSync(userDir)) note('COMP', `[user] ${userDir}`)
-else warn('COMP', `[user] ${userDir} not found — cannot weigh the user-wide layer (is this the right home?)`)
-note('COMP', `[project] ${target}`)
+if (noUser) note('COMP-1', 'user-wide layer skipped (--no-user) — auditing the project layer alone', RUBRIC)
+else if (existsSync(userDir)) note('COMP-1', `[user] ${userDir}`, RUBRIC)
+else warn('COMP-1', `[user] ${userDir} not found — cannot weigh the user-wide layer (is this the right home?)`, RUBRIC)
+note('COMP-1', `[project] ${target}`, RUBRIC)
 
 // Gather config table first (drives budgets + headroom expectation).
 const kiText = readText(join(target, '.ki-config.toml'))
@@ -305,9 +436,15 @@ for (const { layer } of layers) {
     standingTotal += tokens
     const label = `[${layer}] ${basename(file)}${broken.length ? ' (+@imports)' : ''}`
     if (tokens > budget('claude_md'))
-      warn('SURF', `${label} ${tok(tokens)} > budget ${tok(budget('claude_md'))} — lift rarely-read detail into on-demand files`)
-    else note('SURF', `${label} ${tok(tokens)}`)
-    for (const b of broken) fail('SURF', `[${layer}] ${basename(file)} has an unresolved @import → "${b}" (broken include)`)
+      warn(
+        'BUDG-1',
+        `${label} ${tok(tokens)} > budget ${tok(budget('claude_md'))} — lift rarely-read detail into on-demand files`,
+        RUBRIC,
+        basename(file)
+      )
+    else note('SURF-1', `${label} ${tok(tokens)}`, RUBRIC, basename(file))
+    for (const b of broken)
+      fail('SURF-1', `[${layer}] ${basename(file)} has an unresolved @import → "${b}" (broken include)`, RUBRIC, basename(file))
   }
 }
 
@@ -334,8 +471,10 @@ for (const { layer } of layers) {
     }
     if (foreign.size > 0)
       warn(
-        'TOOL',
-        `CLAUDE.md headroom:learn block has ${foreignLines} line(s) rooted in other repo(s) (${[...foreign].join(', ')}) — stale cross-repo captures in the standing prefix; re-learn or prune`
+        'TOOL-4',
+        `CLAUDE.md headroom:learn block has ${foreignLines} line(s) rooted in other repo(s) (${[...foreign].join(', ')}) — stale cross-repo captures in the standing prefix; re-learn or prune`,
+        RUBRIC,
+        'CLAUDE.md'
       )
   }
 }
@@ -362,9 +501,11 @@ if (!noUser && existsSync(userDir)) {
 for (const { layer, file } of memoryFiles) {
   const tokens = approxTokens(readText(file) ?? '')
   standingTotal += tokens
-  const label = `[${layer}] ${file.includes('/Pillars/') ? `Pillars/${basename(dirname(file))}/MEMORY.md` : basename(file)}`
-  if (tokens > budget('memory_index')) warn('SURF', `${label} ${tok(tokens)} > budget ${tok(budget('memory_index'))} — prune stale entries`)
-  else note('SURF', `${label} ${tok(tokens)}`)
+  const memLabel = file.includes('/Pillars/') ? `Pillars/${basename(dirname(file))}/MEMORY.md` : basename(file)
+  const label = `[${layer}] ${memLabel}`
+  if (tokens > budget('memory_index'))
+    warn('BUDG-1', `${label} ${tok(tokens)} > budget ${tok(budget('memory_index'))} — prune stale entries`, RUBRIC, memLabel)
+  else note('SURF-2', `${label} ${tok(tokens)}`, RUBRIC, memLabel)
 }
 
 // ── SURF + BUDG: installed-skill selection surface, per layer ──
@@ -375,8 +516,8 @@ for (const { layer, dir } of layers) {
   standingTotal += tokens
   const label = `[${layer}] ${count} skill description(s)`
   if (tokens > budget('skills_surface'))
-    warn('SURF', `${label} ${tok(tokens)} > budget ${tok(budget('skills_surface'))} — consolidate or tighten descriptions (ki-skills)`)
-  else note('SURF', `${label} ${tok(tokens)}`)
+    warn('BUDG-1', `${label} ${tok(tokens)} > budget ${tok(budget('skills_surface'))} — consolidate or tighten descriptions`, RUBRIC)
+  else note('SURF-3', `${label} ${tok(tokens)}`, RUBRIC)
 }
 
 // ── MCP tool surface + RUN: settings signals ──
@@ -390,6 +531,74 @@ if (!noUser) {
 settingsSources.push({ layer: 'project', file: join(target, '.claude', 'settings.json') })
 settingsSources.push({ layer: 'project', file: join(target, '.claude', 'settings.local.json') })
 settingsSources.push({ layer: 'project', file: join(target, '.mcp.json') })
+
+// TOOL-5 — a project-local Headroom proxy URL carries a per-project path so its
+// savings are attributable. Remote URLs are outside this local-proxy convention;
+// a custom local port is treated as Headroom only when it is already /p/... scoped.
+const projectSlug = expectedProjectSlug(target)
+let projectHeadroomProxyPresent = false
+type ProjectSettings = { name: string; obj: Record<string, unknown> }
+const projectSettings: ProjectSettings[] = []
+let projectSettingsMalformed = false
+for (const name of ['settings.json', 'settings.local.json']) {
+  const text = readText(join(target, '.claude', name))
+  if (text == null) continue
+  try {
+    const parsed = JSON.parse(text) as unknown
+    if (parsed == null || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('root is not an object')
+    projectSettings.push({ name, obj: parsed as Record<string, unknown> })
+  } catch {
+    projectSettingsMalformed = true
+    warn('TOOL-5', `${name} is malformed — Headroom project scope cannot be inspected`, RUBRIC, `.claude/${name}`)
+  }
+}
+const envOf = (settings: ProjectSettings | undefined): Record<string, unknown> => {
+  const env = settings?.obj.env
+  return env && typeof env === 'object' && !Array.isArray(env) ? (env as Record<string, unknown>) : {}
+}
+const baseSettings = projectSettings.find((s) => s.name === 'settings.json')
+const localSettings = projectSettings.find((s) => s.name === 'settings.local.json')
+const baseEnv = envOf(baseSettings)
+const localEnv = envOf(localSettings)
+const effectiveValue = (key: string): { value: unknown; name: string } =>
+  Object.hasOwn(localEnv, key) ? { value: localEnv[key], name: 'settings.local.json' } : { value: baseEnv[key], name: 'settings.json' }
+if (!projectSettingsMalformed) {
+  const { value: raw, name } = effectiveValue('ANTHROPIC_BASE_URL')
+  if (typeof raw === 'string') {
+    const inspected = inspectHeadroomProjectUrl(raw, projectSlug)
+    if (inspected.recognized) {
+      projectHeadroomProxyPresent = true
+      const { value: rawHeaders, name: headerName } = effectiveValue('ANTHROPIC_CUSTOM_HEADERS')
+      const header = headroomProjectHeader(rawHeaders)
+      if (header.present) {
+        if (header.project === projectSlug)
+          note(
+            'TOOL-5',
+            `${headerName} scopes the local Headroom proxy to project ${projectSlug} via header`,
+            RUBRIC,
+            `.claude/${headerName}`
+          )
+        else
+          warn(
+            'TOOL-5',
+            `${headerName} X-Headroom-Project scopes ${header.project || '(empty)'}${header.malformedEncoding ? ' (malformed percent-encoding)' : ''}; expected ${projectSlug} (header overrides the URL path)`,
+            RUBRIC,
+            `.claude/${headerName}`
+          )
+      } else if (inspected.valid) note('TOOL-5', `${name} scopes the local Headroom proxy to /p/${projectSlug}`, RUBRIC, `.claude/${name}`)
+      else
+        warn(
+          'TOOL-5',
+          inspected.actualSlug == null
+            ? `${name} local Headroom proxy URL is missing /p/${projectSlug} project scope`
+            : `${name} local Headroom proxy URL scopes ${inspected.actualSlug}; expected /p/${projectSlug}`,
+          RUBRIC,
+          `.claude/${name}`
+        )
+    }
+  }
+}
+
 let pinnedModel: string | null = null
 for (const { layer, file } of settingsSources) {
   const obj = readJSON(file)
@@ -402,38 +611,47 @@ if (mcp.length) {
   const byLayer: Record<string, number> = {}
   for (const s of mcp) byLayer[s.layer] = (byLayer[s.layer] ?? 0) + 1
   note(
-    'MCP',
+    'MCP-1',
     `${mcp.length} server(s): ${mcp.map((s) => s.name).join(', ')} (${Object.entries(byLayer)
       .map(([l, n]) => `${n} ${l}`)
-      .join(', ')})`
+      .join(', ')})`,
+    RUBRIC
   )
   if (mcp.length > budget('mcp_servers'))
     warn(
-      'MCP',
-      `${mcp.length} MCP servers > budget ${budget('mcp_servers')} — tool definitions are the dominant standing cost; disable/scope servers this work does not use (ki-mcp)`
+      'BUDG-1',
+      `${mcp.length} MCP servers > budget ${budget('mcp_servers')} — tool definitions are the dominant standing cost; disable/scope servers this work does not use`,
+      RUBRIC
     )
-} else note('MCP', 'no MCP servers configured')
+} else note('MCP-1', 'no MCP servers configured', RUBRIC)
 
 // RUN: the only config-level runtime signal the checker can see is a pinned model.
-if (pinnedModel) note('RUN', `default model pinned: ${pinnedModel} — confirm the tier matches the work (RUN-2)`)
-else note('RUN', 'no default model pinned in settings — tier is the session default (runtime judgment)')
+if (pinnedModel) note('RUN-5', `default model pinned: ${pinnedModel} — confirm the tier matches the work`, RUBRIC)
+else note('RUN-5', 'no default model pinned in settings — tier is the session default (runtime judgment)', RUBRIC)
 
 // ── TOOL: compression tooling + declared expectation ──
 const detectCtx: DetectCtx = { mcp, envKeys }
 const present = REGISTRY.map((t) => ({ name: t.name, mode: t.detect(detectCtx) })).filter((d) => d.mode)
+if (projectHeadroomProxyPresent && !present.some((d) => d.name === 'headroom'))
+  present.push({ name: 'headroom', mode: '[project] local proxy URL' })
 for (const d of present)
   note(
-    'TOOL',
-    `${d.name} detected — ${d.mode}; confirm reversible store + cache-aligner are optimal (TOOL-3, keys undocumented — judgment)`
+    'TOOL-1',
+    `${d.name} detected — ${d.mode}; confirm reversible store + cache-aligner are optimal (keys undocumented — judgment)`,
+    RUBRIC
   )
 const expectation: HeadroomExpectation = (ki?.headroom as HeadroomExpectation) ?? 'recommended'
 const headroomPresent = present.some((d) => d.name === 'headroom')
 if (!headroomPresent) {
   if (expectation === 'required')
-    fail('TOOL', 'headroom = "required" but no Headroom configuration detected (mcpServers entry, proxy, or HEADROOM_* env)')
+    fail('TOOL-2', 'headroom = "required" but no Headroom configuration detected (mcpServers entry, proxy, or HEADROOM_* env)', RUBRIC)
   else if (expectation === 'recommended')
-    warn('TOOL', 'no context-compression layer detected — Headroom is recommended for tool-heavy work (set headroom = "off" to silence)')
-  else note('TOOL', 'compression layer off (headroom = "off")')
+    warn(
+      'TOOL-2',
+      'no context-compression layer detected — Headroom is recommended for tool-heavy work (set headroom = "off" to silence)',
+      RUBRIC
+    )
+  else note('TOOL-2', 'compression layer off (headroom = "off")', RUBRIC)
 }
 
 // ── BUDG: total standing surface ──
@@ -442,90 +660,92 @@ const overTotal = total > budget('total')
 const headroomPct = ki?.contextWindow
   ? ` — ${Math.round((total / ki.contextWindow) * 100)}% of the declared ${ki.contextWindow.toLocaleString('en-US')}-token window`
   : ''
-if (overTotal) warn('BUDG', `total standing surface ${tok(total)} > budget ${tok(budget('total'))}${headroomPct}`)
-else note('BUDG', `total standing surface ${tok(total)} (budget ${tok(budget('total'))})${headroomPct}`)
+if (overTotal) warn('BUDG-2', `total standing surface ${tok(total)} > budget ${tok(budget('total'))}${headroomPct}`, RUBRIC)
+else note('BUDG-2', `total standing surface ${tok(total)} (budget ${tok(budget('total'))})${headroomPct}`, RUBRIC)
 
 // ── CFG: the config table, validated down ──
-if (!ki?.present) note('CFG', `no [${KI_SECTION}] table in .ki-config.toml — using default budgets (run --init to opt in and tune)`)
+if (!ki?.present)
+  note(
+    'CFG-2',
+    `no [${KI_SECTION}] table in .ki-config.toml — using default budgets (run --educate to opt in and tune)`,
+    RUBRIC,
+    '.ki-config.toml'
+  )
 else {
-  note('CFG', `[${KI_SECTION}] present (headroom = "${expectation}"${ki.contextWindow ? `, window ${ki.contextWindow}` : ''})`)
+  note(
+    'CFG-1',
+    `[${KI_SECTION}] present (headroom = "${expectation}"${ki.contextWindow ? `, window ${ki.contextWindow}` : ''})`,
+    RUBRIC,
+    '.ki-config.toml'
+  )
   if (ki.headroomBad)
-    warn('CFG', `headroom = "${ki.headroomBad}" is not one of ${HEADROOM_VALUES.join(' / ')} — defaulting to "recommended"`)
-  if (ki.modelTier) note('CFG', `preferred_model = "${ki.modelTier}" — confirm the tier is appropriate for this environment (RUN-2)`)
-  else if (ki.modelTierBad)
-    warn('CFG', `preferred_model = "${ki.modelTierBad}" is not one of ${MODEL_TIER_VALUES.join(' / ')} — value unrecognised`)
-  else warn('CFG', `preferred_model not declared in [${KI_SECTION}] — add it to codify the default tier for this environment (CFG-4)`)
-  for (const k of ki.unknownKeys)
-    warn('CFG', `unrecognised key "${k}" in [${KI_SECTION}] — validate-down (known budgets: ${[...BUDGET_KEYS].join(', ')})`)
-  for (const k of ki.badBudgets) fail('CFG', `"${k}" has a non-numeric/invalid value in [${KI_SECTION}]`)
-}
-
-// ── report ───────────────────────────────────────────────────────────────────
-// Unified-ladder output; keeps the by-area console grouping, adds --json / --report (enforcement-framework §2/§5).
-const jsonOut = argv.includes('--json')
-const ri = argv.indexOf('--report')
-const reportOut = ri !== -1
-const reportDir = reportOut && argv[ri + 1] && !argv[ri + 1].startsWith('-') ? argv[ri + 1] : join(target, '.ki-meta', 'audits')
-
-const fails = findings.filter((x) => x.level === 'FAIL')
-const warns = findings.filter((x) => x.level === 'WARN')
-const n = (l: Level): number => findings.filter((x) => x.level === l).length
-const summary = {
-  fail: fails.length,
-  warn: warns.length,
-  polish: n('POLISH'),
-  advisory: n('ADVISORY'),
-  info: n('INFO'),
-  na: n('NA'),
-  pass: n('PASS')
-}
-const isoStamp = new Date().toISOString()
-
-if (reportOut) {
-  mkdirSync(reportDir, { recursive: true })
-  const body = LADDER.flatMap((l) => {
-    const rows = findings.filter((f) => f.level === l)
-    return rows.length ? ['', `## ${ICON[l]} ${l} (${rows.length})`, ...rows.map((r) => `- [${r.area}] ${r.msg}`)] : []
-  })
-  const tally = `FAIL=${summary.fail} WARN=${summary.warn} POLISH=${summary.polish} PASS=${summary.pass} ADVISORY=${summary.advisory} NA=${summary.na} · standing surface ${tok(total)}`
-  writeFileSync(
-    join(reportDir, 'tokenomics.md'),
-    [`# tokenomics audit — ${target}`, '', `_${isoStamp}_`, '', tally, ...body, ''].join('\n')
-  )
-  writeFileSync(
-    join(reportDir, 'tokenomics.json'),
-    `${JSON.stringify({ concern: 'tokenomics', target, generatedAt: isoStamp, summary, findings }, null, 2)}\n`
-  )
-}
-
-if (jsonOut) {
-  process.stdout.write(`${JSON.stringify({ concern: 'tokenomics', target, generatedAt: isoStamp, summary, findings }, null, 2)}\n`)
-} else {
-  const head = fails.length ? paint(C.red, 'FAIL') : warns.length ? paint(C.yellow, 'WARN') : paint(C.green, 'PASS')
-  console.log(`\n${head}  ${paint(C.cyan, basename(target))}`)
-  for (const area of AREA_ORDER) {
-    const inArea = findings.filter((x) => x.area === area)
-    if (!inArea.length) continue
-    console.log(paint(C.dim, `  ── ${area} ──`))
-    for (const x of inArea) {
-      if (x.level === 'FAIL') console.log(`  ${paint(C.red, 'fail')} ${x.msg}`)
-      else if (x.level === 'WARN') console.log(`  ${paint(C.yellow, 'warn')} ${x.msg}`)
-      else console.log(`  ${paint(C.dim, `${x.level.toLowerCase()} ${x.msg}`)}`)
-    }
-  }
-  console.log(
-    `\n${paint(C.cyan, 'summary')}: FAIL=${summary.fail} WARN=${summary.warn} POLISH=${summary.polish} PASS=${summary.pass} ADVISORY=${summary.advisory} NA=${summary.na} · standing surface ${tok(total)}`
-  )
-  // Remediation footer (checker-contract) — non-clean summary routes to the judgment mode.
-  if (fails.length + warns.length + summary.polish > 0) {
-    console.log(paint(C.dim, '→ to address: run /ki-tokenomics CONFORM   (judgment criteria: references/audit-rubric.md)'))
-  }
-  if (reportOut) console.log(paint(C.dim, `report → ${join(reportDir, 'tokenomics.{md,json}')}`))
-  console.log(
-    paint(
-      C.dim,
-      'mechanical checks only — apply the judgment criteria (altitude, MCP usefulness, runtime levers, Headroom optimality) from references/audit-rubric.md by reading.'
+    warn(
+      'CFG-1',
+      `headroom = "${ki.headroomBad}" is not one of ${HEADROOM_VALUES.join(' / ')} — defaulting to "recommended"`,
+      RUBRIC,
+      '.ki-config.toml'
     )
-  )
+  // CFG-4 — the ambient default model *type* (portable; ADR-KI-HARNESS-009).
+  if (ki.legacyModelTier) {
+    const mapped = LEGACY_ALIAS_TO_TYPE[ki.legacyModelTier]
+    const hint = mapped
+      ? ` — map it to preferred_model_type = "${mapped}"`
+      : ` — replace it with a preferred_model_type value (${MODEL_TIER_VALUES.join(' / ')})`
+    fail(
+      'CFG-4',
+      `preferred_model = "${ki.legacyModelTier}" uses the retired Claude-only key; renamed to preferred_model_type${hint} (ADR-KI-HARNESS-009)`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  } else if (ki.modelTierType)
+    note(
+      'CFG-4',
+      `preferred_model_type = "${ki.modelTierType}" — confirm the type is appropriate for this environment`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  else if (ki.modelTierTypeBad)
+    warn(
+      'CFG-4',
+      `preferred_model_type = "${ki.modelTierTypeBad}" is not one of ${MODEL_TIER_VALUES.join(' / ')} — value unrecognised`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  else
+    warn(
+      'CFG-4',
+      `preferred_model_type not declared in [${KI_SECTION}] — add it to codify the default type for this environment`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  // CFG-5 — optional per-type binding overrides. Keys strict (bad key = FAIL),
+  // values open comma-lists (empty = FAIL); recognised bindings surfaced as INFO.
+  for (const k of ki.bindingBadKeys)
+    fail(
+      'CFG-5',
+      `"${k}" in [${KI_SECTION}.model_tier_bindings] is not a model type — keys must be one of ${MODEL_TIER_VALUES.join(' / ')}`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  for (const k of ki.bindingEmptyKeys)
+    fail(
+      'CFG-5',
+      `${k} in [${KI_SECTION}.model_tier_bindings] has no non-empty model — give an ordered, comma-separated list (e.g. "opus, gpt-5.6-sol")`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  for (const [type, models] of Object.entries(ki.bindings))
+    note('CFG-5', `${type} → ${(models as string[]).join(', ')} (first supported model per runtime)`, RUBRIC, '.ki-config.toml')
+  for (const k of ki.unknownKeys)
+    warn(
+      'CFG-1',
+      `unrecognised key "${k}" in [${KI_SECTION}] — validate-down (known budgets: ${[...BUDGET_KEYS].join(', ')})`,
+      RUBRIC,
+      '.ki-config.toml'
+    )
+  for (const k of ki.badBudgets) fail('CFG-1', `"${k}" has a non-numeric/invalid value in [${KI_SECTION}]`, RUBRIC, '.ki-config.toml')
 }
-process.exit(fails.length > 0 ? 1 : 0)
+
+findings.push(...judgmentFindingsFromRubric(localRubricPath(), RUBRIC))
+emitCheckerReporter({ mode: 'audit', concern: 'tokenomics', target, findings })
+process.exit(checkerReporterExitCode(findings))
