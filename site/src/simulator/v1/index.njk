@@ -1,0 +1,254 @@
+---
+layout: layouts/base.njk
+title: AI capability amplification simulator
+description: A conceptual experiment in how AI amplifies human capability, judgment, and error.
+---
+
+<style>
+  .simulator {
+    --sim-ink: #152338;
+    --sim-muted: #586576;
+    --sim-line: #d9d3c5;
+    --sim-panel: #fffdfa;
+    --sim-teal: #267c7c;
+    --sim-gold: #d6a64a;
+    --sim-risk: #b34c45;
+  }
+
+  .simulator * { box-sizing: border-box; }
+  .simulator .sim-hero { background: linear-gradient(135deg, #111f35 0%, #193c51 58%, #1d5d60 140%); color: var(--color-parchment); padding: clamp(3.5rem, 8vw, 6.25rem) 0 clamp(3rem, 6vw, 4.5rem); }
+  .simulator .sim-kicker { color: #e7bd68; font-size: .75rem; font-weight: 600; letter-spacing: .13em; margin-bottom: 1rem; text-transform: uppercase; }
+  .simulator .sim-hero h1 { color: var(--color-parchment); font-size: clamp(2.4rem, 5vw, 4.5rem); margin: 0 0 1.25rem; max-width: 15ch; }
+  .simulator .sim-intro { color: rgb(245 239 224 / 84%); font-size: 1.125rem; line-height: 1.7; margin: 0; max-width: 62ch; }
+  .simulator .sim-section { background: #f7f4ed; padding: clamp(2.5rem, 5vw, 4.5rem) 0; }
+  .simulator .sim-note { border-left: 3px solid var(--sim-gold); color: #dfe8e7; font-size: .9rem; line-height: 1.55; margin: 2rem 0 0; max-width: 70ch; padding-left: 1rem; }
+  .simulator .sim-grid { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1.55fr) minmax(18rem, .85fr); }
+  .simulator .sim-card { background: var(--sim-panel); border: 1px solid var(--sim-line); border-radius: 1rem; box-shadow: 0 12px 30px rgb(21 35 56 / 7%); }
+  .simulator .sim-chart-card { overflow: hidden; padding: clamp(1rem, 3vw, 2rem); }
+  .simulator .sim-controls { padding: clamp(1.25rem, 3vw, 2rem); }
+  .simulator .sim-heading { color: var(--sim-ink); font-family: var(--font-heading); font-size: 1.55rem; margin: 0; }
+  .simulator .sim-subheading { color: var(--sim-muted); font-size: .925rem; line-height: 1.55; margin: .5rem 0 0; }
+  .simulator .sim-graph { display: block; height: auto; margin-top: 1.5rem; overflow: visible; width: 100%; }
+  .simulator .sim-axis-label { fill: #667386; font-family: var(--font-body); font-size: 12px; }
+  .simulator .sim-axis-title { fill: #455467; font-family: var(--font-body); font-size: 12px; font-weight: 600; }
+  .simulator .sim-legend { display: flex; flex-wrap: wrap; gap: .75rem 1rem; margin: 1rem 0 0; }
+  .simulator .sim-legend-item { align-items: center; color: var(--sim-muted); display: inline-flex; font-size: .8rem; gap: .4rem; }
+  .simulator .sim-key { border-radius: 99px; display: inline-block; height: .6rem; width: .6rem; }
+  .simulator .sim-control { border-top: 1px solid #e4dfd4; padding: 1.15rem 0; }
+  .simulator .sim-control:first-of-type { margin-top: 1rem; }
+  .simulator .sim-control:last-of-type { padding-bottom: 0; }
+  .simulator .sim-control-label { align-items: baseline; color: var(--sim-ink); display: flex; font-size: .925rem; font-weight: 600; justify-content: space-between; gap: 1rem; }
+  .simulator output { color: var(--sim-teal); font-size: .9rem; font-variant-numeric: tabular-nums; }
+  .simulator input[type="range"] { accent-color: var(--sim-teal); cursor: pointer; margin: .7rem 0 .25rem; width: 100%; }
+  .simulator .sim-control-help { color: var(--sim-muted); display: block; font-size: .78rem; line-height: 1.45; }
+  .simulator .sim-derived { background: #eff5f3; border: 1px solid #cfe0dc; border-radius: .75rem; display: grid; gap: .75rem; grid-template-columns: repeat(3, 1fr); margin-top: 1.5rem; padding: 1rem; }
+  .simulator .sim-derived div { min-width: 0; }
+  .simulator .sim-derived dt { color: var(--sim-muted); font-size: .7rem; letter-spacing: .06em; margin: 0; text-transform: uppercase; }
+  .simulator .sim-derived dd { color: var(--sim-ink); font-family: var(--font-heading); font-size: 1.4rem; font-variant-numeric: tabular-nums; margin: .2rem 0 0; }
+  .simulator .sim-reading { background: #172f3d; border-radius: .75rem; color: #eff5f3; font-size: .9rem; line-height: 1.55; margin: 1rem 0 0; padding: 1rem; }
+  .simulator .sim-reading strong { color: #f0c76e; }
+  .simulator .sim-formula { color: var(--sim-muted); font-size: .8rem; line-height: 1.55; margin-top: .9rem; }
+  .simulator .sim-formula summary { color: var(--sim-teal); cursor: pointer; font-weight: 600; }
+  .simulator .sim-formula ul { margin: .6rem 0 0; padding-left: 1.2rem; }
+  .simulator .sim-explainer { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); margin-top: 1.5rem; }
+  .simulator .sim-explainer article { border-top: 2px solid var(--sim-gold); padding-top: 1rem; }
+  .simulator .sim-explainer h3 { color: var(--sim-ink); font-size: 1.1rem; margin: 0 0 .45rem; }
+  .simulator .sim-explainer p { color: var(--sim-muted); font-size: .9rem; line-height: 1.6; margin: 0; }
+  .simulator .sim-footnote { color: var(--sim-muted); font-size: .8rem; line-height: 1.55; margin: 1.5rem 0 0; }
+  @media (max-width: 760px) {
+    .simulator .sim-grid, .simulator .sim-explainer { grid-template-columns: 1fr; }
+    .simulator .sim-derived { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .simulator .sim-derived { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="simulator">
+  <section class="sim-hero">
+    <div class="page-container">
+      <p class="sim-kicker">A conceptual thought experiment</p>
+      <h1>AI amplifies what is already there.</h1>
+      <p class="sim-intro">Change the human and institutional conditions around an AI system. The chart sketches a possible value trajectory and, crucially, how much uncertainty and downside can grow when powerful systems meet weak judgment or governance.</p>
+      <p class="sim-note">This is not a forecast, scientific model, or decision tool. It is a deliberately simple way to reason about amplification: more AI power does not, by itself, make an outcome better.</p>
+    </div>
+  </section>
+
+  <section class="sim-section">
+    <div class="page-container">
+      <div class="sim-grid">
+        <section class="sim-card sim-chart-card" aria-labelledby="chart-title">
+          <h2 id="chart-title" class="sim-heading">Illustrative value over time</h2>
+          <p class="sim-subheading">The central line is an expected direction under these inputs. The shaded range is wider where power is high and precision is low.</p>
+          <svg class="sim-graph" viewBox="0 0 800 440" role="img" aria-labelledby="chart-title chart-description">
+            <desc id="chart-description">An illustrative graph of value or impact over time, including a zero line, expected trajectory, and uncertainty envelope.</desc>
+            <g id="chart-grid"></g>
+            <path id="uncertainty-band" fill="#75a9a2" fill-opacity=".28"></path>
+            <path id="zero-line" stroke="#a1423d" stroke-width="2" stroke-dasharray="5 5"></path>
+            <path id="expected-line" fill="none" stroke="#1f706f" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"></path>
+            <g id="y-axis"></g>
+            <g id="x-axis" transform="translate(0 382)"></g>
+            <text x="400" y="426" class="sim-axis-title" text-anchor="middle">Time</text>
+            <text x="16" y="205" class="sim-axis-title" text-anchor="middle" transform="rotate(-90 16 205)">Value / impact</text>
+          </svg>
+          <div class="sim-legend" aria-hidden="true">
+            <span class="sim-legend-item"><i class="sim-key" style="background: #1f706f;"></i>Expected direction</span>
+            <span class="sim-legend-item"><i class="sim-key" style="background: rgb(117 169 162 / 50%);"></i>Uncertainty envelope</span>
+            <span class="sim-legend-item"><i class="sim-key" style="background: #a1423d;"></i>Zero impact</span>
+          </div>
+        </section>
+
+        <aside class="sim-card sim-controls" aria-labelledby="controls-title">
+          <h2 id="controls-title" class="sim-heading">Set the conditions</h2>
+          <p class="sim-subheading">All five controls are on a 0–100 illustrative scale. Use arrow keys for fine changes.</p>
+
+          <div class="sim-control">
+            <label class="sim-control-label" for="intelligence">Raw intelligence <output id="intelligence-value" for="intelligence">60</output></label>
+            <input id="intelligence" type="range" min="0" max="100" value="60" />
+            <span class="sim-control-help">Ability to reason, recognise patterns, and work with complexity.</span>
+          </div>
+          <div class="sim-control">
+            <label class="sim-control-label" for="learning">Learning ability <output id="learning-value" for="learning">60</output></label>
+            <input id="learning" type="range" min="0" max="100" value="60" />
+            <span class="sim-control-help">Capacity to improve through feedback and adapt over time.</span>
+          </div>
+          <div class="sim-control">
+            <label class="sim-control-label" for="skills">Skills and knowledge <output id="skills-value" for="skills">60</output></label>
+            <input id="skills" type="range" min="0" max="100" value="60" />
+            <span class="sim-control-help">Relevant craft, context, and applied understanding.</span>
+          </div>
+          <div class="sim-control">
+            <label class="sim-control-label" for="governance">Governance and guard rails <output id="governance-value" for="governance">60</output></label>
+            <input id="governance" type="range" min="0" max="100" value="60" />
+            <span class="sim-control-help">Checks, accountability, feedback loops, and constraints.</span>
+          </div>
+          <div class="sim-control">
+            <label class="sim-control-label" for="power">AI power <output id="power-value" for="power">70</output></label>
+            <input id="power" type="range" min="0" max="100" value="70" />
+            <span class="sim-control-help">Reach, speed, autonomy, and the scale of amplification.</span>
+          </div>
+
+          <dl class="sim-derived" aria-label="Derived illustrative values">
+            <div><dt>Capability</dt><dd id="capability-value">60%</dd></div>
+            <div><dt>Precision</dt><dd id="precision-value">60%</dd></div>
+            <div><dt>Effective amplification</dt><dd id="amplification-value">52%</dd></div>
+          </dl>
+          <p id="sim-reading" class="sim-reading" aria-live="polite"></p>
+          <details class="sim-formula">
+            <summary>Show the illustrative calculations</summary>
+            <ul>
+              <li><strong>Capability</strong> = 45% intelligence + 30% learning + 25% skills.</li>
+              <li><strong>Precision</strong> = 35% intelligence + 25% skills + 40% governance.</li>
+              <li><strong>Effective amplification</strong> = AI power × (35% + 65% capability).</li>
+              <li>The trajectory uses capability and precision for direction, learning for speed, and makes uncertainty grow with power and low precision.</li>
+            </ul>
+          </details>
+        </aside>
+      </div>
+
+      <div class="sim-explainer">
+        <article>
+          <h3>Capability shapes direction</h3>
+          <p>Raw intelligence, learning, and skills make up the practical capacity to choose and use a course of action. Stronger capability makes a positive trajectory more plausible; it does not remove risk.</p>
+        </article>
+        <article>
+          <h3>Precision narrows the range</h3>
+          <p>Intelligence, relevant skills, and governance improve the chance that action is aimed well. Low precision means powerful action can travel farther in the wrong direction.</p>
+        </article>
+        <article>
+          <h3>Power magnifies both</h3>
+          <p>AI power increases the effective scale of the system. It can accelerate value when the conditions are sound, but it also expands the uncertainty envelope when they are not.</p>
+        </article>
+      </div>
+      <p class="sim-footnote">The exact weights and curve are intentionally illustrative. They exist to reveal the relationship between inputs, not to quantify a person, organisation, or AI system.</p>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/js/d3.min.js"></script>
+<script>
+  (() => {
+    const controls = [...document.querySelectorAll('.simulator input[type="range"]')];
+    const outputs = Object.fromEntries(controls.map((control) => [control.id, document.getElementById(`${control.id}-value`)]));
+    const metrics = {
+      capability: document.getElementById('capability-value'),
+      precision: document.getElementById('precision-value'),
+      amplification: document.getElementById('amplification-value'),
+    };
+    const reading = document.getElementById('sim-reading');
+    const svg = d3.select('.sim-graph');
+    const grid = svg.select('#chart-grid');
+    const yAxis = svg.select('#y-axis');
+    const xAxis = svg.select('#x-axis');
+    const band = svg.select('#uncertainty-band');
+    const zero = svg.select('#zero-line');
+    const expected = svg.select('#expected-line');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const plot = { left: 62, right: 766, top: 26, bottom: 382 };
+    const x = d3.scaleLinear().domain([0, 12]).range([plot.left, plot.right]);
+    const y = d3.scaleLinear().range([plot.bottom, plot.top]);
+
+    function values() {
+      return Object.fromEntries(controls.map((control) => [control.id, Number(control.value) / 100]));
+    }
+
+    function model() {
+      const input = values();
+      const capability = input.intelligence * .45 + input.learning * .30 + input.skills * .25;
+      const precision = input.intelligence * .35 + input.skills * .25 + input.governance * .40;
+      const amplification = input.power * (.35 + capability * .65);
+      const direction = -.55 + capability * 1.3 + precision * .35;
+      const learningSpeed = .25 + input.learning * .75;
+      const series = Array.from({ length: 25 }, (_, index) => {
+        const time = index / 2;
+        const expectedValue = amplification * learningSpeed * direction * (time * 9 + Math.pow(time, 1.3) * 3);
+        const uncertainty = amplification * (.2 + (1 - precision) * 1.5) * (4 + time * 3) * 3.3;
+        return { time, expected: expectedValue, lower: expectedValue - uncertainty, upper: expectedValue + uncertainty * .72 };
+      });
+      return { capability, precision, amplification, power: input.power, series };
+    }
+
+    function draw(series) {
+      const allValues = series.flatMap((point) => [point.lower, point.upper, point.expected, 0]);
+      const min = Math.min(-20, ...allValues);
+      const max = Math.max(20, ...allValues);
+      const padding = (max - min) * .14;
+      y.domain([min - padding, max + padding]).nice();
+      const area = d3.area().x((point) => x(point.time)).y0((point) => y(point.lower)).y1((point) => y(point.upper)).curve(d3.curveMonotoneX);
+      const line = d3.line().x((point) => x(point.time)).y((point) => y(point.expected)).curve(d3.curveMonotoneX);
+      const duration = prefersReducedMotion ? 0 : 220;
+      grid.call(d3.axisLeft(y).ticks(5).tickSize(-(plot.right - plot.left)).tickFormat(''));
+      grid.select('.domain').remove();
+      grid.selectAll('.tick line').attr('stroke', '#ded9ce');
+      yAxis.call(d3.axisLeft(y).ticks(5).tickSizeOuter(0));
+      xAxis.call(d3.axisBottom(x).tickValues([0, 3, 6, 9, 12]).tickSizeOuter(0));
+      svg.selectAll('#y-axis text, #x-axis text').attr('class', 'sim-axis-label');
+      svg.selectAll('#y-axis path, #x-axis path, #y-axis line, #x-axis line').attr('stroke', '#aeb7bc');
+      band.interrupt().transition().duration(duration).ease(d3.easeCubicOut).attr('d', area(series));
+      expected.interrupt().transition().duration(duration).ease(d3.easeCubicOut).attr('d', line(series));
+      zero.attr('d', `M ${plot.left} ${y(0)} L ${plot.right} ${y(0)}`);
+      svg.selectAll('#zero-label').data([0]).join('text').attr('id', 'zero-label').attr('x', plot.right - 4).attr('y', y(0) - 7).attr('fill', '#a1423d').attr('font-family', 'var(--font-body)').attr('font-size', 11).attr('text-anchor', 'end').text('zero');
+    }
+
+    function interpretation(result) {
+      const final = result.series.at(-1);
+      if (result.power > .7 && result.precision < .45) return '<strong>High power, low precision:</strong> the uncertainty envelope widens sharply. More reach is magnifying both possible value and the cost of getting the direction wrong.';
+      if (final.expected < 0) return '<strong>Amplification is pointing downward:</strong> on these inputs, the illustrative expected direction is below zero. Build capability and precision before increasing power.';
+      if (result.precision > .7 && result.amplification > .5) return '<strong>Power has a clearer aim:</strong> strong governance and relevant capability narrow the range, while AI power increases the potential upside.';
+      return '<strong>The balance is mixed:</strong> the expected line rises, but the envelope still crosses into downside. Better precision narrows uncertainty; more power expands its consequences.';
+    }
+
+    function updateGraph(animate = true) {
+      const result = model();
+      controls.forEach((control) => { outputs[control.id].value = control.value; });
+      metrics.capability.textContent = `${Math.round(result.capability * 100)}%`;
+      metrics.precision.textContent = `${Math.round(result.precision * 100)}%`;
+      metrics.amplification.textContent = `${Math.round(result.amplification * 100)}%`;
+      reading.innerHTML = interpretation(result);
+      draw(result.series, animate);
+    }
+
+    controls.forEach((control) => control.addEventListener('input', () => updateGraph()));
+    updateGraph(false);
+  })();
+</script>

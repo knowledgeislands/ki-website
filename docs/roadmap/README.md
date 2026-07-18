@@ -13,7 +13,7 @@ Canonical themes and active execution plans.
 - **Title:** Build technical V2 AI capability simulator
 - **Theme:** `site-experience`
 - **Roadmap item:** `site-experience/technical-v2-ai-capability-simulator`
-- **Status:** open
+- **Status:** in-progress
 - **Blocks:** —
 
 ## Dependency graph

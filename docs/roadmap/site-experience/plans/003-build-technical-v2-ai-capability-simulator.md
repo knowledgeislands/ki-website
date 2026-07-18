@@ -1,7 +1,7 @@
 ---
 id: '003'
 title: Build technical V2 AI capability simulator
-status: open
+status: in-progress
 roadmap: site-experience/technical-v2-ai-capability-simulator
 blocks: —
 blocked-by: —
@@ -29,33 +29,39 @@ V2 treats the controls as conditions relative to a neutral midpoint, not as immu
 - **Governance and guard rails** — changes precision only: it improves or weakens feedback, constraints, accountability, and error correction.
 - **AI power** — changes only the effective amplification multiplier. Higher power increases the scale of both the expected outcome and its uncertainty; it does not improve direction or precision by itself.
 
-For the four midpoint-centred controls, normalise the user value `x` as `d(x) = (x − 50) / 50`, giving a signed range from `−1` to `+1`. Normalise AI power as `p = power / 100`, giving an absolute range from `0` to `1`.
+For the four midpoint-centred controls, normalise the user value `x` as `d(x) = (x − 50) / 50`, giving a signed range from `−1` to `+1`. Call the resulting values `i`, `l`, `s`, and `g`. Normalise AI power as `p = power / 100`, giving an absolute range from `0` to `1`.
 
 ### Derived values and provisional equation
 
-The final weights require product-owner agreement, but V2 will expose and implement this structure rather than hide overlapping effects:
+V2 will expose and implement this provisional calibration rather than hide overlapping effects. The coefficients are deliberately easy to tune after the first visual review; they are not empirical claims.
 
 ```text
-S₀ = clamp(Sneutral + wiS·di + wlS·dl + wsS·ds)                  starting state
-C  = clamp(50 + wiC·di + wlC·dl + wsC·ds)                       capability
-Q  = clamp(50 + wiQ·di + wlQ·dl + wsQ·ds + wgQ·dg)              precision
-H  = clamp(50 + wiH·di + wlH·dl + wsH·ds)                       human amplification potential
-M  = p · H / 100                                                 effective AI amplification
-D  = α·((C − 50) / 50) + (1 − α)·((Q − 50) / 50)                expected direction
-E(t) = S₀ + M·D·f(t)                                             expected trajectory
-R(t) = M·(1 − Q / 100)·r(t)                                     uncertainty radius
-L(t) = E(t) − R(t); U(t) = E(t) + β·R(t)                        lower and upper bounds
+S₀ = 10·(0.80i + 0.10l + 0.10s)                                 starting state
+H  = 0.45i + 0.35l + 0.20s                                      human direction potential
+Q  = clamp(0.50 + 0.10i + 0.08l + 0.12s + 0.35g, 0.05, 0.95)    precision
+A  = 1 + 1.50p                                                   AI amplification multiplier
+r  = 0.06 + 0.02·max(l, 0)                                      compounding rate
+F(t) = ((1 + r)^t − 1) / ((1.06)^10 − 1)                        fixed 10-year growth shape
+E(t) = S₀ + 24·A·H·F(t)                                          expected trajectory
+R(t) = p·(1 − Q)·(12 + 28·(t / 10)^1.35)                        uncertainty radius
+L(t) = E(t) − R(t); U(t) = E(t) + R(t)                          lower and upper bounds
 ```
 
-`f(t)` is a fixed monotonic time function and `r(t)` is a fixed increasing uncertainty function. The plotted y-domain, `Sneutral`, weights `w`, balance `α`, and asymmetry `β` will be chosen once in Step 1, documented beside the graph, and then remain fixed for every interaction. The uncertainty term makes weak precision and high AI power visibly riskier; the fixed graph frame ensures that this change is perceived as movement in the model rather than a rescaled chart.
+The graph uses a fixed 0–10-year x-axis and a fixed `−120…+120` y-axis, with a central zero reference line. It never resizes or recalculates its axes. AI power increases `A` from 1× to 2.5×, so it amplifies an existing human trajectory instead of making that trajectory disappear when AI is off. `R(0)` is non-zero whenever AI power is on, so the cone begins above and below the expected line rather than at a single point. The first calibration uses a symmetric cone; any later asymmetry must be a deliberate model change.
+
+### First visual-calibration defaults
+
+The first V2 build is a visual calibration surface, not final coefficient approval. At the neutral midpoint for raw intelligence, learning, skills and knowledge, and governance, with AI power set to zero, the expected trajectory is a straight horizontal zero line. Increasing raw intelligence and learning ability together produces a modest upward compound curve over the ten years. Increasing AI power magnifies that curve and widens the uncertainty cone without moving the frame. With neutral human direction and high AI power, the expected line remains flat while the cone spreads either side of it.
+
+The initial review cases are: neutral conditions with AI off; neutral conditions with AI at 100; raw intelligence and learning at 60 with AI off; the same condition with AI at 50; all human conditions at 100 with AI at 100; and all human conditions at 0 with AI at 100. Expose starting state, human direction potential, precision, amplification multiplier, year-10 expected value, and year-10 range as live readouts so these cases can be compared without reverse-engineering the chart.
 
 ## Steps
 
-1. Confirm the working V2 model specification with the product owner: choose `Sneutral`, all weights `w`, balance `α`, asymmetry `β`, graph bounds, and the fixed time functions. Document the resulting factor-to-output matrix and formula at the V2 route rather than infer it from V1.
-2. Specify a fixed chart domain and visual grammar from the agreed model: axes, ticks, labels, zero/reference lines, and plot bounds remain immobile for every interaction; derive a non-zero starting state from the agreed formula; animate only the expected trajectory, uncertainty envelope, and numerical readouts within that stable frame.
-3. Turn `/simulator/` into a clear simulator landing page with distinct links to the V1 conceptual experience and V2 technical experience. Move V1 unchanged to `/simulator/v1/`; create V2 at `/simulator/v2/`; retain an accessible labelled route from V2 back to the landing page.
-4. Build the V2 visual system around a large central D3 SVG plot with dark graphite surfaces, restrained violet/cyan signal accents, technical labels, and compact surrounding instrument controls. Use a minimal standalone document shell that intentionally omits the normal Website navigation and footer. Reuse the locally shipped D3 bundle; do not add a framework or CDN dependency.
-5. Implement five keyboard-operable, midpoint-centred controls for the human and institutional conditions, plus the distinct AI-power control. Show the declared derived values, starting state, and concise scenario interpretation alongside the graph without presenting the output as a forecast.
+1. ✓ Implemented and documented the provisional V2 formula and calibration cases at the V2 route. Every coefficient is named and local to the model so the product owner can revise it after visual review.
+2. ✓ Specified the fixed chart domain and visual grammar from that formula: 0–10 years and `−120…+120`; axes, ticks, labels, zero/reference lines, and plot bounds remain immobile for every interaction; the starting state and cone derive from the formula; only the expected trajectory, uncertainty envelope, and numerical readouts animate within that stable frame.
+3. ✓ Turned `/simulator/` into a clear simulator landing page with distinct links to the V1 conceptual experience and V2 technical experience. V1 now lives unchanged at `/simulator/v1/`; V2 is at `/simulator/v2/`; V2 has an accessible labelled route back to the landing page.
+4. ✓ Built the V2 visual system around a large central D3 SVG plot with dark graphite surfaces, restrained violet/cyan signal accents, technical labels, and compact surrounding instrument controls. It uses a minimal standalone document shell without the normal Website navigation or footer and reuses the locally shipped D3 bundle.
+5. ✓ Implemented five keyboard-operable, midpoint-centred controls for the human and institutional conditions, plus the distinct AI-power control. The interface shows starting state, human direction, precision, AI multiplier, year-10 expected value, and year-10 range.
 6. Regression-check V1 at `/simulator/v1/` and the new landing page independently. Verify V2 at desktop and narrow widths, with reduced motion, and across neutral, strong-positive, strong-negative, low-governance, and high-AI-power combinations; confirm that only plotted data and readouts animate while the graph frame remains fixed.
 
 ## Files touched
