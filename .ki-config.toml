@@ -23,7 +23,7 @@ license = "proprietary" # SPDX id, "UNLICENSED", or "proprietary"
 # compliance marker; the records live in docs/decisions/ for this code repository.
 [ki-decision-records]
 
-# This repository uses the thematic project-roadmap profile for multi-file and
+# This repository uses the thematic repo-roadmap profile for multi-file and
 # multi-step work. The canonical roadmaps and plans live in docs/roadmap/.
 [ki-repo-roadmap]
 
