@@ -1,6 +1,14 @@
-# GDR-KI-ARCADIA-002: Knowledge Islands ecosystem fundamentals
+---
+id: GDR-KI-ARCADIA-002
+title: 'Knowledge Islands ecosystem fundamentals'
+date: 2026-07-18
+status: current
+type: Governance Decision Record
+type_url: https://knowledgeislands.info/specifications/decision-records/gdr
+decision_type: governance
+---
 
-**Date:** 2026-07-18
+# GDR-KI-ARCADIA-002: Knowledge Islands ecosystem fundamentals
 
 ## Context
 
@@ -31,7 +39,7 @@ ki-specifications
 `-- publishes through -> ki-website
 ```
 
-GDR002 is mutually mirrored across all four repositories. Any proposed modification must consider its effect on Arcadia Principal, the Agentic Harness, Specifications, and the Website, and must update all four mirrors coherently. Temporary drift is permitted only during a choreographed rollout that identifies the outstanding mirrors explicitly.
+This file is copied verbatim into `ki-arcadia-principal`, `ki-agentic-harness`, `ki-specifications`, and `ki-website`; the four paths are one shared record, not repository-specific variants. Any proposed modification must consider its effect on all four repositories and update every copy coherently. Temporary drift is permitted only during a choreographed rollout that identifies the outstanding copies explicitly.
 
 Cross-repository work is choreographed rather than centrally orchestrated. Each repository owns its priorities, plans, workspace, verification, and commits. A repository may place a concrete handoff in another repository's Stream or roadmap, naming its origin and whether it blocks or is blocked by the local item. Work should remain non-blocking and independently executable unless a genuine prerequisite requires otherwise.
 
