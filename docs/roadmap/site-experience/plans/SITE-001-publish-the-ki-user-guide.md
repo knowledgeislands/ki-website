@@ -33,7 +33,7 @@ The Website has no `/tooling/` guide routes, tooling navigation, or public user-
 
 The obsolete `/harness/` page has no preservation or redirect requirement.
 
-The existing `/harness/install` and `/harness/bootstrap` shell-facing installer endpoints are outside this page-route migration and remain governed by their own published contract.
+The obsolete `/harness/` page and its shell-facing installation framing have no preservation or redirect requirement. The `/tooling/` guide will describe current executable behaviour and planned native operations without presenting legacy bootstrap scripts as a public contract.
 
 ## Files touched
 
