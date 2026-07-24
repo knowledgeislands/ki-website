@@ -8,7 +8,13 @@ Canonical themes and active execution plans.
 
 ## Active plans
 
-No active plans.
+### [SITE-001](site-experience/plans/SITE-001-publish-the-ki-user-guide.md)
+
+- **Title:** Publish the KI user guide
+- **Theme:** `site-experience`
+- **Roadmap item:** `site-experience/publish-the-ki-user-guide`
+- **Status:** open
+- **Blocks:** —
 
 ## Dependency graph
 

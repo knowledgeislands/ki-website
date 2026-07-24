@@ -12,6 +12,12 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
+### Publish the KI user guide
+
+Establish the Website as the single public home for user-facing Knowledge Islands guidance, including the `ki` tool journey. Publish source-labelled, current-state guidance rather than duplicate executable or normative contracts: `tools-ki` remains the owner of CLI behaviour and HELP, KI Specifications remains the owner of portable contracts, and the harness retains contributor-facing material.
+
+**Plan:** [SITE-001](plans/SITE-001-publish-the-ki-user-guide.md)
+
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
