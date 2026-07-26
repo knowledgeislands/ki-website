@@ -20,38 +20,36 @@ The guide must distinguish released behaviour from planned work, link to the own
 
 The Website's existing `/harness/` page is an orientation to the KI Agentic Harness, but it is too narrow for the `ki` CLI platform, compatible harnesses, and task-oriented user guidance.
 
-The harness has a `docs/guides/user/` tree of user-facing material, including the target `ki` command surface, while `tools-ki` owns executable behaviour and HELP.
+The harness has a `docs/guides/user/` tree of user-facing material, while `tools-ki` owns the shipped executable behaviour and HELP.
 
 The Website has no `/tooling/` guide routes, tooling navigation, or public user-guide content.
 
+The shared ecosystem decision already assigns public tooling-guide prose and routes to the Website, so no ownership-record change remains.
+
 ## Steps
 
-1. Confirm the public `/tooling/` information architecture and source-of-truth boundaries across the Website, harness, `tools-ki`, and KI Specifications.
-2. Replace the `/harness/` orientation page with `/tooling/`, then create logical task-oriented pages for the CLI, compatible harnesses, and user guidance with clear current-versus-planned command availability.
+1. Confirm the public `/tooling/` information architecture and source-of-truth boundaries across the Website, harness, and `tools-ki`; do not expand KI Specifications work.
+2. Replace the `/harness/` orientation page with `/tooling/`, then create task-oriented pages for the CLI, compatible harnesses, and user guidance that distinguish shipped commands from genuinely planned work.
 3. Move or rewrite the public-facing harness guide material into the Website guide area without retaining copied user-guide prose in source repositories.
 4. Reduce the harness to maintainer and contributor guidance, and replace public-guide references in the harness and `tools-ki` with links to the Website.
-5. Update the ecosystem ownership record if needed so that public user-guide prose is explicitly Website-owned while behaviour, portable contracts, and reusable capabilities remain with their respective owners.
 
-The obsolete `/harness/` page has no preservation or redirect requirement.
-
-The obsolete `/harness/` page and its shell-facing installation framing have no preservation or redirect requirement. The `/tooling/` guide will describe current executable behaviour and planned native operations without presenting legacy bootstrap scripts as a public contract.
+The obsolete `/harness/` page and its shell-facing installation framing have no preservation or redirect requirement. The `/tooling/` guide will describe current executable behaviour without presenting legacy bootstrap scripts as a public contract.
 
 ## Files touched
 
 - `site/src/tooling/`, the removed `site/src/harness/` page, and Website navigation or data files
 - `docs/roadmap/site-experience/ROADMAP.md` and this plan
 - Relevant user-guide and entry-point documents in `ki-agentic-harness` and `tools-ki`
-- The shared ecosystem decision record only if the ownership wording requires correction
 
 ## Verify
 
-- `bun .ki-meta/bin/aggregate.ts audit --skill ki-repo-roadmap`
-- `bun run ki:authoring:audit`
+- `ki repo audit --skill ki-repo-roadmap`
+- `ki repo audit --skill ki-authoring`
 - `bun run ki:site:build`
 - Focused source-repository documentation audits and link checks for each edited repository
 
 ## Dependencies / blocks
 
-The work is independent of implementation of the planned native CLI commands.
+The required native CLI command and multi-harness surfaces are shipped and are the executable source of truth for this guide.
 
-The guide will document released commands as current and clearly mark the multi-harness, scoped-skill target as planned until `tools-ki` ships it.
+CLI-006 owns the verified public release installer and the later install-redirect change. SITE-001 can build the guide before that release, but must not publish the legacy harness installer as the current contract.
