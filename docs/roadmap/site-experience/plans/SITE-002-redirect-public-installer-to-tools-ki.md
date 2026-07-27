@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Redirect public installer to verified tools-ki release
-status: open
+status: ready
 roadmap: site-experience/redirect-the-public-installer-to-the-verified-tools-ki-release
 blocks: —
 blocked-by: —

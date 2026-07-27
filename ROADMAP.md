@@ -11,6 +11,7 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
 - [Site Experience: Publish the KI user guide](docs/roadmap/site-experience/ROADMAP.md#publish-the-ki-user-guide)
+- [Site Experience: Redirect the public installer to the verified `tools-ki` release](docs/roadmap/site-experience/ROADMAP.md#redirect-the-public-installer-to-the-verified-tools-ki-release)
 
 ## Soon
 
@@ -22,8 +23,6 @@ Understood and roughly scoped but not yet started — worth doing once the **Nex
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
-
-- [Site Experience: Redirect the public installer to the verified `tools-ki` release](docs/roadmap/site-experience/ROADMAP.md#redirect-the-public-installer-to-the-verified-tools-ki-release)
 
 ## Future
 
