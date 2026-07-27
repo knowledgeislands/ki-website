@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Publish the KI user guide
-status: acceptance
+status: done
 roadmap: site-experience/publish-the-ki-user-guide
 blocks: —
 blocked-by: —
@@ -81,3 +81,11 @@ None.
 ### Mini recap
 
 A public guide can stay current without duplicating volatile CLI and harness contracts when it makes source ownership explicit and routes readers to the authoritative repository for exact detail. No additional learning route is proposed.
+
+## Done
+
+Accepted on 2026-07-27: the Website has a source-labelled `/tooling/` guide for the KI CLI, compatible harnesses, and repository governance.
+
+Residual concerns: None.
+
+Intended follow-up: no implementation work remains; this retained completion record is eligible for separately confirmed pruning.
