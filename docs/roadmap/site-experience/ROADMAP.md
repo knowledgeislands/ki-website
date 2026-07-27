@@ -41,7 +41,3 @@ A visual, interactive version of the Capital/Library/Streams/Harbour geography -
 ### Contribution / Community page _(candidate)_
 
 An external-facing page explaining how other islands and teams can propose additions to the shared canonical model and participate in the wider archipelago. Distinct from the Get Started page (which covers internal setup); this covers the federated contribution mechanics.
-
-### Capability amplification simulator scenarios and multi-actor models _(candidate)_
-
-After Phase 1 establishes the core thought experiment, explore scenario presets, multiple people or teams, AI-agent interactions, configurable equations, and Monte Carlo or organisation-level views without diluting the simulator's central message.
