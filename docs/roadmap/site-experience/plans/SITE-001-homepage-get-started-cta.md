@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Homepage Get Started CTA
-status: acceptance
+status: done
 roadmap: site-experience/homepage-get-started-cta
 blocks: —
 blocked-by: —
@@ -73,3 +73,11 @@ None.
 ### Mini recap
 
 Eleventy rewrites root-relative source links to portable relative links in `site/dist/`; generated-output checks should assert the emitted form rather than the source form.
+
+## Done
+
+The homepage Get Started CTA completed after manual acceptance.
+
+Residual concern: none.
+
+Intended follow-up: select later roadmap work separately.
