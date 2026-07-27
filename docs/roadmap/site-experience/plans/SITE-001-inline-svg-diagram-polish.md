@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Inline SVG diagram polish
-status: in-progress
+status: acceptance
 roadmap: site-experience/inline-svg-diagram-polish
 blocks: —
 blocked-by: —
@@ -50,3 +50,34 @@ The site's dark mode changes page and component tokens, but these diagrams retai
 ## Dependencies / blocks
 
 This work has no plan dependencies and does not block another active plan.
+
+## Acceptance
+
+### Delivered
+
+The Philosophy page's cycle and home geography diagrams now use scoped presentation tokens with coherent dark-mode values.
+
+### Summary of changes
+
+- Added `philosophy-diagram` classes and replaced the two diagrams' affected SVG presentation values in `site/src/philosophy/index.njk`.
+- Added light and dark presentation-token values in `site/src/assets/css/main.css`, including dark surfaces, ring, arrow, and secondary-text contrast values.
+- Removed the obsolete comment that treated the cycle ring's dark-mode contrast as acceptable.
+
+### Verification
+
+- `bun run ki:site:clean` — passed.
+- `bun run ki:site:build` — passed; Eleventy wrote 11 files.
+- `ki repo audit --skill ki-website` — passed with no FAIL or WARN findings.
+- `ki repo audit --skill ki-engineering` — passed with no FAIL or WARN findings.
+- `ki repo audit --skill ki-roadmap` — passed with no FAIL or WARN findings.
+- Inspected the generated `/philosophy/` page in the browser's light colour scheme; both accessible SVG diagrams and their presentation tokens rendered as expected.
+- Confirmed the built stylesheet contains the scoped dark-mode presentation-token values.
+- Evidence revision: `97966245b68d23057bf265f7a1cd219050ce618d`.
+
+### Outstanding concerns
+
+The available browser session could not emulate `prefers-color-scheme: dark`; the dark variant was verified from the generated media-rule values rather than a second visual screenshot.
+
+### Mini recap
+
+Inline SVG presentation attributes can inherit CSS custom properties, allowing the diagrams to retain their semantic geometry while following the site's colour scheme without duplicating SVG markup.
