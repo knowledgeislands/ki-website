@@ -10,7 +10,8 @@ const site = {
     { label: 'Model', href: '/model/' },
     { label: 'Tooling', href: '/tooling/' },
     { label: 'Specifications', href: '/specifications/' },
-    { label: 'Get Started', href: '/get-started/' }
+    { label: 'Get Started', href: '/get-started/' },
+    { label: 'Contribute', href: '/contribute/' }
   ]
 }
 

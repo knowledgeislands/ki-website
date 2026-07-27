@@ -24,13 +24,13 @@ No contribution or community route currently exists.
 
 ## Steps
 
-1. Add a source-grounded `/contribute/` page explaining the purpose of contribution, the generic-scope and Council-ratification constraints, and the distinction between contribution, territory, and archipelago.
+1. ✓ Add a source-grounded `/contribute/` page explaining the purpose of contribution, the generic-scope and Council-ratification constraints, and the distinction between contribution, territory, and archipelago.
 
-2. Link the new page to the existing Model and Get Started routes for process and setup detail, without adding a submission form, contact promise, or governance rule not already published on the site.
+2. ✓ Link the new page to the existing Model and Get Started routes for process and setup detail, without adding a submission form, contact promise, or governance rule not already published on the site.
 
-3. Add a concise public-navigation entry and sitemap record for `/contribute/`, preserving the existing navigation items and route conventions.
+3. ✓ Add a concise public-navigation entry and sitemap record for `/contribute/`, preserving the existing navigation items and route conventions.
 
-4. Build from a clean output directory and confirm the generated route, navigation link, and sitemap entry; run the website and roadmap audits.
+4. ✓ Build from a clean output directory and confirm the generated route, navigation link, and sitemap entry; run the website and roadmap audits.
 
 ## Files touched
 
@@ -45,7 +45,8 @@ No contribution or community route currently exists.
 - `bun run ki:site:clean`
 - `bun run ki:site:build`
 - `test -f site/dist/contribute/index.html`
-- `rg 'contribute/index.html' site/dist/index.html site/dist/sitemap.xml`
+- `rg 'href="contribute/index.html"' site/dist/index.html`
+- `rg 'https://knowledgeislands.info/contribute/' site/dist/sitemap.xml`
 - `ki repo audit --skill ki-website`
 - `ki repo audit --skill ki-roadmap`
 
