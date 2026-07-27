@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Contribution Community page
-status: in-progress
+status: acceptance
 roadmap: site-experience/contribution-community-page
 blocks: —
 blocked-by: —
@@ -53,3 +53,35 @@ No contribution or community route currently exists.
 ## Dependencies / blocks
 
 This work has no plan dependencies and does not block another active plan.
+
+## Acceptance
+
+### Delivered
+
+The site now has a public Contribution / Community page at `/contribute/`, linked from navigation and listed in the sitemap.
+
+### Summary of changes
+
+- Added `site/src/contribute/index.njk` with a source-grounded explanation of the Contribution Process, its generic-scope and Council-ratification constraints, and the island, territory, and archipelago distinction.
+- Linked visitors to the existing Model and Get Started pages instead of creating a submission mechanism or new governance policy.
+- Added the Contribute navigation item in `site/src/_data/site.ts` and the route in `site/src/sitemap.njk`.
+- Strengthened the plan verification so generated navigation and sitemap surfaces are asserted separately.
+
+### Verification
+
+- `bun run ki:site:clean` — passed.
+- `bun run ki:site:build` — passed; Eleventy wrote 12 files.
+- `test -f site/dist/contribute/index.html` — passed.
+- `rg 'href="contribute/index.html"' site/dist/index.html` — passed.
+- `rg 'https://knowledgeislands.info/contribute/' site/dist/sitemap.xml` — passed.
+- `ki repo audit --skill ki-website` — passed with no FAIL or WARN findings.
+- `ki repo audit --skill ki-roadmap` — passed with no FAIL or WARN findings.
+- Evidence revision: `46495d5fd6c069427dabc05faf732151e67c6095`.
+
+### Outstanding concerns
+
+None.
+
+### Mini recap
+
+The public page can be useful without a submission form when it states the existing governance boundary and routes visitors to the source pages that define the process.
