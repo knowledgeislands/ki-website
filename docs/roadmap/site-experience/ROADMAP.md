@@ -16,6 +16,8 @@ Scoped and ready to start — the immediate queue, picked up before anything in 
 
 The homepage currently only links to Philosophy and Model in the footer CTA. Add a "Get Started" card or link in the hero / territories section to complete the reading funnel.
 
+**Plan:** [SITE-001](plans/SITE-001-homepage-get-started-cta.md)
+
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
