@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Publish the KI user guide
-status: in-progress
+status: acceptance
 roadmap: site-experience/publish-the-ki-user-guide
 blocks: —
 blocked-by: —
@@ -53,3 +53,31 @@ The obsolete `/harness/` page and its shell-facing installation framing have no 
 The required native CLI command and multi-harness surfaces are shipped and remain the executable source of truth for this guide.
 
 The stable installer redirect already targets the released `tools-ki` installer. SITE-001 must not present the legacy harness bootstrap script as the current public CLI contract.
+
+## Acceptance
+
+### Delivered
+
+The Website now provides a source-labelled public tooling guide at `/tooling/`, with focused routes for installing and inspecting the KI CLI, working with compatible harnesses, and governing repositories.
+
+### Summary of changes
+
+- Replaced the `/harness/` orientation page with `/tooling/` and three task-oriented subpages under `site/src/tooling/`.
+- Updated the global navigation and sitemap to expose the new guide routes.
+- Linked each guide topic to its owning repository, retaining `tools-ki` as the source of executable behaviour and the KI Agentic Harness as the source of reusable capabilities.
+- Conformed `.markdownlint-cli2.jsonc` to the owned authoring configuration, clearing the pre-existing audit drift.
+
+### Verification
+
+- `ki repo audit --skill ki-roadmap --repo .` — passed with no FAIL or WARN at `5dc7f22b7ad5c592d5163bc4dbfc1576c16eed3f`.
+- `ki repo audit --skill ki-authoring --repo .` — passed with no FAIL or WARN at `5dc7f22b7ad5c592d5163bc4dbfc1576c16eed3f`.
+- `ki repo audit --skill ki-website --repo .` — passed with no FAIL or WARN at `5dc7f22b7ad5c592d5163bc4dbfc1576c16eed3f`.
+- `bun run ki:site:clean && bun run ki:site:build` — passed; the generated output contains the four `/tooling/` routes, includes them in `sitemap.xml`, retains the stable installer URL, and omits `dist/harness/index.html`.
+
+### Outstanding concerns
+
+None.
+
+### Mini recap
+
+A public guide can stay current without duplicating volatile CLI and harness contracts when it makes source ownership explicit and routes readers to the authoritative repository for exact detail. No additional learning route is proposed.
