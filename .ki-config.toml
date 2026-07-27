@@ -3,6 +3,8 @@ supported_runtimes = ["claude-code", "codex"]
 visibility = "public"
 license = "proprietary"
 
+[ki-git]
+
 [ki-authoring]
 
 [ki-engineering]
