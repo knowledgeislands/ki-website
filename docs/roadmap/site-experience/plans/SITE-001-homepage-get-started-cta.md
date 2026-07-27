@@ -1,11 +1,11 @@
 ---
 id: 'SITE-001'
 title: Homepage Get Started CTA
-status: ready
+status: in-progress
 roadmap: site-experience/homepage-get-started-cta
 blocks: —
 blocked-by: —
-baseline-ref: —
+baseline-ref: b5333fa884782a10478564a814e477e5a022036a
 ---
 
 ## Context
