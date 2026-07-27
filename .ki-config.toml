@@ -24,9 +24,9 @@ license = "proprietary" # SPDX id, "UNLICENSED", or "proprietary"
 # compliance marker; the records live in docs/decisions/ for this code repository.
 [ki-decision-records]
 
-# This repository uses the thematic repo-roadmap profile for multi-file and
-# multi-step work. The canonical roadmaps and plans live in docs/roadmap/.
-[ki-repo-roadmap]
+# This repository uses the thematic roadmap profile for multi-file and multi-step
+# work. The canonical roadmaps and plans live in docs/roadmap/.
+[ki-roadmap]
 
 # Read by the ki-website-cloudflare skill (Workers + Static Assets serving dist/).
 # Monorepo layout: wrangler.jsonc lives in the site/ workspace and is auto-detected, so

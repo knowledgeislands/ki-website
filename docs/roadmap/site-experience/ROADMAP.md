@@ -34,6 +34,12 @@ The cycle and home geography diagrams use hardcoded hex fills - they remain legi
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
 
+### Redirect the public installer to the verified `tools-ki` release
+
+Replace `/harness/install` only after `tools-ki` publishes its first verified, signed release artifact and provides the release proof required by CLI-006. This Website-owned recipient work was transferred from `knowledgeislands/tools-ki` CLI-006; the external publish proof is the named condition, not a reason to imply that the redirect is ready now.
+
+**Plan:** [SITE-002](plans/SITE-002-redirect-public-installer-to-tools-ki.md)
+
 ## Future
 
 Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass (or a decision to drop them) before they're actionable.

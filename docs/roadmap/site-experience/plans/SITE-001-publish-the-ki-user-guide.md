@@ -30,8 +30,8 @@ The shared ecosystem decision already assigns public tooling-guide prose and rou
 
 1. Confirm the public `/tooling/` information architecture and source-of-truth boundaries across the Website, harness, and `tools-ki`; do not expand KI Specifications work.
 2. Replace the `/harness/` orientation page with `/tooling/`, then create task-oriented pages for the CLI, compatible harnesses, and user guidance that distinguish shipped commands from genuinely planned work.
-3. Move or rewrite the public-facing harness guide material into the Website guide area without retaining copied user-guide prose in source repositories.
-4. Reduce the harness to maintainer and contributor guidance, and replace public-guide references in the harness and `tools-ki` with links to the Website.
+3. Write the public guide in the Website guide area from source-labelled current-state material, linking to the owning executable or contract where precision matters rather than copying it.
+4. Send focused implementation briefs to the harness and `tools-ki` for any source-repository entry-point changes. Each recipient decides whether and when to adopt its own documentation work.
 
 The obsolete `/harness/` page and its shell-facing installation framing have no preservation or redirect requirement. The `/tooling/` guide will describe current executable behaviour without presenting legacy bootstrap scripts as a public contract.
 
@@ -39,17 +39,17 @@ The obsolete `/harness/` page and its shell-facing installation framing have no 
 
 - `site/src/tooling/`, the removed `site/src/harness/` page, and Website navigation or data files
 - `docs/roadmap/site-experience/ROADMAP.md` and this plan
-- Relevant user-guide and entry-point documents in `ki-agentic-harness` and `tools-ki`
+- `-/_HANDOFFS/ki-agentic-harness/` and `-/_HANDOFFS/tools-ki/`
 
 ## Verify
 
-- `ki repo audit --skill ki-repo-roadmap`
+- `ki repo audit --skill ki-roadmap`
 - `ki repo audit --skill ki-authoring`
 - `bun run ki:site:build`
-- Focused source-repository documentation audits and link checks for each edited repository
+- Check that every outbound brief names its recipient, source item, ownership boundary, and adoption condition
 
 ## Dependencies / blocks
 
 The required native CLI command and multi-harness surfaces are shipped and are the executable source of truth for this guide.
 
-CLI-006 owns the verified public release installer and the later install-redirect change. SITE-001 can build the guide before that release, but must not publish the legacy harness installer as the current contract.
+SITE-002 owns the later installer redirect as separate recipient work. SITE-001 can build the guide before the first verified release, but must not publish the legacy harness installer as the current contract.

@@ -1,6 +1,6 @@
 # Repository roadmap
 
-This portfolio view is generated from the canonical theme roadmaps under `docs/roadmap/`. Edit those files, then run `ki-repo-roadmap` CONFORM.
+This portfolio view is generated from the canonical theme roadmaps under `docs/roadmap/`. Edit those files, then run `ki-roadmap` CONFORM.
 
 ## Blocking
 
@@ -22,6 +22,8 @@ Understood and roughly scoped but not yet started — worth doing once the **Nex
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
+
+- [Site Experience: Redirect the public installer to the verified `tools-ki` release](docs/roadmap/site-experience/ROADMAP.md#redirect-the-public-installer-to-the-verified-tools-ki-release)
 
 ## Future
 
