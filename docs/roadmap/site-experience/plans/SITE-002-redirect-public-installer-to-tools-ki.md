@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Redirect public installer to verified tools-ki release
-status: acceptance
+status: done
 roadmap: site-experience/redirect-the-public-installer-to-the-verified-tools-ki-release
 blocks: —
 blocked-by: —
@@ -72,3 +72,11 @@ None.
 ### Mini recap
 
 A stable public installer route should target an immutable, verified release script rather than mutable default-branch code. Future release automation should update this Website recipient route when changing an installer trust anchor. No additional learning route is proposed.
+
+## Done
+
+Accepted on 2026-07-27: the public `/harness/install` route directs `ki` CLI users to the verified, immutable `tools-ki` v0.2.6 installer.
+
+Residual concerns: None.
+
+Intended follow-up: no implementation work remains; this retained completion record is eligible for separately confirmed pruning.
