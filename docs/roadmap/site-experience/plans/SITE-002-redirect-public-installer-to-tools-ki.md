@@ -1,11 +1,11 @@
 ---
 id: 'SITE-002'
 title: Redirect public installer to verified tools-ki release
-status: ready
+status: in-progress
 roadmap: site-experience/redirect-the-public-installer-to-the-verified-tools-ki-release
 blocks: —
 blocked-by: —
-baseline-ref: —
+baseline-ref: 2b64dac693c0edb079d1ffdf0d202bad476181e2
 transferred-from: knowledgeislands/tools-ki:CLI-006
 ---
 
