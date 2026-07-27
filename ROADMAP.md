@@ -29,4 +29,3 @@ Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass
 - [Site Experience: Capability amplification simulator scenarios and multi-actor models _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#capability-amplification-simulator-scenarios-and-multi-actor-models-candidate)
 - [Site Experience: Contribution / Community page _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#contribution--community-page-candidate)
 - [Site Experience: Interactive island geography diagram _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram-candidate)
-- [Site Experience: Multilingual support _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#multilingual-support-candidate)
