@@ -11,7 +11,6 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
 - [Site Experience: Contribution / Community page](docs/roadmap/site-experience/ROADMAP.md#contribution--community-page)
-- [Site Experience: Homepage -> Get Started CTA](docs/roadmap/site-experience/ROADMAP.md#homepage---get-started-cta)
 
 ## Soon
 

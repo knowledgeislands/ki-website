@@ -18,12 +18,6 @@ An external-facing page explaining how other islands and teams can propose addit
 
 **Plan:** [SITE-002](plans/SITE-002-contribution-community-page.md)
 
-### Homepage -> Get Started CTA
-
-The homepage currently only links to Philosophy and Model in the footer CTA. Add a "Get Started" card or link in the hero / territories section to complete the reading funnel.
-
-**Plan:** [SITE-001](plans/SITE-001-homepage-get-started-cta.md)
-
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
