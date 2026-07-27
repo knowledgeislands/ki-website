@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Homepage Get Started CTA
-status: in-progress
+status: acceptance
 roadmap: site-experience/homepage-get-started-cta
 blocks: —
 blocked-by: —
@@ -44,3 +44,32 @@ The existing `/get-started/` page provides the appropriate first-step guidance, 
 ## Dependencies / blocks
 
 This work has no plan dependencies and does not block another active plan.
+
+## Acceptance
+
+### Delivered
+
+The homepage hero now includes a Get Started action that leads visitors to the existing first-step guidance.
+
+### Summary of changes
+
+- Added a `Get Started` hero link to `site/src/index.njk` using the existing light-outline button treatment.
+- Preserved the existing Philosophy and Model actions and made no change to the Get Started route or content.
+- Updated the plan's generated-output assertion to use Eleventy's portable relative link form.
+
+### Verification
+
+- `bun run ki:site:clean` — passed.
+- `bun run ki:site:build` — passed; Eleventy wrote 11 files.
+- `rg 'href="get-started/index.html"' site/dist/index.html` — passed; the hero action is present in the generated homepage.
+- `ki repo audit --skill ki-website` — passed with no FAIL or WARN findings.
+- `ki repo audit --skill ki-roadmap` — passed with no FAIL or WARN findings.
+- Evidence revision: `c8e9253219038bf6c215823ee32a6ee6e7e4f3e8`.
+
+### Outstanding concerns
+
+None.
+
+### Mini recap
+
+Eleventy rewrites root-relative source links to portable relative links in `site/dist/`; generated-output checks should assert the emitted form rather than the source form.
