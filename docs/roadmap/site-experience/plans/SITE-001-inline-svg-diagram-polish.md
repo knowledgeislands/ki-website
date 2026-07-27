@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Inline SVG diagram polish
-status: open
+status: ready
 roadmap: site-experience/inline-svg-diagram-polish
 blocks: —
 blocked-by: —
