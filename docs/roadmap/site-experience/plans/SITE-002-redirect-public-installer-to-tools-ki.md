@@ -17,16 +17,16 @@ The stable public `/harness/install` URL is a Website route, so the Website owns
 
 ## Current state
 
-`site/src/_redirects` still sends `/harness/install` to the harness user-install script.
+`site/src/_redirects` now sends `/harness/install` to the immutable `v0.2.6` `tools-ki` installer. `/harness/bootstrap` remains the harness bootstrap script.
 
-The `tools-ki` installer and release workflow are implemented, but the first verified published release remains the external condition for this change. The route must not present an unpublished or unverified installer as the public contract.
+`tools-ki` published its verified, signed `v0.2.6` release after the successful three-platform release workflow and independent installer proof. The public harness page now distinguishes the tools-owned executable from the harness-owned reusable capabilities.
 
 ## Steps
 
-1. Confirm that `tools-ki` has published a verified, signed release artifact and recorded the end-to-end installer proof required by CLI-006.
-2. Review the released installer entry point with its owner, then replace the `/harness/install` redirect with the approved `tools-ki` target without changing `/harness/bootstrap`.
-3. Update any Website public guidance that names the installer so it describes the released current state and points to the owning `tools-ki` material for executable detail.
-4. Build the site and inspect the generated `_redirects` output before deployment.
+1. ✓ Confirm that `tools-ki` has published a verified, signed release artifact and recorded the end-to-end installer proof required by CLI-006.
+2. ✓ Review the released installer entry point with its owner, then replace the `/harness/install` redirect with the approved `tools-ki` target without changing `/harness/bootstrap`.
+3. ✓ Update any Website public guidance that names the installer so it describes the released current state and points to the owning `tools-ki` material for executable detail.
+4. ✓ Build the site and inspect the generated `_redirects` output before deployment.
 
 ## Files touched
 
@@ -43,6 +43,6 @@ The `tools-ki` installer and release workflow are implemented, but the first ver
 
 ## Dependencies / blocks
 
-This open transferred plan remains in **Waiting for** until `tools-ki` supplies the first verified published release artifact and CLI-006's publish proof. It is not eligible for readiness or execution before that condition changes.
+The external condition is satisfied by `tools-ki` `v0.2.6` and its successful release proof. This plan is now independently executable in the Website repository.
 
 The Website may publish its broader user guide independently, provided it does not present the legacy harness installer as the current public contract.
