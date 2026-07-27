@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Publish the KI user guide
-status: open
+status: ready
 roadmap: site-experience/publish-the-ki-user-guide
 blocks: —
 blocked-by: —
