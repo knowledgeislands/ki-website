@@ -22,11 +22,11 @@ The existing `/get-started/` page provides the appropriate first-step guidance, 
 
 ## Steps
 
-1. Add a clearly labelled Get Started link to the homepage hero action group, using the existing button treatment and preserving the current Philosophy and Model links.
+1. ✓ Add a clearly labelled Get Started link to the homepage hero action group, using the existing button treatment and preserving the current Philosophy and Model links.
 
-2. Keep the change limited to the homepage reading funnel; do not add a duplicate CTA card or alter the Get Started destination.
+2. ✓ Keep the change limited to the homepage reading funnel; do not add a duplicate CTA card or alter the Get Started destination.
 
-3. Build from a clean output directory and confirm the generated homepage contains one working `/get-started/` hero link alongside the existing actions.
+3. ✓ Build from a clean output directory and confirm the generated homepage contains one working Get Started hero link alongside the existing actions.
 
 ## Files touched
 
@@ -38,7 +38,7 @@ The existing `/get-started/` page provides the appropriate first-step guidance, 
 
 - `bun run ki:site:clean`
 - `bun run ki:site:build`
-- `rg 'href="/get-started/"' site/dist/index.html`
+- `rg 'href="get-started/index.html"' site/dist/index.html`
 - `ki repo audit --skill ki-website`
 
 ## Dependencies / blocks
