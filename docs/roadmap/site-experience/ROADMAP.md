@@ -12,6 +12,10 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
+### Contribution / Community page
+
+An external-facing page explaining how other islands and teams can propose additions to the shared canonical model and participate in the wider archipelago. Distinct from the Get Started page (which covers internal setup); this covers the federated contribution mechanics.
+
 ### Homepage -> Get Started CTA
 
 The homepage currently only links to Philosophy and Model in the footer CTA. Add a "Get Started" card or link in the hero / territories section to complete the reading funnel.
@@ -21,10 +25,6 @@ The homepage currently only links to Philosophy and Model in the footer CTA. Add
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
-
-### Contribution / Community page
-
-An external-facing page explaining how other islands and teams can propose additions to the shared canonical model and participate in the wider archipelago. Distinct from the Get Started page (which covers internal setup); this covers the federated contribution mechanics.
 
 ## Waiting for
 
