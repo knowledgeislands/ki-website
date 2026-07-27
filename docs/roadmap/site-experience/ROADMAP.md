@@ -18,12 +18,6 @@ Establish the Website as the single public home for user-facing Knowledge Island
 
 **Plan:** [SITE-001](plans/SITE-001-publish-the-ki-user-guide.md)
 
-### Redirect the public installer to the verified `tools-ki` release
-
-`tools-ki` has now published the verified, signed [v0.2.6 release](https://github.com/knowledgeislands/tools-ki/releases/tag/v0.2.6), including its successful three-platform [release proof](https://github.com/knowledgeislands/tools-ki/actions/runs/30275847129). Replace `/harness/install` with the tools-owned installer while retaining `/harness/bootstrap` unchanged.
-
-**Plan:** [SITE-002](plans/SITE-002-redirect-public-installer-to-tools-ki.md)
-
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
