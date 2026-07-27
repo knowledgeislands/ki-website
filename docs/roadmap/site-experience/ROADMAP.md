@@ -16,6 +16,8 @@ Scoped and ready to start — the immediate queue, picked up before anything in 
 
 The cycle and home geography diagrams use hardcoded hex fills - they remain legible in dark mode but their white box fills and light ring strokes are visually inverted. Add `@media (prefers-color-scheme: dark)` rules scoped to the diagram containers, or switch fill values to `currentColor`-based tokens.
 
+**Plan:** [SITE-001](plans/SITE-001-inline-svg-diagram-polish.md)
+
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
