@@ -10,12 +10,13 @@ Actively broken, or blocking the `Next` horizon: takes priority over everything 
 
 Scoped and ready to start — the immediate queue, picked up before anything in **Soon** or **Future**.
 
+- [Site Experience: Inline SVG diagram polish](docs/roadmap/site-experience/ROADMAP.md#inline-svg-diagram-polish)
+
 ## Soon
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
 - [Site Experience: Homepage -> Get Started CTA](docs/roadmap/site-experience/ROADMAP.md#homepage---get-started-cta)
-- [Site Experience: Inline SVG diagram polish](docs/roadmap/site-experience/ROADMAP.md#inline-svg-diagram-polish)
 
 ## Waiting for
 
