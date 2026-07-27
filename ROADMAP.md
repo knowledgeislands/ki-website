@@ -18,8 +18,8 @@ Understood and roughly scoped but not yet started — worth doing once the **Nex
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
 
+- [Site Experience: Interactive island geography diagram](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram)
+
 ## Future
 
 Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass (or a decision to drop them) before they're actionable.
-
-- [Site Experience: Interactive island geography diagram _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram-candidate)
