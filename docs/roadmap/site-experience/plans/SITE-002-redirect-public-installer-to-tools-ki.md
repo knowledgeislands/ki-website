@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Redirect public installer to verified tools-ki release
-status: in-progress
+status: acceptance
 roadmap: site-experience/redirect-the-public-installer-to-the-verified-tools-ki-release
 blocks: —
 blocked-by: —
@@ -46,3 +46,29 @@ The stable public `/harness/install` URL is a Website route, so the Website owns
 The external condition is satisfied by `tools-ki` `v0.2.6` and its successful release proof. This plan is now independently executable in the Website repository.
 
 The Website may publish its broader user guide independently, provided it does not present the legacy harness installer as the current public contract.
+
+## Acceptance
+
+### Delivered
+
+The stable `/harness/install` route now redirects to the immutable `tools-ki` `v0.2.6` installer, and the public harness page accurately describes the executable and capability ownership boundary.
+
+### Summary of changes
+
+- Replaced the harness user-install-script redirect with `https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.2.6/install.sh` in `site/src/_redirects`.
+- Retained `/harness/bootstrap` as the harness-owned bootstrap route.
+- Updated `site/src/harness/index.njk` so it describes `tools-ki` as owner of the released `ki` executable and the harness as owner of reusable capabilities and documentation.
+
+### Verification
+
+- `curl --fail --silent --show-error --location --output /dev/null https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.2.6/install.sh` — passed.
+- `bun run ki:site:build` — passed; `site/dist/_redirects` contains the approved installer target and unchanged bootstrap target at `ba30cf8`.
+- `bun run ki:website:audit`, `bun run ki:authoring:audit`, and `bun /Users/krisbrown/workspaces/kis/knowledgeislands/tools-ki/src/main.ts repo audit --skill ki-roadmap --repo .` — passed with no FAIL or WARN at `ba30cf8`.
+
+### Outstanding concerns
+
+None.
+
+### Mini recap
+
+A stable public installer route should target an immutable, verified release script rather than mutable default-branch code. Future release automation should update this Website recipient route when changing an installer trust anchor. No additional learning route is proposed.
