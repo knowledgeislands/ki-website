@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Contribution Community page
-status: acceptance
+status: done
 roadmap: site-experience/contribution-community-page
 blocks: —
 blocked-by: —
@@ -85,3 +85,11 @@ None.
 ### Mini recap
 
 The public page can be useful without a submission form when it states the existing governance boundary and routes visitors to the source pages that define the process.
+
+## Done
+
+The Contribution / Community page completed after manual acceptance.
+
+Residual concern: none.
+
+Intended follow-up: select later roadmap work separately.
