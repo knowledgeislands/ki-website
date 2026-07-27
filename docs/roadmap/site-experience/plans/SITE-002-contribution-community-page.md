@@ -1,11 +1,11 @@
 ---
 id: 'SITE-002'
 title: Contribution Community page
-status: ready
+status: in-progress
 roadmap: site-experience/contribution-community-page
 blocks: —
 blocked-by: —
-baseline-ref: —
+baseline-ref: 0b5d1023fab26219ddf6e9e66ba5b51d75cb4f51
 ---
 
 ## Context
