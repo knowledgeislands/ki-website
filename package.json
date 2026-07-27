@@ -51,7 +51,6 @@
   },
   "scripts": {
     "clean": "rm -rf {node_modules,site/dist}",
-    "ki:hosting-cloudflare:audit": "bun .claude/skills/ki-hosting-cloudflare/scripts/audit-cloudflare-hosting.ts .",
     "ki:site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "ki:site:clean": "rm -rf site/dist site/.wrangler",
     "ki:site:deploy": "cd site && bunx wrangler deploy",
@@ -60,8 +59,6 @@
     "ki:site:dev:serve": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "ki:site:preview": "bun run ki:site:build && cd site && bunx wrangler dev",
     "ki:site:upload": "cd site && bunx wrangler versions upload",
-    "ki:skills:link:project": "bun $HOME/.claude/skills/knowledgeislands-bootstrap/scripts/link-skills.ts",
-    "ki:websites-11ty:audit": "bun .claude/skills/ki-websites-11ty/scripts/audit-websites.ts .",
     "prepare": "husky"
   },
   "type": "module",
