@@ -1,11 +1,11 @@
 ---
 id: 'SITE-001'
 title: Inline SVG diagram polish
-status: ready
+status: in-progress
 roadmap: site-experience/inline-svg-diagram-polish
 blocks: —
 blocked-by: —
-baseline-ref: —
+baseline-ref: f4c244bbce623c3c8d452f08283a529d6ed0c5f0
 ---
 
 ## Context
