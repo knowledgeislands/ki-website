@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Homepage Get Started CTA
-status: open
+status: ready
 roadmap: site-experience/homepage-get-started-cta
 blocks: —
 blocked-by: —
