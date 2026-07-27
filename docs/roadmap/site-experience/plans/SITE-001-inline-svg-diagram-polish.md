@@ -1,7 +1,7 @@
 ---
 id: 'SITE-001'
 title: Inline SVG diagram polish
-status: acceptance
+status: done
 roadmap: site-experience/inline-svg-diagram-polish
 blocks: —
 blocked-by: —
@@ -81,3 +81,11 @@ The available browser session could not emulate `prefers-color-scheme: dark`; th
 ### Mini recap
 
 Inline SVG presentation attributes can inherit CSS custom properties, allowing the diagrams to retain their semantic geometry while following the site's colour scheme without duplicating SVG markup.
+
+## Done
+
+The inline SVG diagram polish completed after manual acceptance.
+
+Residual concern: the dark-mode variant was verified from generated media-rule values rather than a browser screenshot.
+
+Intended follow-up: none; select later roadmap work separately.
