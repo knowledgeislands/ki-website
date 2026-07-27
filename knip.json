@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "ignore": [".ncurc.cjs", "scripts/ki/**", ".ki-meta/**", ".claude/skills/**"],
+  "ignore": [".ncurc.cjs", ".claude/skills/**"],
   "ignoreDependencies": ["tailwindcss", "syncpack"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
