@@ -328,6 +328,21 @@
     display: grid;
     grid-template-columns: 8rem 1fr;
   }
+
+  /* Philosophy diagrams use presentation tokens to retain their structure in both colour schemes. */
+  .philosophy-diagram {
+    --diagram-surface: white;
+    --diagram-subtle-surface: #faf8f2;
+    --diagram-ring: #d4c9b4;
+    --diagram-muted: #6b7280;
+    --diagram-soft: #9ca3af;
+    --diagram-faint: #d1d5db;
+    --diagram-gold: #c4a882;
+    --diagram-ocean: #1b3a5c;
+    --diagram-teal: #3d8a8a;
+    --diagram-forest: #2d5a3d;
+    --diagram-node-ink: white;
+  }
 }
 
 /* ─── Dark mode ─────────────────────────────────────────────────── */
@@ -426,10 +441,18 @@
     border-left-color: var(--color-gold);
   }
 
-  /* Overline: teal is already overridden */
-
-  /* The cycle diagram SVG background ring */
-  /* (uses hardcoded stroke="#d4c9b4" — barely visible; acceptable) */
+  .philosophy-diagram {
+    --diagram-surface: #1c2840;
+    --diagram-subtle-surface: #1e2d42;
+    --diagram-ring: #667791;
+    --diagram-muted: #bac6d8;
+    --diagram-soft: #9eafc4;
+    --diagram-faint: #71809a;
+    --diagram-gold: #e0bd8c;
+    --diagram-ocean: #7ab0d8;
+    --diagram-teal: var(--color-teal);
+    --diagram-forest: #78b487;
+  }
 }
 
 /* ─── Mobile breakpoints ──────────────────────────────────────── */

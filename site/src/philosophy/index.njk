@@ -101,39 +101,39 @@ description: The Knowledge Islands philosophy — treating knowledge as a civili
 
           <!-- Cycle diagram: triangular flow -->
           <div style="margin: 2.5rem 0 2rem;">
-            <svg width="100%" viewBox="0 0 420 270" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px; display: block; margin: 0 auto;" role="img" aria-label="The Knowledge Cycle: Capture feeds the Harbour, Connect grows the Libraries, Reflect keeps islands honest">
+            <svg class="philosophy-diagram" width="100%" viewBox="0 0 420 270" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 400px; display: block; margin: 0 auto;" role="img" aria-label="The Knowledge Cycle: Capture feeds the Harbour, Connect grows the Libraries, Reflect keeps islands honest">
               <defs>
                 <marker id="cyc-arr-teal" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#3d8a8a" fill-opacity="0.65"/>
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="var(--diagram-teal)" fill-opacity="0.65"/>
                 </marker>
                 <marker id="cyc-arr-ocean" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#1b3a5c" fill-opacity="0.65"/>
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="var(--diagram-ocean)" fill-opacity="0.65"/>
                 </marker>
                 <marker id="cyc-arr-forest" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth">
-                  <path d="M0 0 L7 3.5 L0 7 Z" fill="#2d5a3d" fill-opacity="0.65"/>
+                  <path d="M0 0 L7 3.5 L0 7 Z" fill="var(--diagram-forest)" fill-opacity="0.65"/>
                 </marker>
               </defs>
               <!-- Faint background ring -->
-              <circle cx="210" cy="148" r="90" stroke="#d4c9b4" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
+              <circle cx="210" cy="148" r="90" stroke="var(--diagram-ring)" stroke-width="1" stroke-dasharray="3 6" fill="none"/>
               <!-- Connecting arcs (bezier curves approximating the circular arc) -->
               <!-- Capture (210,58) → Connect (288,193): control at (327,78) -->
-              <path d="M 223 80 Q 327 78 276 171" stroke="#3d8a8a" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-teal)"/>
+              <path d="M 223 80 Q 327 78 276 171" stroke="var(--diagram-teal)" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-teal)"/>
               <!-- Connect (288,193) → Reflect (132,193): control at (210,280) -->
-              <path d="M 262 193 Q 210 278 158 193" stroke="#1b3a5c" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-ocean)"/>
+              <path d="M 262 193 Q 210 278 158 193" stroke="var(--diagram-ocean)" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-ocean)"/>
               <!-- Reflect (132,193) → Capture (210,58): control at (93,78) -->
-              <path d="M 145 171 Q 93 78 197 80" stroke="#2d5a3d" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-forest)"/>
+              <path d="M 145 171 Q 93 78 197 80" stroke="var(--diagram-forest)" stroke-width="1.5" stroke-opacity="0.6" fill="none" marker-end="url(#cyc-arr-forest)"/>
               <!-- Node circles -->
-              <circle cx="210" cy="58" r="26" fill="#3d8a8a"/>
-              <circle cx="288" cy="193" r="26" fill="#1b3a5c"/>
-              <circle cx="132" cy="193" r="26" fill="#2d5a3d"/>
+              <circle cx="210" cy="58" r="26" fill="var(--diagram-teal)"/>
+              <circle cx="288" cy="193" r="26" fill="var(--diagram-ocean)"/>
+              <circle cx="132" cy="193" r="26" fill="var(--diagram-forest)"/>
               <!-- Node numbers -->
-              <text x="210" y="58" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">1</text>
-              <text x="288" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">2</text>
-              <text x="132" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="white">3</text>
+              <text x="210" y="58" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="var(--diagram-node-ink)">1</text>
+              <text x="288" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="var(--diagram-node-ink)">2</text>
+              <text x="132" y="193" text-anchor="middle" dominant-baseline="central" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="700" fill="var(--diagram-node-ink)">3</text>
               <!-- Labels -->
-              <text x="210" y="16" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#3d8a8a">CAPTURE</text>
-              <text x="328" y="190" text-anchor="start" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#1b3a5c">CONNECT</text>
-              <text x="92" y="190" text-anchor="end" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="#2d5a3d">REFLECT</text>
+              <text x="210" y="16" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="var(--diagram-teal)">CAPTURE</text>
+              <text x="328" y="190" text-anchor="start" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="var(--diagram-ocean)">CONNECT</text>
+              <text x="92" y="190" text-anchor="end" font-family="'Inter', system-ui, sans-serif" font-size="11" font-weight="600" letter-spacing="0.1em" fill="var(--diagram-forest)">REFLECT</text>
             </svg>
           </div>
 
@@ -177,48 +177,48 @@ description: The Knowledge Islands philosophy — treating knowledge as a civili
 
           <!-- Home geography diagram: vertical flow from outside world to canonical library -->
           <div style="margin: 2.5rem 0 2rem;">
-            <svg width="100%" viewBox="0 0 500 330" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 500px; display: block; margin: 0 auto;" role="img" aria-label="Island geography: material enters via Harbour, matures through Streams, and becomes canonical in the Library, which is governed by the Council Hall">
+            <svg class="philosophy-diagram" width="100%" viewBox="0 0 500 330" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width: 500px; display: block; margin: 0 auto;" role="img" aria-label="Island geography: material enters via Harbour, matures through Streams, and becomes canonical in the Library, which is governed by the Council Hall">
               <defs>
                 <marker id="geo-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                  <path d="M0 0 L7 4 L0 8 Z" fill="#9ca3af"/>
+                  <path d="M0 0 L7 4 L0 8 Z" fill="var(--diagram-soft)"/>
                 </marker>
                 <marker id="geo-gov-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                  <path d="M0 0 L7 4 L0 8 Z" fill="#1b3a5c" fill-opacity="0.5"/>
+                  <path d="M0 0 L7 4 L0 8 Z" fill="var(--diagram-ocean)" fill-opacity="0.5"/>
                 </marker>
               </defs>
               <!-- OUTSIDE WORLD (dashed) -->
-              <rect x="175" y="10" width="150" height="42" rx="6" stroke="#c4a882" stroke-width="1.5" stroke-dasharray="4 3" fill="#faf8f2"/>
-              <text x="250" y="29" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.07em" fill="#9ca3af">OUTSIDE WORLD</text>
-              <text x="250" y="44" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#d1d5db">email · notes · links · conversations</text>
+              <rect x="175" y="10" width="150" height="42" rx="6" stroke="var(--diagram-gold)" stroke-width="1.5" stroke-dasharray="4 3" fill="var(--diagram-subtle-surface)"/>
+              <text x="250" y="29" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="10.5" font-weight="600" letter-spacing="0.07em" fill="var(--diagram-soft)">OUTSIDE WORLD</text>
+              <text x="250" y="44" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="var(--diagram-faint)">email · notes · links · conversations</text>
               <!-- Arrow: outside → harbour -->
-              <line x1="250" y1="52" x2="250" y2="66" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <line x1="250" y1="52" x2="250" y2="66" stroke="var(--diagram-faint)" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
               <!-- HARBOUR -->
-              <rect x="140" y="68" width="220" height="60" rx="8" fill="white" stroke="#1b3a5c" stroke-width="1.5"/>
-              <text x="250" y="91" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#1b3a5c">Harbour</text>
-              <text x="250" y="109" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">port of entry · material is assessed &amp; routed</text>
+              <rect x="140" y="68" width="220" height="60" rx="8" fill="var(--diagram-surface)" stroke="var(--diagram-ocean)" stroke-width="1.5"/>
+              <text x="250" y="91" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="var(--diagram-ocean)">Harbour</text>
+              <text x="250" y="109" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="var(--diagram-muted)">port of entry · material is assessed &amp; routed</text>
               <!-- Arrow: harbour → streams -->
-              <line x1="250" y1="128" x2="250" y2="143" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <line x1="250" y1="128" x2="250" y2="143" stroke="var(--diagram-faint)" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
               <!-- STREAMS -->
-              <rect x="90" y="145" width="320" height="60" rx="8" fill="white" stroke="#3d8a8a" stroke-width="1.5"/>
-              <text x="250" y="168" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#3d8a8a">Streams</text>
-              <text x="250" y="186" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">knowledge forming · living edge · not yet canonical</text>
+              <rect x="90" y="145" width="320" height="60" rx="8" fill="var(--diagram-surface)" stroke="var(--diagram-teal)" stroke-width="1.5"/>
+              <text x="250" y="168" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="var(--diagram-teal)">Streams</text>
+              <text x="250" y="186" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="var(--diagram-muted)">knowledge forming · living edge · not yet canonical</text>
               <!-- Arrow: streams → library (angled left-center) -->
-              <line x1="228" y1="205" x2="186" y2="224" stroke="#d1d5db" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
+              <line x1="228" y1="205" x2="186" y2="224" stroke="var(--diagram-faint)" stroke-width="1.5" marker-end="url(#geo-arrow)"/>
               <!-- LIBRARY (larger, left) -->
-              <rect x="20" y="226" width="265" height="90" rx="8" fill="white" stroke="#2d5a3d" stroke-width="2"/>
-              <text x="152" y="251" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="#2d5a3d">Library</text>
-              <text x="152" y="269" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">canonical knowledge</text>
-              <text x="152" y="284" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#9ca3af">Calendar · Pillars · Resources</text>
-              <text x="152" y="299" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="#c4a882" font-style="italic">nothing enters without consideration</text>
+              <rect x="20" y="226" width="265" height="90" rx="8" fill="var(--diagram-surface)" stroke="var(--diagram-forest)" stroke-width="2"/>
+              <text x="152" y="251" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="15" font-weight="700" fill="var(--diagram-forest)">Library</text>
+              <text x="152" y="269" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="var(--diagram-muted)">canonical knowledge</text>
+              <text x="152" y="284" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="var(--diagram-soft)">Calendar · Pillars · Resources</text>
+              <text x="152" y="299" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="var(--diagram-gold)" font-style="italic">nothing enters without consideration</text>
               <!-- COUNCIL HALL (right, same level) -->
-              <rect x="305" y="226" width="175" height="90" rx="8" fill="white" stroke="#1b3a5c" stroke-width="1.5"/>
-              <text x="392" y="255" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="700" fill="#1b3a5c">Council Hall</text>
-              <text x="392" y="273" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="#6b7280">governance</text>
-              <text x="392" y="289" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="#9ca3af">charter · decisions · conventions</text>
-              <text x="392" y="305" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="#9ca3af" font-style="italic">not storage</text>
+              <rect x="305" y="226" width="175" height="90" rx="8" fill="var(--diagram-surface)" stroke="var(--diagram-ocean)" stroke-width="1.5"/>
+              <text x="392" y="255" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="14" font-weight="700" fill="var(--diagram-ocean)">Council Hall</text>
+              <text x="392" y="273" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" fill="var(--diagram-muted)">governance</text>
+              <text x="392" y="289" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9" fill="var(--diagram-soft)">charter · decisions · conventions</text>
+              <text x="392" y="305" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8.5" fill="var(--diagram-soft)" font-style="italic">not storage</text>
               <!-- Governs arrow: Council Hall → Library (short dashed horizontal) -->
-              <line x1="304" y1="268" x2="287" y2="268" stroke="#1b3a5c" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="4 2" marker-end="url(#geo-gov-arrow)"/>
-              <text x="296" y="262" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8" letter-spacing="0.04em" fill="#1b3a5c" fill-opacity="0.5">governs</text>
+              <line x1="304" y1="268" x2="287" y2="268" stroke="var(--diagram-ocean)" stroke-width="1.5" stroke-opacity="0.4" stroke-dasharray="4 2" marker-end="url(#geo-gov-arrow)"/>
+              <text x="296" y="262" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="8" letter-spacing="0.04em" fill="var(--diagram-ocean)" fill-opacity="0.5">governs</text>
             </svg>
           </div>
 

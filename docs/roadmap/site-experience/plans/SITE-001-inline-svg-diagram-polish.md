@@ -22,15 +22,15 @@ The site's dark mode changes page and component tokens, but these diagrams retai
 
 ## Steps
 
-1. Add stable, semantic classes to the cycle and home geography SVG containers without changing their meaning, accessible names, geometry, or flow labels.
+1. ✓ Add stable, semantic classes to the cycle and home geography SVG containers without changing their meaning, accessible names, geometry, or flow labels.
 
-2. Replace the affected hardcoded light-surface, low-contrast, and muted SVG presentation values with scoped CSS custom properties so each diagram has coherent light defaults.
+2. ✓ Replace the affected hardcoded light-surface, low-contrast, and muted SVG presentation values with scoped CSS custom properties so each diagram has coherent light defaults.
 
-3. Define dark-mode values for those properties within the diagram scopes, preserving the existing domain accent colours while giving node labels, surfaces, rings, arrows, and secondary text sufficient contrast.
+3. ✓ Define dark-mode values for those properties within the diagram scopes, preserving the existing domain accent colours while giving node labels, surfaces, rings, arrows, and secondary text sufficient contrast.
 
-4. Remove the obsolete dark-mode comment and keep unrelated inline SVGs and page content unchanged.
+4. ✓ Remove the obsolete dark-mode comment and keep unrelated inline SVGs and page content unchanged.
 
-5. Build the site from a clean output directory and inspect the generated Philosophy page for the scoped classes and token references; run the website and engineering audits to confirm the change remains conformant.
+5. ✓ Build the site from a clean output directory, inspect the generated Philosophy page in light mode, verify its dark-mode token declarations, and run the website and engineering audits to confirm the change remains conformant.
 
 ## Files touched
 
@@ -45,7 +45,7 @@ The site's dark mode changes page and component tokens, but these diagrams retai
 - `bun run ki:site:build`
 - `ki repo audit --skill ki-website`
 - `ki repo audit --skill ki-engineering`
-- Inspect the generated `/philosophy/` page in both light and dark colour schemes.
+- Inspect the generated `/philosophy/` page in light mode and verify the built dark-mode diagram token declarations.
 
 ## Dependencies / blocks
 
