@@ -16,6 +16,8 @@ Scoped and ready to start — the immediate queue, picked up before anything in 
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
+- [Site Experience: Contribution / Community page](docs/roadmap/site-experience/ROADMAP.md#contribution--community-page)
+
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
@@ -24,5 +26,4 @@ Worth doing, but presently blocked on an external dependency or decision. Revisi
 
 Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass (or a decision to drop them) before they're actionable.
 
-- [Site Experience: Contribution / Community page _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#contribution--community-page-candidate)
 - [Site Experience: Interactive island geography diagram _(candidate)_](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram-candidate)

@@ -22,6 +22,10 @@ The homepage currently only links to Philosophy and Model in the footer CTA. Add
 
 Understood and roughly scoped but not yet started — worth doing once the **Next** queue clears, ahead of anything still speculative.
 
+### Contribution / Community page
+
+An external-facing page explaining how other islands and teams can propose additions to the shared canonical model and participate in the wider archipelago. Distinct from the Get Started page (which covers internal setup); this covers the federated contribution mechanics.
+
 ## Waiting for
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes rather than treating it as dormant local work.
@@ -33,7 +37,3 @@ Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass
 ### Interactive island geography diagram _(candidate)_
 
 A visual, interactive version of the Capital/Library/Streams/Harbour geography - SVG or canvas, using the isometric tile set from the Aesthetics pillar.
-
-### Contribution / Community page _(candidate)_
-
-An external-facing page explaining how other islands and teams can propose additions to the shared canonical model and participate in the wider archipelago. Distinct from the Get Started page (which covers internal setup); this covers the federated contribution mechanics.
