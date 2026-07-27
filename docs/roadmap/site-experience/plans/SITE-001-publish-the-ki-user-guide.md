@@ -1,11 +1,11 @@
 ---
 id: 'SITE-001'
 title: Publish the KI user guide
-status: ready
+status: in-progress
 roadmap: site-experience/publish-the-ki-user-guide
 blocks: —
 blocked-by: —
-baseline-ref: —
+baseline-ref: 5c1c0748016e9f4e3d56305d29b4369d3259943c
 ---
 
 ## Context
