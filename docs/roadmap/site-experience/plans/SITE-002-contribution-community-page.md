@@ -1,7 +1,7 @@
 ---
 id: 'SITE-002'
 title: Contribution Community page
-status: open
+status: ready
 roadmap: site-experience/contribution-community-page
 blocks: —
 blocked-by: —
