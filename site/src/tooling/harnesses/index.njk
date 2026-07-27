@@ -1,0 +1,48 @@
+---
+title: Compatible Harnesses — Knowledge Islands
+description: Learn how the ki CLI installs the canonical harness, manages compatible harnesses, and activates capabilities explicitly.
+layout: layouts/base.njk
+---
+
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Tooling / Harnesses</p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 24ch;">Capabilities come from harnesses. Activation stays explicit.</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 56ch; line-height: 1.7;">A compatible harness packages reusable agentic capabilities. The CLI manages verified installation; you decide which capabilities belong in user or repository scope.</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 3rem; align-items: start;">
+      <div class="prose-ki" style="max-width: none;">
+        <p class="overline">Canonical starting point</p>
+        <h2>Bootstrap installs the canonical harness.</h2>
+        <p><code>ki bootstrap</code> detects supported local agent runtimes, installs the verified canonical KI harness, and activates core user skills. Run it after installing the CLI.</p>
+        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki bootstrap
+ki doctor</code></pre>
+        <p>Use <code>ki bootstrap --refresh</code> only when you want to redetect supported runtimes and reconcile the recorded user environment.</p>
+      </div>
+      <aside class="card-ki">
+        <p class="overline">Current source</p>
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.75rem;">The harness owns its capabilities.</h2>
+        <p class="text-muted" style="font-size: 0.9375rem;">The KI Agentic Harness owns the skills, agents, hooks, and other reusable material it publishes. Its user guides describe the current capability catalogue.</p>
+        <p style="margin: 1rem 0 0;"><a href="https://github.com/knowledgeislands/ki-agentic-harness">Open the KI Agentic Harness</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Compatible additions</p>
+      <h2>Inspect first. Install only when the work calls for it.</h2>
+      <p>List the harnesses already installed, inspect one identity and its capabilities, then add a configured compatible harness when it supplies something you need.</p>
+      <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki harness list
+ki harness info &lt;harness-id&gt;
+ki harness install &lt;harness-id&gt;</code></pre>
+      <p>Installation makes registered capabilities available for explicit activation; it does not activate everything automatically. The installed CLI's <code>ki help harness</code> is the current reference.</p>
+    </div>
+  </div>
+</section>

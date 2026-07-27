@@ -1,0 +1,51 @@
+---
+title: KI CLI — Knowledge Islands
+description: Install and inspect the released ki command-line interface, with links to the executable owner for current command and release details.
+layout: layouts/base.njk
+---
+
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Tooling / KI CLI</p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 22ch;">Install the command. Keep the contract with its owner.</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 54ch; line-height: 1.7;">The <code>ki</code> CLI installs verified compatible harnesses, activates skills in explicit scopes, and hosts native repository operations.</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 3rem; align-items: start;">
+      <div class="prose-ki" style="max-width: none;">
+        <p class="overline">Install</p>
+        <h2>Use the stable public installer.</h2>
+        <p>The stable URL below directs to the verified release installer owned by <a href="https://github.com/knowledgeislands/tools-ki">tools-ki</a>. It is for a user environment, not a repository checkout.</p>
+        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL https://knowledgeislands.info/harness/install | sh</code></pre>
+        <p>After installation, confirm which executable and configuration the shell is using:</p>
+        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki --version
+ki diag
+ki doctor</code></pre>
+      </div>
+      <aside class="card-ki">
+        <p class="overline">Current source</p>
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.75rem;"><code>tools-ki</code> owns executable detail.</h2>
+        <p class="text-muted" style="font-size: 0.9375rem;">Use the CLI's own help for the command surface installed on your machine. The source repository owns release notes, installer behaviour, and the manual.</p>
+        <p style="margin: 1rem 0 0;"><a href="https://github.com/knowledgeislands/tools-ki">Open tools-ki</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Learn the live surface</p>
+      <h2>Ask the installed CLI before relying on a command.</h2>
+      <p>The command surface evolves with released versions. Start with root help, then request help for the group you need:</p>
+      <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki help
+ki help bootstrap
+ki help harness
+ki help repo</code></pre>
+      <p>For a release-specific installation path, platform support, or signature-verification details, read the <a href="https://github.com/knowledgeislands/tools-ki">tools-ki repository</a>. This page intentionally does not reproduce that executable contract.</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+title: Govern a Repository — Knowledge Islands
+description: Bootstrap a KI environment, activate skills in the right scope, and run native repository operations with source-labelled guidance.
+layout: layouts/base.njk
+---
+
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Tooling / Guidance</p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 24ch;">Make governance explicit, inspectable, and local to the repository.</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 56ch; line-height: 1.7;">Use the CLI to activate capabilities in the appropriate scope, then ask its native repository operations to explain, inspect, and safely conform declared governance.</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 3rem; align-items: start;">
+      <div class="prose-ki" style="max-width: none;">
+        <p class="overline">Choose a scope</p>
+        <h2>Activate a skill where it belongs.</h2>
+        <p>User scope makes a capability available across configured local agent runtimes. Repository scope declares and links a capability for one existing repository.</p>
+        <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki skill user add &lt;skill&gt;
+ki skill repo add &lt;skill&gt; --repo &lt;repository&gt;</code></pre>
+        <p>A fully qualified skill identifies both its provider and name. Ask <code>ki help skill</code> for the release currently installed on your machine.</p>
+      </div>
+      <aside class="card-ki">
+        <p class="overline">Current sources</p>
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.75rem;">CLI behaviour and reusable guidance have different owners.</h2>
+        <p class="text-muted" style="font-size: 0.9375rem;"><code>tools-ki</code> owns native command behaviour. The KI Agentic Harness owns the reusable guides and capability material. The Website provides this task-oriented route between them.</p>
+        <p style="margin: 1rem 0 0;"><a href="https://github.com/knowledgeislands/tools-ki">CLI owner</a> · <a href="https://github.com/knowledgeislands/ki-agentic-harness">harness owner</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Work safely</p>
+      <h2>Understand a repository before changing it.</h2>
+      <p>Repository operations use the declarations already present in that repository. Start with explanation and audit. A dry run lets you review a proposed conform operation before publishing changes.</p>
+      <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>ki repo educate --repo &lt;repository&gt;
+ki repo audit --repo &lt;repository&gt;
+ki repo conform --repo &lt;repository&gt; --dry-run</code></pre>
+      <p>Use <code>--skill &lt;skill&gt;</code> to focus an operation on one declared capability. The CLI does not turn local wrappers or copied tooling into the command authority; refer to <a href="https://github.com/knowledgeislands/tools-ki">tools-ki</a> for the complete current behaviour.</p>
+    </div>
+  </div>
+</section>

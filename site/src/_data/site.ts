@@ -8,7 +8,7 @@ const site = {
   nav: [
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
-    { label: 'Harness', href: '/harness/' },
+    { label: 'Tooling', href: '/tooling/' },
     { label: 'Specifications', href: '/specifications/' },
     { label: 'Get Started', href: '/get-started/' }
   ]
