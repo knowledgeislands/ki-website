@@ -28,3 +28,9 @@ bun run ki:lint:check  # Biome (TypeScript + JSON)
 bun run ki:lint:md     # Prettier + markdownlint over Markdown
 bun run ki:lint:types  # tsc --noEmit -p site
 ```
+
+<!-- headroom:learn:start -->
+
+- When removing or renaming a route, run `bun run ki:site:clean` before `bun run ki:site:build`; an ordinary Eleventy build can retain obsolete output in `site/dist/`.
+
+<!-- headroom:learn:end -->
