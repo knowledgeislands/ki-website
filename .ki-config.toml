@@ -42,3 +42,9 @@ preferred_model_type = "standard"
 
 [ki-tokenomics.budgets]
 mcp_servers = 20   # 19 user-scoped at time of first audit (2026-06-22); revisit when scoped
+
+[ki-housekeeping-claude]
+
+[ki-tokenomics-claude]
+
+[ki-tokenomics-codex]
