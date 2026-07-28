@@ -34,7 +34,7 @@
     "tailwindcss",
     "website"
   ],
-  "license": "UNLICENSED",
+  "license": "MIT",
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": [
       "bunx @biomejs/biome check --write --no-errors-on-unmatched"
