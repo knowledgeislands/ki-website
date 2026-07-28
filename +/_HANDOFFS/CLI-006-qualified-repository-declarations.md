@@ -21,3 +21,10 @@ Adopt and schedule migration of this repository's `.ki-config.toml` declarations
 ## Ownership and disposition
 
 The receiving repository owns its roadmap placement, plan, migration, verification, and commit. The migration is non-blocking local work, but its durable scheduling is required before CLI-006 can release. Reply with the adopted roadmap/plan locator, a decline, or a supersession so this outbound brief can be removed.
+
+## Receiving disposition
+
+- Status: parked.
+- Owner: `knowledgeislands/ki-website`.
+- Reason: begin the local migration only after CLI-006 receives manual acceptance.
+- Review trigger: CLI-006 is accepted in `knowledgeislands/tools-ki`.
