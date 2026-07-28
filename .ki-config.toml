@@ -1,31 +1,31 @@
-[ki-repo]
+["knowledgeislands/ki-agentic-harness:ki-repo"]
 supported_runtimes = ["claude-code", "codex"]
 visibility = "public"
 license = "proprietary"
 
-[ki-git]
+["knowledgeislands/ki-agentic-harness:ki-git"]
 
-[ki-authoring]
+["knowledgeislands/ki-agentic-harness:ki-authoring"]
 
-[ki-engineering]
+["knowledgeislands/ki-agentic-harness:ki-engineering"]
 
-[ki-website]
+["knowledgeislands/ki-agentic-harness:ki-website"]
 
-[ki-decision-records]
+["knowledgeislands/ki-agentic-harness:ki-decision-records"]
 
-[ki-roadmap]
+["knowledgeislands/ki-agentic-harness:ki-roadmap"]
 
-[ki-website-cloudflare]
+["knowledgeislands/ki-agentic-harness:ki-website-cloudflare"]
 
-[ki-tokenomics]
+["knowledgeislands/ki-agentic-harness:ki-tokenomics"]
 headroom = "recommended"
 preferred_model_type = "standard"
 
-[ki-tokenomics.budgets]
+["knowledgeislands/ki-agentic-harness:ki-tokenomics".budgets]
 mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
 
-[ki-housekeeping-claude]
+["knowledgeislands/ki-agentic-harness:ki-housekeeping-claude"]
 
-[ki-tokenomics-claude]
+["knowledgeislands/ki-agentic-harness:ki-tokenomics-claude"]
 
-[ki-tokenomics-codex]
+["knowledgeislands/ki-agentic-harness:ki-tokenomics-codex"]
