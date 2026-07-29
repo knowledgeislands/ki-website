@@ -16,6 +16,9 @@ license = "MIT"
 ["knowledgeislands/ki-agentic-harness:ki-roadmap"]
 repo_code = "KI-WEB"
 
+["knowledgeislands/ki-agentic-harness:ki-roadmap".themes]
+SITE = "site-experience"
+
 ["knowledgeislands/ki-agentic-harness:ki-website-cloudflare"]
 
 ["knowledgeislands/ki-agentic-harness:ki-tokenomics"]
