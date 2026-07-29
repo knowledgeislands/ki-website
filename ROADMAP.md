@@ -1,6 +1,6 @@
 # Repository roadmap
 
-This portfolio view is generated from the canonical theme roadmaps under `docs/roadmap/`. Edit those files, then run `ki-roadmap` CONFORM.
+This index is generated from canonical work items under `docs/roadmap/`. Edit those files, then run `ki repo conform --skill ki-roadmap`.
 
 ## Blocking
 
@@ -18,7 +18,9 @@ Understood and roughly scoped but not yet started — worth doing once the **Nex
 
 Worth doing, but presently blocked on an external dependency or decision. Revisit when its named condition changes; do not use this horizon for intentionally paused work.
 
-- [Site Experience: Interactive island geography diagram](docs/roadmap/site-experience/ROADMAP.md#interactive-island-geography-diagram)
+### Site Experience
+
+- [KI-WEB-SITE-001 — Interactive island geography diagram](docs/roadmap/KI-WEB-SITE-001-interactive-island-geography-diagram.md)
 
 ## Parked
 
@@ -26,4 +28,4 @@ Intentionally paused work with no current attention. Revisit only when its prior
 
 ## Future
 
-Speculative or not yet scoped — items marked _(candidate)_ need a scoping pass (or a decision to drop them) before they're actionable.
+Speculative or not yet scoped — candidate items need a scoping pass (or a decision to drop them) before they are actionable.
