@@ -9,25 +9,35 @@ permalink: /guidance/using-ki/planning-and-delivery/
 
 The reusable pattern is a "deep audit to implementation-ready roadmap" request. It does not depend on legal work, Knowledge Islands, Streams, or even a software repository.
 
-This is a reusable request template, not a competing planning standard. `ki-roadmap` owns repository-roadmap and work-item structure; `ki-plan` owns the current work-item lifecycle; `ki-delegate` owns delegation-ready execution.
+This is a reusable request template, not a competing planning standard. `ki-roadmap` owns repository-roadmap and work-item structure; `ki-plan` owns planning through `Ready`; `ki-implement` owns delivery through `Acceptance`; `ki-accept` owns closure and confirmed pruning; and `ki-delegate` owns delegation-ready execution.
 
 ## Live work lifecycle
 
-The process skills form one continuous route from a live session into governed delivery:
+The process skills form three explicit cycles from a live session into governed delivery:
 
 ```text
-ki-recap → identifies unfinished or newly transferred work
-     ↓
-ki-next → triages, prioritises, and materialises it
-     ↓
-ki-plan → enriches the detailed work item and currently carries it through delivery
-     ↓
-ki-roadmap → owns horizons, work-item shape, links, and transition rules
+Roadmap cycle
+ki-recap → ki-next → ki-plan → Ready
+
+Implementation cycle
+ki-implement → In progress → verified Acceptance
+
+Acceptance cycle
+ki-accept → Done → confirmed prune when requested
 ```
 
-The arrows show responsibility passing between processes; `ki-roadmap` is the governance foundation each process reads rather than merely the final execution step.
+The arrows show responsibility passing between processes. `ki-roadmap` is the governance foundation for horizons, work-item shape, links, and transition rules; it is not an execution stage.
 
-The intended process boundary is narrower: `ki-plan` will prepare an item to `ready`, planned `ki-implement` will take it from `ready` through `in-progress` to `acceptance`, and planned `ki-accept` will take accepted work to `done`. Those two skills are not shipped yet, so `ki-plan` remains the current lifecycle authority.
+`ki-plan` stops at `Ready`. `ki-implement` requires an approved ready item, records its immutable baseline, executes only its bounded plan, assembles verification evidence, moves it to `Acceptance`, and stops. `ki-accept` requires human approval by default before moving it to `Done`; pruning is a separate exact confirmation.
+
+## Authorised batches
+
+`ki-batch` applies the same boundaries to an explicitly named set in two phases:
+
+1. **Preparation** coordinates `ki-next` selection and `ki-plan` shaping over the named candidates, producing a reviewed batch authorisation. No implementation begins.
+2. **Implementation** validates that authorisation and coordinates repeated independent `ki-implement` cycles in dependency order.
+
+Every item keeps its own baseline, lifecycle, verification, and acceptance packet. Ambiguous or out-of-authority work is parked and recorded rather than inferred. The normal batch endpoint is `Acceptance`; `ki-accept` remains the closure owner unless the authorisation expressly grants acceptance authority for named items. Pruning always remains separately confirmed.
 
 `ki-next` checks the current repository's `+/_HANDOFFS/` inbox automatically while grounding the portfolio. An unreviewed handoff, or a parked handoff whose named review trigger has fired, is presented for an adopt, park, clarify, decline, or supersede decision before ordinary work selection. A parked handoff whose trigger has not fired is acknowledged and skipped. No separate handoff invocation is required.
 

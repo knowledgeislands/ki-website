@@ -129,17 +129,29 @@ Owns the **`Streams` zone** — the base's working copy ("plan mode") — and th
 
 ## Process
 
+### `ki-accept`
+
+Closes one evidence-backed repository work item from `Acceptance` to `Done`, retains completed records, and prunes only an exact explicitly confirmed set of done items. Human approval is required by default. It is the sole owner of lifecycle closure and deletion; it never chooses work, begins implementation, reshapes a plan, reconstructs missing verification, or infers approval.
+
+### `ki-batch`
+
+Coordinates an explicitly authorised set of independent repository work-item cycles in two phases. Preparation uses `ki-next` and `ki-plan` over named candidates to produce a reviewed batch authorisation without starting delivery. Implementation then coordinates repeated bounded `ki-implement` cycles in dependency order, parks ambiguity, and records per-item ledgers plus a concise recap. Its normal endpoint is `Acceptance`; `ki-accept` retains closure ownership unless the authorisation expressly grants named acceptance decisions, and pruning always requires separate confirmation.
+
 ### `ki-delegate`
 
 Prepares and runs **delegation-ready, round-sequenced execution** across sub-agents. The planner banks the reasoning once in cold-agent-ready worker briefs: locked-versus-escalate decisions, a pass/fail definition of done, bounded scope, an explicit minimum-viable per-spawn model, a verification gate, and a completion checkpoint. It then **classifies** each task as judgment / mechanical / research, **assigns** it to an agent and model, **sequences** dependency-ordered rounds, and **gates** every result through orchestrator review, with an adversarial pass for auto-executing output. It draws model cost/selection policy from `ki-tokenomics` without restating it. The method is runtime-neutral, with Claude Code mechanics tagged `CC`. Installable globally alongside `ki-bootstrap` and never declared via a `.ki-config.toml` table. It owns execution delegation, not cross-repository transfer.
 
+### `ki-implement`
+
+Implements one explicitly approved `Ready` repository work item through preflight, immutable baseline, `In progress`, bounded execution, integration, verification, and an evidence-backed `Acceptance` packet. It stops at acceptance and never selects work, reshapes a plan, self-accepts, prunes, pushes, releases, or expands authority. Delegation is used only when the approved plan or a separate authority record calls for it.
+
 ### `ki-next`
 
-Selects the next work, or a small compatible batch, in the repository's local forward-work structure. In a non-KB repository it grounds the generated roadmap index and canonical work-item dependency graph, evaluates Blocking and Next first, then uses separately confirmed horizon transitions. In a Knowledge Base it grounds Streams, evaluates Blocking and Active first, then uses the equivalent Focus transitions and existing proposal Checklists. A batch contains only independently ready work and preserves each item's execution or proposal boundary. It applies the readiness rules owned by `ki-roadmap` or `ki-kb-streams`, and stops for work-item or proposal review rather than implementation. A recent `ki-recap` can provide current-session context but is never required; `ki-next` does not mine historical transcripts. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki-config.toml` table.
+Selects the next work, or a small compatible set, in the repository's local forward-work structure. In a non-KB repository it grounds the generated roadmap index and canonical work-item dependency graph, evaluates Blocking and Next first, then uses separately confirmed horizon transitions. In a Knowledge Base it grounds Streams, evaluates Blocking and Active first, then uses the equivalent Focus transitions and existing proposal Checklists. A set contains only independently ready work and preserves each item's execution or proposal boundary. It applies the readiness rules owned by `ki-roadmap` or `ki-kb-streams`, and stops for work-item or proposal review rather than implementation. A recent `ki-recap` can provide current-session context but is never required; `ki-next` does not mine historical transcripts. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki-config.toml` table.
 
 ### `ki-plan`
 
-Drives the **work-item lifecycle** for a non-KB repository — `ready` / `execute` / `accept` / `done` / `prune` / `new` / `promote` / `status`. It reads format and methodology from `ki-roadmap`, enriches the canonical `<REPO>-<THEME>-<NNN>` item in place, preserves the `blocks`/`blocked-by` graph, applies explicit readiness and acceptance gates, retains done records, and prunes only an explicit completed batch. `/ki-plan promote` turns a current authenticated Claude Code Plan Mode scratch plan into that same governed item; the discovery bridge is Claude-Code-only while the file-oriented lifecycle is runtime-neutral. In a Knowledge Base, the same entrypoint dispatches to `ki-kb-streams` and its native proposal Checklist lifecycle. Installable globally alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki-config.toml` table.
+Creates and shapes governed work items in a non-KB repository through `new`, `shape`, `ready`, `promote`, and `status`. It reads format and methodology from `ki-roadmap`, enriches the canonical `<REPO>-<THEME>-<NNN>` item in place, preserves the dependency graph, and stops at the explicit all-or-nothing `Ready` transition. `/ki-plan promote` turns a current authenticated runtime plan into that same governed item. In a Knowledge Base, the entrypoint dispatches to `ki-kb-streams` and its native proposal Checklist lifecycle. It never implements, assembles acceptance evidence, closes, or prunes work.
 
 ### `ki-recap`
 

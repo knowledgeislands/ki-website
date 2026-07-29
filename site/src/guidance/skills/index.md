@@ -7,46 +7,45 @@ permalink: /guidance/skills/
 
 # Skills and journeys
 
-The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, and `ki-delegate` are the current set. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/guidance/skills/catalogue/).
+The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-delegate` form the current repository-delivery set. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/guidance/skills/catalogue/).
 
 ## The repository delivery journey
 
 The process skills coordinate around durable repository roadmap items. They do not form an inheritance hierarchy: each owns one part of the journey and passes a governed work item to the next.
 
-The delivered workflow currently looks like this:
+The delivered single-item workflow is:
 
 ```text
 ki-recap
   → ki-next
     → ki-plan
-      → ki-delegate where parallel or specialist execution helps
-        → implementation, acceptance, done, and prune through ki-plan
-          → repeat
+      → Ready
+        → ki-implement
+          → In progress
+            → Acceptance
+              → ki-accept
+                → Done
+                  → repeat
 ```
 
 - **`ki-recap`** closes a working session, identifies unfinished or newly transferred work, and offers grounded actions to `ki-next`.
 - **`ki-next`** grounds the repository portfolio, processes inbound handoffs, and confirms the next item or small compatible set.
-- **`ki-plan`** enriches a selected item and currently owns its complete lifecycle from readiness through execution, acceptance, done, and explicit pruning.
-- **`ki-delegate`** is used within planning or implementation when work benefits from bounded specialist agents. It classifies, assigns, sequences, and gates delegated units; it does not own roadmap state.
+- **`ki-plan`** creates or enriches selected items through the explicit `Ready` gate, then stops.
+- **`ki-implement`** takes one approved `Ready` item through `In progress`, bounded execution, verification, and an evidence-backed `Acceptance` packet, then stops.
+- **`ki-accept`** reviews one item at `Acceptance`, requires human approval by default, moves approved work to `Done`, and prunes only exact confirmed retained records.
+- **`ki-delegate`** supports planning or implementation when work benefits from bounded specialist agents. It classifies, assigns, sequences, and gates delegated units; it does not own roadmap state or confer authority.
 
-The planned cleaner ownership model separates that broad `ki-plan` lifecycle into three phases:
+`ki-batch` coordinates the same ownership boundaries across an explicit set:
 
 ```text
-Roadmap cycle
-ki-recap → ki-next → ki-plan → ready
+Preparation
+named candidates → ki-next + ki-plan → reviewed batch authorisation
 
-Implementation cycle
-ki-implement → in progress → acceptance
-
-Acceptance cycle
-ki-accept → done
-
-Return to ki-recap and repeat
+Implementation
+approved authorisation → repeated bounded ki-implement cycles → Acceptance
 ```
 
-`ki-implement` and `ki-accept` are **planned skills, not currently shipped capabilities**. Until they exist, `ki-plan` remains the authority for those lifecycle transitions.
-
-A further planned `ki-batch` process will prepare an explicitly authorised set through the roadmap cycle and coordinate repeated implementation cycles. It will orchestrate these skills rather than duplicate them, and will stop or park work whenever a required decision falls outside the approved batch authority.
+Batch preparation selects and shapes only the named candidates; it does not start delivery. Batch implementation then runs independent items in dependency order, parks ambiguity or out-of-authority decisions, and records a per-item ledger plus recap. Its normal endpoint is `Acceptance`. `ki-accept` remains the closure owner unless the batch authorisation expressly grants acceptance authority for named items; pruning always requires separate explicit confirmation.
 
 The keystone skills sit underneath this journey. `ki-bootstrap` establishes the user environment, `ki-repo` owns the repository contract and declared governance coverage, and `ki-skills` governs the quality and structure of the capabilities used throughout.
 
@@ -56,7 +55,7 @@ A skill is a self-contained capability an agent can load on demand — a name an
 
 A `SKILL.md` follows the open [Agent Skills standard](https://agentskills.io/), so it is not Claude-Code-specific: a second runtime such as OpenAI Codex CLI discovers the same `SKILL.md` files from its own path (`.agents/skills`, vs Claude Code's `.claude/skills`), though it reads project instructions from `AGENTS.md` rather than `CLAUDE.md`.
 
-Every skill here is a Knowledge Islands skill, shipped as part of this system, but the set has two **kinds** (`ADR-KI-HARNESS-SKILLS-006`). Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes plus a mechanical checker; what tells governance skills apart is not their kind but _what each governs_: a repository's structure, a knowledge base, the machine itself. A smaller set are **process skills** — they drive an action or lifecycle rather than holding a standard, are exempt from the governance shape and universal modes, and expose HELP only optionally: `ki-recap` (summarise / surface-outstanding / harvest-learnings over a live session, optionally handing grounded current-session actions to `ki-next`), `ki-next` (re-ground the roadmap, triage incoming transfers, and confirm the next item or small compatible batch), `ki-plan` (the non-KB work-item lifecycle, paired with `ki-roadmap`), and `ki-delegate` (bank planning reasoning in cold-agent-ready briefs, then classify / assign / sequence / gate execution). Human-led repository review is the `REVIEW` mode of `ki-repo`, so it follows the declared repository governance capability rather than being installed as a separate process skill. Knowledge Bases use `ki-kb-streams` instead of repository work items. Kind and physical domain are separate axes in the map below.
+Every skill here is a Knowledge Islands skill, shipped as part of this system, but the set has two **kinds** (`ADR-KI-HARNESS-SKILLS-006`). Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes plus a mechanical checker; what tells governance skills apart is not their kind but _what each governs_: a repository's structure, a knowledge base, the machine itself. A smaller set are **process skills** — they drive an action or lifecycle rather than holding a standard and are exempt from the governance shape and universal modes. The repository-delivery process set separates recap, selection, planning, implementation, acceptance, batching, and delegation into the boundaries above. Human-led repository review is the `REVIEW` mode of `ki-repo`, so it follows the declared repository governance capability rather than being installed as a separate process skill. Knowledge Bases use `ki-kb-streams` instead of repository work items. Kind and physical domain are separate axes in the map below.
 
 The Agent Skills standard is more general than this, though. A skill need not govern a standard at all — it could equally encode a standalone workflow (a review process, a release checklist, a research harness) or target one specific project or recurring task. The process kind is the first step into that territory, and the set is expected to grow further over time.
 
@@ -82,7 +81,7 @@ The source tree groups capabilities into eight semantic domains:
 3. **Governance** — `ki-authoring`, `ki-decision-records`, `ki-engineering`, `ki-feature-definitions`, `ki-git`, `ki-roadmap`, and `ki-specifications`: reusable standards and instruments that cut across repository shapes.
 4. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
 5. **Knowledge bases** — `ki-kb`, `ki-kb-activities`, `ki-kb-live-artifacts`, and `ki-kb-streams`: the base shape and its operational families.
-6. **Process** — `ki-delegate`, `ki-next`, `ki-plan`, and `ki-recap`: shipped action and lifecycle skills rather than house standards; `ki-implement`, `ki-accept`, and `ki-batch` are planned.
+6. **Process** — `ki-accept`, `ki-batch`, `ki-delegate`, `ki-implement`, `ki-next`, `ki-plan`, and `ki-recap`: action and lifecycle skills rather than house standards.
 7. **Tooling** — `ki-homebrew-tap` and `ki-tools`: standalone command-line tools and their distribution surface.
 8. **Websites** — `ki-website` and `ki-website-cloudflare`: portable site builds and their Cloudflare hosting delta.
 
@@ -142,9 +141,15 @@ ki-binding-chezmoi
 
 ki-delegate
 
+ki-accept
+
+ki-batch
+
 ki-engineering
 
 ki-homebrew-tap
+
+ki-implement
 
 ki-next
 
