@@ -5,10 +5,7 @@
   // Eleventy builds to dist/ inside this workspace; the Worker serves it directly.
   "assets": { "directory": "dist" },
   // Custom domains — apex plus www (www → apex via a Cloudflare redirect rule).
-  "routes": [
-    { "pattern": "knowledgeislands.info", "custom_domain": true },
-    { "pattern": "www.knowledgeislands.info", "custom_domain": true }
-  ],
+  "routes": [{ "pattern": "knowledgeislands.info", "custom_domain": true }, { "pattern": "www.knowledgeislands.info", "custom_domain": true }],
   // Persist Workers logs in the dashboard (Workers & Pages → ki-website → Logs).
   "observability": { "enabled": true }
 }
