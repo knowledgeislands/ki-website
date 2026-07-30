@@ -1,4 +1,7 @@
 ["knowledgeislands/ki-agentic-harness:ki-repo"]
+title = "KI Website"
+description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
+repo_code = "KI-WEB"
 supported_runtimes = ["claude-code", "codex"]
 visibility = "public"
 license = "MIT"
@@ -14,8 +17,6 @@ license = "MIT"
 ["knowledgeislands/ki-agentic-harness:ki-decision-records"]
 
 ["knowledgeislands/ki-agentic-harness:ki-roadmap"]
-repo_code = "KI-WEB"
-
 ["knowledgeislands/ki-agentic-harness:ki-roadmap".themes]
 SITE = "site-experience"
 
