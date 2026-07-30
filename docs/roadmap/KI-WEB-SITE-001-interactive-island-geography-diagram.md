@@ -16,3 +16,5 @@ Create a visual, interactive version of the Capital/Library/Streams/Harbour geog
 ## Boundary
 
 Wait for the isometric graphics to become available before beginning implementation.
+
+## Discussion
