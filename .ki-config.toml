@@ -2,7 +2,7 @@
 title = "KI Website"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
 repo_code = "KI-WEB"
-supported_runtimes = ["claude-code", "codex"]
+supported_runtimes = ["claude-code", "chatgpt-codex"]
 visibility = "public"
 license = "MIT"
 
