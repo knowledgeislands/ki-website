@@ -9,19 +9,19 @@
   "dependencies": {},
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "@biomejs/biome": "2.5.4",
+    "@biomejs/biome": "2.5.6",
     "@tailwindcss/cli": "^4.3.3",
-    "@types/node": "^26.1.1",
-    "concurrently": "^10.0.3",
+    "@types/node": "^26.1.2",
+    "concurrently": "^10.0.4",
     "husky": "^9.1.7",
-    "knip": "^6.27.0",
-    "lint-staged": "^17.1.0",
-    "markdownlint-cli2": "^0.23.1",
-    "prettier": "^3.9.5",
+    "knip": "^6.31.0",
+    "lint-staged": "^17.3.0",
+    "markdownlint-cli2": "^0.23.2",
+    "prettier": "^3.9.6",
     "syncpack": "^15.3.2",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "wrangler": "^4.112.0"
+    "wrangler": "^4.118.0"
   },
   "engines": {
     "node": ">=22.0.0"
