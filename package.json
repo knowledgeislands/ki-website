@@ -24,7 +24,7 @@
     "wrangler": "^4.118.0"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=22"
   },
   "homepage": "https://github.com/knowledgeislands/ki-website#readme",
   "keywords": [
@@ -36,7 +36,7 @@
   ],
   "license": "MIT",
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,json}": [
+    "*.{ts,tsx,js,jsx,json,jsonc}": [
       "bunx @biomejs/biome check --write --no-errors-on-unmatched"
     ],
     "*.md": [
@@ -51,6 +51,7 @@
   },
   "scripts": {
     "clean": "rm -rf {node_modules,site/dist}",
+    "ki:deps:update": "bun update --latest",
     "ki:site:build": "cd site && node --experimental-strip-types ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "ki:site:clean": "rm -rf site/dist site/.wrangler",
     "ki:site:deploy": "cd site && bunx wrangler deploy",
