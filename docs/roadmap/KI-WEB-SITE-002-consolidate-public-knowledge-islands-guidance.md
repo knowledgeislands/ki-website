@@ -11,6 +11,10 @@ baseline-ref: null
 transferred-from: KI-HARNESS-GOV-006
 ---
 
+## Goal
+
+Achieve the stated outcome: Consolidate public Knowledge Islands guidance.
+
 ## Context
 
 Make the KI Website the coherent public home for user, prompting, and cross-skill-composition guidance across the six primary public Knowledge Islands repositories.

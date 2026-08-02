@@ -9,6 +9,10 @@ blocked-by: []
 baseline-ref: null
 ---
 
+## Goal
+
+Achieve the stated outcome: Interactive island geography diagram.
+
 ## Context
 
 Create a visual, interactive version of the Capital/Library/Streams/Harbour geography using the isometric tile set from the Aesthetics pillar.
