@@ -5,4 +5,4 @@ This directory holds the significant, durable decisions for the KI Website. Reco
 ## Reading order
 
 1. [GDR-KI-WEBSITE-001](GDR-KI-WEBSITE-001-adopting-decision-records.md) - adopts Decision Records for this repository.
-2. [GDR-KI-FUNDAMENTALS-001](GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) - defines the four repository authorities, publication flows, and choreography.
+2. [GDR-KI-FUNDAMENTALS-001](GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) - defines the six repository authorities, publication flows, and choreography.
