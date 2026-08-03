@@ -1,4 +1,5 @@
 ["knowledgeislands/ki-agentic-harness:ki-repo"]
+repository = "https://github.com/knowledgeislands/ki-website"
 title = "KI Website"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
 repo_code = "KI-WEB"
@@ -13,6 +14,21 @@ license = "MIT"
 ["knowledgeislands/ki-agentic-harness:ki-engineering"]
 
 ["knowledgeislands/ki-agentic-harness:ki-website"]
+
+["knowledgeislands/ki-agentic-harness:ki-handoffs"]
+["knowledgeislands/ki-agentic-harness:ki-handoffs".exports_to]
+knowledge = []
+work = []
+
+["knowledgeislands/ki-agentic-harness:ki-handoffs".imports_from]
+knowledge = [
+  "https://github.com/knowledgeislands/ki-agentic-harness",
+  "https://github.com/knowledgeislands/tools-ki",
+]
+work = [
+  "https://github.com/knowledgeislands/ki-agentic-harness",
+  "https://github.com/knowledgeislands/tools-ki",
+]
 
 ["knowledgeislands/ki-agentic-harness:ki-decision-records"]
 
