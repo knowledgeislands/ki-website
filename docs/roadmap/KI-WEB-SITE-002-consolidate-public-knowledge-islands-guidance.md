@@ -3,7 +3,7 @@ id: KI-WEB-SITE-002
 title: Consolidate public guidance
 theme: site-experience
 horizon: future
-status: open
+status: draft
 candidate: true
 blocks: []
 blocked-by: []
@@ -34,6 +34,30 @@ This is a wholesale, source-owned consolidation rather than piecemeal copying. T
 Repository-local developer guidance remains with its codebase and moves directly under `docs/developer/` when `docs/guides/` no longer has a public purpose. CLI help, the `tools-ki` manual, generated reference, capability contracts, SKILL.md instructions, and repository governance standards remain owned by their existing repositories; the website must link to them rather than duplicate volatile or executable detail.
 
 The originating harness item is `KI-HARNESS-GOV-006`; this item does not block it. It may inventory and design the presentation while the harness establishes the canonical skill-composition and batch-authorisation model.
+
+## Current state
+
+Public explanatory guidance remains distributed across the six primary repositories, with the website not yet established as its coherent task-oriented home. This candidate draft remains in `Future` pending the source inventory and the related harness work.
+
+## Steps
+
+- [ ] Inventory the public explanatory material across the six primary repositories and classify each source's durable owner.
+- [ ] Propose the task-oriented website information architecture and source-by-source migration slices.
+- [ ] Migrate one approved guidance area at a time, leaving a pointer or removing the superseded source before requesting review.
+
+## Files touched
+
+- Website guidance, navigation, and page-content files.
+- Source-repository guidance only through separately approved, source-owned changes.
+
+## Verify
+
+- Each migrated area has one canonical public explanatory home and retained links remain valid.
+- The website build, lint, and authored-content checks pass.
+
+## Dependencies / blocks
+
+The item is a `Future` candidate and is informed by `KI-HARNESS-GOV-006`; it does not block that harness work.
 
 ## Discussion
 
