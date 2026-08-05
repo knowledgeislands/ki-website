@@ -1,6 +1,6 @@
 ---
 id: KI-WEB-SITE-002
-title: Consolidate public Knowledge Islands guidance
+title: Consolidate public guidance
 theme: site-experience
 horizon: future
 status: open

@@ -1,6 +1,6 @@
 ---
 id: KI-WEB-SITE-001
-title: Interactive island geography diagram
+title: Interactive island diagram
 theme: site-experience
 horizon: waiting-for
 status: open
