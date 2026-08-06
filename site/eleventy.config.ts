@@ -43,12 +43,15 @@ export default function (eleventyConfig: UserConfig) {
   // to the exclusion pattern below to protect icon-managed components).
   eleventyConfig.addTransform('external-link-icons', (content: string, outputPath: string | undefined) => {
     if (!outputPath?.endsWith('.html')) return content
-    return content.replace(/<a\s+([^>]*href="https?:\/\/[^"]*"[^>]*)>([\s\S]*?)<\/a>/gi, (match, attrs: string, inner: string) => {
-      // Add class names here to prevent icon injection inside specific components:
-      if (/class="[^"]*(?:home-nav-card|tool-card)/.test(attrs)) return match
-      if (/data-lucide="external-link"/.test(inner)) return match
-      return `<a ${attrs}>${inner}<i data-lucide="external-link" class="prose-ext-icon"></i></a>`
-    })
+    return content.replace(
+      /<a\s+([^>]*href="https?:\/\/[^"]*"[^>]*)>([\s\S]*?)<\/a>/gi,
+      (match, attrs: string, inner: string) => {
+        // Add class names here to prevent icon injection inside specific components:
+        if (/class="[^"]*(?:home-nav-card|tool-card)/.test(attrs)) return match
+        if (/data-lucide="external-link"/.test(inner)) return match
+        return `<a ${attrs}>${inner}<i data-lucide="external-link" class="prose-ext-icon"></i></a>`
+      }
+    )
   })
 
   // ── Transform: rewrite absolute links to relative ────────────────────────
@@ -56,10 +59,13 @@ export default function (eleventyConfig: UserConfig) {
   // rewritten to relative paths, making dist/ portable without a web server.
   eleventyConfig.addTransform('explicit-index-links', (content: string, outputPath: string | undefined) => {
     if (!outputPath?.endsWith('.html')) return content
-    return content.replace(/(\s(?:href|src)=)(["'])([^"']+)(\2)/gi, (_match, prefix: string, quote: string, url: string) => {
-      if (/^(?:https?:|mailto:|tel:|javascript:|data:|#)/i.test(url)) return `${prefix}${quote}${url}${quote}`
-      return `${prefix}${quote}${toRelativeOutputUrl(url, outputPath)}${quote}`
-    })
+    return content.replace(
+      /(\s(?:href|src)=)(["'])([^"']+)(\2)/gi,
+      (_match, prefix: string, quote: string, url: string) => {
+        if (/^(?:https?:|mailto:|tel:|javascript:|data:|#)/i.test(url)) return `${prefix}${quote}${url}${quote}`
+        return `${prefix}${quote}${toRelativeOutputUrl(url, outputPath)}${quote}`
+      }
+    )
   })
 
   // ── Tailwind CSS ─────────────────────────────────────────────────────────────
