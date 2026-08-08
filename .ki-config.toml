@@ -15,20 +15,13 @@ license = "MIT"
 
 ["knowledgeislands/ki-agentic-harness:ki-website"]
 
-["knowledgeislands/ki-agentic-harness:ki-trades"]
 ["knowledgeislands/ki-agentic-harness:ki-trades".exports_to]
-knowledge = []
 work = []
+knowledge = []
 
 ["knowledgeislands/ki-agentic-harness:ki-trades".imports_from]
-knowledge = [
-  "https://github.com/knowledgeislands/ki-agentic-harness",
-  "https://github.com/knowledgeislands/tools-ki",
-]
-work = [
-  "https://github.com/knowledgeislands/ki-agentic-harness",
-  "https://github.com/knowledgeislands/tools-ki",
-]
+work = ["https://github.com/knowledgeislands/ki-agentic-harness", "https://github.com/knowledgeislands/tools-ki", "https://github.com/knowledgeislands/tools-mgit", "https://github.com/krisb/dotfiles"]
+knowledge = ["https://github.com/knowledgeislands/ki-agentic-harness", "https://github.com/knowledgeislands/tools-ki", "https://github.com/knowledgeislands/tools-mgit", "https://github.com/krisb/dotfiles"]
 
 ["knowledgeislands/ki-agentic-harness:ki-decision-records"]
 
