@@ -1,4 +1,7 @@
-["knowledgeislands/ki-agentic-harness:ki-repo"]
+[repo]
+harnesses = ["knowledgeislands/ki-agentic-harness"]
+
+[skills.ki-repo]
 repository = "https://github.com/knowledgeislands/ki-website"
 title = "KI Website"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
@@ -7,39 +10,39 @@ supported_runtimes = ["claude-code", "chatgpt-codex"]
 visibility = "public"
 license = "MIT"
 
-["knowledgeislands/ki-agentic-harness:ki-git"]
+[skills.ki-git]
 
-["knowledgeislands/ki-agentic-harness:ki-authoring"]
+[skills.ki-authoring]
 
-["knowledgeislands/ki-agentic-harness:ki-engineering"]
+[skills.ki-engineering]
 
-["knowledgeislands/ki-agentic-harness:ki-website"]
+[skills.ki-website]
 
-["knowledgeislands/ki-agentic-harness:ki-trades".exports_to]
-work = []
-knowledge = []
+[skills.ki-trades]
 
-["knowledgeislands/ki-agentic-harness:ki-trades".imports_from]
-work = ["https://github.com/knowledgeislands/ki-agentic-harness", "https://github.com/knowledgeislands/tools-ki", "https://github.com/knowledgeislands/tools-mgit", "https://github.com/krisb/dotfiles"]
-knowledge = ["https://github.com/knowledgeislands/ki-agentic-harness", "https://github.com/knowledgeislands/tools-ki", "https://github.com/knowledgeislands/tools-mgit", "https://github.com/krisb/dotfiles"]
+[skills.ki-trades.routes]
+"knowledgeislands/ki-agentic-harness" = { import = ["work", "knowledge"] }
+"knowledgeislands/tools-ki" = { import = ["work", "knowledge"] }
+"knowledgeislands/tools-mgit" = { import = ["work", "knowledge"] }
+"krisb/dotfiles" = { import = ["work", "knowledge"] }
 
-["knowledgeislands/ki-agentic-harness:ki-decision-records"]
+[skills.ki-decision-records]
 
-["knowledgeislands/ki-agentic-harness:ki-roadmap"]
-["knowledgeislands/ki-agentic-harness:ki-roadmap".themes]
+[skills.ki-roadmap]
+[skills.ki-roadmap.themes]
 SITE = "site-experience"
 
-["knowledgeislands/ki-agentic-harness:ki-website-cloudflare"]
+[skills.ki-website-cloudflare]
 
-["knowledgeislands/ki-agentic-harness:ki-tokenomics"]
+[skills.ki-tokenomics]
 headroom = "recommended"
 preferred_model_type = "standard"
 
-["knowledgeislands/ki-agentic-harness:ki-tokenomics".budgets]
+[skills.ki-tokenomics.budgets]
 mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
 
-["knowledgeislands/ki-agentic-harness:ki-housekeeping-claude"]
+[skills.ki-housekeeping-claude]
 
-["knowledgeislands/ki-agentic-harness:ki-tokenomics-claude"]
+[skills.ki-tokenomics-claude]
 
-["knowledgeislands/ki-agentic-harness:ki-tokenomics-codex"]
+[skills.ki-tokenomics-codex]
