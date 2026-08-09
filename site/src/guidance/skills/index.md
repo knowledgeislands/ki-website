@@ -74,15 +74,14 @@ Its universal modes apply at local scale:
 
 ## The skill domains
 
-The source tree groups capabilities into seven semantic domains:
+The source tree groups capabilities into six semantic domains:
 
 1. **Agentic systems** — `ki-communication` and `ki-subagents`: the shared capability types that equip an agent.
 2. **Change management** — `ki-change-management`, its Roadmap, Streams, GitHub Issues, and Linear adapters, and the short lifecycle process skills.
 3. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-codex` runtime adapters; and `ki-housekeeping-claude`.
-4. **Governance** — `ki-agora`, `ki-authoring`, `ki-decision-records`, `ki-delegation`, `ki-engineering`, `ki-git`, `ki-guides`, and `ki-specs`: reusable standards and instruments that cut across repository shapes.
+4. **Governance** — `ki-agora`, `ki-authoring`, `ki-checkpoint`, `ki-decision-records`, `ki-delegation`, `ki-engineering`, `ki-git`, `ki-guides`, `ki-specs`, `ki-trade`, and `ki-trades`: reusable standards and instruments that cut across repository shapes.
 5. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
-6. **Repository operations** — `ki-repo-checkpoints`, `ki-repo-trade`, and `ki-repo-trades`: working-area conventions that apply to either primary repository structure.
-7. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, and Knowledge Base zones.
+6. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, and Knowledge Base zones.
 
 ## Interdependencies
 
