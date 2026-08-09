@@ -16,11 +16,13 @@ license = "MIT"
 
 [skills.ki-engineering]
 
-[skills.ki-website]
+[skills.ki-repo-project]
 
-[skills.ki-trades]
+[skills.ki-repo-website]
 
-[skills.ki-trades.routes]
+[skills.ki-repo-trades]
+
+[skills.ki-repo-trades.routes]
 "knowledgeislands/ki-agentic-harness" = { import = ["work", "knowledge"] }
 "knowledgeislands/tools-ki" = { import = ["work", "knowledge"] }
 "knowledgeislands/tools-mgit" = { import = ["work", "knowledge"] }
@@ -28,11 +30,13 @@ license = "MIT"
 
 [skills.ki-decision-records]
 
-[skills.ki-roadmap]
-[skills.ki-roadmap.themes]
-SITE = "site-experience"
+[skills.ki-change-management]
+adapter = "roadmap"
 
-[skills.ki-website-cloudflare]
+[skills.ki-change-management-roadmap]
+themes = ["site-experience"]
+
+[skills.ki-repo-website-cloudflare]
 
 [skills.ki-tokenomics]
 headroom = "recommended"

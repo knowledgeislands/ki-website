@@ -1,5 +1,5 @@
 ---
-id: KI-WEB-SITE-001
+id: KI-WEB-001
 title: Interactive island diagram
 theme: site-experience
 horizon: waiting-for

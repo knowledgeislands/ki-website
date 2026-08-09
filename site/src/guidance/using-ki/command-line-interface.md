@@ -33,7 +33,7 @@ Skill activation always has an explicit scope:
 A fully qualified capability name identifies both the provider and skill:
 
 ```text
-knowledgeislands/ki-agentic-harness:ki-roadmap
+knowledgeislands/ki-agentic-harness:ki-change-management-roadmap
 ```
 
 A bare skill name is accepted only when exactly one installed harness provides it. Removal only reverses state whose ownership KI can prove; it does not uninstall the providing harness.

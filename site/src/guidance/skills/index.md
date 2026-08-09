@@ -55,7 +55,7 @@ A skill is a self-contained capability an agent can load on demand — a name an
 
 A `SKILL.md` follows the open [Agent Skills standard](https://agentskills.io/), so it is not Claude-Code-specific: a second runtime such as OpenAI Codex CLI discovers the same `SKILL.md` files from its own path (`.agents/skills`, vs Claude Code's `.claude/skills`), though it reads project instructions from `AGENTS.md` rather than `CLAUDE.md`.
 
-Every skill here is a Knowledge Islands skill, shipped as part of this system, but the set has two **kinds** (`ADR-KI-HARNESS-SKILLS-006`). Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes plus a mechanical checker; what tells governance skills apart is not their kind but _what each governs_: a repository's structure, a knowledge base, the machine itself. A smaller set are **process skills** — they drive an action or lifecycle rather than holding a standard and are exempt from the governance shape and universal modes. The repository-delivery process set separates recap, selection, planning, implementation, acceptance, batching, and delegation into the boundaries above. Human-led repository review is the `REVIEW` mode of `ki-repo`, so it follows the declared repository governance capability rather than being installed as a separate process skill. Knowledge Bases use `ki-kb-streams` instead of repository work items. Kind and physical domain are separate axes in the map below.
+Every skill here is a Knowledge Islands skill, shipped as part of this system, but the set has two **kinds** (`ADR-KI-HARNESS-SKILLS-006`). Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes plus a mechanical checker; what tells governance skills apart is not their kind but _what each governs_: a repository's structure, an operation, or the machine itself. A smaller set are **process skills** — they drive an action or lifecycle rather than holding a standard and are exempt from the governance shape and universal modes. The repository-delivery process set separates recap, selection, planning, implementation, acceptance, batching, and delegation into the boundaries above. Human-led repository review is the `REVIEW` mode of `ki-repo`, so it follows the declared repository governance capability rather than being installed as a separate process skill. `ki-change-management` selects the repository's forward-work adapter: Roadmap by default for a Project repository, or Streams for a Knowledge Base. Kind and physical domain are separate axes in the map below.
 
 The Agent Skills standard is more general than this, though. A skill need not govern a standard at all — it could equally encode a standalone workflow (a review process, a release checklist, a research harness) or target one specific project or recurring task. The process kind is the first step into that territory, and the set is expected to grow further over time.
 
@@ -74,16 +74,15 @@ Its universal modes apply at local scale:
 
 ## The skill domains
 
-The source tree groups capabilities into eight semantic domains:
+The source tree groups capabilities into seven semantic domains:
 
-1. **Agentic systems** — `ki-harness`, `ki-mcp`, `ki-plugins`, and `ki-subagents`: the containers and capability types that equip an agent.
-2. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-codex` runtime adapters; `ki-housekeeping-claude`; and the renderer-specific `ki-binding-chezmoi` and `ki-dotfiles-chezmoi`.
-3. **Governance** — `ki-authoring`, `ki-decision-records`, `ki-engineering`, `ki-specs`, `ki-git`, `ki-roadmap`, and `ki-specifications`: reusable standards and instruments that cut across repository shapes.
-4. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
-5. **Knowledge bases** — `ki-kb`, `ki-kb-activities`, `ki-kb-live-artifacts`, and `ki-kb-streams`: the base shape and its operational families.
-6. **Process** — `ki-accept`, `ki-batch`, `ki-delegate`, `ki-implement`, `ki-next`, `ki-plan`, and `ki-recap`: action and lifecycle skills rather than house standards.
-7. **Tooling** — `ki-homebrew-tap` and `ki-tools`: standalone command-line tools and their distribution surface.
-8. **Websites** — `ki-website` and `ki-website-cloudflare`: portable site builds and their Cloudflare hosting delta.
+1. **Agentic systems** — `ki-communication` and `ki-subagents`: the shared capability types that equip an agent.
+2. **Change management** — `ki-change-management`, its Roadmap, Streams, GitHub Issues, and Linear adapters, and the short lifecycle process skills.
+3. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-codex` runtime adapters; and `ki-housekeeping-claude`.
+4. **Governance** — `ki-agora`, `ki-authoring`, `ki-decision-records`, `ki-delegation`, `ki-engineering`, `ki-git`, `ki-guides`, and `ki-specs`: reusable standards and instruments that cut across repository shapes.
+5. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
+6. **Repository operations** — `ki-repo-checkpoints`, `ki-repo-trade`, and `ki-repo-trades`: working-area conventions that apply to either primary repository structure.
+7. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, and Knowledge Base zones.
 
 ## Interdependencies
 
@@ -94,25 +93,26 @@ The domains group the skills by concern. A second relationship runs across them:
 ```text
 ki-bootstrap
 
-ki-harness
-├─ ki-skills
-├─ ki-subagents
-├─ ki-decision-records
-└─ ki-roadmap
+ki-change-management
+├─ ki-change-management-roadmap
+├─ ki-change-management-github-issues
+└─ ki-change-management-linear
 
-ki-kb
-├─ ki-kb-activities
-├─ ki-kb-live-artifacts
-└─ ki-kb-streams
+ki-repo-kb
+├─ ki-repo-kb-activities
+├─ ki-repo-kb-live-artifacts
+└─ ki-repo-kb-streams
 
-ki-website
-└─ ki-website-cloudflare
+ki-repo-website
+└─ ki-repo-website-cloudflare
 
-ki-mcp
+ki-repo-harness
 
-ki-plugins
+ki-repo-mcp
 
-ki-specifications
+ki-repo-plugins
+
+ki-repo-specifications
 
 ki-specs
 
