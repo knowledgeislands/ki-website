@@ -22,11 +22,17 @@ license = "MIT"
 
 [skills.ki-trades]
 
-[skills.ki-trades.routes]
-"knowledgeislands/ki-agentic-harness" = { import = ["work", "knowledge"] }
-"knowledgeislands/tools-ki" = { import = ["work", "knowledge"] }
-"knowledgeislands/tools-mgit" = { import = ["work", "knowledge"] }
-"krisb/dotfiles" = { import = ["work", "knowledge"] }
+[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
+import = ["work", "knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/tools-ki"]
+import = ["work", "knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/tools-mgit"]
+import = ["work", "knowledge"]
+
+[skills.ki-trades.routes."krisb/dotfiles"]
+import = ["work", "knowledge"]
 
 [skills.ki-decision-records]
 
