@@ -36,6 +36,9 @@ adapter = "roadmap"
 [skills.ki-change-management-roadmap]
 themes = ["site-experience"]
 
+[skills.ki-change-management-roadmap.areas]
+SITE = "site-experience"
+
 [skills.ki-repo-website-cloudflare]
 
 [skills.ki-tokenomics]

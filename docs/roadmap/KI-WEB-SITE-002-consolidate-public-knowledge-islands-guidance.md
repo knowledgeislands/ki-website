@@ -1,5 +1,6 @@
 ---
-id: KI-WEB-002
+id: KI-WEB-SITE-002
+area: SITE
 title: Consolidate public guidance
 theme: site-experience
 horizon: future
