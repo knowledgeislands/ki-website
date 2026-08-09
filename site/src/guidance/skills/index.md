@@ -78,7 +78,7 @@ The source tree groups capabilities into eight semantic domains:
 
 1. **Agentic systems** — `ki-harness`, `ki-mcp`, `ki-plugins`, and `ki-subagents`: the containers and capability types that equip an agent.
 2. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-codex` runtime adapters; `ki-housekeeping-claude`; and the renderer-specific `ki-binding-chezmoi` and `ki-dotfiles-chezmoi`.
-3. **Governance** — `ki-authoring`, `ki-decision-records`, `ki-engineering`, `ki-feature-definitions`, `ki-git`, `ki-roadmap`, and `ki-specifications`: reusable standards and instruments that cut across repository shapes.
+3. **Governance** — `ki-authoring`, `ki-decision-records`, `ki-engineering`, `ki-specs`, `ki-git`, `ki-roadmap`, and `ki-specifications`: reusable standards and instruments that cut across repository shapes.
 4. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
 5. **Knowledge bases** — `ki-kb`, `ki-kb-activities`, `ki-kb-live-artifacts`, and `ki-kb-streams`: the base shape and its operational families.
 6. **Process** — `ki-accept`, `ki-batch`, `ki-delegate`, `ki-implement`, `ki-next`, `ki-plan`, and `ki-recap`: action and lifecycle skills rather than house standards.
@@ -114,7 +114,7 @@ ki-plugins
 
 ki-specifications
 
-ki-feature-definitions
+ki-specs
 
 ki-git
 

@@ -79,9 +79,9 @@ Governs **Decision Records** in any Knowledge Islands repo, code or KB — the t
 
 The shared **engineering toolchain** every TS/Bun repo builds on — native repository audit wiring, direct code-tool execution, `tsconfig`/`biome`, the Bun-install / Node-run split, a runner-neutral bare `test` entrypoint, the config-gated Vitest profile with 100% coverage, and the build/cli-chmod rule. The toolchain twin of `ki-authoring`; coverage selects it alongside artifact skills such as `ki-mcp` when a repository uses this toolchain. The shared mode and rubric rules are owned separately by `ki-skills`.
 
-### `ki-feature-definitions`
+### `ki-specs`
 
-Governs **Feature Definitions** — the behaviour-level "what" of a system, the third leg of the `docs/` triad (decisions = why, features = what, guides = how). Definitions live in `docs/features/`, flat one-file-per-area, with an `index.md` defining the ID scheme and an areas table. Each requirement is a `### <PREFIX>-NNN — title` heading carrying one RFC-2119 (`MUST` / `SHOULD` / `MAY`) statement and a `_Verify:_` test hook; IDs are append-only, and an unnumbered `## Gaps` section holds the backlog. Off-ramps the governing decisions a requirement cites to `ki-decision-records`.
+Governs **Specifications** — the behaviour-level "what" of a system, the third leg of the `docs/` triad (decisions = why, specifications = what, guides = how). Specifications live in `docs/specs/`, flat one-file-per-area, with an `index.md` defining the ID scheme and an areas table. Each requirement is a `### <PREFIX>-NNN — title` heading carrying one RFC-2119 (`MUST` / `SHOULD` / `MAY`) statement and a `_Verify:_` test hook; IDs are append-only, and an unnumbered `## Gaps` section holds the backlog. Consumer-facing requirements describe observable public behaviour; architectural requirements describe internal boundaries and their evidence. Both use the same corpus. Off-ramps the governing decisions a requirement cites to `ki-decision-records`.
 
 ### `ki-git`
 
@@ -93,7 +93,7 @@ Governs **forward work in non-KB repositories** through flat canonical work item
 
 ### `ki-specifications`
 
-Audits, conforms, and scaffolds the deliberately minimal **KI Specifications** repository shape: a keyless `["knowledgeislands/ki-agentic-harness:ki-specifications"]` marker and the established `proposals/`, `specifications/`, `schemas/`, `templates/`, `examples/`, `docs/`, and `tooling/` areas. It remains a thin structural delta over `ki-repo`; deeper KIP/KIS rules remain in the canonical Specifications repository until they are stable enough to factor into reusable governance.
+Audits, conforms, and scaffolds the deliberately minimal **KI Specifications** repository shape: a keyless `[skills.ki-specifications]` marker and the established `proposals/`, `specifications/`, `schemas/`, `templates/`, `examples/`, `docs/`, and `tooling/` areas. It remains a thin structural delta over `ki-repo`; deeper KIP/KIS rules remain in the canonical Specifications repository until they are stable enough to factor into reusable governance.
 
 ## Keystone
 
