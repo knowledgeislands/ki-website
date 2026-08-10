@@ -22,6 +22,9 @@ license = "MIT"
 
 [skills.ki-trades]
 
+[skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal"]
+import = ["work", "knowledge"]
+
 [skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
 import = ["work", "knowledge"]
 
