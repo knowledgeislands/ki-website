@@ -7,9 +7,9 @@ horizon: future
 status: draft
 candidate: true
 blocks: []
-blocked-by: []
-baseline-ref: null
-transferred-from: KI-HARNESS-GOV-006
+blocked_by: []
+baseline_ref: null
+transferred_from: KI-HARNESS-GOV-006
 ---
 
 ## Goal
