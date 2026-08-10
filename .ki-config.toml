@@ -28,15 +28,6 @@ import = ["knowledge"]
 [skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
 import = ["knowledge"]
 
-[skills.ki-trades.routes."knowledgeislands/tools-ki"]
-import = ["knowledge"]
-
-[skills.ki-trades.routes."knowledgeislands/tools-mgit"]
-import = ["knowledge"]
-
-[skills.ki-trades.routes."krisb/dotfiles"]
-import = ["knowledge"]
-
 [skills.ki-decision-records]
 
 [skills.ki-change-management]
