@@ -20,6 +20,8 @@ license = "MIT"
 
 [skills.ki-repo-website]
 
+[skills.ki-repo-website-content]
+
 [skills.ki-trades]
 
 [skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal"]

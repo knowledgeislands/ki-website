@@ -181,10 +181,18 @@ Audits, conforms, and scaffolds a **standalone command-line tool** repo (`tools-
 
 ### `ki-repo-website`
 
-Audits, conforms, and scaffolds static websites against the house build standard — **Eleventy 3 + Nunjucks + Markdown, TypeScript run natively on Bun, Tailwind 4 config-less with design tokens** — that compile to a portable `dist/`. Owns the **site-build delta**; coverage separately selects `ki-engineering` for the toolchain and `ki-authoring` for Markdown, while `ki-repo-website-cloudflare` depends on this skill and consumes the built `dist/`.
+Governs the generator-neutral website seam: one site source root, a reproducible `dist/` output, and the `ki:site:build`, `ki:site:dev`, and `ki:site:clean` lifecycle. Every website selects exactly one purpose-specific implementation below. Hosting is orthogonal.
+
+### `ki-repo-website-content`
+
+Governs content-led sites where Eleventy 3 generates a page collection from Markdown and structured data, with Nunjucks, Tailwind 4 semantic tokens, and portable `dist/` output. A single interactive SPA is a legitimate non-adoption because combining Eleventy with React/Vite would introduce two build systems.
+
+### `ki-repo-website-app`
+
+Governs one interactive client-side React application bundled by Vite to `dist/`. Use it for dashboards and SPAs whose primary artifact is an application rather than a Markdown/data page collection; never select it together with `ki-repo-website-content`.
 
 ### `ki-repo-website-cloudflare`
 
-Audits, conforms, and scaffolds the house convention for serving a built site on **Cloudflare Workers + Static Assets** (not Pages): one `wrangler.jsonc` pointing `assets.directory` at the site's `dist/`, custom-domain routes, observability, and the `ki:site:deploy` script family. Owns the **hosting delta** for the site Worker; the `dist/` is the seam from `ki-repo-website`. Companion Workers (bots, ingress) route to the generic `cloudflare` / `wrangler` skills.
+Governs Cloudflare hosting for either website implementation using **Workers Static Assets**, never Pages as the deployment target. It rejects the legacy `pages_build_output_dir` marker and any `main` server entry, matches `assets.directory` to `dist/`, and covers Workers Builds, workers.dev, custom domains, and deploy scripts.
 
 Where the set is going next is in the roadmap.

@@ -1,5 +1,5 @@
 {
-  // ki-website — Cloudflare Workers deployment (Workers + Static Assets, not Pages).
+  // ki-website — Cloudflare Workers Static Assets deployment, not Pages.
   "name": "ki-website",
   "compatibility_date": "2026-06-19",
   // Eleventy builds to dist/ inside this workspace; the Worker serves it directly.
