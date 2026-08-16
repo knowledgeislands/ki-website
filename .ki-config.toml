@@ -38,13 +38,13 @@ import = ["knowledge"]
 
 [skills.ki-decision-records]
 
-[skills.ki-change-management]
+[skills.ki-work]
 adapter = "roadmap"
 
-[skills.ki-change-management-roadmap]
+[skills.ki-work-roadmap]
 themes = ["site-experience"]
 
-[skills.ki-change-management-roadmap.areas]
+[skills.ki-work-roadmap.areas]
 SITE = "site-experience"
 
 [skills.ki-repo-website-cloudflare]

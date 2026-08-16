@@ -13,7 +13,7 @@ Every skill in the harness, grouped by [source domain](/guidance/skills/#the-ski
 
 ### `ki-repo-harness`
 
-Audits, conforms, and scaffolds a **harness repository** — the container that bundles the other parts: the five-part `skills/` / `subagents/` / `mcp/` / `evals/` / `hooks/` layout, the root `CLAUDE.md` / `ROADMAP.md` / `package.json` script families / `.ki-config.toml` table, and the delivery conventions that make its components available. Governs the **container, not the contents**: it depends on `ki-skills`, `ki-subagents`, and `ki-decision-records`; `ki-change-management` selects its work-tracking adapter, while coverage separately selects `ki-repo-mcp`, `ki-engineering`, and `ki-repo` when their concerns apply. Empty shelves are valid — a shelf is not a gap.
+Audits, conforms, and scaffolds a **harness repository** — the container that bundles the other parts: the five-part `skills/` / `subagents/` / `mcp/` / `evals/` / `hooks/` layout, the root `CLAUDE.md` / `ROADMAP.md` / `package.json` script families / `.ki-config.toml` table, and the delivery conventions that make its components available. Governs the **container, not the contents**: it depends on `ki-skills`, `ki-subagents`, and `ki-decision-records`; `ki-work` selects its work-tracking adapter, while coverage separately selects `ki-repo-mcp`, `ki-engineering`, and `ki-repo` when their concerns apply. Empty shelves are valid — a shelf is not a gap.
 
 ### `ki-repo-mcp`
 
@@ -29,13 +29,13 @@ Audits, writes, and conforms **Claude Code subagent definitions** against a chec
 
 ## Change management
 
-### `ki-change-management`
+### `ki-work`
 
-Selects the repository's work-tracking adapter. Project repositories normally select `ki-change-management-roadmap`; Knowledge Bases select `ki-repo-kb-streams`; GitHub Issues and Linear are explicit alternatives. It does not decide the repository's structure or document placement.
+Selects the repository's work-tracking adapter. Project repositories normally select `ki-work-roadmap`; Knowledge Bases select `ki-repo-kb-streams`; GitHub Issues and Linear are explicit alternatives. It does not decide the repository's structure or document placement.
 
-### `ki-change-management-housekeeping`
+### `ki-work-housekeeping`
 
-Governs change-management housekeeping across the configured forward-work adapter.
+Governs work housekeeping across the configured forward-work adapter.
 
 ## Environment
 
@@ -97,7 +97,7 @@ Governs **Specifications** — the behaviour-level "what" of a system, the third
 
 Governs portable Knowledge Islands Git working and commit conventions: the Conventional Commit vocabulary, direct-main versus branch choice, safe Git hygiene, and the stale-lock guard's semantics. Its initial native rubric is deliberately judgment-only; repository GitHub settings stay with `ki-repo`, hook payload layout with `ki-harness`, and runtime-specific hook registration with `ki-dotfiles-chezmoi`.
 
-### `ki-change-management-roadmap`
+### `ki-work-roadmap`
 
 Governs **forward work in Project repositories** through flat canonical work items directly under `docs/roadmap/` and a concise root `ROADMAP.md` orientation. Each item has a stable `<REPO>-<THEME>-<NNN>` identifier, explicit theme grouping, horizon, lifecycle state, and dependencies. A concise item is enriched in place with execution detail when work is planned; it never gains a duplicate plan file. The CLI reports the canonical items; the root file deliberately does not repeat their queue. It owns readiness rules for authored horizon transitions; `ki-next` applies those rules to select and promote work, while `ki-plan` drives individual work-item lifecycles. Knowledge Bases select `ki-repo-kb-streams` instead; repository-roadmap artefacts do not apply there.
 
@@ -135,7 +135,7 @@ Governs **Live Artifacts** — operational documents that track island state (da
 
 ### `ki-repo-kb-streams`
 
-Owns the **`Streams` zone** — the base's working copy ("plan mode") — and the **Enactment Process** that governs it: the lifecycle modes **PROPOSE / ITERATE / READY / ROLLOUT / REVIEW / SETTLE / REJECT**, plus **AUDIT / CONFORM** of a base's Streams structure (Focus lifecycle, the `Proposal` suffix, leaf/parent layout, proposal frontmatter). `ki-repo-kb` delegates the zone here, while `ki-change-management` selects it as the Knowledge Base forward-work adapter.
+Owns the **`Streams` zone** — the base's working copy ("plan mode") — and the **Enactment Process** that governs it: the lifecycle modes **PROPOSE / ITERATE / READY / ROLLOUT / REVIEW / SETTLE / REJECT**, plus **AUDIT / CONFORM** of a base's Streams structure (Focus lifecycle, the `Proposal` suffix, leaf/parent layout, proposal frontmatter). `ki-repo-kb` delegates the zone here, while `ki-work` selects it as the Knowledge Base forward-work adapter.
 
 ## Process
 

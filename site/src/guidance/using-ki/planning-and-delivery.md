@@ -9,7 +9,7 @@ permalink: /guidance/using-ki/planning-and-delivery/
 
 The reusable pattern is a "deep audit to implementation-ready roadmap" request. It does not depend on legal work, Knowledge Islands, Streams, or even a software repository.
 
-This is a reusable request template, not a competing planning standard. `ki-change-management` selects the configured work-tracking adapter; `ki-change-management-roadmap` owns repository-roadmap and work-item structure when Roadmap is selected. `ki-plan` owns planning through `Ready`; `ki-implement` owns delivery through `Acceptance`; `ki-accept` owns closure and confirmed pruning; and `ki-delegation` owns delegation-ready execution.
+This is a reusable request template, not a competing planning standard. `ki-work` selects the configured work-tracking adapter; `ki-work-roadmap` owns repository-roadmap and work-item structure when Roadmap is selected. `ki-plan` owns planning through `Ready`; `ki-implement` owns delivery through `Acceptance`; `ki-accept` owns closure and confirmed pruning; and `ki-delegation` owns delegation-ready execution.
 
 ## Live work lifecycle
 
@@ -26,7 +26,7 @@ Acceptance cycle
 ki-accept → Done → confirmed prune when requested
 ```
 
-The arrows show responsibility passing between processes. With the Roadmap adapter selected, `ki-change-management-roadmap` is the governance foundation for horizons, work-item shape, links, and transition rules; it is not an execution stage. With the Streams adapter selected for a Knowledge Base, `ki-repo-kb-streams` supplies the equivalent lifecycle.
+The arrows show responsibility passing between processes. With the Roadmap adapter selected, `ki-work-roadmap` is the governance foundation for horizons, work-item shape, links, and transition rules; it is not an execution stage. With the Streams adapter selected for a Knowledge Base, `ki-repo-kb-streams` supplies the equivalent lifecycle.
 
 `ki-plan` stops at `Ready`. `ki-implement` requires an approved ready item, records its immutable baseline, executes only its bounded plan, assembles verification evidence, moves it to `Acceptance`, and stops. `ki-accept` requires human approval by default before moving it to `Done`; pruning is a separate exact confirmation.
 
