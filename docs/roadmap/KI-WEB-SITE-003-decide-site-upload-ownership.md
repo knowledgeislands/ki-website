@@ -4,7 +4,7 @@ title: Decide site upload ownership
 area: SITE
 theme: site-experience
 horizon: next
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 7be731fc987d87aea3e245b6ef163abaf07bf7b9
@@ -113,6 +113,10 @@ The retained command has a credible platform purpose and an explicit non-read-on
 ### Mini recap
 
 `KI-WEB-SITE-003` is ready to close under `KI-WEB-BATCH-001`: retain the exact upload command, never run it during safe verification, and return its proposed ownership contract to the Harness. Closure recheck must confirm the review packet, local audits, and absence of any Wrangler upload, deployment, push, or release.
+
+## Done
+
+Accepted at `2026-08-29T23:01:30Z` under the exact closure grant in `KI-WEB-BATCH-001`. The canonical review packet, roadmap and authoring audits, unchanged manifest assertion, and absence of any Wrangler upload, deployment, push, or release were rechecked immediately before closure.
 
 ## Discussion
 
