@@ -46,3 +46,15 @@ The admitted record must independently reach `awaiting-review`, pass its review-
 ## Run ledger
 
 <!-- ki-batch-run: KI-WEB-BATCH-001-RUN-001 2bd0fa8ec353c7c81319169188d07f16a72bb728ee889724b08dc9ebe1615f62 -->
+
+### `KI-WEB-SITE-003`
+
+- **Admitted state and baseline:** `ready`; Website baseline `7be731fc987d87aea3e245b6ef163abaf07bf7b9`.
+- **Result:** `done`; started by `8f33958`, delivered for review by `af89984`, and accepted by `6f7f074`.
+- **Delivery evidence:** Introducing commit `64744124e036ebf90ebd78e387afbd994a1452f3`, current CI and documentation search, and official Cloudflare Versions and Deployments documentation establish a credible Workers Builds preview-upload purpose. The record returns the exact command and remote-effect safety boundary to `KI-HARNESS-GOV-007`.
+- **Verification:** `bun run ki:site:build` and the `ki-engineering`, `ki-repo-website-cloudflare`, `ki-work-roadmap`, and `ki-authoring` audits passed. A manifest-only assertion checked the exact command without executing Wrangler. This repository has no `test` script.
+- **Decision and stops:** Retained `ki:site:upload` as Website's intentional external-build hook and proposed Harness ownership. No Wrangler command, Cloudflare state change, public-contract edit, package change, push, release, or prune occurred. No delegation was used.
+
+## Batch recap
+
+The single admitted record reached `done` under the exact consolidated-acceptance grant. Website keeps the preview-upload command with a documented credentialed remote-mutation boundary; the Harness owns the separate contract decision. The run made no destructive or irreversible change, external coordination, deployment, push, release, or prune.
