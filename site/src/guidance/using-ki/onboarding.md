@@ -21,7 +21,7 @@ Each user has a KI XDG configuration and an installed compatible-harness set. `k
 
 ## Repository declaration and activation
 
-A KI repository carries a regular `.ki-config.toml` at its Git worktree root. Each `[ki-<skill>]` table declares one governance capability.
+A KI repository carries a regular `.ki.toml` at its Git worktree root. Each `[ki-<skill>]` table declares one governance capability.
 
 Activate a repository skill with:
 
@@ -45,7 +45,7 @@ ki repo audit --repo <repository>
 ki repo conform --repo <repository> --dry-run
 ```
 
-They physically resolve the selected repository, read `.ki-config.toml`, validate declared dependencies, and load registered compatible operations from verified installed harnesses.
+They physically resolve the selected repository, read `.ki.toml`, validate declared dependencies, and load registered compatible operations from verified installed harnesses.
 
 AUDIT is read-only. CONFORM applies only registered safe mechanical changes; `--dry-run` validates and reports without publishing. EDUCATE renders the declared rubric guidance.
 
@@ -75,6 +75,6 @@ If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or 
 
 ## Scope and recovery
 
-User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki-config.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
+User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
 
 Use `ki doctor` for environment health, `ki diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki help <command>` for exact grammar.

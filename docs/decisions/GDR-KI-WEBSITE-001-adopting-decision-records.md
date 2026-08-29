@@ -23,5 +23,5 @@ A DR is a living present-state record. When a decision changes, its record is up
 
 - Significant decisions remain searchable, reviewable, and available to humans and agents across context resets.
 - Routine implementation details remain in commits and ordinary documentation; not every change warrants a DR.
-- A repository adopting Decision Records declares `[ki-decision-records]` in `.ki-config.toml` and carries GDR001 as its first governance decision.
+- A repository adopting Decision Records declares `[ki-decision-records]` in `.ki.toml` and carries GDR001 as its first governance decision.
 - The four primary ecosystem repositories keep GDR001 consistent in substance while using their own repository scope in the record identifier.

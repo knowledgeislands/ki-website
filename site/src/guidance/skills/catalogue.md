@@ -13,7 +13,7 @@ Every skill in the harness, grouped by [source domain](/guidance/skills/#the-ski
 
 ### `ki-repo-harness`
 
-Audits, conforms, and scaffolds a **harness repository** — the container that bundles the other parts: the five-part `skills/` / `subagents/` / `mcp/` / `evals/` / `hooks/` layout, the root `CLAUDE.md` / `ROADMAP.md` / `package.json` script families / `.ki-config.toml` table, and the delivery conventions that make its components available. Governs the **container, not the contents**: it depends on `ki-skills`, `ki-subagents`, and `ki-decision-records`; `ki-work` selects its work-tracking adapter, while coverage separately selects `ki-repo-mcp`, `ki-engineering`, and `ki-repo` when their concerns apply. Empty shelves are valid — a shelf is not a gap.
+Audits, conforms, and scaffolds a **harness repository** — the container that bundles the other parts: the five-part `skills/` / `subagents/` / `mcp/` / `evals/` / `hooks/` layout, the root `CLAUDE.md` / `ROADMAP.md` / `package.json` script families / `.ki.toml` table, and the delivery conventions that make its components available. Governs the **container, not the contents**: it depends on `ki-skills`, `ki-subagents`, and `ki-decision-records`; `ki-work` selects its work-tracking adapter, while coverage separately selects `ki-repo-mcp`, `ki-engineering`, and `ki-repo` when their concerns apply. Empty shelves are valid — a shelf is not a gap.
 
 ### `ki-repo-mcp`
 
@@ -113,7 +113,7 @@ Explains first-time Knowledge Islands activation through the `ki` CLI: bootstrap
 
 ### `ki-repo`
 
-Audits, conforms, and onboards any **Knowledge Islands–compliant** git repo (one carrying a `.ki-config.toml`) against the repo standard — local files, GitHub settings, and security. Owns the cross-cutting **`.ki-config.toml` contract** and discovers repos from a local tree or a whole org. Its human-led `REVIEW` mode examines repository architecture and implementation, interviews material uncertainty, and routes evidence-backed findings without turning them into compliance rules or automatic verdicts.
+Audits, conforms, and onboards any **Knowledge Islands–compliant** git repo (one carrying a `.ki.toml`) against the repo standard — local files, GitHub settings, and security. Owns the cross-cutting **`.ki.toml` contract** and discovers repos from a local tree or a whole org. Its human-led `REVIEW` mode examines repository architecture and implementation, interviews material uncertainty, and routes evidence-backed findings without turning them into compliance rules or automatic verdicts.
 
 ### `ki-skills`
 
@@ -149,7 +149,7 @@ Coordinates an explicitly authorised set of independent repository work-item cyc
 
 ### `ki-delegation`
 
-Prepares and runs **delegation-ready, round-sequenced execution** across sub-agents. The planner banks the reasoning once in cold-agent-ready worker briefs: locked-versus-escalate decisions, a pass/fail definition of done, bounded scope, an explicit minimum-viable per-spawn model, a verification gate, and a completion checkpoint. It then **classifies** each task as judgment / mechanical / research, **assigns** it to an agent and model, **sequences** dependency-ordered rounds, and **gates** every result through orchestrator review, with an adversarial pass for auto-executing output. It draws model cost/selection policy from `ki-tokenomics` without restating it. The method is runtime-neutral, with Claude Code mechanics tagged `CC`. Installable globally alongside `ki-bootstrap` and never declared via a `.ki-config.toml` table. It owns execution delegation, not cross-repository transfer.
+Prepares and runs **delegation-ready, round-sequenced execution** across sub-agents. The planner banks the reasoning once in cold-agent-ready worker briefs: locked-versus-escalate decisions, a pass/fail definition of done, bounded scope, an explicit minimum-viable per-spawn model, a verification gate, and a completion checkpoint. It then **classifies** each task as judgment / mechanical / research, **assigns** it to an agent and model, **sequences** dependency-ordered rounds, and **gates** every result through orchestrator review, with an adversarial pass for auto-executing output. It draws model cost/selection policy from `ki-tokenomics` without restating it. The method is runtime-neutral, with Claude Code mechanics tagged `CC`. Installable globally alongside `ki-bootstrap` and never declared via a `.ki.toml` table. It owns execution delegation, not cross-repository transfer.
 
 ### `ki-implement`
 
@@ -157,7 +157,7 @@ Implements one explicitly approved `Ready` repository work item through prefligh
 
 ### `ki-next`
 
-Selects the next work, or a small compatible set, in the repository's local forward-work structure. In a non-KB repository it grounds the generated roadmap index and canonical work-item dependency graph, evaluates Blocking and Next first, then uses separately confirmed horizon transitions. In a Knowledge Base it grounds Streams, evaluates Blocking and Active first, then uses the equivalent Focus transitions and existing proposal Checklists. A set contains only independently ready work and preserves each item's execution or proposal boundary. It applies the readiness rules owned by `ki-roadmap` or `ki-kb-streams`, and stops for work-item or proposal review rather than implementation. A recent `ki-recap` can provide current-session context but is never required; `ki-next` does not mine historical transcripts. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki-config.toml` table.
+Selects the next work, or a small compatible set, in the repository's local forward-work structure. In a non-KB repository it grounds the generated roadmap index and canonical work-item dependency graph, evaluates Blocking and Next first, then uses separately confirmed horizon transitions. In a Knowledge Base it grounds Streams, evaluates Blocking and Active first, then uses the equivalent Focus transitions and existing proposal Checklists. A set contains only independently ready work and preserves each item's execution or proposal boundary. It applies the readiness rules owned by `ki-roadmap` or `ki-kb-streams`, and stops for work-item or proposal review rather than implementation. A recent `ki-recap` can provide current-session context but is never required; `ki-next` does not mine historical transcripts. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki.toml` table.
 
 ### `ki-plan`
 
@@ -165,7 +165,7 @@ Creates and shapes governed work items in a non-KB repository through `new`, `sh
 
 ### `ki-recap`
 
-Drives a live-session recap: **summarise** what happened (changes, decisions, files touched), **surface what is outstanding** (unfinished threads, deferred fixes — a ROADMAP item added this session is "what happened", not outstanding), and **harvest the learnings**, routing each to its proper home (a `CLAUDE.md` learned-pattern entry via `headroom learn`, a skill fix or rubric criterion, a new agent, a hook, memory, or a `ki-plan`/ROADMAP item), confirming before writing anywhere durable. When a grounded action needs a portfolio decision, it may offer `ki-next` as an optional current-session handoff; that never writes or invokes `ki-next` automatically. An optional **compress** leg writes a carry-forward digest — true in-context compression is the native / PreCompact-hook path, not something a skill can do. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki-config.toml` table.
+Drives a live-session recap: **summarise** what happened (changes, decisions, files touched), **surface what is outstanding** (unfinished threads, deferred fixes — a ROADMAP item added this session is "what happened", not outstanding), and **harvest the learnings**, routing each to its proper home (a `CLAUDE.md` learned-pattern entry via `headroom learn`, a skill fix or rubric criterion, a new agent, a hook, memory, or a `ki-plan`/ROADMAP item), confirming before writing anywhere durable. When a grounded action needs a portfolio decision, it may offer `ki-next` as an optional current-session handoff; that never writes or invokes `ki-next` automatically. An optional **compress** leg writes a carry-forward digest — true in-context compression is the native / PreCompact-hook path, not something a skill can do. Installable globally, cross-repo, alongside `ki-bootstrap` — and like `ki-bootstrap`, never declared via a `.ki.toml` table.
 
 ## Tooling
 

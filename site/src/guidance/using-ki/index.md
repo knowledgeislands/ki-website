@@ -42,11 +42,11 @@ The five are meant to be co-installed and versioned together: the skills carry t
 
 The skills are designed to build on each other rather than repeat each other. Where two standards overlap, the more specific skill calls the more general one's checker and adds only its own extra rules on top — so a rule is written down once and reused, never copied and left to drift out of sync. Two general **foundation skills** sit underneath the rest this way: one for how we write (Markdown, config), one for how we build (the toolchain). Every more specialised skill leans on those two instead of restating them.
 
-When a repository genuinely needs something different from the shared standard, it records the variation in its `.ki-config.toml` or portable `AGENTS.md`; a runtime file such as `CLAUDE.md` is only for detail that genuinely belongs to that runtime. It never copies a skill and edits the copy. That keeps one authoritative version of each standard, with per-repository differences recorded as data rather than as diverging forks.
+When a repository genuinely needs something different from the shared standard, it records the variation in its `.ki.toml` or portable `AGENTS.md`; a runtime file such as `CLAUDE.md` is only for detail that genuinely belongs to that runtime. It never copies a skill and edits the copy. That keeps one authoritative version of each standard, with per-repository differences recorded as data rather than as diverging forks.
 
 ## Repository and user environment
 
-The approved model has two deliberately separate scopes. **Harness installation** gives a person verified compatible harnesses under the standard XDG locations. **Skill activation** then makes one installed skill discoverable in a selected user runtime or for one repository, and repository activation updates that repository's `.ki-config.toml`. Native repository operations read those declarations but do not own the user's wider runtime state. Keeping the scopes separate makes it clear what a command will change.
+The approved model has two deliberately separate scopes. **Harness installation** gives a person verified compatible harnesses under the standard XDG locations. **Skill activation** then makes one installed skill discoverable in a selected user runtime or for one repository, and repository activation updates that repository's `.ki.toml`. Native repository operations read those declarations but do not own the user's wider runtime state. Keeping the scopes separate makes it clear what a command will change.
 
 The command group is deliberately small:
 

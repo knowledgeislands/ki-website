@@ -64,11 +64,11 @@ Use repository scope when a skill governs one existing KI repository:
 ki skill repo add <harness-id>:<skill-name> --repo <repository>
 ```
 
-The repository command updates that repository's `.ki-config.toml` and creates only the managed runtime-discovery links for the selected skill. A bare skill name is accepted when exactly one installed harness provides it.
+The repository command updates that repository's `.ki.toml` and creates only the managed runtime-discovery links for the selected skill. A bare skill name is accepted when exactly one installed harness provides it.
 
 ## 5. Govern a repository
 
-A repository declares its coverage in `.ki-config.toml`. Run:
+A repository declares its coverage in `.ki.toml`. Run:
 
 ```bash
 ki repo educate --repo <repository>

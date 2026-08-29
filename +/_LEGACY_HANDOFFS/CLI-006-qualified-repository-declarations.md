@@ -10,7 +10,7 @@
 
 ## Requested outcome
 
-Adopt and schedule migration of this repository's `.ki-config.toml` declarations to quoted `<harness-id>:<skill-name>` roots. Preserve every existing configuration value and migrate nested tables under their qualified parent, including the tokenomics budget table.
+Adopt and schedule migration of this repository's `.ki.toml` declarations to quoted `<harness-id>:<skill-name>` roots. Preserve every existing configuration value and migrate nested tables under their qualified parent, including the tokenomics budget table.
 
 ## Constraints
 

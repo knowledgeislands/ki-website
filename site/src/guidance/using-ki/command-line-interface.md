@@ -28,7 +28,7 @@ Installing another harness makes its registered capabilities available for expli
 Skill activation always has an explicit scope:
 
 - **User scope** makes a skill discoverable across configured user agent runtimes.
-- **Repository scope** declares a skill in one repository's `.ki-config.toml` and creates only the managed runtime-discovery links required there.
+- **Repository scope** declares a skill in one repository's `.ki.toml` and creates only the managed runtime-discovery links required there.
 
 A fully qualified capability name identifies both the provider and skill:
 
