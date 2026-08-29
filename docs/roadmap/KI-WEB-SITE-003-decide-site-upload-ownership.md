@@ -4,10 +4,10 @@ title: Decide site upload ownership
 area: SITE
 theme: site-experience
 horizon: next
-status: ready
+status: in-progress
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: 7be731fc987d87aea3e245b6ef163abaf07bf7b9
 ---
 
 ## Goal
