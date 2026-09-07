@@ -109,7 +109,7 @@ Audits, conforms, and scaffolds the deliberately minimal **KI Specifications** r
 
 ### `ki-bootstrap`
 
-Explains first-time Knowledge Islands activation through the `ki` CLI: bootstrap a user, select a verified compatible harness, distinguish user skills from repository declarations, and route exact command behaviour to `ki help`. It is guidance-only; the CLI owns installation, activation, and repository-operation mechanics. The user-facing starting point is [Install and get started](/guidance/using-ki/getting-started/); local harness selection is contributor-only machinery.
+Explains first-time Knowledge Islands activation through the `ki` CLI: bootstrap a user, select a verified compatible harness, distinguish user skills from repository declarations, and route exact command behaviour to `ki --help`. It is guidance-only; the CLI owns installation, activation, and repository-operation mechanics. The user-facing starting point is [Install and get started](/guidance/using-ki/getting-started/); local harness selection is contributor-only machinery.
 
 ### `ki-repo`
 

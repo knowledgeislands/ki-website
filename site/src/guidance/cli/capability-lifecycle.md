@@ -11,7 +11,7 @@ permalink: /guidance/cli/capability-lifecycle/
 
 They do not activate or deactivate skills for a user or repository.
 
-Use `ki help harness` and `ki help skill` for exact grammar supported by the installed version.
+Use `ki harness --help` and `ki skill --help` for exact grammar supported by the installed version.
 
 ## Harness identifiers
 

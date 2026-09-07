@@ -21,7 +21,7 @@ Confirm the executable and its paths:
 
 ```bash
 ki --version
-ki diag
+ki manage diag
 ```
 
 The [optional tools](/guidance/using-ki/recommended-tools/) guide covers machine-level additions such as chezmoi, headroom-ai, and mcporter.
@@ -36,7 +36,7 @@ ki bootstrap
 
 `ki bootstrap` detects supported local agent runtimes, creates the KI XDG configuration, installs the verified canonical `knowledgeislands/ki-agentic-harness`, and activates the core user skills.
 
-Use `ki bootstrap --refresh` later to redetect agents and reconcile the recorded installed inventory. `ki doctor` reports the current environment and gives recovery guidance.
+Use `ki bootstrap --refresh` later to redetect agents and reconcile the recorded installed inventory. `ki manage doctor` reports the current environment and gives recovery guidance.
 
 ## 3. Install another harness when needed
 
@@ -55,13 +55,13 @@ Installing a harness makes its registered capabilities available for explicit ac
 Use user scope when a skill should be available across configured agent runtimes:
 
 ```bash
-ki skill user add <harness-id>:<skill-name>
+ki skill add <harness-id>:<skill-name>
 ```
 
 Use repository scope when a skill governs one existing KI repository:
 
 ```bash
-ki skill repo add <harness-id>:<skill-name> --repo <repository>
+ki repo skill add <harness-id>:<skill-name> --repo <repository>
 ```
 
 The repository command updates that repository's `.ki.toml` and creates only the managed runtime-discovery links for the selected skill. A bare skill name is accepted when exactly one installed harness provides it.

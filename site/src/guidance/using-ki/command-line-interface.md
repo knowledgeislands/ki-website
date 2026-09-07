@@ -9,13 +9,13 @@ permalink: /guidance/using-ki/command-line-interface/
 
 `ki` is the end-user Knowledge Islands command-line interface. It installs compatible harnesses, activates their capabilities in explicit scopes, and hosts native repository operations.
 
-This page explains the command groups and their ownership boundaries. The installed command's `ki help` output and the [KI CLI page](/tooling/cli/) are the authority for exact, version-specific grammar.
+This page explains the command groups and their ownership boundaries. The installed command's `ki --help` output and the [KI CLI page](/tooling/cli/) are the authority for exact, version-specific grammar.
 
 ## Bootstrap and diagnostics
 
 `ki bootstrap` establishes the user environment: it detects supported local agent runtimes, creates the KI configuration when needed, installs the verified canonical harness, and activates the core user skills. It does not declare governance for a repository.
 
-Use `ki bootstrap --refresh` to reconcile detected runtimes and recorded installed state. Use `ki diag` to inspect installation mode and paths, and `ki doctor` to check configuration, agents, harnesses, and user skills.
+Use `ki bootstrap --refresh` to reconcile detected runtimes and recorded installed state. Use `ki manage diag` to inspect installation mode and paths, and `ki manage doctor` to check configuration, agents, harnesses, and user skills.
 
 ## Harness installation
 
@@ -56,9 +56,9 @@ The host resolves operations only from verified installed harnesses. It does not
 
 ## Rubric publication and harness development
 
-Harness maintainers can verify or refresh a skill's generated rubric publication through the `ki skill rubric` command group.
+Harness maintainers can verify or refresh a skill's generated rubric publication through `ki dev skill rubric <skill>`.
 
-Local harness development is explicit. `ki dev on <path>` selects a validated checkout; `ki dev off` restores the verified canonical archive. A nearby checkout is never used implicitly.
+Local harness development is explicit. `ki dev local set <harness-id> <local-harness-path>` records a validated checkout, `ki dev local on [harness-id]` selects it, and `ki dev local off [harness-id]` restores the verified archive. A nearby checkout is never used implicitly.
 
 ## Installation and user-owned locations
 
@@ -77,8 +77,8 @@ Commands refuse unknown options, ambiguous capabilities, unsafe paths, and unfam
 Use:
 
 ```bash
-ki help
-ki help <command>
+ki --help
+ki <command> --help
 ```
 
 for the delivered grammar and [Install and get started](/guidance/using-ki/getting-started/) for the end-to-end setup path.

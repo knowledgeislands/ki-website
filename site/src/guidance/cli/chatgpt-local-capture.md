@@ -11,7 +11,7 @@ permalink: /guidance/cli/chatgpt-local-capture/
 
 The capture is an input adapter, not a KEP. The importer validates it before creating the selected KEP output directory.
 
-Use `ki help acquire chatgpt import` for the exact command grammar supported by the installed version.
+Use `ki acquire chatgpt import --help` for the exact command grammar supported by the installed version.
 
 ## Layout
 

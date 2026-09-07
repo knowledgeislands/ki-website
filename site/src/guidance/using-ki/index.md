@@ -52,8 +52,8 @@ The command group is deliberately small:
 
 ```text
 ki harness install <harness-id>
-ki skill user add <harness-id>:<skill-name>
-ki skill repo add <harness-id>:<skill-name>
+ki skill add <harness-id>:<skill-name>
+ki repo skill add <harness-id>:<skill-name>
 ki repo educate
 ki repo audit
 ki repo conform

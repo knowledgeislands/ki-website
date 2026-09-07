@@ -1,33 +1,33 @@
 ---
 layout: layouts/base.njk
 title: Local utility commands
-description: Search installed capabilities, inspect eligible cleanup state, and find canonical KI documentation.
+description: Manage local KI capabilities, documentation locations, and supported machine projections.
 permalink: /guidance/cli/local-commands/
 ---
 
 # Local utility commands
 
-`ki search`, `ki cleanup`, and `ki docs` operate only on local KI state or fixed public documentation locations.
+`ki manage search`, `ki manage cleanup`, and `ki manage docs` operate only on local KI state or fixed public documentation locations.
 
 They do not discover a repository, fetch content, contact a registry, launch a browser, or activate a skill.
 
-Use `ki help search`, `ki help cleanup`, and `ki help docs` for exact grammar supported by the installed version.
+Use `ki manage search --help`, `ki manage cleanup --help`, and `ki manage docs --help` for exact grammar supported by the installed version.
 
 ## Search installed capabilities
 
-Run `ki search <query>` with one non-empty query.
+Run `ki manage search <query>` with one non-empty query.
 
 KI inspects only verified installed harnesses and matches the query case-insensitively against each harness identifier, capability kind, and capability name.
 
 It prints matching capabilities in harness identifier, capability kind, and capability name order.
 
-For example, `ki search bootstrap` can report the installed `ki-bootstrap` skill.
+For example, `ki manage search bootstrap` can report the installed `ki-bootstrap` skill.
 
 When no capability matches, the command succeeds and prints `No matching installed capabilities.`
 
 ## Report managed stale state
 
-Run `ki cleanup` to report stale state that KI has explicitly recorded in a persisted, versioned KI-owned format.
+Run `ki manage cleanup` to report stale state that KI has explicitly recorded in a persisted, versioned KI-owned format.
 
 V1 defines no such artifact format, so the command prints `No eligible managed stale state.` and does not change files.
 
@@ -35,15 +35,23 @@ It never treats cache contents, transaction-looking directories, unconfigured ha
 
 ## Print documentation locations
 
-Run `ki docs [topic]` to print canonical public URLs.
+Run `ki manage docs [topic]` to print canonical public URLs.
 
 With no topic, KI prints every location with an `Overview:`, `Site:`, `Manual:`, or `Roadmap:` prefix.
 
 The supported single-location topics are `overview`, `site`, `manual`, and `roadmap`.
 
-- `ki docs overview` prints `https://knowledgeislands.info/tooling/cli/`.
-- `ki docs site` prints `https://knowledgeislands.info/`.
-- `ki docs manual` prints `https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1`.
-- `ki docs roadmap` prints `https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md`.
+- `ki manage docs overview` prints `https://knowledgeislands.info/tooling/cli/`.
+- `ki manage docs site` prints `https://knowledgeislands.info/`.
+- `ki manage docs manual` prints `https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1`.
+- `ki manage docs roadmap` prints `https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md`.
 
-`ki docs` only prints the URL; it does not launch a browser or retrieve its content.
+`ki manage docs` only prints the URL; it does not launch a browser or retrieve its content.
+
+## Reconcile a VS Code projection
+
+When a chezmoi source owns the machine's VS Code workspace files and shared agent trusted-folder inventory, `ki manage vscode check` compares that source state with the local KI repository registry without writing.
+
+`ki manage vscode sync` previews a reconciliation. Add `--write` only after reviewing the plan, then review the resulting source changes with `chezmoi diff`. The command never runs `chezmoi apply`.
+
+`ki manage vscode source create <repository>` similarly previews an opt-in OneDrive source store; add `--write` to create and associate it after review. See the [tools-ki VS Code projection management guide](https://github.com/knowledgeislands/tools-ki/blob/main/docs/guides/vscode-management.md) for the ownership boundary and fail-closed behaviour.

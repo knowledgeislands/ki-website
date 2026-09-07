@@ -26,12 +26,12 @@ A KI repository carries a regular `.ki.toml` at its Git worktree root. Each `[ki
 Activate a repository skill with:
 
 ```bash
-ki skill repo add <skill> --repo <repository>
+ki repo skill add <skill> --repo <repository>
 ```
 
 The command resolves one installed provider, updates the repository declaration, and creates managed runtime-discovery links. It refuses ambiguous providers and unfamiliar destination state.
 
-`ki skill repo remove` reverses only the declaration and links whose ownership KI can prove. User activation is separate and uses `ki skill user add` or `ki skill user remove`.
+`ki repo skill remove` reverses only the declaration and links whose ownership KI can prove. User activation is separate and uses `ki skill add` or `ki skill remove`.
 
 `ki-repo` owns the judgment about which capabilities a repository should declare.
 
@@ -51,7 +51,7 @@ AUDIT is read-only. CONFORM applies only registered safe mechanical changes; `--
 
 Missing, incompatible, undeclared, ambiguous, or untrusted capabilities fail before an operation runs. `--skill <skill>` narrows an operation to one declared capability without changing repository coverage.
 
-The host never invokes copied rubric runners, repository-local wrappers, a nearby checkout, or an ad hoc child-process fallback. Harness contributors select a local checkout explicitly with `ki dev on <path>`.
+The host never invokes copied rubric runners, repository-local wrappers, a nearby checkout, or an ad hoc child-process fallback. Harness contributors record a checkout with `ki dev local set <harness-id> <local-harness-path>` and select it explicitly with `ki dev local on [harness-id]`.
 
 ## CI and automation
 
@@ -69,7 +69,7 @@ The harness's pre-commit hook audits a complete staged snapshot when governed sk
 
 The former models created `.ki/` or `.ki-meta/` executors and regular-file skill copies under repository runtime-discovery directories.
 
-That material is now migration evidence, not an executor or a managed runtime link. Use the maintainer [retirement guide](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/guides/developer/retiring-repository-vendored-ki.md) to map every consumer to its native replacement, prove generated ownership, and replace unchanged runtime copies through `ki skill repo`.
+That material is now migration evidence, not an executor or a managed runtime link. Use the maintainer [retirement guide](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/guides/developer/retiring-repository-vendored-ki.md) to map every consumer to its native replacement, prove generated ownership, and replace unchanged runtime copies through `ki repo skill`.
 
 If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or concurrently changed, preserve it and stop. A passing legacy runner does not prove that native governance is available.
 
@@ -77,4 +77,4 @@ If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or 
 
 User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
 
-Use `ki doctor` for environment health, `ki diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki help <command>` for exact grammar.
+Use `ki manage doctor` for environment health, `ki manage diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki <command> --help` for exact grammar.
