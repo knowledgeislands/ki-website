@@ -1,17 +1,30 @@
 ---
 id: KI-WEB-SITE-004
 area: SITE
-title: Website audit follow-up discussion
+title: Resolve website audit
 theme: site-experience
 horizon: future
 status: draft
+candidate: true
 blocks: []
 blocked_by: []
 baseline_ref: null
 ---
 
-# Website Audit Follow-up Discussion
+# Resolve Website Audit
 
-This is an audit proposal for discussion only. It is not accepted, prioritised, or implementation authority.
+## Goal
 
-Audit reported website core/content and Cloudflare coverage failures and warnings. No live Cloudflare settings were changed. Review exact gaps before authorising repair.
+Discuss whether to resolve the remaining website core, content, and Cloudflare audit findings.
+
+## Context
+
+The estate audit reported configuration, package ownership, Cloudflare guide, and roadmap metadata gaps. This candidate records those findings without treating them as accepted implementation work.
+
+## Boundary
+
+Discussion does not authorise deployment, Cloudflare dashboard changes, or other remote mutation.
+
+## Discussion
+
+Review the exact findings, decide which represent real repository gaps, and separately promote any accepted work.

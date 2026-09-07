@@ -23,6 +23,8 @@ license = "MIT"
 
 [skills.ki-repo-website]
 
+site-root = "site"
+
 [skills.ki-repo-website-content]
 
 [skills.ki-trades]
