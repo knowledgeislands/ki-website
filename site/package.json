@@ -11,12 +11,12 @@
   },
   "private": true,
   "scripts": {
-    "build": "bun ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
+    "build": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts",
     "clean": "rm -rf dist .wrangler",
     "deploy": "bunx wrangler deploy",
     "dev": "concurrently --kill-others-on-fail --names css,11ty --prefix-colors cyan,yellow \"bun run dev:css\" \"bun run dev:serve\"",
     "dev:css": "bunx tailwindcss -i src/assets/css/main.css -o ./dist/assets/css/main.css --watch",
-    "dev:serve": "bun ../node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
+    "dev:serve": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "preview": "bun run build && bunx wrangler dev",
     "upload": "bunx wrangler versions upload"
   },
