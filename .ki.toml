@@ -1,6 +1,10 @@
 # Knowledge Islands repository configuration.
 # Its presence declares conformance with the Knowledge Islands repository standard.
 
+# -----------------------------------------------------------------------------
+# Foundation
+# -----------------------------------------------------------------------------
+
 [repo]
 harnesses = ["knowledgeislands/ki-agentic-harness"]
 
@@ -13,19 +17,60 @@ supported_runtimes = ["claude-code", "claude-desktop", "chatgpt-codex"]
 visibility = "public"
 license = "MIT"
 
-[skills.ki-git]
-
 [skills.ki-authoring]
 
-[skills.ki-engineering]
+# -----------------------------------------------------------------------------
+# Repository shape
+# -----------------------------------------------------------------------------
 
 [skills.ki-repo-project]
 
 [skills.ki-repo-website]
-
 site-root = "site"
 
 [skills.ki-repo-website-content]
+
+[skills.ki-repo-website-cloudflare]
+
+# -----------------------------------------------------------------------------
+# Governance runtime
+# -----------------------------------------------------------------------------
+
+[skills.ki-engineering]
+
+[skills.ki-decision-records]
+
+# -----------------------------------------------------------------------------
+# Change management
+# -----------------------------------------------------------------------------
+
+[skills.ki-git]
+
+[skills.ki-work]
+adapter = "roadmap"
+
+[skills.ki-work-roadmap]
+themes = ["site-experience"]
+
+[skills.ki-work-roadmap.areas]
+SITE = "site-experience"
+
+[skills.ki-tokenomics]
+headroom = "recommended"
+preferred_model_type = "standard"
+
+[skills.ki-tokenomics.budgets]
+mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
+
+[skills.ki-housekeeping-claude]
+
+[skills.ki-tokenomics-claude]
+
+[skills.ki-tokenomics-codex]
+
+# -----------------------------------------------------------------------------
+# Relationships
+# -----------------------------------------------------------------------------
 
 [skills.ki-trades]
 
@@ -40,32 +85,6 @@ import = ["knowledge"]
 
 [skills.ki-trades.routes."knowledgeislands/ki-techne-principal"]
 import = ["knowledge"]
-
-[skills.ki-decision-records]
-
-[skills.ki-work]
-adapter = "roadmap"
-
-[skills.ki-work-roadmap]
-themes = ["site-experience"]
-
-[skills.ki-work-roadmap.areas]
-SITE = "site-experience"
-
-[skills.ki-repo-website-cloudflare]
-
-[skills.ki-tokenomics]
-headroom = "recommended"
-preferred_model_type = "standard"
-
-[skills.ki-tokenomics.budgets]
-mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
-
-[skills.ki-housekeeping-claude]
-
-[skills.ki-tokenomics-claude]
-
-[skills.ki-tokenomics-codex]
 
 [skills.ki-agora]
 
