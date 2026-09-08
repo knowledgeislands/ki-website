@@ -48,7 +48,7 @@
     "ki:site:build": "bun run --cwd site build",
     "ki:site:clean": "bun run --cwd site clean",
     "ki:site:deploy": "bun run --cwd site deploy",
-    "ki:site:dev": "bun run --cwd site dev",
+    "ki:site:dev": "bun run --cwd site ki:site:dev",
     "ki:site:preview": "bun run --cwd site preview",
     "ki:site:upload": "bun run --cwd site upload",
     "prepare": "husky"
