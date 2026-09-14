@@ -9,6 +9,8 @@ candidate: true
 blocks: []
 blocked_by: []
 baseline_ref: null
+created_at: 2026-07-29T11:42:36Z
+updated_at: 2026-08-10T00:14:14Z
 transferred_from: KI-HARNESS-GOV-006
 ---
 

@@ -8,6 +8,8 @@ status: done
 blocks: []
 blocked_by: []
 baseline_ref: 7be731fc987d87aea3e245b6ef163abaf07bf7b9
+created_at: 2026-08-29T07:42:52Z
+updated_at: 2026-08-29T23:01:44Z
 ---
 
 ## Goal
