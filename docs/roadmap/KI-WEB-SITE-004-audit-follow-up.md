@@ -5,7 +5,6 @@ title: Resolve website audit
 theme: site-experience
 horizon: future
 status: draft
-candidate: true
 blocks: []
 blocked_by: []
 baseline_ref: null
