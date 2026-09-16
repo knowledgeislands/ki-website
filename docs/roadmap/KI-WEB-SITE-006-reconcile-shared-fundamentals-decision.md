@@ -4,12 +4,12 @@ area: SITE
 title: Reconcile Shared Fundamentals Decision
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 6b909e38b6167603e6de0e1234c96c10b97be239
 created_at: 2026-09-16T09:08:39Z
-updated_at: 2026-09-16T21:23:28Z
+updated_at: 2026-09-16T21:36:41Z
 ---
 
 # Reconcile Shared Fundamentals Decision
@@ -100,6 +100,10 @@ The receiver copy now exactly matches the approved shared identity. The change i
 ### Mini recap
 
 KI Website's decision projection is aligned, verified, and awaiting review; no site implementation changed.
+
+## Done
+
+Accepted 2026-09-16 by Kris Brown on the review packet above.
 
 ## Discussion
 
