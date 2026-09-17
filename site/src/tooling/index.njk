@@ -16,19 +16,31 @@ layout: layouts/base.njk
 <section class="section-parchment section-pad">
   <div class="page-container" style="max-width: 64rem;">
     <div class="prose-ki" style="max-width: none; margin-bottom: 3rem;">
+      <p class="overline">Released tools</p>
+      <h2>Every tool has the same two routes.</h2>
+      <p>Each released command-line tool has a page at <code>/tooling/&lt;tool&gt;/</code> and a stable installer endpoint at <code>/install/&lt;tool&gt;</code>. Both are generated from one website-owned registry, so a tool's page, its endpoint and the version it advertises always move together. The owning repository still decides what is released.</p>
+    </div>
+
+    <div class="grid-3col" style="gap: 1.5rem; margin-bottom: 3rem;">
+{%- for tool in tools %}
+      <a href="/tooling/{{ tool.slug }}/" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
+        <div class="symbol-circle symbol-circle-{{ tool.accent }}">{{ kiIcon(tool.icon, 22) }}</div>
+        <h2 style="font-size: 1.25rem; margin-bottom: 0.625rem;"><code>{{ tool.name }}</code></h2>
+        <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ tool.tagline }}</p>
+        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ tool.version }} · {{ tool.maturity }}</p>
+      </a>
+{%- endfor %}
+    </div>
+
+    <div class="prose-ki" style="max-width: none; margin-bottom: 3rem;">
       <p class="overline">Start here</p>
       <h2>Choose the task in front of you.</h2>
       <p>Install the CLI once, bootstrap your user environment, then activate only the skills and harnesses your work needs. Each page below names its source so you can move to the owner when a command, release, or capability needs exact detail.</p>
     </div>
 
-    <div class="grid-3col" style="gap: 1.5rem;">
-      <a href="/tooling/cli/" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
-        <div class="symbol-circle symbol-circle-gold">{{ kiIcon("terminal", 22) }}</div>
-        <h2 style="font-size: 1.25rem; margin-bottom: 0.625rem;">Install and inspect <code>ki</code></h2>
-        <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">Install the verified CLI, check its version and configuration, and find the live command reference.</p>
-      </a>
+    <div class="grid-2col" style="gap: 1.5rem;">
       <a href="/tooling/harnesses/" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
-        <div class="symbol-circle symbol-circle-teal">{{ kiIcon("layers", 22) }}</div>
+        <div class="symbol-circle symbol-circle-teal">{{ kiIcon("archipelago", 22) }}</div>
         <h2 style="font-size: 1.25rem; margin-bottom: 0.625rem;">Use compatible harnesses</h2>
         <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">Understand the canonical harness, inspect compatible additions, and activate capabilities in the right scope.</p>
       </a>

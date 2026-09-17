@@ -5,7 +5,7 @@
   "ignoreExportsUsedInFile": true,
   "workspaces": {
     "site": {
-      "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!"],
+      "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!", "scripts/**/*.ts!"],
       "project": ["**/*.ts"],
       "ignore": ["src/assets/**"]
     }

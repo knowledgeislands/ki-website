@@ -34,11 +34,13 @@ eleventyExcludeFromCollections: true
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+{%- for tool in tools %}
   <url>
-    <loc>https://knowledgeislands.info/tooling/cli/</loc>
+    <loc>{{ site.url }}/tooling/{{ tool.slug }}/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+{%- endfor %}
   <url>
     <loc>https://knowledgeislands.info/tooling/harnesses/</loc>
     <changefreq>weekly</changefreq>

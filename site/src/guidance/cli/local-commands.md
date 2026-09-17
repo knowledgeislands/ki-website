@@ -41,7 +41,7 @@ With no topic, KI prints every location with an `Overview:`, `Site:`, `Manual:`,
 
 The supported single-location topics are `overview`, `site`, `manual`, and `roadmap`.
 
-- `ki manage docs overview` prints `https://knowledgeislands.info/tooling/cli/`.
+- `ki manage docs overview` prints this site's `ki` product page. `tools-ki` owns that string; releases up to and including `v0.3.6` print the retired `/tooling/cli/` address, and the canonical page is now [`/tooling/ki/`](/tooling/ki/).
 - `ki manage docs site` prints `https://knowledgeislands.info/`.
 - `ki manage docs manual` prints `https://github.com/knowledgeislands/tools-ki/blob/main/man/ki.1`.
 - `ki manage docs roadmap` prints `https://github.com/knowledgeislands/tools-ki/blob/main/ROADMAP.md`.

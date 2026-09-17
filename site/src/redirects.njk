@@ -1,0 +1,12 @@
+---
+permalink: /_redirects
+eleventyExcludeFromCollections: true
+---
+# Generated from src/_data/tools.json5 by src/redirects.njk — edit the registry, not this file.
+#
+# Machine routes: each /install/<tool> is this site's stable endpoint for a tool
+# whose installer is published at an immutable release tag in its own repository.
+{% for tool in tools %}/install/{{ tool.slug }} {{ tool.installer }} 302
+{% endfor %}
+# Repository bootstrap, owned by the KI Agentic Harness.
+/harness/bootstrap https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh 302
