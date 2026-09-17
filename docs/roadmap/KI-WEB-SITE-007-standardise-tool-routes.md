@@ -4,12 +4,12 @@ area: SITE
 title: Standardise tool routes
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: a0bb455a6a28acda03c62d47e16e7a0fa29e972d
 created_at: 2026-09-17T06:42:45Z
-updated_at: 2026-09-17T07:01:42Z
+updated_at: 2026-09-17T21:04:22Z
 ---
 
 # KI-WEB-SITE-007: Standardise tool routes
@@ -117,9 +117,11 @@ Two, both cross-repository and both outside this item's authority to resolve.
 
 `ki manage docs overview` in `tools-ki` up to `v0.3.6` prints the now-retired `https://knowledgeislands.info/tooling/cli/`. Retiring the route without an alias was the item's explicit instruction, so that printed URL is dead until `tools-ki` ships a release naming `/tooling/ki/`. `site/src/guidance/cli/local-commands.md` states this plainly rather than claiming otherwise. A handoff to `tools-ki` is needed.
 
-None of the four installers pins the version it installs. Each is served from an immutable tag, so the _script_ the endpoint serves cannot change underneath a caller, but every script resolves the repository's latest release at run time. The registry's advertised version therefore describes the installer, not necessarily what lands on disk. Closing that gap means changing installer behaviour, which the boundary assigns to each tool repository; a handoff proposing a version-pinning argument or environment variable would be the way to raise it.
+The advertised version describes the installer, not necessarily what lands on disk. Each endpoint serves a script from an immutable tag, so the _script_ cannot change underneath a caller, but every script defaults to resolving the repository's latest release at run time. All four do accept an explicit version, through three different interfaces: `ki` takes a positional `vX.Y.Z`, `git-almanac` takes either a positional argument or `GIT_ALMANAC_VERSION`, and `mgit` and `rig` take `MGIT_VERSION` and `RIG_VERSION` only. A uniform interface would let `/install/<tool>` document a genuinely pinned invocation; standardising it belongs to the tool repositories, and the website work it unblocks is tracked separately.
 
 The per-tool release handoff described in `docs/guides/tool-routes.md` is documented here but not yet filed as an item in `tools-ki`, `tools-rig`, `tools-mgit` or `tools-git-almanac`. Writing into four other repositories exceeds this record's scope and was deliberately left for an explicit decision.
+
+At review, all four entries were set to `preview`; the initial `experimental` values for `rig` and `git-almanac` understated tools their owner considers usable.
 
 ### Post-change review
 
