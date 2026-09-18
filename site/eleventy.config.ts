@@ -32,9 +32,6 @@ export default function (eleventyConfig: UserConfig) {
   // Add any static asset directories that should be copied verbatim to dist.
   eleventyConfig.addPassthroughCopy('src/assets/images')
   eleventyConfig.addPassthroughCopy('src/assets/js')
-  // Vendor Lucide UMD bundle from node_modules so we don't depend on a CDN in production.
-  eleventyConfig.addPassthroughCopy({ '../node_modules/lucide/dist/umd/lucide.min.js': 'assets/js/lucide.min.js' })
-  eleventyConfig.addPassthroughCopy({ '../node_modules/d3/dist/d3.min.js': 'assets/js/d3.min.js' })
 
   // ── Transform: inject external-link icons ────────────────────────────────
   // Adds a Lucide external-link icon to any prose <a href="https://..."> link.
@@ -75,7 +72,9 @@ export default function (eleventyConfig: UserConfig) {
   // the browser whenever Tailwind writes a new dist/assets/css/main.css.
   eleventyConfig.on('eleventy.before', ({ runMode }: { runMode: string }) => {
     if (runMode !== 'serve' && runMode !== 'watch') {
-      execSync('npx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --minify', { stdio: 'inherit' })
+      // bunx, not npx: Cloudflare Workers Builds installs with Bun, so npm cannot
+      // resolve the Tailwind executable there.
+      execSync('bunx tailwindcss -i src/assets/css/main.css -o dist/assets/css/main.css --minify', { stdio: 'inherit' })
     }
   })
   // Watch the compiled CSS so the dev server reloads the browser whenever
