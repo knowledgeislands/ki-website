@@ -4,12 +4,12 @@ area: SITE
 title: Resolve website audit
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: ca41f9a69c68da628066c7925f1f032f063287cb
 created_at: 2026-09-04T08:18:09Z
-updated_at: 2026-09-18T04:44:30Z
+updated_at: 2026-09-18T04:47:00Z
 ---
 
 # Resolve Website Audit
@@ -36,9 +36,9 @@ The repository declares eighteen skills and audits clean against all of them. Th
 
 ## Steps
 
-- [ ] Re-run the unscoped repository audit at all reporter levels and capture the finding set.
-- [ ] Record each originally reported finding against its disposition: closed here, closed by a named item, or no longer applicable.
-- [ ] Confirm no finding remains that would need promoting into separate work.
+- [x] Re-run the unscoped repository audit at all reporter levels and capture the finding set.
+- [x] Record each originally reported finding against its disposition: closed here, closed by a named item, or no longer applicable.
+- [x] Confirm no finding remains that would need promoting into separate work.
 
 ## Files touched
 
@@ -69,6 +69,43 @@ None beyond `docs/guides/README.md`, which `ec0524c` added as the collection ind
 ### Roadmap
 
 This record carries the disposition and the closing evidence.
+
+## Review
+
+### Delivered
+
+Every finding the estate audit of 2026-09-04 recorded now has an explicit disposition, and the repository audits clean against all eighteen declared skills with no finding at any reporter level.
+
+| Reported gap | Disposition |
+| --- | --- |
+| Configuration | Closed in `ec0524c`. `COV-1` wanted `[skills.ki-guides]` declared for the existing `docs/guides/**` collection; `FILES-6` wanted the managed ignore blocks reconciled. |
+| Package ownership | Closed by `KI-WEB-SITE-003` (upload ownership) and `KI-WEB-SITE-005` (the `ki:site:dev` family). Both accepted and pruned. |
+| Cloudflare guide | No longer applicable. `docs/guides/cloudflare.md` records the dashboard-owned settings, and its build and deploy command pair was confirmed correct against a live Workers Build in `01503f8`. |
+| Roadmap metadata | Closed by `KI-WEB-SITE-006`, and by the `## Done` heading repair in `6f475b0` that `ITEM-3` required of accepted records. |
+
+### Summary of changes
+
+- No repository change was needed under this item. The three findings that were still open when it was promoted had already been closed in `ec0524c`, under the repository governance work that preceded this delivery.
+- This record now carries the disposition table and the closing evidence.
+
+### Verification
+
+- `ki repo audit --repo .` reports `PASS` across 18 skills.
+- The same audit at `--reporter-levels all` emits no `FAIL` and no `WARN`.
+
+### Outstanding concerns
+
+None. Nothing in the finding set warranted promoting into separate work.
+
+One observation rather than a concern: the agent memory index that `IDX-1` wanted is outside the repository, under the local Claude project directory. It is real state that the audit reads, but it is not versioned here, so a fresh checkout on another machine will report that finding again until that machine's index exists.
+
+### Post-change review
+
+The candidate was right to record the findings without accepting them. Read four weeks later, most had already been resolved by named items, and the residue was three mechanical conformance gaps rather than the design questions the original wording implied. The cost of the delay was one audit that stayed dirty; the benefit was that no finding was promoted into an item before anyone knew whether it was real.
+
+### Mini recap
+
+The estate audit findings are fully dispositioned and the repository audits clean. No follow-on work was identified.
 
 ## Discussion
 
