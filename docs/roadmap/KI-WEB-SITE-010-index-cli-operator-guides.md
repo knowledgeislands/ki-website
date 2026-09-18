@@ -4,12 +4,12 @@ area: SITE
 title: Index CLI operator guides
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T05:45:00Z
+updated_at: 2026-09-18T06:05:00Z
 ---
 
 # Index CLI operator guides
@@ -117,6 +117,10 @@ The unresolved tension is honest rather than fixed: pinned-at-`v0.4.0` documenta
 ### Mini recap
 
 Six operator guides indexed and every touched link pinned; registry drift recorded, not resolved.
+
+## Done
+
+Accepted 2026-09-18 by Kris Brown on the review packet above.
 
 ## Discussion
 

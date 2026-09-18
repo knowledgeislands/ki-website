@@ -4,12 +4,12 @@ area: SITE
 title: Add specifications adoption page
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T05:45:00Z
+updated_at: 2026-09-18T06:05:00Z
 ---
 
 # Add specifications adoption page
@@ -101,6 +101,10 @@ The inventory classified these five documents as source-owned and that held up â
 ### Mini recap
 
 Adoption route added to `/specifications/`; nothing copied, nothing moved.
+
+## Done
+
+Accepted 2026-09-18 by Kris Brown on the review packet above.
 
 ## Discussion
 
