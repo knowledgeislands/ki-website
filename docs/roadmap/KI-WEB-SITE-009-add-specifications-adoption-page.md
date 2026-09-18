@@ -4,12 +4,12 @@ area: SITE
 title: Add specifications adoption page
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T05:25:00Z
+updated_at: 2026-09-18T05:45:00Z
 ---
 
 # Add specifications adoption page
@@ -38,8 +38,8 @@ If the adoption guide's own content turns out to need work, that is the specific
 
 ## Steps
 
-- [ ] Add an adoption section to `/specifications/` linking the five informative documents with one line of orientation each.
-- [ ] Keep the existing repository link as the canonical destination.
+- [x] Add an adoption section to `/specifications/` linking the five informative documents with one line of orientation each.
+- [x] Keep the existing repository link as the canonical destination.
 
 ## Files touched
 
@@ -71,6 +71,36 @@ None.
 ### Roadmap
 
 This record only.
+
+## Review
+
+### Delivered
+
+`/specifications/` now has an adoption section that routes a reader to the five informative documents in `ki-specifications` — adoption guide, specification process, numbering, versioning, and architecture context — with one line of orientation each, plus the `GOVERNANCE.md` anchor.
+
+Delivered as a section on the existing page rather than a new route. The page was two short sections and a single link to a repository root; a reader's problem was that it dead-ended, not that it lacked a destination to click through to.
+
+### Summary of changes
+
+- `site/src/specifications/index.njk` — one added section, using the existing section and prose classes.
+
+### Verification
+
+- Every linked document was confirmed to exist in `ki-specifications`.
+- `bun run ki:site:build` succeeds and `/specifications/` renders the new section.
+- `ki repo audit --repo .` reports `PASS` across 18 skills.
+
+### Outstanding concerns
+
+None. The repository stays canonical, and nothing on this page restates a normative contract.
+
+### Post-change review
+
+The inventory classified these five documents as source-owned and that held up — the useful change was a route in, not a move. Worth noting for the remaining consolidation: "this is hard to find" and "this is in the wrong repository" are different problems, and the first is usually cheaper to fix.
+
+### Mini recap
+
+Adoption route added to `/specifications/`; nothing copied, nothing moved.
 
 ## Discussion
 
