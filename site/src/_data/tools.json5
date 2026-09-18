@@ -48,12 +48,12 @@
     description:
       'Sweeps a directory of checkouts and runs the same Git or shell command across all of them, reporting per-repository results so a wide working set stays legible.',
     repository: 'https://github.com/knowledgeislands/tools-mgit',
-    version: 'v0.12.0',
+    version: 'v0.13.0',
     maturity: 'preview',
     formula: 'mgit',
-    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-mgit/v0.12.0/install.sh',
-    manual: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.12.0/README.md',
-    changelog: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.12.0/CHANGELOG.md',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-mgit/v0.13.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.13.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.13.0/CHANGELOG.md',
     icon: 'route',
     accent: 'teal'
   },
