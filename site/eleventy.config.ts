@@ -34,9 +34,19 @@ export default function (eleventyConfig: UserConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/js')
 
   // ── Transform: inject external-link icons ────────────────────────────────
-  // Adds a Lucide external-link icon to any prose <a href="https://..."> link.
+  // Marks any prose <a href="https://..."> link with an external-link glyph.
+  // The SVG is inlined rather than rendered by an icon runtime: the marker is
+  // decorative, and a client-side library to draw it would be a script and a
+  // dependency the rest of the site does not need.
+  // Sized in em so it tracks the surrounding type; styled by .prose-ext-icon.
   // Skips links already inside named component classes (add your own classes
   // to the exclusion pattern below to protect icon-managed components).
+  const externalLinkIcon =
+    '<svg class="prose-ext-icon" width="0.85em" height="0.85em" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+    ' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M13 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/>' +
+    '<path d="M15 3h6v6"/><path d="M11 13 21 3"/></svg>'
+
   eleventyConfig.addTransform('external-link-icons', (content: string, outputPath: string | undefined) => {
     if (!outputPath?.endsWith('.html')) return content
     return content.replace(
@@ -44,8 +54,8 @@ export default function (eleventyConfig: UserConfig) {
       (match, attrs: string, inner: string) => {
         // Add class names here to prevent icon injection inside specific components:
         if (/class="[^"]*(?:home-nav-card|tool-card)/.test(attrs)) return match
-        if (/data-lucide="external-link"/.test(inner)) return match
-        return `<a ${attrs}>${inner}<i data-lucide="external-link" class="prose-ext-icon"></i></a>`
+        if (/class="prose-ext-icon"/.test(inner)) return match
+        return `<a ${attrs}>${inner}${externalLinkIcon}</a>`
       }
     )
   })

@@ -273,6 +273,14 @@
     margin-bottom: 0.5rem;
   }
 
+  /* External-link marker injected by the external-link-icons transform. */
+  .prose-ext-icon {
+    display: inline-block;
+    vertical-align: -0.1em;
+    margin-left: 0.25em;
+    opacity: 0.65;
+  }
+
   /* Overline labels — small uppercase section/component tags */
   .overline {
     font-size: 0.8125rem;
