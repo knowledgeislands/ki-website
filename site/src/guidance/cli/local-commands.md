@@ -54,4 +54,4 @@ When a chezmoi source owns the machine's VS Code workspace files and shared agen
 
 `ki manage vscode sync` previews a reconciliation. Add `--write` only after reviewing the plan, then review the resulting source changes with `chezmoi diff`. The command never runs `chezmoi apply`.
 
-`ki manage vscode source create <repository>` similarly previews an opt-in OneDrive source store; add `--write` to create and associate it after review. See the [tools-ki VS Code projection management guide](https://github.com/knowledgeislands/tools-ki/blob/main/docs/guides/vscode-management.md) for the ownership boundary and fail-closed behaviour.
+`ki manage vscode source create <repository>` similarly previews an opt-in OneDrive source store; add `--write` to create and associate it after review. See the [tools-ki VS Code projection management guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/vscode-management.md) for the ownership boundary and fail-closed behaviour.

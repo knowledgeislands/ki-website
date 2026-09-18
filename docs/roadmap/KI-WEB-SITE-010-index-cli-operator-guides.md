@@ -4,12 +4,12 @@ area: SITE
 title: Index CLI operator guides
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T05:25:00Z
+updated_at: 2026-09-18T05:45:00Z
 ---
 
 # Index CLI operator guides
@@ -38,9 +38,9 @@ The registry advertises `ki` at `v0.3.6`. Only `repository-local-governance.md` 
 
 ## Steps
 
-- [ ] Add an operator-guides index under `/guidance/cli/` linking all six guides at an explicit release tag.
-- [ ] Repoint the existing `main` link in `/guidance/cli/local-commands/` at the same tag.
-- [ ] Record the registry drift rather than advancing the registry here.
+- [x] Add an operator-guides index under `/guidance/cli/` linking all six guides at an explicit release tag.
+- [x] Repoint the existing `main` link in `/guidance/cli/local-commands/` at the same tag.
+- [x] Record the registry drift rather than advancing the registry here.
 
 ## Files touched
 
@@ -75,6 +75,48 @@ None. `docs/guides/` here covers operating this repository.
 ### Roadmap
 
 This record only.
+
+## Review
+
+### Delivered
+
+`/guidance/cli/operator-guides/` indexes all six `tools-ki` operator guides with a line each, linked from `/guidance/cli/`. Every documentation link on the pages this item touched now points at an explicit release tag; none follows a branch.
+
+### Summary of changes
+
+- `site/src/guidance/cli/operator-guides.md` — new index page.
+- `site/src/guidance/cli/index.md` — one link added; the `ki(1)` manual link repointed off `main`.
+- `site/src/guidance/cli/local-commands.md` — the `vscode-management.md` link repointed off `main`.
+
+### Verification
+
+- Every linked guide was confirmed present at `v0.4.0` with `git ls-tree`.
+- `bun run ki:site:build` succeeds and emits `dist/guidance/cli/operator-guides/`.
+- `bun run --cwd site verify:routes -- --network` passes with one warning, quoted below.
+- `ki repo audit --repo .` reports `PASS` across 18 skills.
+
+### Outstanding concerns
+
+The `ki` registry entry is stale, and the routes gate says so:
+
+```text
+warning: ki: the registry advertises v0.3.6 but knowledgeislands/tools-ki has published v0.4.0;
+advance the registry when that release is ready to be recommended
+```
+
+This matters here because five of the six guides did not exist at `v0.3.6`. The links are therefore pinned at `v0.4.0` — a real, immutable, released tag — while the site still recommends installing `v0.3.6`. A reader on the recommended version may find a guide describing behaviour they do not have.
+
+The website did not advance the registry, deliberately. Advancing it is a release follow-up owned by `tools-ki`, and that repository has in-flight release-governance work at `KI-TOOL-CLI-074` covering exactly this cutover. Advancing it from here would pre-empt a decision this repository does not own, on a question another writer is actively working.
+
+### Post-change review
+
+The slice looked like pure link plumbing and turned out to be the one item that found a real defect: three site links following `main`, and a registry a release behind. The pinning rule in the tool-routes contract is what surfaced both — applying it to ordinary prose links, not just registry fields, was worth doing.
+
+The unresolved tension is honest rather than fixed: pinned-at-`v0.4.0` documentation against a `v0.3.6` recommendation. Pinning at `v0.3.6` would have shipped five broken links, and pinning at `main` is what this item set out to remove.
+
+### Mini recap
+
+Six operator guides indexed and every touched link pinned; registry drift recorded, not resolved.
 
 ## Discussion
 
