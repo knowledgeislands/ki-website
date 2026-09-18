@@ -4,12 +4,12 @@ area: SITE
 title: Consolidate public guidance
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 6a88d252af609e1d00df3a1c6b3cc3653da56440
 created_at: 2026-07-29T11:42:36Z
-updated_at: 2026-09-18T04:52:00Z
+updated_at: 2026-09-18T05:05:00Z
 transferred_from: KI-HARNESS-GOV-006
 ---
 
@@ -131,6 +131,10 @@ The one structural thing worth keeping: the classification test that settled mos
 ### Mini recap
 
 Inventory and design delivered; three slices proposed in Triage. No guidance moved, and none can until each slice is approved and its owning repository agrees.
+
+## Done
+
+Accepted 2026-09-18 by Kris Brown on the review packet above.
 
 ## Discussion
 

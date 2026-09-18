@@ -4,12 +4,12 @@ area: SITE
 title: Resolve website audit
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: ca41f9a69c68da628066c7925f1f032f063287cb
 created_at: 2026-09-04T08:18:09Z
-updated_at: 2026-09-18T04:47:00Z
+updated_at: 2026-09-18T05:05:00Z
 ---
 
 # Resolve Website Audit
@@ -106,6 +106,10 @@ The candidate was right to record the findings without accepting them. Read four
 ### Mini recap
 
 The estate audit findings are fully dispositioned and the repository audits clean. No follow-on work was identified.
+
+## Done
+
+Accepted 2026-09-18 by Kris Brown on the review packet above.
 
 ## Discussion
 
