@@ -4,12 +4,12 @@ area: SITE
 title: Migrate skill outcome routing
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T05:25:00Z
+updated_at: 2026-09-18T05:45:00Z
 ---
 
 # Migrate skill outcome routing
@@ -40,9 +40,9 @@ The website has no equivalent page. `/guidance/skills/` explains what a skill is
 
 ## Steps
 
-- [ ] Copy the guide to `site/src/guidance/skills/by-outcome/` verbatim, rewriting only its frontmatter and the one relative link.
-- [ ] Link it from `/guidance/skills/` alongside the catalogue.
-- [ ] File a handoff in `ki-agentic-harness` to reduce its copy to a pointer.
+- [x] Copy the guide to `site/src/guidance/skills/by-outcome/` verbatim, rewriting only its frontmatter and the one relative link.
+- [x] Link it from `/guidance/skills/` alongside the catalogue.
+- [x] File a handoff in `ki-agentic-harness` to reduce its copy to a pointer.
 
 ## Files touched
 
@@ -77,6 +77,42 @@ None. This is site page content, not repository operating knowledge.
 ### Roadmap
 
 This record, plus one handoff record in `ki-agentic-harness`.
+
+## Review
+
+### Delivered
+
+`/guidance/skills/by-outcome/` publishes the outcome-to-skill routing on the website, linked from `/guidance/skills/`, and `ki-agentic-harness` holds a Triage record to reduce its copy to a pointer.
+
+The migration is a copy, not a rewrite. The body is byte-identical to the harness source apart from the Eleventy frontmatter and the one relative link to the generated capability catalogue, which is now absolute. That was deliberate: a migration that also edits prose cannot be checked against its source, and the point of this slice was to move a document without changing what it says.
+
+### Summary of changes
+
+- `site/src/guidance/skills/by-outcome.md` — the migrated guide, ten outcome sections.
+- `site/src/guidance/skills/index.md` — one paragraph routing a reader who knows the outcome but not the skill name.
+- `ki-agentic-harness/docs/roadmap/KI-HARNESS-GOV-076-reduce-outcome-routing-guide.md` — the source-side handoff, captured as `triage` / `draft` so the harness adopts or declines on its own terms. Committed there as `e4cc851`.
+
+### Verification
+
+- Fidelity checked mechanically: the migrated body equals the source with only the catalogue link substituted.
+- `bun run ki:site:build` succeeds and emits `dist/guidance/skills/by-outcome/`.
+- `ki repo audit --repo .` reports `PASS` across 18 skills.
+
+### Outstanding concerns
+
+Two copies exist until the harness acts on `KI-HARNESS-GOV-076`. That is recorded in both repositories rather than silent, but it is the state this consolidation exists to end, so it should not sit indefinitely.
+
+The harness checkout was 5 commits behind its remote when the handoff was committed, so the record is on a stale base. It is an additive file plus a ledger bump; a merge should be clean, but the ledger line is the one place a conflict could appear.
+
+### Post-change review
+
+Copying rather than rewriting made the review cheap — a one-line assertion settles whether the migration is faithful, which no amount of reading would have done as reliably. Worth repeating for any future slice that moves a document intact.
+
+The one judgment call was leaving the catalogue link on `main`. The harness is not a released tool with an advertised version, and its capability catalogue is generated, so `main` is the only address that is continuously true.
+
+### Mini recap
+
+Guide migrated verbatim and linked; source-side reduction handed to the harness.
 
 ## Discussion
 

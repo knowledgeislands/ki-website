@@ -9,6 +9,8 @@ permalink: /guidance/skills/
 
 The skills are the bulk of the harness today. Most are **governance skills** — each holds a house standard and ships the universal **EDUCATE / AUDIT / CONFORM / REFRESH** modes (plus skill-specific ones), backed by a tracked `references/sources.md`. A smaller, growing set are **process skills** — lightweight skills that drive an action or lifecycle rather than holding a standard (`ADR-KI-HARNESS-SKILLS-006`); `ki-recap`, `ki-next`, `ki-plan`, `ki-implement`, `ki-accept`, `ki-batch`, and `ki-delegate` form the current repository-delivery set. This page is the map: what a skill is, how the set fits together, and the shape they share; the per-skill entries are in [the catalogue](/guidance/skills/catalogue/).
 
+If you know the outcome you want but not the skill name, start with [choose a skill by outcome](/guidance/skills/by-outcome/), which routes a plain-language goal to the smallest capability that serves it.
+
 ## The repository delivery journey
 
 The process skills coordinate around durable repository roadmap items. They do not form an inheritance hierarchy: each owns one part of the journey and passes a governed work item to the next.
