@@ -3,13 +3,13 @@ id: KI-WEB-SITE-010
 area: SITE
 title: Index CLI operator guides
 theme: site-experience
-horizon: triage
-status: draft
+horizon: now
+status: ready
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: d0c40b2b6b8ae499e5525eef3c0a5c17b2f5ce8e
 created_at: 2026-09-18T04:50:00Z
-updated_at: 2026-09-18T04:50:00Z
+updated_at: 2026-09-18T05:25:00Z
 ---
 
 # Index CLI operator guides
@@ -29,6 +29,52 @@ The site already links `vscode-management.md` from `/guidance/cli/local-commands
 Website-only. This adds an index that links the `tools-ki` guides at their released version; it copies none of them and changes nothing in `tools-ki`.
 
 Guides for tools other than `ki` are out of scope until those tools have operator guides worth linking.
+
+## Current state
+
+`tools-ki` publishes six operator guides plus a collection index. `/guidance/cli/` links none of them; `/guidance/cli/local-commands/` links exactly one, `vscode-management.md`, and links it at `main` — a branch, which the tool-routes contract rejects for exactly the reason it applies here.
+
+The registry advertises `ki` at `v0.3.6`. Only `repository-local-governance.md` existed at that tag; the other five landed by `v0.4.0`, which is released but not yet advertised.
+
+## Steps
+
+- [ ] Add an operator-guides index under `/guidance/cli/` linking all six guides at an explicit release tag.
+- [ ] Repoint the existing `main` link in `/guidance/cli/local-commands/` at the same tag.
+- [ ] Record the registry drift rather than advancing the registry here.
+
+## Files touched
+
+- `site/src/guidance/cli/operator-guides.md` — new.
+- `site/src/guidance/cli/index.md` — one link.
+- `site/src/guidance/cli/local-commands.md` — one link repointed.
+
+## Verify
+
+- `bun run ki:site:build` emits `/guidance/cli/operator-guides/` and the routes gate passes.
+- Every linked guide exists at the pinned tag.
+- No link in the added or edited pages follows a branch.
+
+## Dependencies / blocks
+
+Advancing the `ki` registry entry is owned by `tools-ki` and is currently entangled with its in-flight release-governance work. This item does not wait on it and does not do it.
+
+## Documentation impact
+
+### Decision Records
+
+None.
+
+### Specifications
+
+None.
+
+### Guides
+
+None. `docs/guides/` here covers operating this repository.
+
+### Roadmap
+
+This record only.
 
 ## Discussion
 
