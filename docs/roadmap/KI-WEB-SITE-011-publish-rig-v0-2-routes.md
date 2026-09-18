@@ -4,12 +4,12 @@ area: SITE
 title: Publish Rig v0.2 routes
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: de5db12e5a6e17f0b6fdf4d15486a55b23694adb
 created_at: 2026-09-18T06:46:03Z
-updated_at: 2026-09-18T06:55:00Z
+updated_at: 2026-09-18T07:00:00Z
 ---
 
 # Publish Rig v0.2 routes
@@ -40,9 +40,9 @@ The tagline, description, icon, accent, and `preview` maturity remain accurate f
 
 ## Steps
 
-- [ ] Advance `version`, `installer`, `manual`, and `changelog` on the `rig` registry entry to `v0.2.0`.
-- [ ] Rebuild and confirm the generated page, installer route, and sitemap entry all advertise the same release.
-- [ ] Run the routes gate with `--network` to confirm the installer target resolves and no drift remains for Rig.
+- [x] Advance `version`, `installer`, `manual`, and `changelog` on the `rig` registry entry to `v0.2.0`.
+- [x] Rebuild and confirm the generated page, installer route, and sitemap entry all advertise the same release.
+- [x] Run the routes gate with `--network` to confirm the installer target resolves and no drift remains for Rig.
 
 ## Files touched
 
@@ -75,6 +75,41 @@ None. `docs/guides/tool-routes.md` already describes this handoff; it needs no c
 ### Roadmap
 
 This record, received from `tools-rig`.
+
+## Review
+
+### Delivered
+
+`/tooling/rig/` and `/install/rig` now advertise and resolve `v0.2.0`. One registry entry changed; the page, the installer redirect, and the sitemap entry are all generated from it, so they cannot disagree.
+
+The handoff described this as publishing new routes. It was not: the routes already existed at `v0.1.0`, and the real work was a four-field version advance. Checking that before acting is what kept this from becoming a duplicate entry.
+
+### Summary of changes
+
+- `site/src/_data/tools.json5` — the `rig` entry's `version`, `installer`, `manual`, and `changelog` advanced from `v0.1.0` to `v0.2.0`.
+
+Tagline, description, icon, accent, and `preview` maturity were left as they were. The v0.2.0 changelog describes the same catalogue-led tool with the same pre-1.0 shape, so none of them had gone stale.
+
+### Verification
+
+- `bun run ki:site:build` exits 0 and its routes gate reports no failure.
+- `bun run --cwd site verify:routes -- --network` reaches the `v0.2.0` installer and reports no drift for `rig`.
+- `dist/tooling/rig/index.html` names `v0.2.0` and no other version; `dist/_redirects` carries `/install/rig` to the `v0.2.0` installer; the sitemap has its one entry.
+- The tap formula at `homebrew-tap/Formula/rig.rb` is already on `v0.2.0`, so the two installation paths agree.
+
+### Outstanding concerns
+
+None for Rig.
+
+The routes gate still warns that `ki` advertises `v0.3.6` against a published `v0.4.0`. That predates this item and belongs to `tools-ki`; it is noted only because the gate output appears in this item's evidence.
+
+### Post-change review
+
+The one lesson worth carrying: a received handoff describes the sending repository's release accurately and the receiving repository's state only by assumption. This record's "current state" was wrong in a way that would have produced a second `rig` entry had it been taken at face value. Future tool handoffs should have their current-state claim checked against the registry first — it costs one `grep`.
+
+### Mini recap
+
+Rig advanced to `v0.2.0` across both routes; verified against the live installer.
 
 ## Discussion
 
