@@ -141,6 +141,10 @@ Concerns: `tools-ki` still prints the retired `/tooling/cli/` address; no instal
 
 Learning routes, proposed only: the `ki:` script namespace is capability-owned, so a new gate belongs inside an existing lifecycle command rather than in a new `ki:` key — worth a line in the repository's engineering notes. The "immutable installer target" idea splits into two properties, an immutable _script_ and a pinned _installed version_, and only the first is achievable from the website side — worth raising with the tool repositories before the phrase is reused in another item.
 
+## Done
+
+Accepted 2026-09-17 by Kris Brown on the review packet above.
+
 ## Discussion
 
 ### Route contract

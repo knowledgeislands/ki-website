@@ -4,12 +4,12 @@ area: SITE
 title: Scope site development scripts
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: f9927cd91730c2e02f3221142af241a4f90badc7
 created_at: 2026-09-08T22:42:07Z
-updated_at: 2026-09-08T22:42:07Z
+updated_at: 2026-09-18T04:35:04Z
 ---
 
 # Scope site development scripts
@@ -99,6 +99,10 @@ The change meets the approved command contract without altering the public entry
 ### Mini recap
 
 The Knowledge Islands content package and root now share the governed `ki:site:dev` seam, retired active references are absent, and every scoped gate passes. No follow-on work was identified within this item.
+
+## Done
+
+Accepted 2026-09-18 by Kris Brown on the review packet above.
 
 ## Discussion
 
