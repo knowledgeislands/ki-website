@@ -4,12 +4,12 @@ area: SITE
 title: Publish Rig v0.2 routes
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: de5db12e5a6e17f0b6fdf4d15486a55b23694adb
 created_at: 2026-09-18T06:46:03Z
-updated_at: 2026-09-18T07:00:00Z
+updated_at: 2026-09-19T09:00:00Z
 ---
 
 # Publish Rig v0.2 routes
@@ -110,6 +110,10 @@ The one lesson worth carrying: a received handoff describes the sending reposito
 ### Mini recap
 
 Rig advanced to `v0.2.0` across both routes; verified against the live installer.
+
+## Done
+
+Accepted 2026-09-19 by Kris Brown on the review packet above.
 
 ## Discussion
 
