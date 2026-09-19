@@ -32,12 +32,12 @@
     description:
       'Installs verified compatible harnesses, activates skills in explicit scopes, and hosts the native repository operations that govern a Knowledge Islands checkout.',
     repository: 'https://github.com/knowledgeislands/tools-ki',
-    version: 'v0.3.6',
+    version: 'v0.4.0',
     maturity: 'preview',
     formula: 'ki',
-    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.3.6/install.sh',
-    manual: 'https://github.com/knowledgeislands/tools-ki/blob/v0.3.6/README.md',
-    changelog: 'https://github.com/knowledgeislands/tools-ki/blob/v0.3.6/CHANGELOG.md',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.4.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/CHANGELOG.md',
     icon: 'anchor',
     accent: 'gold'
   },

@@ -49,6 +49,24 @@ Check the registry before acting on the handoff. A sending repository knows its 
 
 Because the handoff is explicit, a newer upstream release does not change the site until someone decides it should. That is the point: the endpoint is a recommendation, and recommendations advance deliberately.
 
+### Automated release advances
+
+The manual handoff above remains only for first-time registry entries and maturity changes. Existing tool versions advance through an event-driven website review. After source repository publishes immutable release and Homebrew tap validates its formula, tap CI dispatches `tool-release-published` with tool slug, exact tag, source repository, formula path, and full tap commit.
+
+Website receiver independently requires all following before it writes anything:
+
+- source release exists, is repository's latest release, is published rather than draft or prerelease, and GitHub reports it immutable;
+- formula at supplied tap commit names same source repository and version in every release URL;
+- versioned installer exists and is non-empty;
+- registry already maps tool slug to source repository; and
+- requested version is not downgrade.
+
+Successful verification changes only selected entry's `version`, `installer`, `manual`, and `changelog` pins. Receiver pushes deterministic `automation/tool-release-<tool>-<version>` branch through `ki-release-bot` GitHub App and opens or updates pull request. It never commits to `main`, merges, or deploys. Ordinary pull-request CI and human website review remain publication boundary.
+
+Configure `KI_RELEASE_BOT_APP_ID` repository variable and `KI_RELEASE_BOT_PRIVATE_KEY` Actions secret. App is installed only on `ki-website` with repository Contents and Pull requests read/write permissions. Homebrew tap holds same credential names only to mint token restricted to dispatching this repository. Never commit or print private key.
+
+Use receiver's manual workflow only to retry verified event, supplying same exact values. Repeated delivery is idempotent: already-current registry produces no commit or pull request. If dispatch is missed, network verifier continues to report upstream drift without silently changing recommendation.
+
 ## Verification
 
 `bun run ki:site:build` runs the gate automatically after Eleventy writes `dist/`, so a broken declaration fails the build that a deployment is cut from. Run it directly from the site workspace when iterating on the registry:

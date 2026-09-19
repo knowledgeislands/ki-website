@@ -4,12 +4,12 @@ area: SITE
 title: Automate release registry
 theme: site-experience
 horizon: now
-status: ready
+status: in-progress
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: 96428b86a7c5599a62fb18eafcdd0a087c732e06
 created_at: 2026-09-19T09:26:42Z
-updated_at: 2026-09-19T09:26:42Z
+updated_at: 2026-09-19T09:50:47Z
 ---
 
 # Automate Tool Release Registry
@@ -32,19 +32,19 @@ The website will not resolve moving release state for visitors, accept unverifie
 
 ## Steps
 
-- [ ] Add a typed, testable registry synchronizer that validates the tool, tag, source release, and tap formula before changing exact pinned URLs.
-- [ ] Add a repository-dispatch and manual receiver workflow that uses a GitHub App token to create or update one deterministic pull request without committing directly to `main`.
-- [ ] Advance the current `ki` registry and public guidance to v0.4.0 without retaining stale release claims.
-- [ ] Document the credential, verification, review, and retry contract.
+- [x] Add a typed, testable registry synchronizer that validates the tool, tag, source release, and tap formula before changing exact pinned URLs.
+- [x] Add a repository-dispatch and manual receiver workflow that uses a GitHub App token to create or update one deterministic pull request without committing directly to `main`.
+- [x] Advance the current `ki` registry and public guidance to v0.4.0 without retaining stale release claims.
+- [x] Document the credential, verification, review, and retry contract.
 - [ ] Run focused tests, the full site build, and applicable repository audits.
 
 ## Files touched
 
 - `.github/workflows/update-tool-release.yml`
+- `.github/workflows/ci.yml`
 - `site/scripts/sync-tool-release.ts`
 - `site/scripts/sync-tool-release.test.ts`
 - `site/src/_data/tools.json5`
-- `site/src/guidance/cli/local-commands.md`
 - `docs/guides/tool-routes.md`
 - `docs/roadmap/_ISSUES.md`
 - `docs/roadmap/KI-WEB-SITE-012-automate-tool-release-registry.md`

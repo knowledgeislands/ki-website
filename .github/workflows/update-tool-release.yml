@@ -1,0 +1,131 @@
+name: Update tool release
+
+on:
+  repository_dispatch:
+    types: [tool-release-published]
+  workflow_dispatch:
+    inputs:
+      tool:
+        description: Tool registry slug
+        required: true
+        type: string
+      version:
+        description: Exact v-prefixed release tag
+        required: true
+        type: string
+      source_repository:
+        description: Source repository without github.com prefix
+        required: true
+        type: string
+      tap_commit:
+        description: Full Homebrew tap commit containing the formula
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  prepare-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release-bot token
+        id: release-bot
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.KI_RELEASE_BOT_APP_ID }}
+          private-key: ${{ secrets.KI_RELEASE_BOT_PRIVATE_KEY }}
+          owner: knowledgeislands
+          repositories: ki-website
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ steps.release-bot.outputs.token }}
+      - uses: jdx/mise-action@v4
+      - run: bun install --frozen-lockfile
+      - name: Resolve release event
+        id: release
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_TOOL: ${{ github.event.client_payload.tool }}
+          DISPATCH_VERSION: ${{ github.event.client_payload.version }}
+          DISPATCH_SOURCE_REPOSITORY: ${{ github.event.client_payload.source_repository }}
+          DISPATCH_TAP_COMMIT: ${{ github.event.client_payload.tap_commit }}
+          DISPATCH_FORMULA_PATH: ${{ github.event.client_payload.formula_path }}
+          INPUT_TOOL: ${{ inputs.tool }}
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_SOURCE_REPOSITORY: ${{ inputs.source_repository }}
+          INPUT_TAP_COMMIT: ${{ inputs.tap_commit }}
+        run: |
+          set -euo pipefail
+          if [[ "$EVENT_NAME" == "repository_dispatch" ]]; then
+            tool=$DISPATCH_TOOL
+            version=$DISPATCH_VERSION
+            source_repository=$DISPATCH_SOURCE_REPOSITORY
+            tap_commit=$DISPATCH_TAP_COMMIT
+            formula_path=$DISPATCH_FORMULA_PATH
+          else
+            tool=$INPUT_TOOL
+            version=$INPUT_VERSION
+            source_repository=$INPUT_SOURCE_REPOSITORY
+            tap_commit=$INPUT_TAP_COMMIT
+            formula_path="Formula/$tool.rb"
+          fi
+          [[ "$tool" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]
+          [[ "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$source_repository" =~ ^knowledgeislands/[a-z0-9]+(-[a-z0-9]+)*$ ]]
+          [[ "$tap_commit" =~ ^[0-9a-f]{40}$ ]]
+          test "$formula_path" = "Formula/$tool.rb"
+          {
+            echo "tool=$tool"
+            echo "version=$version"
+            echo "source_repository=$source_repository"
+            echo "tap_commit=$tap_commit"
+            echo "formula_path=$formula_path"
+          } >> "$GITHUB_OUTPUT"
+      - name: Test registry synchronizer
+        run: bun test site/scripts/sync-tool-release.test.ts
+      - name: Verify release and prepare registry update
+        env:
+          GITHUB_TOKEN: ${{ steps.release-bot.outputs.token }}
+        run: >-
+          bun site/scripts/sync-tool-release.ts
+          --tool '${{ steps.release.outputs.tool }}'
+          --version '${{ steps.release.outputs.version }}'
+          --source-repository '${{ steps.release.outputs.source_repository }}'
+          --tap-commit '${{ steps.release.outputs.tap_commit }}'
+          --formula-path '${{ steps.release.outputs.formula_path }}'
+      - name: Create or update pull request
+        env:
+          GH_TOKEN: ${{ steps.release-bot.outputs.token }}
+          TOOL: ${{ steps.release.outputs.tool }}
+          VERSION: ${{ steps.release.outputs.version }}
+          SOURCE_REPOSITORY: ${{ steps.release.outputs.source_repository }}
+          TAP_COMMIT: ${{ steps.release.outputs.tap_commit }}
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- site/src/_data/tools.json5; then
+            echo "$TOOL $VERSION is already current; no pull request needed." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          branch="automation/tool-release-$TOOL-$VERSION"
+          git config user.name "ki-release-bot[bot]"
+          git config user.email "ki-release-bot[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add -- site/src/_data/tools.json5
+          git commit -m "chore(tooling): advertise $TOOL $VERSION"
+          if git ls-remote --exit-code --heads origin "refs/heads/$branch" > /dev/null; then
+            git fetch origin "refs/heads/$branch:refs/remotes/origin/$branch"
+          fi
+          git push --force-with-lease origin "HEAD:refs/heads/$branch"
+
+          # shellcheck disable=SC2016
+          body=$(printf 'Advances `%s` to immutable release `%s`.\n\nSource: `%s@%s`\nTap evidence: `knowledgeislands/homebrew-tap@%s`\n\nCreated by the verified tool-release registry workflow; ordinary website review and CI still apply.\n' "$TOOL" "$VERSION" "$SOURCE_REPOSITORY" "$VERSION" "$TAP_COMMIT")
+          existing=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
+          if [[ -n "$existing" ]]; then
+            gh pr edit "$existing" --title "chore(tooling): advertise $TOOL $VERSION" --body "$body"
+            echo "Updated PR #$existing for $TOOL $VERSION." >> "$GITHUB_STEP_SUMMARY"
+          else
+            url=$(gh pr create --base main --head "$branch" --title "chore(tooling): advertise $TOOL $VERSION" --body "$body")
+            echo "Created $url for $TOOL $VERSION." >> "$GITHUB_STEP_SUMMARY"
+          fi
