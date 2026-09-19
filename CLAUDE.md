@@ -1,5 +1,7 @@
 # CLAUDE.md — ki-website
 
+@AGENTS.md
+
 Always-loaded orientation for an agent working in this repo. The full picture is in [README.md](README.md); this file is the short anchor.
 
 Read [AGENTS.md](AGENTS.md) first for the shared runtime-neutral progress and commit convention.
