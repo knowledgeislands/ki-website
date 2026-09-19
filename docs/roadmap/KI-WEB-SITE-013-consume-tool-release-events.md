@@ -4,12 +4,12 @@ area: SITE
 title: Consume tool release events
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: 664846a67ef123e70c2c61a6d8ecdf08879a56ae
 created_at: 2026-09-19T17:39:47Z
-updated_at: 2026-09-19T17:41:24Z
+updated_at: 2026-09-19T17:48:11Z
 ---
 
 # Consume Tool Release Events
@@ -32,9 +32,9 @@ The event contract is already provider-neutral, but workflow settings use `KI_RE
 
 ## Steps
 
-- [ ] Rename website workflow settings to the shared `KI_TOOLS_RELEASE_BOT_*` identity.
-- [ ] Document the website as one opt-in consumer of the generic release event and preserve its independent verification and pull-request boundary.
-- [ ] Run focused workflow, synchronizer, site, and repository verification.
+- [x] Rename website workflow settings to the shared `KI_TOOLS_RELEASE_BOT_*` identity.
+- [x] Document the website as one opt-in consumer of the generic release event and preserve its independent verification and pull-request boundary.
+- [x] Run focused workflow, synchronizer, site, and repository verification.
 
 ## Files touched
 
@@ -75,6 +75,32 @@ Update the tool-routes guide to distinguish the shared release bot from the webs
 ### Roadmap
 
 Coordinate with Homebrew tap item `BREW-004`; no further website work is expected once the generic event is proven reviewable.
+
+## Review
+
+### Delivered
+
+Delivered the approved consumer generalization from baseline `664846a67ef123e70c2c61a6d8ecdf08879a56ae`, with implementation evidence at `effe558464dbda61873954107439f1cdf2bf67e3`. KI Website now identifies the shared tools release bot while preserving its existing verified event and reviewable registry-update behaviour.
+
+### Summary of changes
+
+Renamed workflow settings and commit identity to `KI_TOOLS_RELEASE_BOT_*` and `ki-tools-release-bot`; updated the tool-routes guide to make the tap's explicit fan-out and consumer autonomy clear. No registry schema, public route, synchronizer, merge, or deployment behaviour changed.
+
+### Verification
+
+The synchronizer suite passed 7 tests. Actionlint 1.7.12 passed the receiver workflow. The clean site build generated and verified all four tool routes. Focused `ki-authoring` and `ki-work-roadmap` audits passed. KI Website PR #3 `build` passed in GitHub Actions.
+
+### Outstanding concerns
+
+Live receipt and pull-request creation remain intentionally unavailable until the shared GitHub App is installed and `KI_TOOLS_RELEASE_BOT_APP_ID` plus `KI_TOOLS_RELEASE_BOT_PRIVATE_KEY` are configured in repository settings.
+
+### Post-change review
+
+The change leaves the website fail-closed and independently authoritative over its registry. The generic event still triggers only deterministic validation and a review branch; it cannot merge, deploy, or add a previously unknown tool.
+
+### Mini recap
+
+KI Website is now the first explicit consumer of the shared tools release bot rather than the bot's hard-coded destination. Local gates and hosted build CI pass; operational App provisioning remains the only live cutover step.
 
 ## Discussion
 
