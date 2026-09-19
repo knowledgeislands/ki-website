@@ -4,12 +4,12 @@ area: SITE
 title: Automate release registry
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: 96428b86a7c5599a62fb18eafcdd0a087c732e06
 created_at: 2026-09-19T09:26:42Z
-updated_at: 2026-09-19T09:50:47Z
+updated_at: 2026-09-19T09:53:50Z
 ---
 
 # Automate Tool Release Registry
@@ -36,7 +36,7 @@ The website will not resolve moving release state for visitors, accept unverifie
 - [x] Add a repository-dispatch and manual receiver workflow that uses a GitHub App token to create or update one deterministic pull request without committing directly to `main`.
 - [x] Advance the current `ki` registry and public guidance to v0.4.0 without retaining stale release claims.
 - [x] Document the credential, verification, review, and retry contract.
-- [ ] Run focused tests, the full site build, and applicable repository audits.
+- [x] Run focused tests, the full site build, and applicable repository audits.
 
 ## Files touched
 
@@ -83,6 +83,32 @@ Update the tool-route guide with the event payload, GitHub App settings, verific
 ### Roadmap
 
 Coordinate the receiver with the Homebrew tap's separately owned dispatcher item. No further website work is expected once the pull-request path is proven.
+
+## Review
+
+### Delivered
+
+Delivered the approved receiver boundary from baseline `96428b86a7c5599a62fb18eafcdd0a087c732e06`, with implementation evidence at `467445dd64821b28adb0dc80ebca9a7fbba5cf14`. The website validates immutable source-release and exact Homebrew formula evidence, prepares one deterministic registry change, and opens or updates a reviewable pull request without committing to `main` or deploying.
+
+### Summary of changes
+
+Added `.github/workflows/update-tool-release.yml` and the typed synchronizer and tests under `site/scripts/`; advanced the `ki` registry and CI bootstrap pins to v0.4.0; and documented verification, credentials, retry, and review ownership in `docs/guides/tool-routes.md`. The receiver remains fail-closed and changes only an existing registry entry's immutable versioned URLs.
+
+### Verification
+
+`bun test site/scripts/sync-tool-release.test.ts` passed 7 tests; pinned Actionlint 1.7.12 passed both changed workflows; `bun run ki:site:clean` and `bun run ki:site:build` passed and verified four tool routes; focused `ki-engineering`, `ki-authoring`, and `ki-work-roadmap` audits passed. A whole-repository audit from the temporary worktree reported only runtime-activation and local-registry findings caused by the temporary physical root rather than repository content.
+
+### Outstanding concerns
+
+The GitHub App variable, private-key secret, installation permissions, and first live repository-dispatch run cannot be proven locally. Their absence fails the workflow closed and remains an operational setup step documented in the guide.
+
+### Post-change review
+
+The implementation stays within the approved repository-dispatch, verification, deterministic branch, and pull-request boundary. Focused tests cover malformed identities, conflicting formula evidence, immutable/latest release checks, idempotence, and downgrade refusal; the site build confirms the committed registry remains publishable. The item is ready for acceptance subject to the stated live-credential concern.
+
+### Mini recap
+
+KI Website now has a tested, review-preserving receiver for verified Homebrew release events and advertises `ki` v0.4.0. Verification is clean apart from environment-only findings in the temporary worktree; no additional durable learning route is required beyond the updated guide.
 
 ## Discussion
 
