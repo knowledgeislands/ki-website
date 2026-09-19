@@ -4,12 +4,12 @@ area: SITE
 title: Automate release registry
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 96428b86a7c5599a62fb18eafcdd0a087c732e06
 created_at: 2026-09-19T09:26:42Z
-updated_at: 2026-09-19T09:53:50Z
+updated_at: 2026-09-19T09:55:00Z
 ---
 
 # Automate Tool Release Registry
@@ -109,6 +109,10 @@ The implementation stays within the approved repository-dispatch, verification, 
 ### Mini recap
 
 KI Website now has a tested, review-preserving receiver for verified Homebrew release events and advertises `ki` v0.4.0. Verification is clean apart from environment-only findings in the temporary worktree; no additional durable learning route is required beyond the updated guide.
+
+## Done
+
+Accepted 2026-09-19 by Kris Brown on the review packet above.
 
 ## Discussion
 
