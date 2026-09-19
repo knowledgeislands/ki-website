@@ -45,6 +45,8 @@ Advancing the registry is a **named release follow-up owned by the releasing rep
 
 The website then edits the registry entry — `version`, `installer`, `manual`, `changelog`, and `maturity` if it changed — and ships. Nothing else needs touching: the page, the card, the sitemap entry, and the redirect are all generated.
 
+Check the registry before acting on the handoff. A sending repository knows its own release; it does not know this site's current state, so a handoff that reads like "publish these new routes" may in fact be a version advance on an entry that already exists. Grep `tools.json5` for the slug first. Taking the handoff's account of the website at face value is how a tool ends up with two entries.
+
 Because the handoff is explicit, a newer upstream release does not change the site until someone decides it should. That is the point: the endpoint is a recommendation, and recommendations advance deliberately.
 
 ## Verification
