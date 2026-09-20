@@ -27,7 +27,7 @@ Lifecycle operations do not accept capability-qualified or bare-skill targets.
 
 `ki harness uninstall <harness-id>` removes an installed non-canonical harness whose recognised payload belongs to KI.
 
-Lifecycle commands apply their requested change immediately after validation; only `ki acquire chatgpt import` and `ki repo conform` provide a dry-run preview.
+Lifecycle commands apply their requested change immediately after validation; only `ki acquire import --adapter chatgpt` and `ki repo conform` provide a dry-run preview.
 
 ## Activation boundary
 

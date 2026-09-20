@@ -7,11 +7,11 @@ permalink: /guidance/cli/chatgpt-local-capture/
 
 # ChatGPT local-capture format
 
-`ki acquire chatgpt import` accepts only a user-prepared local capture directory. It never signs in to ChatGPT, controls a browser, contacts a network service, reads a browser profile or credentials, discovers a repository, or extracts knowledge.
+`ki acquire import --adapter chatgpt` accepts only a user-prepared local capture directory. It never signs in to ChatGPT, controls a browser, contacts a network service, reads a browser profile or credentials, discovers a repository, or extracts knowledge.
 
 The capture is an input adapter, not a KEP. The importer validates it before creating the selected KEP output directory.
 
-Use `ki acquire chatgpt import --help` for the exact command grammar supported by the installed version.
+Use `ki acquire import --adapter chatgpt --help` for the exact command grammar supported by the installed version.
 
 ## Layout
 
