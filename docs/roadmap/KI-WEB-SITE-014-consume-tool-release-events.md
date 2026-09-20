@@ -1,5 +1,5 @@
 ---
-id: KI-WEB-SITE-013
+id: KI-WEB-SITE-014
 area: SITE
 title: Consume tool release events
 theme: site-experience
@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: 664846a67ef123e70c2c61a6d8ecdf08879a56ae
 created_at: 2026-09-19T17:39:47Z
-updated_at: 2026-09-20T07:05:21Z
+updated_at: 2026-09-20T07:17:44Z
 ---
 
 # Consume Tool Release Events
@@ -41,7 +41,7 @@ The event contract is already provider-neutral, but workflow settings use `KI_RE
 - `.github/workflows/update-tool-release.yml`
 - `docs/guides/tool-routes.md`
 - `docs/roadmap/_ISSUES.md`
-- `docs/roadmap/KI-WEB-SITE-013-consume-tool-release-events.md`
+- `docs/roadmap/KI-WEB-SITE-014-consume-tool-release-events.md`
 
 ## Verify
 
@@ -105,6 +105,8 @@ KI Website is now the first explicit consumer of the shared tools release bot ra
 ## Done
 
 Accepted 2026-09-20 by Kris Brown on the review packet above, with authority to complete the operational cutover and prune the retained record after this closure lands.
+
+The record was reviewed as `KI-WEB-SITE-013` and mechanically renumbered to `KI-WEB-SITE-014` during integration because remote `main` independently allocated `013`; its goal, delivered scope, and acceptance evidence did not change.
 
 ## Discussion
 
