@@ -29,12 +29,12 @@ jobs:
   prepare-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Create release-bot token
+      - name: Create tools release bot token
         id: release-bot
         uses: actions/create-github-app-token@v2
         with:
-          app-id: ${{ vars.KI_RELEASE_BOT_APP_ID }}
-          private-key: ${{ secrets.KI_RELEASE_BOT_PRIVATE_KEY }}
+          app-id: ${{ vars.KI_TOOLS_RELEASE_BOT_APP_ID }}
+          private-key: ${{ secrets.KI_TOOLS_RELEASE_BOT_PRIVATE_KEY }}
           owner: knowledgeislands
           repositories: ki-website
       - uses: actions/checkout@v7
@@ -109,8 +109,8 @@ jobs:
           fi
 
           branch="automation/tool-release-$TOOL-$VERSION"
-          git config user.name "ki-release-bot[bot]"
-          git config user.email "ki-release-bot[bot]@users.noreply.github.com"
+          git config user.name "ki-tools-release-bot[bot]"
+          git config user.email "ki-tools-release-bot[bot]@users.noreply.github.com"
           git switch -c "$branch"
           git add -- site/src/_data/tools.json5
           git commit -m "chore(tooling): advertise $TOOL $VERSION"
