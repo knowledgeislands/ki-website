@@ -4,12 +4,12 @@ area: SITE
 title: Consume tool release events
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 664846a67ef123e70c2c61a6d8ecdf08879a56ae
 created_at: 2026-09-19T17:39:47Z
-updated_at: 2026-09-19T17:48:11Z
+updated_at: 2026-09-20T07:05:21Z
 ---
 
 # Consume Tool Release Events
@@ -101,6 +101,10 @@ The change leaves the website fail-closed and independently authoritative over i
 ### Mini recap
 
 KI Website is now the first explicit consumer of the shared tools release bot rather than the bot's hard-coded destination. Local gates and hosted build CI pass; operational App provisioning remains the only live cutover step.
+
+## Done
+
+Accepted 2026-09-20 by Kris Brown on the review packet above, with authority to complete the operational cutover and prune the retained record after this closure lands.
 
 ## Discussion
 
