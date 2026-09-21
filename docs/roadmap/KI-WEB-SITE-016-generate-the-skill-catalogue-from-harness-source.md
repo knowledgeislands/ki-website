@@ -6,8 +6,8 @@ theme: site-experience
 blocks: []
 blocked_by: []
 created_at: 2026-09-21T15:44:00Z
-updated_at: 2026-09-21T15:44:00Z
-horizon: triage
+updated_at: 2026-09-21T16:12:00Z
+horizon: now
 status: draft
 ---
 
@@ -40,4 +40,4 @@ It does not propose the site fetch from `main` at build time; if that is the onl
 
 ## Discussion
 
-Review before deciding. The prompting question is whether the site wants a second inventory at all, or whether the catalogue should become a route into the harness's own.
+Shaping settles the design, not whether to act. The prompting question is whether the site wants a second inventory at all, or whether the catalogue should become a route into the harness's own.

@@ -6,8 +6,8 @@ theme: site-experience
 blocks: []
 blocked_by: []
 created_at: 2026-09-21T15:44:00Z
-updated_at: 2026-09-21T15:44:00Z
-horizon: triage
+updated_at: 2026-09-21T16:12:00Z
+horizon: now
 status: draft
 ---
 
@@ -41,4 +41,4 @@ This is repair of the site's own links and citations. Whether the harness should
 
 ## Discussion
 
-Review before deciding. Worth noting that the pinned links all held and both failures were unpinned — evidence for the discipline the provenance guide already recommends.
+Shaping settles how the two links are repaired, not whether. Worth noting that the pinned links all held and both failures were unpinned — evidence for the discipline the provenance guide already recommends.
