@@ -4,12 +4,12 @@ area: SITE
 title: Guidance hub and navigation
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:05:00Z
-updated_at: 2026-09-22T09:05:00Z
+updated_at: 2026-09-22T10:00:00Z
 ---
 
 ## Goal
@@ -27,6 +27,16 @@ The owner could not find the skill catalogue. That page carries all 61 skills an
 This item is about reachability and the hub page. It does not rewrite the guidance pages themselves; depth is `KI-WEB-SITE-018` and the section items.
 
 The 31 pages keep their current URLs. This adds a route and changes links into them.
+
+## Shaping
+
+**The reachability check is in scope, not optional.** Without it this item fixes today's orphans and nothing prevents tomorrow's, and the prompting collection is the evidence: fourteen pages that presumably had a way in once and lost it silently. The check walks links from `dist/index.html` and fails the build on any unreachable page, which is the same reasoning that made the provenance sweep worth building — a condition nobody can see is a condition nobody fixes.
+
+It fails rather than warns, because unlike upstream drift this is entirely within the site's control. The provenance sweep warns because another repository editing its own README must not break this build; an orphaned page is the site's own doing.
+
+**The hub introduces four collections by the question each answers**, not by listing them. A list of four links is the navigation problem restated one level down.
+
+**The 31 pages keep their URLs.** This adds a route and rewires links into it; nothing moves, so nothing needs redirecting.
 
 ## Current state
 

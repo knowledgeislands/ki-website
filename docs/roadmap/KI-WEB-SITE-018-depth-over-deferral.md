@@ -4,12 +4,12 @@ area: SITE
 title: Depth over deferral
 theme: site-experience
 horizon: now
-status: draft
-blocks: [KI-WEB-SITE-020]
+status: ready
+blocks: [KI-WEB-SITE-022, KI-WEB-SITE-023]
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:00:00Z
-updated_at: 2026-09-22T09:00:00Z
+updated_at: 2026-09-22T10:00:00Z
 ---
 
 ## Goal
@@ -31,6 +31,18 @@ This is specifically about the **ownership** test, which decides what the site s
 This item revises the guide and states the new test. It does not rewrite any page: the rewriting lands in the section items that follow, judged against the revised test.
 
 It does not weaken provenance, change `verify:guidance`, or revisit the vendored catalogue.
+
+## Shaping
+
+The reversal's extent is settled rather than left open.
+
+**A repository link survives as a fact about a project; it stops being a destination that stands in for content.** "The CLI is developed at `knowledgeislands/tools-ki`" tells a reader something. "Read the README to find out what it does" is the deferral being removed. The test is whether the sentence transfers information or postpones it.
+
+**Deferral stays correct in three cases**, and the guide should name them rather than gesture at judgement: an executable contract whose exact surface changes per release, a release artefact or installer whose authority is the publishing repository, and an interface a reader operates rather than decides about. A reader choosing whether to adopt something and a reader running it in production need different material; only the first is this site's job.
+
+**Where a page needs upstream material that changes per release, the route is vendoring, not hand-writing.** `KI-WEB-SITE-016` demonstrated both halves of this: a hand-maintained inventory drifted to 42 entries against an upstream 61, and a pinned snapshot of a published interface fixed it. The revised guide must say so, or it will license exactly the rot it is replacing.
+
+**The two tests stay distinct and the guide must say which is which.** Ownership decides what the site says; provenance decides what the site cites. Carrying more upstream material makes the `sources:` declaration more necessary, not less, and nothing here touches `verify:guidance` or ADR-KI-WEBSITE-001.
 
 ## Current state
 
@@ -58,7 +70,7 @@ The revised guide, applied to `/tooling/ki/` and `/projects/mcp-git-audit/` as t
 
 ## Dependencies / blocks
 
-Blocks `KI-WEB-SITE-020`, which rewrites project pages and needs the standard they are written against. Does not block `KI-WEB-SITE-019` or `KI-WEB-SITE-021`, which are structural.
+Blocks `KI-WEB-SITE-022` and `KI-WEB-SITE-023`, which rewrite guidance and project pages against the test this item sets. Does not block `KI-WEB-SITE-019`, `KI-WEB-SITE-020` or `KI-WEB-SITE-021`, which are structural.
 
 ## Documentation impact
 

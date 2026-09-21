@@ -4,12 +4,12 @@ area: SITE
 title: Retire specifications section
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:15:00Z
-updated_at: 2026-09-22T09:15:00Z
+updated_at: 2026-09-22T10:00:00Z
 ---
 
 ## Goal
@@ -25,6 +25,16 @@ The owner's instruction: take specifications off the website, because it is not 
 ## Boundary
 
 This retires the section from the site. It does not delete anything in `ki-specifications`, and it does not judge that corpus — only its readiness to be published here.
+
+## Shaping
+
+**The route is removed and redirected, not kept and unlisted.** An unlinked page still makes the promise — a reader who has the URL, or who arrives from a search engine, meets a section advertising normative contracts that are not ready. Unlisting hides the problem from the navigation while leaving it in place for exactly the reader most likely to care.
+
+The redirect target is the home page rather than the projects entry for `ki-specifications`, since that entry is routeless and would be a second dead end.
+
+**Nothing in `ki-specifications` changes.** This is a judgement about readiness to publish here, and the item should not be read as a judgement of that corpus.
+
+**The four remaining inbound references are rewritten individually.** Each sentence needs a different repair: some can drop the reference, others need to point at the repository directly. A blanket find-and-replace would leave dangling prose.
 
 ## Current state
 

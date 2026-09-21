@@ -4,12 +4,12 @@ area: SITE
 title: Merge tooling into projects
 theme: site-experience
 horizon: now
-status: draft
-blocks: []
-blocked_by: [KI-WEB-SITE-018]
+status: ready
+blocks: [KI-WEB-SITE-023]
+blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:10:00Z
-updated_at: 2026-09-22T09:10:00Z
+updated_at: 2026-09-22T10:00:00Z
 ---
 
 ## Goal
@@ -30,6 +30,18 @@ The `/install/<slug>` routes are a separate contract, carried in `dist/_redirect
 
 `/tooling/harnesses/` and `/tooling/guidance/` are not tool pages. They are task guidance — how to bootstrap a harness, how to activate a skill in a scope — and they move to `/guidance/`, not to `/projects/`.
 
+## Shaping
+
+**The four tools join `projects.json5` as entries carrying release and install fields.** Keeping a second registry that the projects section reads would preserve the split in the data while hiding it from the reader, which is the arrangement that produced two indistinguishable sections. One registry, with optional fields that a project shipping a binary fills in.
+
+`sync-tool-release.ts` and `verify-tool-routes.ts` read the tool entries, so the move must keep the fields those scripts depend on intact under their new home. The `/install/<slug>` routes live in `dist/_redirects` and are gated independently; they are unaffected by where the registry entry sits.
+
+**"What can I install today" gets a deliberate answer on the projects index.** It was the tooling section's one genuine job, and folding four installable tools into a fourteen-entry list loses it unless the index groups them.
+
+**The retired routes redirect rather than 404.** `/tooling/` and the four tool paths have been published; `/tooling/harnesses/` and `/tooling/guidance/` redirect to their new guidance homes.
+
+**The two guidance pages move rather than merge.** They describe how to bootstrap a harness and how to activate a skill in a scope — task guidance that was filed under released tools by accident of navigation.
+
 ## Current state
 
 `/tooling/` publishes six routes: an index, four tool pages built from `tools.json5` through `tool.njk`, and the two guidance pages named above. `/projects/` publishes an index and eleven pages built from `projects.json5` through `project.njk` and `projectPages.ts`; three of the fourteen registry entries are deliberately routeless.
@@ -45,7 +57,7 @@ The two page templates differ mainly in that the tool template carries install i
 - [ ] Give the projects index a way to see the released tools as a group, since "what can I install today" is a real question and was the tooling section's one genuine job.
 - [ ] Move `/tooling/harnesses/` and `/tooling/guidance/` into `/guidance/`, handing the hub placement to `KI-WEB-SITE-019`.
 - [ ] Remove the tooling routes and templates, drop the navigation entry, and redirect `/tooling/` and `/tooling/<slug>/` to their new homes rather than letting them 404.
-- [ ] Update the pages that link to `/tooling/`, and rewrite the merged pages against the revised ownership test from `KI-WEB-SITE-018`.
+- [ ] Update the pages that link to `/tooling/`. Rewriting the merged pages for depth is `KI-WEB-SITE-023`; this item carries them across intact.
 - [ ] Run `bun run ki:site:clean` before the build, since removing routes leaves stale output otherwise.
 
 ## Files touched
@@ -63,7 +75,7 @@ The two page templates differ mainly in that the tool template carries install i
 
 ## Dependencies / blocks
 
-Blocked by `KI-WEB-SITE-018`: the merged pages are rewritten against the revised ownership test, and doing that before the test is settled means writing them twice.
+Not blocked. This item is structural — routes, registry, templates and redirects — and deliberately moves the pages unchanged; their depth is `KI-WEB-SITE-023`, which it blocks.
 
 Hands `/tooling/harnesses/` and `/tooling/guidance/` to `KI-WEB-SITE-019`.
 
