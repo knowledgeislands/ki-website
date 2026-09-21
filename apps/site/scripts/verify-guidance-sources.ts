@@ -16,10 +16,12 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const guidanceDir = resolve(siteRoot, 'src/guidance')
 const sourcesPartial = 'partials/sources.njk'
+const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
 
 const repositoryOwner = 'knowledgeislands'
 const repositoryPattern = /^knowledgeislands\/[a-z0-9]+(?:[-.][a-z0-9]+)*$/
@@ -326,6 +328,49 @@ for (const file of pages) {
     if (source.repository) repositorySources.push({ page, source })
   })
 }
+
+/**
+ * Holds a vendored snapshot to the ref its page cites.
+ *
+ * A vendored page publishes its snapshot's content and its frontmatter's citation as one claim. If
+ * the two refs drift apart the page cites a document it is not showing, which is a local
+ * inconsistency rather than upstream movement — so unlike drift, this fails, and fails offline.
+ */
+const checkVendoredSnapshot = (): void => {
+  let snapshot: { source?: Source }
+  try {
+    snapshot = JSON5.parse(readFileSync(vendoredData, 'utf-8'))
+  } catch (error) {
+    fail(`${relative(siteRoot, vendoredData)}: could not be read (${(error as Error).message}).`)
+    return
+  }
+
+  const { repository, path, ref } = snapshot.source ?? {}
+  if (!repository || !path || !ref) {
+    fail(`${relative(siteRoot, vendoredData)}: must declare the repository, path, and ref it was taken from.`)
+    return
+  }
+
+  const citing = repositorySources.filter(
+    (entry) => entry.source.repository === repository && entry.source.path === path
+  )
+  if (citing.length === 0) {
+    fail(
+      `${relative(siteRoot, vendoredData)}: vendors ${repository}/${path}, but no guidance page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
+    )
+    return
+  }
+
+  for (const { page, source } of citing) {
+    if (source.ref !== ref) {
+      fail(
+        `${page}: cites ${repository}/${path} at ${source.ref}, but the vendored snapshot was taken at ${ref}. Re-run sync:skills at the cited ref, or advance the citation.`
+      )
+    }
+  }
+}
+
+checkVendoredSnapshot()
 
 if (network && failures.length === 0) {
   for (const { page, source } of repositorySources) {

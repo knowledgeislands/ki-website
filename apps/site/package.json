@@ -18,6 +18,7 @@
     "ki:site:dev:css": "bunx tailwindcss -i src/assets/css/main.css -o ./dist/assets/css/main.css --watch",
     "ki:site:dev:serve": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "preview": "bun run build && bunx wrangler dev",
+    "sync:skills": "bun scripts/sync-skill-catalogue.ts",
     "upload": "bunx wrangler versions upload",
     "verify:guidance": "bun scripts/verify-guidance-sources.ts",
     "verify:projects": "bun scripts/verify-projects.ts",

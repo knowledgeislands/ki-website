@@ -51,6 +51,22 @@ sources: original
 
 This is a claim, not a default. It says someone decided the page has no source, which is different from nobody having filled the field in.
 
+### Vendored pages
+
+A third case sits between the two. A **vendored** page declares `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. `/guidance/skills/catalogue/` is the one that exists today, rendering the harness's generated capability inventory from `apps/site/src/_data/skillCatalogue.json5` — see [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md).
+
+Vendoring is the right answer only where the upstream artefact is itself a specified interface and the site adds nothing by rewording it. That is a narrow case: the catalogue qualifies because `ki-repo-harness` names its markers normatively and fixes its fields, and because an inventory reworded is still an inventory. Most guidance is not like that, and [the ownership test](guidance-ownership.md#the-test) still decides.
+
+Refresh a vendored page by re-running its sync at a new ref and advancing the declared `ref` and `reviewed` in the same change:
+
+```bash
+bun run --cwd apps/site sync:skills -- --ref <tag-or-commit>
+```
+
+The snapshot's ref and the page's declared ref must agree, and the check **fails** when they do not — offline, unlike everything else in this guide. Upstream moving is not the site's fault and warns; the site citing one ref while publishing another is the site contradicting itself, and no amount of upstream good behaviour will fix it.
+
+Nothing is fetched during a build. `apps/site/dist/` has to be reproducible, so a build that reached the network would depend on when it ran.
+
 ## Publishing the declaration
 
 The frontmatter is not an internal note. Every guidance page ends with
