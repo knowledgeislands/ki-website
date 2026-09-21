@@ -4,12 +4,12 @@ area: SITE
 title: Reconcile static analysis warnings
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 681af19afd11e32fa4d0182fc054456335e60bed
 created_at: 2026-09-19T19:54:00Z
-updated_at: 2026-09-21T08:03:45Z
+updated_at: 2026-09-21T10:41:09Z
 ---
 
 # Reconcile static analysis warnings
@@ -141,6 +141,10 @@ Ready for acceptance.
 Reconciled thirteen advisory findings to zero under the house gate. Seven Biome `!important` warnings were caused by inline `style` attributes, not specificity, so the declarations moved into `main.css` and the `!important` came out by hand; Biome's autofix would have stripped them and silently broken the narrow-viewport layout. Four Knip suppressions were genuinely redundant and went; two are mandated by `ki-engineering` `GEN-1` and stayed. Verified by 594 computed properties and 22 screenshots across eleven pages at two widths, all identical to baseline, plus four green audits.
 
 Two things worth routing rather than promoting. The plan asserted five redundant Knip suppressions on the strength of Knip's own hint, and `GEN-1` contradicted two of them — a reminder that an analyser's opinion about its own configuration is not authority over a standard it cannot see. And the site's templates still carry substantial inline styling, which is what made a routine lint cleanup a visual-regression risk in the first place.
+
+## Done
+
+Accepted 2026-09-21 by Kris Brown on the review packet above.
 
 ## Discussion
 

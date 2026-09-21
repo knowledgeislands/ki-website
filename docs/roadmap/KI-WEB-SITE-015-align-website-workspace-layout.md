@@ -4,12 +4,12 @@ area: SITE
 title: Align website workspace layout
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 3a89d1e46ffc9baebb7b895b2cbb02c9ab6d70af
 created_at: 2026-09-21T07:38:11Z
-updated_at: 2026-09-21T08:09:09Z
+updated_at: 2026-09-21T10:41:09Z
 ---
 
 # Align website workspace layout
@@ -145,6 +145,10 @@ Ready for acceptance.
 Moved the site to the canonical `apps/site` workspace and put Turborepo over the task graph, closing both standards this repository had drifted from. `dist` is byte-identical to baseline, cold and cached, and the `build` task's `inputs` were proven with random-content edits across seven files rather than assumed. Eight audits pass.
 
 Two things worth routing rather than promoting. `ki-repo-website` and `ki-engineering` pull in opposite directions at the `ki:site:*` seam — one wants an exact literal command, the other wants the task runner to own every path — and the resolution leaves the Cloudflare build uncached; whether Workers Builds should call `bun run build` is a decision, not an oversight. And the detection gap that allowed this drift is now `KI-HARNESS-GOV-079`, where three other repositories are still exposed to it.
+
+## Done
+
+Accepted 2026-09-21 by Kris Brown on the review packet above.
 
 ## Discussion
 
