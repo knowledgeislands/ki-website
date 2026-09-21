@@ -169,10 +169,25 @@
     text-decoration: none;
   }
 
+  /* Site header and navigation. These declarations live here rather than
+     inline on partials/nav.njk so the narrow-viewport rules below can override
+     them through the cascade instead of !important. */
+  .site-header-inner {
+    align-items: center;
+  }
+
+  .site-nav-list {
+    gap: 2rem;
+  }
+
+  .site-nav-list a {
+    font-size: 0.9375rem;
+  }
+
   /* Keep the shared navigation within narrow viewports. */
   @media (max-width: 700px) {
     .site-header-inner {
-      align-items: flex-start !important;
+      align-items: flex-start;
       flex-direction: column;
       gap: 0.75rem;
     }
@@ -184,11 +199,11 @@
 
     .site-nav-list {
       flex-wrap: wrap;
-      gap: 0.625rem 1rem !important;
+      gap: 0.625rem 1rem;
     }
 
     .site-nav-list a {
-      font-size: 0.8125rem !important;
+      font-size: 0.8125rem;
     }
   }
 
@@ -309,6 +324,15 @@
   /* Default section vertical padding */
   .section-pad {
     padding: 5rem 0;
+  }
+
+  /* Hero vertical padding. The home hero is taller than the section heroes. */
+  .hero-section-tall {
+    padding: 6rem 0 5rem;
+  }
+
+  .hero-section-standard {
+    padding: 4rem 0 3.5rem;
   }
 
   /* Responsive grid layouts — class replaces inline grid-template-columns */
@@ -493,17 +517,12 @@
 
   /* Reduce hero/section vertical padding */
   .hero-section {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3rem !important;
+    padding-top: 3.5rem;
+    padding-bottom: 3rem;
   }
 
   .section-pad {
     padding: 3rem 0;
-  }
-
-  .section-pad-lg {
-    padding-top: 3rem !important;
-    padding-bottom: 3rem !important;
   }
 
   /* Footer bottom row: wrap on narrow screens */
