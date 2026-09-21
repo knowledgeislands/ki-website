@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Command-line interface
 description: Understand what the KI CLI owns and where to find authoritative command help.
 permalink: /guidance/using-ki/command-line-interface/

@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Operator guides
 description: Index of the tools-ki operator guides, linked at the release they describe.
 permalink: /guidance/cli/operator-guides/

@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Install and get started
 description: Install the KI CLI, bootstrap compatible harnesses, activate skills, and govern a repository.
 permalink: /guidance/using-ki/getting-started/

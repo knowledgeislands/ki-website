@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: KI CLI guidance
 description: Use the KI command-line interface to manage capabilities, update verified installations, and prepare local imports.
 permalink: /guidance/cli/

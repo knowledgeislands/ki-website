@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Choose a skill by outcome
 description: Route a plain-language outcome to the smallest Knowledge Islands skill or journey that serves it.
 permalink: /guidance/skills/by-outcome/

@@ -1,7 +1,6 @@
 ---
 title: Prompting Ministral 3 (Mistral edge models)
 description: Model-specific prompting guidance for the Ministral 3 family.
-layout: layouts/base.njk
 sources:
   - url: https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512
     title: 'Ministral-3-14B-Instruct-2512 (Hugging Face)'
@@ -16,10 +15,6 @@ sources:
     governs: 'Family overview, sizes, licence'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Ministral 3 (Mistral edge models)
 
@@ -38,8 +33,3 @@ Ministral 3 is Mistral's local/edge line — small enough for a laptop or single
 - **Serve with the Mistral tokenizer.** Reliability depends on the runtime: use vLLM with `--tokenizer_mode mistral --config_format mistral --load_format mistral` (and the Mistral tool-call parser) rather than a generic template.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

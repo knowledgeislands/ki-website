@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Optional tools
 description: Evaluate optional machine-level tools for configuration, context management, skill discovery, and MCP access.
 permalink: /guidance/using-ki/recommended-tools/

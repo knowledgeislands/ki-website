@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Capability lifecycle
 description: Understand how KI installs harnesses separately from activating their capabilities.
 permalink: /guidance/cli/capability-lifecycle/

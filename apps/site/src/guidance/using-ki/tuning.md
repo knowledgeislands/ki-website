@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Tune an agent session
 description: Reduce standing context and runtime cost while retaining the capabilities an agent needs.
 permalink: /guidance/using-ki/tuning/

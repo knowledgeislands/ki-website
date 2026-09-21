@@ -1,7 +1,6 @@
 ---
 title: Prompting Google Gemini 3
 description: Model-specific prompting guidance for Google's Gemini 3 line.
-layout: layouts/base.njk
 sources:
   - url: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/gemini-3-prompting-guide
     title: 'Gemini 3 prompting guide'
@@ -16,10 +15,6 @@ sources:
     governs: 'Cross-model prompt structure and grounding'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Google Gemini 3
 
@@ -48,8 +43,3 @@ Gemini 3 is Google's frontier reasoning line, reached for long-context, multimod
 - **Knowledge cutoff.** January 2025 — for time-sensitive queries, state the current date in the system instruction and have it follow that when forming search queries.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

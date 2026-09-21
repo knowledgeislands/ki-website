@@ -1,7 +1,6 @@
 ---
 title: Prompting OpenAI GPT-5.6 (Sol / Terra / Luna)
 description: Model-specific prompting guidance for OpenAI GPT-5.6 in Codex CLI.
-layout: layouts/base.njk
 sources:
   - url: https://www.agensi.io/learn/gpt-5-6-sol-terra-luna-skills-guide
     title: 'GPT-5.6 Sol, Terra, Luna: Skills Setup for Codex CLI'
@@ -12,10 +11,6 @@ sources:
     governs: 'Tiers, effort/mode axis, pricing, preview status'
     reviewed: '2026-07-13'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting OpenAI GPT-5.6 (Sol / Terra / Luna)
 
@@ -57,8 +52,3 @@ A repo running under Codex declares these in `["knowledgeislands/ki-agentic-harn
 - **Everything in [Prompting OpenAI GPT-5.5](/guidance/prompting/gpt-5-5/) still applies** — the Responses API, `phase` field, verbosity param, and tool-preamble guidance are unchanged across the GPT-5 line.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

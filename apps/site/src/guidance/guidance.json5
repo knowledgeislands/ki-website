@@ -1,0 +1,12 @@
+// Directory data for every published guidance page, inherited by the subdirectories below it.
+//
+// Guidance is authored in Markdown, which carries no chrome of its own: base.njk drops `content`
+// straight into `<main>`, and the stylesheet styles the `.prose-ki` component rather than bare
+// `p`/`ul`/`li`. A Markdown page therefore rendered edge-to-edge with no measure until fourteen
+// prompting pages pasted the wrapper into their own bodies and the other seventeen did not.
+//
+// Setting the layout here rather than in each frontmatter means a guidance page is styled because
+// of where it lives, so a page added later cannot ship unstyled by omission.
+{
+  layout: 'layouts/page.njk'
+}

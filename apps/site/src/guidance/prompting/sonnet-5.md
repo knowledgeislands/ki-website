@@ -1,7 +1,6 @@
 ---
 title: Prompting Claude Sonnet 5
 description: Model-specific prompting guidance for Claude Sonnet 5.
-layout: layouts/base.njk
 sources:
   - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5
     title: 'Prompting Claude Sonnet 5'
@@ -16,10 +15,6 @@ sources:
     governs: 'The cross-model principles in the area index'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Claude Sonnet 5
 
@@ -48,8 +43,3 @@ Sonnet 5 has particular strengths in coding and agentic tasks and is the tier fo
 - **Code review.** As with Opus 4.8, a harness tuned for an older model may show lower reported recall because Sonnet 5 follows "be conservative / high-severity only" instructions more faithfully. Tell the finding stage its job is coverage and filter separately, or set a concrete severity bar.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

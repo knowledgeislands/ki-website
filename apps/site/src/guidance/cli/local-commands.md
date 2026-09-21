@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Local utility commands
 description: Manage local KI capabilities, documentation locations, and supported machine projections.
 permalink: /guidance/cli/local-commands/

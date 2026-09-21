@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Plan and deliver governed work
 description: Turn a deep audit or transferred concern into implementation-ready, governed roadmap work.
 permalink: /guidance/using-ki/planning-and-delivery/

@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+{#
+  Prose chrome for Markdown pages.
+
+  base.njk emits `content` straight into `<main>`, which is right for the hand-built `.njk`
+  pages: they carry full-bleed section backgrounds and supply their own containers. A Markdown
+  page has neither, so it rendered edge-to-edge with no measure and no vertical rhythm — the
+  stylesheet has no element-level rules for `p`, `ul` or `li`, only the `.prose-ki` component.
+
+  Thirteen prompting pages used to paste this wrapper into their own body. Holding it in a layout
+  means a guidance page added tomorrow is styled because it is a guidance page, not because
+  someone remembered.
+#}
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <article class="prose-ki" style="max-width: none;">
+      {{ content | safe }}
+    </article>
+  </div>
+</section>

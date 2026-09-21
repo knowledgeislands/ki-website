@@ -1,7 +1,6 @@
 ---
 title: Prompting Gemma 4 (31B)
 description: Model-specific prompting guidance for Gemma 4 31B.
-layout: layouts/base.njk
 sources:
   - url: https://ai.google.dev/gemma/docs/core/prompt-formatting-gemma4
     title: 'Gemma 4 prompt formatting'
@@ -16,10 +15,6 @@ sources:
     governs: 'Tool-calling tokens and handshake'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Gemma 4 (31B)
 
@@ -38,8 +33,3 @@ Gemma 4 31B is a capable local model for a workstation or single accelerator, re
 - **Watch the inference stack.** Tool-use and system-prompt reliability depend on the runtime, not just the weights — some stacks (e.g. certain llama.cpp builds) mishandle Gemma's tool-response tokens. Verify tool round-trips on your actual stack.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

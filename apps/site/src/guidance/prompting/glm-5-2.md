@@ -1,7 +1,6 @@
 ---
 title: Prompting GLM-5.2
 description: Model-specific prompting guidance for Z.ai's GLM-5.2.
-layout: layouts/base.njk
 sources:
   - url: https://github.com/zai-org/GLM-5
     title: 'GLM-5 repository (zai-org/GLM-5)'
@@ -12,10 +11,6 @@ sources:
     governs: 'Hosted-inference parameters and effort mapping'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting GLM-5.2
 
@@ -34,8 +29,3 @@ GLM-5.2 is the open-weight choice for agentic software engineering and long-hori
 - **Be concrete on coding specifics.** Name the language, framework, and versions, the project structure, and the exact deliverable. For agentic work, give the tools available and a rough decomposition.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

@@ -1,7 +1,6 @@
 ---
 title: Prompting Qwen3 (small / coder)
 description: Model-specific prompting guidance for small and coder Qwen3 models.
-layout: layouts/base.njk
 sources:
   - url: https://qwen.readthedocs.io/en/latest/getting_started/quickstart.html
     title: 'Qwen documentation — Quickstart'
@@ -12,10 +11,6 @@ sources:
     governs: 'Recommended sampling per mode, `enable_thinking`'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Qwen3 (small / coder)
 
@@ -33,8 +28,3 @@ Qwen3 is the versatile open-weight all-rounder, and its coder variants are a str
 - **Mind the local context budget.** The small variants run in tight VRAM — keep prompts focused and cap output length so a long thinking trace doesn't exhaust the window on-device.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

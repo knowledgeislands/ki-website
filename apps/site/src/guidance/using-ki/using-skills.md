@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Use skills
 description: Invoke a Knowledge Islands skill through a natural-language trigger or an explicit runtime command.
 permalink: /guidance/using-ki/using-skills/

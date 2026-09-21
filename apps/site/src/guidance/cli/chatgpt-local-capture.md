@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: ChatGPT local-capture format
 description: Prepare the bounded local capture accepted by the KI ChatGPT import adapter.
 permalink: /guidance/cli/chatgpt-local-capture/

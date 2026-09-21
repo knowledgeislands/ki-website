@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Skills and journeys
 description: Understand Knowledge Islands skills, their domains, and the process journey from a live session to governed delivery.
 permalink: /guidance/skills/

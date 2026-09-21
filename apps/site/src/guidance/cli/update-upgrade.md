@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Update and upgrade
 description: Refresh verified KI installations and the harness providers selected by a repository.
 permalink: /guidance/cli/update-upgrade/

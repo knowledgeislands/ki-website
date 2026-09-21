@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Using Knowledge Islands
 description: Understand the Knowledge Islands harness, its governed capabilities, and the path from installation to day-to-day use.
 permalink: /guidance/using-ki/

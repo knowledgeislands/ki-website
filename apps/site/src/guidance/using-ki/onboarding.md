@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Onboard a repository
 description: Connect a repository to native KI governance with explicit capability declarations, trusted harnesses, and CI.
 permalink: /guidance/using-ki/onboarding/

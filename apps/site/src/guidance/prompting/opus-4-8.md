@@ -1,7 +1,6 @@
 ---
 title: Prompting Claude Opus 4.8
 description: Model-specific prompting guidance for Claude Opus 4.8.
-layout: layouts/base.njk
 sources:
   - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8
     title: 'Prompting Claude Opus 4.8'
@@ -16,10 +15,6 @@ sources:
     governs: 'The cross-model principles in the area index'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Claude Opus 4.8
 
@@ -49,8 +44,3 @@ Opus 4.8 is the strong general tier for complex reasoning, knowledge work, codin
 - **Code review.** It is meaningfully better at finding bugs, but a harness tuned for an older model may show _lower_ reported recall: it follows "only report high-severity" instructions more faithfully and drops findings below your stated bar. Tell the finding stage its job is coverage — report everything with a confidence and severity — and filter in a separate step, or set a concrete bar rather than a vague "important".
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

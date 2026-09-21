@@ -1,7 +1,6 @@
 ---
 title: Prompting Claude Haiku 4.5
 description: Model-specific prompting guidance for Claude Haiku 4.5.
-layout: layouts/base.njk
 sources:
   - url: https://www.anthropic.com/claude-haiku-4-5-system-card
     title: 'Claude Haiku 4.5 system card'
@@ -12,10 +11,6 @@ sources:
     governs: 'Effort-as-lever and the cross-model principles in the area index'
     reviewed: '2026-07-13'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Claude Haiku 4.5
 
@@ -42,8 +37,3 @@ Haiku 4.5 is the tier for mechanical, bulk, and high-volume steps — the fan-ou
 - **Escalation, not replacement.** Default a flow to Haiku and escalate the specific steps that demonstrably need more — adversarial verify, hard synthesis — to a stronger type, rather than raising the whole flow's tier.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

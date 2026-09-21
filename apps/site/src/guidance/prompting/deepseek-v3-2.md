@@ -1,7 +1,6 @@
 ---
 title: Prompting DeepSeek V3.2
 description: Model-specific prompting guidance for DeepSeek V3.2.
-layout: layouts/base.njk
 sources:
   - url: https://api-docs.deepseek.com/quick_start/parameter_settings
     title: 'Temperature & parameter settings'
@@ -12,10 +11,6 @@ sources:
     governs: 'Weights, `generation_config.json` defaults, prompt template'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting DeepSeek V3.2
 
@@ -33,8 +28,3 @@ DeepSeek V3.2 is a strong open-weight pick for multi-step reasoning and maths, a
 - **Put documents before the question.** For search/RAG over supplied documents, place the document block first and the instruction after it.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

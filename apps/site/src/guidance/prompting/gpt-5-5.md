@@ -1,7 +1,6 @@
 ---
 title: Prompting OpenAI GPT-5.5
 description: Model-specific prompting guidance for OpenAI GPT-5.5.
-layout: layouts/base.njk
 sources:
   - url: https://developers.openai.com/api/docs/guides/prompt-guidance
     title: 'Prompt guidance'
@@ -16,10 +15,6 @@ sources:
     governs: 'Agentic eagerness, coding-specific tips, GPT-5 → 5.5 deltas'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting OpenAI GPT-5.5
 
@@ -48,8 +43,3 @@ GPT-5.5 is OpenAI's strong general reasoning-and-agentic tier, reached for codin
 - **Migration.** Codex offers an automated path via the OpenAI Docs skill (`openai-docs migrate this project to gpt-5.5`) rather than hand-porting an older prompt stack.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

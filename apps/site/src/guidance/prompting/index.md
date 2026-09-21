@@ -1,7 +1,6 @@
 ---
 title: Prompting guides
 description: Model-specific prompting guidance for leading frontier and open-weight models.
-layout: layouts/base.njk
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md
@@ -9,10 +8,6 @@ sources:
     governs: 'The portable model-type framing these per-model guides are indexed under'
     reviewed: '2026-09-21'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting guides
 
@@ -80,10 +75,5 @@ These apply to the Claude guides only:
 ## Refreshing
 
 Each guide is distilled from the vendor pages its **Sources** table lists — tagged and dated. To update a guide, re-read those pages and re-date the "Last reviewed" column. The cross-cutting Anthropic reference is [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
-
-</article>
-
-</div>
-</section>
 
 {% include "partials/sources.njk" %}

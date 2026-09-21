@@ -1,7 +1,6 @@
 ---
 title: Prompting Llama 4
 description: Model-specific prompting guidance for Meta's Llama 4 family.
-layout: layouts/base.njk
 sources:
   - url: https://www.llama.com/docs/model-cards-and-prompt-formats/llama4/
     title: 'Llama 4 model cards & prompt formats'
@@ -16,10 +15,6 @@ sources:
     governs: 'Prompting, model selection, moderation'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Llama 4
 
@@ -39,8 +34,3 @@ Llama 4 is the default "safe" open-weight choice — broadly supported across in
 - **Layer safety at the system level.** Don't rely on prompts alone for safety; pair with Llama Guard 4 as a system-level guardrail.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

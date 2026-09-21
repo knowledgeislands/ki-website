@@ -1,7 +1,6 @@
 ---
 title: Prompting Claude Fable 5
 description: Model-specific prompting guidance for Claude Fable 5 and Mythos 5.
-layout: layouts/base.njk
 sources:
   - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5
     title: 'Prompting Claude Fable 5'
@@ -16,10 +15,6 @@ sources:
     governs: 'The cross-model principles in the area index'
     reviewed: '2026-07-09'
 ---
-
-<section class="section-parchment section-pad">
-  <div class="page-container" style="max-width: 64rem;">
-    <article class="prose-ki" style="max-width: none;">
 
 # Prompting Claude Fable 5
 
@@ -60,8 +55,3 @@ Effort is the primary intelligence, latency, and cost control, set on the API re
 - **Reasoning visibility.** If an application needs the model's reasoning, read structured `thinking` blocks — do not instruct the model to reproduce its reasoning in the response.
 
 {% include "partials/sources.njk" %}
-
-</article>
-
-</div>
-</section>

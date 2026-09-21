@@ -1,5 +1,4 @@
 ---
-layout: layouts/base.njk
 title: Skill catalogue
 description: Browse every capability in the canonical Knowledge Islands harness and learn when to use it.
 permalink: /guidance/skills/catalogue/
