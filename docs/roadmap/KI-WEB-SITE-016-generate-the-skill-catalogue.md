@@ -4,12 +4,12 @@ title: Generate the skill catalogue
 area: SITE
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-21T15:44:00Z
-updated_at: 2026-09-21T16:40:00Z
+updated_at: 2026-09-21T19:45:00Z
 ---
 
 ## Goal
@@ -41,20 +41,34 @@ It does not propose the site fetch from `main` at build time; if that is the onl
 
 ## Current state
 
-`src/guidance/skills/catalogue.md` restates every harness skill's description in hand-written prose. It now declares `knowledgeislands/ki-agentic-harness` `skills/README.md` as its source and includes `partials/sources.njk`, so `verify:guidance --network` reports when that file moves. Nothing generates the inventory, so acting on the warning still means re-reading a long document line by line.
+`apps/site/src/guidance/skills/catalogue.md` is 206 hand-written lines restating every skill in the harness, pinned at `7dcee9dc`. It is the page the provenance mechanism was built for and the one it serves worst: nothing detects a skill renamed, added, or removed upstream except the blunt fact that `skills/README.md` changed, which it does for every edit.
+
+Shaping answered both open questions, and the answers are firmer than the item assumed.
+
+**The upstream block is a published interface, not an implementation detail.** `skills/README.md` carries its inventory between `<!-- ki-repo-harness:capability-catalogue:start -->` and `<!-- ki-repo-harness:capability-catalogue:end -->` (lines 19–651 today). Those markers are named normatively in `ki-repo-harness`'s own standard, which specifies what the block publishes: source-domain groups, full descriptions, governance/process counts, runtime-neutral argument hints, required dependencies, and runtime bindings. `ki repo conform --skill ki-repo-harness` regenerates it from canonical `SKILL.md` frontmatter, and the harness's rubric tests assert both markers. Parsing between them is consuming a contract, not reverse-engineering a file.
+
+**So no handoff is needed.** The item allowed for asking the harness to publish a machine-readable artefact; it already publishes a specified one. Asking for a second format would be asking for work that duplicates what exists.
+
+**Build-time fetch is rejected, on the repository's own terms.** The neutral website seam requires `apps/site/dist/` to be reproducible, and `verify:guidance --network` is already a person's command rather than a build step for the same reason. A catalogue fetched at build time would make the output depend on when it was built and would fail offline.
+
+That leaves a vendored snapshot pinned at an immutable ref, which is also the house preference for sharing across repositories and the shape `tools.json5` already uses. Staleness detection comes free: the page keeps its `sources` declaration, so the sweep extended in `KI-WEB-SITE-017` already warns when `skills/README.md` moves past the pinned ref — warn rather than fail, exactly the precedent this item wanted to follow.
+
+One consequence needs stating plainly: the page stops being a restatement and becomes a vendored copy. `guidance-ownership.md`'s test asks whether the site is adding something for its reader. For the framing prose the answer stays yes; for the inventory it was always no, which is why it rotted. Provenance gains a third case — declared, restated, or vendored — and the guide has to say so.
 
 ## Steps
 
-- [ ] Confirm what `skills/README.md` is generated from upstream, and whether that source is a stable interface or an implementation detail.
-- [ ] Decide the data route: build-time fetch, a vendored snapshot advanced by an explicit handoff, or a generated artefact the harness publishes for consumers.
-- [ ] Separate the page's framing prose from the generated inventory so a regeneration cannot overwrite editorial judgment.
-- [ ] Implement the chosen route and generate the inventory.
-- [ ] Decide and implement what the page does when the snapshot is stale, following the tool-route registry's warn-rather-than-fail precedent.
-- [ ] Reconcile the page's `sources` declaration with its new status, since a generated inventory cites differently from a restated one.
+- [x] Confirm what `skills/README.md` is generated from upstream and whether it is a stable interface: it is, with normatively named markers and a specified field set.
+- [x] Decide the data route: vendored snapshot pinned at an immutable ref. Build-time fetch rejected against the reproducible-`dist/` contract; no harness handoff needed.
+- [ ] Add `apps/site/scripts/sync-skill-catalogue.ts`, which resolves `skills/README.md` at a given ref, parses the marker-delimited block into structured entries, and writes `apps/site/src/_data/skillCatalogue.json5` carrying the ref it was taken at.
+- [ ] Cover the parser with tests, following `sync-tool-release.test.ts`: a pure parse function over fixture text, so the shape the site depends on is asserted rather than assumed.
+- [ ] Rewrite `catalogue.md` as framing prose plus a Nunjucks loop over that data, keeping the editorial framing outside anything a regeneration overwrites.
+- [ ] Make the ref mismatch mechanical: fail the build offline when the vendored snapshot's ref and the page's declared `sources` ref disagree, since that is a local inconsistency rather than upstream drift.
+- [ ] Reconcile the `sources` declaration for a vendored page and record the vendored case in `guidance-provenance.md`.
+- [ ] Wire the sync script into `apps/site/package.json` and confirm `bun run ki:site:build` passes with the generated page.
 
 ## Files touched
 
-`apps/site/src/guidance/skills/catalogue.md`, a new generator or vendored data file under `apps/site/`, `apps/site/package.json` if a script is added, and `apps/site/scripts/verify-guidance-sources.ts` if generated pages declare sources differently.
+`apps/site/src/guidance/skills/catalogue.md`, `apps/site/scripts/sync-skill-catalogue.ts` and its test, `apps/site/src/_data/skillCatalogue.json5`, `apps/site/scripts/verify-guidance-sources.ts`, `apps/site/package.json`, and `docs/guides/developer/guidance-provenance.md`.
 
 ## Verify
 
@@ -62,13 +76,13 @@ It does not propose the site fetch from `main` at build time; if that is the onl
 
 ## Dependencies / blocks
 
-Depends on what the harness publishes. A route that reads an artefact the harness maintains for consumers needs a handoff to `ki-agentic-harness`; a vendored snapshot does not, and can proceed alone. `KI-WEB-SITE-017` touches the same guidance tree but different pages.
+Not blocked. Shaping established that the vendored route needs nothing from `ki-agentic-harness`, so no handoff is owed. The standing dependency is on the catalogue markers and field set staying as `ki-repo-harness` specifies them; a change there breaks the parser, which is why the parser fails loudly rather than degrading.
 
 ## Documentation impact
 
 ### Decision Records
 
-A decision record is owed if the site adopts a vendored cross-repository snapshot, since that is a standing coupling with a refresh obligation rather than a one-off page change.
+A decision record is owed: the site is adopting a vendored cross-repository snapshot, which is a standing coupling with a refresh obligation rather than a one-off page change. It should record why build-time fetch was rejected and what the site depends on upstream, so the next person meeting the coupling finds the reasoning rather than rediscovering it.
 
 ### Specifications
 
@@ -80,7 +94,7 @@ No behaviour-level contract changes. The site publishes no contract; the catalog
 
 ### Roadmap
 
-If the chosen route needs something from the harness, that handoff is a new item there. Otherwise no roadmap change follows.
+No handoff follows. The route consumes an interface the harness already publishes and specifies, so nothing is asked of it.
 
 ## Discussion
 
