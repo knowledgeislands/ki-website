@@ -1,0 +1,236 @@
+/**
+ * Verifies the website-owned directory of ecosystem projects.
+ *
+ * The directory is descriptive: it pins no version, hosts no artefact and
+ * redirects no installer. What it can be held to is that every entry is
+ * complete, that every card leads somewhere the build actually produced, and
+ * that it never contradicts the release registry in `tools.json5` — the one
+ * declaration allowed to make a version or installer promise.
+ *
+ * Offline checks run by default. `--network` additionally confirms every
+ * declared repository is a public `knowledgeislands` repository, so the
+ * directory cannot quietly advertise a private or deleted one.
+ */
+
+import { existsSync, readFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import JSON5 from 'json5'
+
+const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const registryPath = resolve(siteRoot, 'src/_data/projects.json5')
+const toolsPath = resolve(siteRoot, 'src/_data/tools.json5')
+const iconsPath = resolve(siteRoot, 'src/_includes/macros/icons.njk')
+const distDir = resolve(siteRoot, 'dist')
+
+const kinds = ['principal', 'capability', 'standard', 'mcp', 'platform']
+const availabilities = ['published', 'source']
+const accents = ['gold', 'teal', 'forest']
+const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
+const repositoryPrefix = 'https://github.com/knowledgeislands/'
+
+interface Project {
+  slug: string
+  name: string
+  kind: string
+  tagline: string
+  description: string
+  role: string
+  usage: string
+  repository: string
+  availability: string
+  route?: string
+  icon: string
+  accent: string
+}
+
+interface Tool {
+  slug: string
+}
+
+const failures: string[] = []
+const warnings: string[] = []
+
+const fail = (message: string): void => {
+  failures.push(message)
+}
+
+const warn = (message: string): void => {
+  warnings.push(message)
+}
+
+/** Reads the KI symbol names the icon macro actually defines. */
+const declaredIcons = (): Set<string> => {
+  const source = readFileSync(iconsPath, 'utf-8')
+  return new Set([...source.matchAll(/name == "([^"]+)"/g)].map((match) => match[1] as string))
+}
+
+const requireText = (record: Record<string, unknown>, field: string, where: string): void => {
+  const value = record[field]
+  if (typeof value !== 'string' || value.trim() === '') fail(`${where}: "${field}" must be a non-empty string`)
+}
+
+const readRegistry = <T>(path: string, label: string): T[] => {
+  const parsed = JSON5.parse(readFileSync(path, 'utf-8')) as unknown
+  if (!Array.isArray(parsed) || parsed.length === 0) {
+    fail(`${label} must be a non-empty array of declarations`)
+    return []
+  }
+  return parsed as T[]
+}
+
+/**
+ * Resolves a declared `route` to the file the build should have written, so a
+ * card pointing at a section that was renamed or removed fails the gate
+ * instead of shipping as a dead link.
+ */
+const outputFor = (route: string): string => resolve(distDir, `.${route.endsWith('/') ? `${route}index.html` : route}`)
+
+const checkRegistry = (projects: Project[], tools: Tool[]): void => {
+  const icons = declaredIcons()
+  const toolSlugs = new Set(tools.map((tool) => tool.slug))
+  const seen = new Set<string>()
+
+  for (const [index, project] of projects.entries()) {
+    const where = `projects[${index}]${typeof project.slug === 'string' ? ` (${project.slug})` : ''}`
+    const record = project as unknown as Record<string, unknown>
+
+    for (const field of [
+      'slug',
+      'name',
+      'kind',
+      'tagline',
+      'description',
+      'role',
+      'usage',
+      'repository',
+      'availability',
+      'icon',
+      'accent'
+    ]) {
+      requireText(record, field, where)
+    }
+
+    if (typeof project.slug === 'string') {
+      if (!slugPattern.test(project.slug)) fail(`${where}: "slug" must be lowercase kebab-case`)
+      if (seen.has(project.slug)) fail(`${where}: duplicate slug "${project.slug}"`)
+      seen.add(project.slug)
+      if (toolSlugs.has(project.slug)) {
+        fail(
+          `${where}: "${project.slug}" is already a released tool in tools.json5; released tools are rendered from that registry and must not be restated here`
+        )
+      }
+    }
+
+    if (!kinds.includes(project.kind)) {
+      fail(`${where}: "kind" must be one of ${kinds.join(', ')}, got "${project.kind}"`)
+    }
+
+    if (!availabilities.includes(project.availability)) {
+      fail(`${where}: "availability" must be one of ${availabilities.join(', ')}, got "${project.availability}"`)
+    }
+
+    if (!accents.includes(project.accent)) {
+      fail(`${where}: "accent" must be one of ${accents.join(', ')}, got "${project.accent}"`)
+    }
+
+    if (typeof project.icon === 'string' && !icons.has(project.icon)) {
+      fail(`${where}: "icon" is "${project.icon}", which macros/icons.njk does not define`)
+    }
+
+    if (typeof project.repository !== 'string' || !project.repository.startsWith(repositoryPrefix)) {
+      fail(`${where}: "repository" must be a ${repositoryPrefix}* URL`)
+    }
+
+    if (project.route !== undefined) {
+      if (typeof project.route !== 'string' || !project.route.startsWith('/')) {
+        fail(`${where}: "route" must be an absolute site path, or be omitted entirely`)
+      } else if (project.route.startsWith('/projects/')) {
+        fail(`${where}: "route" must not point back into /projects/; omit it and the page is generated`)
+      }
+    }
+
+    // The directory describes; it never promises a version or an installer.
+    // Those live in tools.json5 and must not be smuggled in through a card.
+    for (const field of ['version', 'installer', 'formula', 'changelog']) {
+      if (record[field] !== undefined) {
+        fail(`${where}: "${field}" belongs in tools.json5, not the project directory`)
+      }
+    }
+  }
+
+  const missingKinds = kinds.filter((kind) => !projects.some((project) => project.kind === kind))
+  if (missingKinds.length > 0) {
+    warn(`no project declares the kind(s) ${missingKinds.join(', ')}; /projects/ will render an empty group`)
+  }
+}
+
+/** Checks the built output when one is present; a clean tree simply skips this. */
+const checkBuild = (projects: Project[]): void => {
+  if (!existsSync(distDir)) {
+    warn('dist/ is absent, so the generated routes were not checked; run the site build first')
+    return
+  }
+
+  if (!existsSync(resolve(distDir, 'projects', 'index.html'))) {
+    fail('dist/projects/index.html was not generated')
+  }
+
+  for (const project of projects) {
+    if (typeof project.route === 'string') {
+      if (!existsSync(outputFor(project.route))) {
+        fail(`${project.slug}: declared route ${project.route} has no generated page in dist/`)
+      }
+      if (existsSync(resolve(distDir, 'projects', project.slug, 'index.html'))) {
+        fail(
+          `${project.slug}: declares route ${project.route} but dist/projects/${project.slug}/ also exists; run the clean script before building`
+        )
+      }
+      continue
+    }
+
+    if (!existsSync(resolve(distDir, 'projects', project.slug, 'index.html'))) {
+      fail(`dist/projects/${project.slug}/index.html was not generated`)
+    }
+  }
+}
+
+const checkNetwork = async (projects: Project[]): Promise<void> => {
+  for (const project of projects) {
+    const repository = project.repository.slice('https://github.com/'.length)
+    try {
+      const response = await fetch(`https://api.github.com/repos/${repository}`, {
+        headers: { accept: 'application/vnd.github+json' }
+      })
+      if (response.status === 404) {
+        fail(`${project.slug}: ${project.repository} is not publicly visible`)
+        continue
+      }
+      if (!response.ok) {
+        warn(`${project.slug}: could not read ${repository} (HTTP ${response.status})`)
+        continue
+      }
+      const metadata = (await response.json()) as { private?: boolean; archived?: boolean }
+      if (metadata.private === true) fail(`${project.slug}: ${repository} is private and must not be listed`)
+      if (metadata.archived === true) warn(`${project.slug}: ${repository} is archived; confirm it still belongs here`)
+    } catch (error) {
+      warn(`${project.slug}: could not read ${repository} — ${(error as Error).message}`)
+    }
+  }
+}
+
+const projects = readRegistry<Project>(registryPath, 'src/_data/projects.json5')
+const tools = readRegistry<Tool>(toolsPath, 'src/_data/tools.json5')
+checkRegistry(projects, tools)
+checkBuild(projects)
+if (process.argv.includes('--network')) await checkNetwork(projects)
+
+for (const message of warnings) console.warn(`warning: ${message}`)
+
+if (failures.length > 0) {
+  for (const message of failures) console.error(`error: ${message}`)
+  console.error(`\nverify-projects: ${failures.length} problem(s) found`)
+  process.exit(1)
+}
+
+console.log(`verify-projects: ${projects.length} project entr(ies) verified alongside ${tools.length} released tool(s)`)

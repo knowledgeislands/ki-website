@@ -1,0 +1,63 @@
+---
+pagination:
+  data: projectPages
+  size: 1
+  alias: project
+permalink: "/projects/{{ project.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ project.name | safe }}"
+  description: "{{ project.tagline | safe }} What it owns in the Knowledge Islands ecosystem, and where its canonical source lives."
+---
+{% from "macros/icons.njk" import kiIcon %}
+
+<section class="section-navy hero-section" style="padding: 4rem 0 3.5rem;">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Projects / <code>{{ project.name }}</code></p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 22ch;">{{ project.tagline }}</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 54ch; line-height: 1.7;">{{ project.description }}</p>
+    <p style="margin-top: 1.5rem; font-size: 0.9375rem; color: rgb(245 239 224 / 60%);">Public {{ project.kind }} repository · {{ project.availability }}</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 3rem; align-items: start;">
+      <div class="prose-ki" style="max-width: none;">
+        <p class="overline">Authority</p>
+        <h2>What this repository owns.</h2>
+        <p>{{ project.role }}</p>
+        <p>That boundary is deliberate. The ecosystem separates philosophy, engineering discipline, capability semantics, portable standards, and executable behaviour so that none of them can quietly absorb another. <a href="/projects/">The full directory</a> shows where this project sits relative to the rest.</p>
+
+        <p class="overline" style="margin-top: 2.5rem;">Using it</p>
+        <h2>How to pick it up today.</h2>
+        <p>{{ project.usage }}</p>
+      </div>
+
+      <aside class="card-ki">
+        <div class="symbol-circle symbol-circle-{{ project.accent }}">{{ kiIcon(project.icon, 22) }}</div>
+        <h2 style="font-size: 1.125rem; margin-bottom: 0.75rem;"><code>{{ project.name }}</code> at source.</h2>
+        <p class="text-muted" style="font-size: 0.9375rem;">The repository is the authority for this project's contents, its interfaces and its current state. This page describes it; it does not stand in for it.</p>
+        <p style="margin: 0.75rem 0 0;"><a href="{{ project.repository }}">Open the repository</a></p>
+        <p style="margin: 0.375rem 0 0;"><a href="{{ project.repository }}#readme">Read the README</a></p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Nearby</p>
+      <h2>Other projects of the same kind.</h2>
+      <ul>
+        {%- for other in projects %}
+          {%- if other.kind == project.kind and other.slug != project.slug %}
+        <li><a href="{{ other.route | default('/projects/' + other.slug + '/') }}"><code>{{ other.name }}</code></a> — {{ other.tagline }}</li>
+          {%- endif %}
+        {%- endfor %}
+      </ul>
+      <p>See <a href="/projects/">every public project</a>, or go straight to <a href="/tooling/">the released command-line tools</a>.</p>
+    </div>
+  </div>
+</section>

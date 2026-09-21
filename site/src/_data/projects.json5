@@ -1,0 +1,239 @@
+// Website-owned directory of the public Knowledge Islands ecosystem.
+//
+// This file answers one question: what are the projects, what is each one for,
+// and who owns it. It is a directory, not a release channel — it pins no
+// version, hosts no artefact and redirects no installer. Released command-line
+// tools keep that contract in `tools.json5`, and `/projects/` renders them from
+// there rather than restating them here, so a tool's version and installer have
+// exactly one declaration.
+//
+// Only public repositories appear. A private or internally operated repository
+// is deliberately absent; the directory is a public surface and must not leak
+// the existence of work that is not itself public.
+//
+// Fields
+//   slug         route segment for `/projects/<slug>/`, and the card anchor
+//   name         the repository as its owners name it
+//   kind         principal | capability | standard | mcp | platform
+//   tagline      one short sentence for cards and page headers
+//   description  a fuller paragraph for the project page
+//   role         the authority this project holds in the ecosystem
+//   usage        how a reader actually consumes it today, stated honestly
+//   repository   canonical source repository
+//   availability published | source (see docs/guides/projects-directory.md)
+//   route        an existing site page that is already this project's home;
+//                omit it and `/projects/<slug>/` is generated instead
+//   icon         KI symbol name from src/_includes/macros/icons.njk
+//   accent       symbol-circle accent: gold | teal | forest
+//
+// `bun run ki:site:verify:projects` gates the declaration before deployment.
+[
+  // ── Principal knowledge bases ───────────────────────────────────────────
+  {
+    slug: 'ki-arcadia-principal',
+    name: 'ki-arcadia-principal',
+    kind: 'principal',
+    tagline: 'The canonical record of the Knowledge Islands philosophy and conceptual model.',
+    description:
+      'Arcadia Principal is where the approach is developed and proved before anything is built on it. It holds the philosophy, the conceptual model, and the worked record that shows the model surviving contact with real knowledge work — and it does so without mandating any particular tooling implementation.',
+    role: 'Canonical source of the philosophy and conceptual model. It informs every other repository and mandates none of their implementations.',
+    usage: 'A public Markdown knowledge base. Read it in the repository, or read the distilled account under Philosophy and Model on this site.',
+    repository: 'https://github.com/knowledgeislands/ki-arcadia-principal',
+    availability: 'source',
+    icon: 'island',
+    accent: 'gold'
+  },
+  {
+    slug: 'ki-techne-principal',
+    name: 'ki-techne-principal',
+    kind: 'principal',
+    tagline: 'The canonical record of the Knowledge Islands engineering discipline.',
+    description:
+      'Techne Principal translates the philosophy into engineering: architecture, operating models, workflows, technology posture, and the implementation patterns the tooling repositories follow. It informs how things are built without owning any repository\'s executable behaviour or its portable normative contracts.',
+    role: 'Canonical source of the engineering discipline. It shapes implementation repositories; it does not define their executables or standards.',
+    usage: 'A public Markdown knowledge base. Read it in the repository alongside the guidance published on this site.',
+    repository: 'https://github.com/knowledgeislands/ki-techne-principal',
+    availability: 'source',
+    icon: 'tree',
+    accent: 'forest'
+  },
+
+  // ── Agentic capabilities ────────────────────────────────────────────────
+  {
+    slug: 'ki-agentic-harness',
+    name: 'ki-agentic-harness',
+    kind: 'capability',
+    tagline: 'The canonical source of reusable agentic capabilities and compatible harnesses.',
+    description:
+      'A capability here is a typed published member of a compatible harness: a skill, an agent, an MCP server, a hook, an eval, or a future registered kind. The harness defines what each capability contains and what it means. It does not implement the ki executable, and it does not originate portable normative contracts.',
+    role: 'Canonical source of capability content and semantics, and of the compatible-harness contract that ki installs against.',
+    usage: 'Install a compatible harness with the ki CLI, then activate only the capabilities a piece of work needs.',
+    repository: 'https://github.com/knowledgeislands/ki-agentic-harness',
+    availability: 'source',
+    route: '/tooling/harnesses/',
+    icon: 'archipelago',
+    accent: 'teal'
+  },
+  {
+    slug: 'ki-plugins',
+    name: 'ki-plugins',
+    kind: 'capability',
+    tagline: 'A Claude plugin marketplace projecting harness skills and agents onto the Cowork surface.',
+    description:
+      'The same capabilities the harness publishes, reprojected as a Claude plugin marketplace so they can be installed on surfaces that consume plugins rather than harnesses. It is a projection, not a second authority: the harness remains the source for what each skill and agent contains.',
+    role: 'Delivery projection of harness capabilities onto the Claude plugin surface. It defines no capability of its own.',
+    usage: 'Add the marketplace in a Claude client that supports plugins, then install the skills and agents you want.',
+    repository: 'https://github.com/knowledgeislands/ki-plugins',
+    availability: 'source',
+    icon: 'stellar',
+    accent: 'gold'
+  },
+
+  // ── Portable standards ──────────────────────────────────────────────────
+  {
+    slug: 'ki-specifications',
+    name: 'ki-specifications',
+    kind: 'standard',
+    tagline: 'The canonical source of normative, portable Knowledge Islands contracts.',
+    description:
+      'KIPs, KIS documents, schemas, templates, conformance rules, reference examples, and the portable capability identity and inventory contracts. Specifications formalise concepts once they are proven and once implementations have supplied evidence; an Active KIS then governs every implementation claiming conformance within its scope.',
+    role: 'Canonical source of portable normative contracts. Active specifications constrain the harness and the CLI; neither of them constrains a specification.',
+    usage: 'Read the published specifications on this site, or the canonical documents and schemas in the repository.',
+    repository: 'https://github.com/knowledgeislands/ki-specifications',
+    availability: 'source',
+    route: '/specifications/',
+    icon: 'lighthouse',
+    accent: 'gold'
+  },
+
+  // ── MCP servers ─────────────────────────────────────────────────────────
+  {
+    slug: 'mcp-ki-kb-fs',
+    name: 'mcp-ki-kb-fs',
+    kind: 'mcp',
+    tagline: 'Give an agent scoped read and write access to local knowledge-base directories.',
+    description:
+      'One registration serves many knowledge bases: the environment declares alias-to-path pairs and every tool call names the base it acts in. Each path is validated twice — lexically, then through realpath — so neither a traversal nor a symlink can reach outside the declared root, and no call under one alias can wander into a sibling base. Dotfiles and repository metadata stay hidden from ordinary tools. No network, no authentication.',
+    role: 'The knowledge-base filesystem adapter. It reads and writes notes; it holds no knowledge of its own.',
+    usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-ki-kb-fs',
+    availability: 'source',
+    icon: 'book',
+    accent: 'teal'
+  },
+  {
+    slug: 'mcp-ki-kb-notion-mirror',
+    name: 'mcp-ki-kb-notion-mirror',
+    kind: 'mcp',
+    tagline: 'Mirror knowledge-base notes into Notion for people who do not work in the repository.',
+    description:
+      'Pushes Markdown notes into Notion records and writes the resulting Notion URL back into the note\'s frontmatter. The knowledge base stays canonical and the mirror stays derivative — a read surface for readers who are not in the repository. It assumes no fixed root folder and no fixed wiki database; note, tree, and roots verbs let a caller drive exactly the subtree it means to mirror.',
+    role: 'A derivative publication adapter. Nothing it writes to Notion becomes authoritative.',
+    usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-ki-kb-notion-mirror',
+    availability: 'source',
+    icon: 'weave',
+    accent: 'gold'
+  },
+  {
+    slug: 'mcp-git-audit',
+    name: 'mcp-git-audit',
+    kind: 'mcp',
+    tagline: 'Audit a whole tree of Git repositories, read-only until an operator says otherwise.',
+    description:
+      'Walks a tree of checkouts and reports branch, working-tree status, ahead and behind counts, and last-commit metadata for each. The walk and the per-repository git calls are split into separate tools, so one cheap filesystem scan can be cached and re-audited many times. Remote and branch mutations exist but stay hidden until an operator raises the access level, and every walked path is validated against a configured allow-list of safe roots.',
+    role: 'A read-only-by-default Git observation adapter for wide working sets.',
+    usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-git-audit',
+    availability: 'source',
+    icon: 'route',
+    accent: 'forest'
+  },
+  {
+    slug: 'mcp-housekeeping-claude',
+    name: 'mcp-housekeeping-claude',
+    kind: 'mcp',
+    tagline: 'Audit and safely clean the filesystem state Claude applications accumulate.',
+    description:
+      'Codified audits across the three storage areas Claude apps leave on macOS: Claude Desktop and Cowork sessions, Claude Code state under the user\'s home, and VSCode chat sessions. Each audit step is its own tool, so an agent orchestrates the checks and writes the report. Every tool maps to an access level derived from its MCP annotations, and the default exposes read-only tools only.',
+    role: 'A local hygiene adapter for agent-runtime state. It observes and prunes; it decides nothing about knowledge.',
+    usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-housekeeping-claude',
+    availability: 'source',
+    icon: 'current',
+    accent: 'teal'
+  },
+  {
+    slug: 'mcp-gsuite',
+    name: 'mcp-gsuite',
+    kind: 'mcp',
+    tagline: 'Connect an agent to Google Workspace, with outbound mail confined to drafts.',
+    description:
+      'Gmail search, triage, threading, and label management over the full Gmail query syntax, with batch relabelling in a single API call. Outbound mail is deliberately drafts-only — the server composes, the person reviews in Gmail and clicks Send. Deletion is restricted to recoverable trash; the permanent-delete endpoints are not exposed at all. Calendar and Drive tools follow on the same client, scopes, and access gate.',
+    role: 'A Google Workspace adapter with a deliberately narrowed write surface.',
+    usage: 'Not yet published to a registry. Clone the repository, supply your own Google Cloud OAuth credentials, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-gsuite',
+    availability: 'source',
+    icon: 'compass',
+    accent: 'gold'
+  },
+  {
+    slug: 'mcp-m365',
+    name: 'mcp-m365',
+    kind: 'mcp',
+    tagline: 'Connect an agent to Outlook and OneDrive through the Microsoft Graph API.',
+    description:
+      'Outlook coverage spans reading, searching, sending, and deleting mail, managing folders and rules, and creating or answering calendar events. OneDrive coverage spans listing, searching, download, chunked upload, folder creation, and sharing. A standalone auth server handles the OAuth consent flow and refreshes cached tokens transparently.',
+    role: 'A Microsoft 365 adapter covering the Outlook and OneDrive surfaces.',
+    usage: 'Not yet published to a registry. Clone the repository, supply your own Microsoft app registration, and register the built server with your MCP client.',
+    repository: 'https://github.com/knowledgeislands/mcp-m365',
+    availability: 'source',
+    icon: 'grid',
+    accent: 'forest'
+  },
+
+  // ── Platform and delivery ───────────────────────────────────────────────
+  {
+    slug: 'ki-techne-harness',
+    name: 'ki-techne-harness',
+    kind: 'platform',
+    tagline: 'A runnable personal-controller execution fabric for the ecosystem.',
+    description:
+      'Where the agentic harness publishes capabilities an agent can use, the Techne harness provides somewhere for work to actually run: a Kubernetes-based personal controller and execution fabric that a single operator can stand up and keep. It is infrastructure for the ecosystem rather than a source of knowledge or capability semantics.',
+    role: 'Execution infrastructure. It runs work; it defines neither capabilities nor standards.',
+    usage: 'Public source. Clone the repository and follow its own operating documentation to stand a fabric up.',
+    repository: 'https://github.com/knowledgeislands/ki-techne-harness',
+    availability: 'source',
+    icon: 'grid',
+    accent: 'forest'
+  },
+  {
+    slug: 'homebrew-tap',
+    name: 'homebrew-tap',
+    kind: 'platform',
+    tagline: 'The Homebrew tap that packages the released Knowledge Islands command-line tools.',
+    description:
+      'A delivery repository, not an ecosystem authority. It implements the release transport that each tool repository owns: a validated formula per released tool, so Homebrew takes responsibility for installation, upgrade, and removal on a user\'s machine. It also fans a verified release event out to the repositories that consume one — this website among them.',
+    role: 'Release transport for the command-line tools. Each tool repository remains the authority for what it released.',
+    usage: 'brew install knowledgeislands/tap/<tool> — naming the tap in the argument taps it implicitly.',
+    repository: 'https://github.com/knowledgeislands/homebrew-tap',
+    availability: 'published',
+    icon: 'harbour',
+    accent: 'teal'
+  },
+  {
+    slug: 'ki-website',
+    name: 'ki-website',
+    kind: 'platform',
+    tagline: 'The public publication layer — this site.',
+    description:
+      'An autonomous publication layer. It owns the public guide prose and the routes you are reading now, and it vendors source-labelled material from the other repositories so it can build and deploy without waiting on any of them. Publication never transfers ownership: every page names the repository that is actually the authority for what it describes.',
+    role: 'Public publication. It is authoritative for its own routes and prose, and for nothing else.',
+    usage: 'You are using it. The source is public if you want to see how a page is generated.',
+    repository: 'https://github.com/knowledgeislands/ki-website',
+    availability: 'published',
+    route: '/',
+    icon: 'current',
+    accent: 'gold'
+  }
+]

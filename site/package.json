@@ -11,7 +11,7 @@
   },
   "private": true,
   "scripts": {
-    "build": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts && bun run verify:routes",
+    "build": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts && bun run verify:routes && bun run verify:projects",
     "clean": "rm -rf dist .wrangler",
     "deploy": "bunx wrangler deploy",
     "ki:site:dev": "concurrently --kill-others-on-fail --names css,11ty --prefix-colors cyan,yellow \"bun run ki:site:dev:css\" \"bun run ki:site:dev:serve\"",
@@ -19,6 +19,7 @@
     "ki:site:dev:serve": "bun node_modules/@11ty/eleventy/cmd.cjs --config=eleventy.config.ts --serve --port 3000",
     "preview": "bun run build && bunx wrangler dev",
     "upload": "bunx wrangler versions upload",
+    "verify:projects": "bun scripts/verify-projects.ts",
     "verify:routes": "bun scripts/verify-tool-routes.ts"
   },
   "type": "module"

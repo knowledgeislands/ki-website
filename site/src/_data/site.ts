@@ -8,6 +8,7 @@ const site = {
   nav: [
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
+    { label: 'Projects', href: '/projects/' },
     { label: 'Tooling', href: '/tooling/' },
     { label: 'Guidance', href: '/guidance/using-ki/' },
     { label: 'Specifications', href: '/specifications/' },
