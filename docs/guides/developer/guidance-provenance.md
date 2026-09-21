@@ -2,7 +2,9 @@
 
 How every published guidance page records what it was written from, and how a refresh sweep finds the pages whose upstream has moved.
 
-[Deciding what this site publishes](guidance-ownership.md) sets out when the site restates material that another repository owns. This guide is the mechanism that makes restating safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
+[Deciding what this site publishes](guidance-ownership.md) sets out how much of another repository's material the site carries. This guide is the mechanism that makes carrying it safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
+
+The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since [GDR-KI-WEBSITE-002](../../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
 
 ## The problem this solves
 
