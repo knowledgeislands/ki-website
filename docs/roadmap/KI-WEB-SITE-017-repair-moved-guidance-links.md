@@ -4,12 +4,12 @@ title: Repair moved guidance links
 area: SITE
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-21T15:44:00Z
-updated_at: 2026-09-21T16:40:00Z
+updated_at: 2026-09-21T17:45:00Z
 ---
 
 ## Goal
@@ -42,23 +42,30 @@ This is repair of the site's own links and citations. Whether the harness should
 
 ## Current state
 
-The provenance sweep's first `--network` run reports two harness documents that are absent from `ki-agentic-harness` on its default branch and are linked from published pages at `main`, so they are broken for readers today. It separately reports `tools-ki` `docs/guides/vscode-management.md` as absent, which is a move the site's `v0.4.0` pin still resolves through. No repair has been made.
+The provenance sweep's first `--network` run reports two harness documents absent from `ki-agentic-harness` on its default branch, both linked from published pages at `main`, so they are broken for readers today. Shaping established what happened to each:
+
+- `docs/guides/developer/retiring-repository-vendored-ki.md` was **retired** on 2026-08-10 by `2a19ce8a` ("docs: remove legacy migration guidance"), which deleted 171 lines alongside a retired checkpoint and a superseded decision record. No replacement exists, and none is intended — the guidance was legacy migration material.
+- `docs/diagrams/skills-map.svg` was **replaced** on 2026-08-13 by `9e09b943` ("feat(harness): publish skill discovery guide"), which deleted the diagram and its `.dot` source and created `docs/guides/skills-by-outcome.md` in the same commit. The site already publishes its own account of that document at `/guidance/skills/by-outcome/`.
+
+Two further findings changed the plan. `v0.4.0` is still the latest `tools-ki` tag, so there is no release to advance the citations to; the `docs/guides/user/` move is `main`-only and the existing pins resolve. And the class is wider than the two breaks: guidance prose carries 13 unpinned `main` links to `knowledgeislands` repositories, of which the other 11 currently resolve. Nothing checks them, which is why these two rotted unnoticed.
 
 ## Steps
 
-- [ ] Establish what happened to `docs/guides/developer/retiring-repository-vendored-ki.md` and `docs/diagrams/skills-map.svg`: renamed, retired, or absorbed.
-- [ ] Relink, rewrite, or drop the affected passages in `using-ki/getting-started.md`, `using-ki/onboarding.md`, and `skills/index.md` according to that answer.
-- [ ] Decide whether the site should link harness documents at `main` at all, given both breaks were `main` links while every pinned link held.
-- [ ] Advance the `tools-ki` citations to the current release and its `docs/guides/user/` paths as an ordinary refresh, moving `ref` and `reviewed` together.
+- [x] Establish what happened to both documents: one retired, one replaced. Recorded in Current state.
+- [ ] Drop the retirement-guide link from `using-ki/getting-started.md` and `using-ki/onboarding.md`, keeping the advice, which remains sound without it.
+- [ ] Rewrite the `skills/index.md` sentence to cite the outcome guide rather than a diagram, dropping the description of visual properties that no longer exist.
+- [ ] Extend `verify-guidance-sources.ts` to resolve prose links to `knowledgeislands` repositories under `--network`, so this class of rot is caught rather than these two instances repaired.
+- [ ] Record in `guidance-provenance.md` what the prose-link check covers and why it warns rather than fails.
 - [ ] Re-run the sweep and confirm the remaining reports are refreshes owed rather than breaks.
+- [ ] Leave the `tools-ki` pins at `v0.4.0`: no newer release exists, so there is nothing to advance to.
 
 ## Files touched
 
-`apps/site/src/guidance/using-ki/getting-started.md`, `apps/site/src/guidance/using-ki/onboarding.md`, `apps/site/src/guidance/skills/index.md`, and the `tools-ki`-sourced pages under `apps/site/src/guidance/cli/`.
+`apps/site/src/guidance/using-ki/getting-started.md`, `apps/site/src/guidance/using-ki/onboarding.md`, `apps/site/src/guidance/skills/index.md`, `apps/site/scripts/verify-guidance-sources.ts`, and `docs/guides/developer/guidance-provenance.md`.
 
 ## Verify
 
-`bun run --cwd apps/site verify:guidance -- --network` reports no failures, and every remaining warning is a refresh owed rather than an unresolvable link. `bun run ki:site:build` passes.
+`bun run --cwd apps/site verify:guidance -- --network` reports no unresolvable prose link and no failure, and every remaining warning is a refresh owed. `bun run ki:site:build` passes. `ki repo audit --skill ki-engineering --repo .` and `--skill ki-authoring --repo .` pass.
 
 ## Dependencies / blocks
 
