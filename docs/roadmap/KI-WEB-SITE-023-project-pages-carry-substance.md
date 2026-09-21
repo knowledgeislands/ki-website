@@ -6,7 +6,7 @@ theme: site-experience
 horizon: now
 status: draft
 blocks: []
-blocked_by: [KI-WEB-SITE-018, KI-WEB-SITE-020]
+blocked_by: [KI-WEB-SITE-020]
 baseline_ref: null
 created_at: 2026-09-22T09:35:00Z
 updated_at: 2026-09-22T10:00:00Z
@@ -94,7 +94,7 @@ Each page carries two outbound GitHub links, and each tool page five, of which t
 
 ## Dependencies / blocks
 
-Blocked by `KI-WEB-SITE-018` for the test, and by `KI-WEB-SITE-020` for the merge — extending `project.njk` before the tool fields arrive means extending it twice. It stays a draft in Now until both are done, since a blocked item is not awaiting execution.
+Blocked by `KI-WEB-SITE-020`: extending `project.njk` before the tool fields arrive means extending it twice. The ownership test it is judged against was delivered by `KI-WEB-SITE-018` as GDR-KI-WEBSITE-002. It stays a draft in Now until the merge lands, since a blocked item is not awaiting execution.
 
 ## Documentation impact
 

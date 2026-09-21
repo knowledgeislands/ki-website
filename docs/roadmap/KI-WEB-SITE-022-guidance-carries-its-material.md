@@ -4,9 +4,9 @@ area: SITE
 title: Guidance carries its material
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
-blocked_by: [KI-WEB-SITE-018]
+blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:30:00Z
 updated_at: 2026-09-22T10:00:00Z
@@ -88,7 +88,7 @@ The collections not listed are in better shape: `using-ki/tuning/` (2,656 words)
 
 ## Dependencies / blocks
 
-Blocked by `KI-WEB-SITE-018`, which sets the test these rewrites are judged against.
+Not blocked. `KI-WEB-SITE-018` delivered the revised ownership test in GDR-KI-WEBSITE-002, so the standard these rewrites are judged against exists.
 
 Overlaps `KI-WEB-SITE-019` in `/guidance/`: that item adds the hub and the links, this one rewrites the pages. They touch different files except where a collection index gains an upward link.
 
