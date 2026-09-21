@@ -1,0 +1,22 @@
+{#
+  Renders a guidance page's Sources table from its `sources` frontmatter.
+
+  The frontmatter is the single declaration: `verify:guidance` gates it, and this partial publishes
+  it, so the table a reader sees and the record a refresh sweep reads cannot drift apart. Pages that
+  restate nothing declare `sources: original` and render no table.
+
+  See docs/guides/developer/guidance-provenance.md.
+#}
+{% if sources and sources != 'original' %}
+## Sources
+
+| Source | Governs | Last reviewed |
+| --- | --- | --- |
+{% for source in sources -%}
+{% if source.url -%}
+| [{{ source.title or source.url }}]({{ source.url }}) | {{ source.governs }} | {{ source.reviewed }} |
+{% else -%}
+| [{{ source.title or (source.repository + "/" + source.path) }}](https://github.com/{{ source.repository }}/blob/{{ source.ref }}/{{ source.path }}) at `{{ source.ref }}` | {{ source.governs }} | {{ source.reviewed }} |
+{% endif -%}
+{% endfor %}
+{% endif %}

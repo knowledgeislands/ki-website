@@ -2,6 +2,19 @@
 title: Prompting Claude Fable 5
 description: Model-specific prompting guidance for Claude Fable 5 and Mythos 5.
 layout: layouts/base.njk
+sources:
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5
+    title: 'Prompting Claude Fable 5'
+    governs: 'The prompting patterns and steers above'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5
+    title: 'Introducing Claude Fable 5 and Mythos 5'
+    governs: 'Capabilities, safeguards, refusal / fallback behaviour'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: 'Prompting best practices'
+    governs: 'The cross-model principles in the area index'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -46,15 +59,9 @@ Effort is the primary intelligence, latency, and cost control, set on the API re
 - **Refactor legacy prompts.** Instructions written for prior models are often over-prescriptive and can degrade Fable 5. Strip them back and re-test against its default behaviour.
 - **Reasoning visibility.** If an application needs the model's reasoning, read structured `thinking` blocks — do not instruct the model to reproduce its reasoning in the response.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5) | BP | The prompting patterns and steers above | 2026-07-09 |
-| [Introducing Claude Fable 5 and Mythos 5](https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5) | BP | Capabilities, safeguards, refusal / fallback behaviour | 2026-07-09 |
-| [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) | BP | The cross-model principles in the area index | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

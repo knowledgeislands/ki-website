@@ -2,6 +2,15 @@
 title: Prompting OpenAI GPT-5.6 (Sol / Terra / Luna)
 description: Model-specific prompting guidance for OpenAI GPT-5.6 in Codex CLI.
 layout: layouts/base.njk
+sources:
+  - url: https://www.agensi.io/learn/gpt-5-6-sol-terra-luna-skills-guide
+    title: 'GPT-5.6 Sol, Terra, Luna: Skills Setup for Codex CLI'
+    governs: 'Tier positioning and Codex CLI routing'
+    reviewed: '2026-07-13'
+  - url: https://codex.danielvaughan.com/2026/06/26/gpt-5-6-sol-terra-luna-preview-codex-cli-model-tiers-pricing-ultra-mode-configuration/
+    title: 'GPT-5.6 Sol, Terra, and Luna — Codex CLI model tiers, pricing, Ultra mode, configuration'
+    governs: 'Tiers, effort/mode axis, pricing, preview status'
+    reviewed: '2026-07-13'
 ---
 
 <section class="section-parchment section-pad">
@@ -47,15 +56,9 @@ A repo running under Codex declares these in `["knowledgeislands/ki-agentic-harn
 - **Match tier to the step, not the session.** Run a bulk fan-out on Luna and escalate only the irreducible reasoning step to Sol — the same barbell discipline `ki-tokenomics` prescribes for Claude tiers.
 - **Everything in [Prompting OpenAI GPT-5.5](/guidance/prompting/gpt-5-5/) still applies** — the Responses API, `phase` field, verbosity param, and tool-preamble guidance are unchanged across the GPT-5 line.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [GPT-5.6 Sol, Terra, Luna: Skills Setup for Codex CLI](https://www.agensi.io/learn/gpt-5-6-sol-terra-luna-skills-guide) | BP | Tier positioning and Codex CLI routing | 2026-07-13 |
-| [GPT-5.6 Sol, Terra, and Luna — Codex CLI model tiers, pricing, Ultra mode, configuration](https://codex.danielvaughan.com/2026/06/26/gpt-5-6-sol-terra-luna-preview-codex-cli-model-tiers-pricing-ultra-mode-configuration/) | BP | Tiers, effort/mode axis, pricing, preview status | 2026-07-13 |
-| [Prompting OpenAI GPT-5.5](/guidance/prompting/gpt-5-5/) | — | The GPT-5-line prompt contract GPT-5.6 inherits | 2026-07-13 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

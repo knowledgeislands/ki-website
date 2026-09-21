@@ -2,6 +2,15 @@
 title: Prompting DeepSeek V3.2
 description: Model-specific prompting guidance for DeepSeek V3.2.
 layout: layouts/base.njk
+sources:
+  - url: https://api-docs.deepseek.com/quick_start/parameter_settings
+    title: 'Temperature & parameter settings'
+    governs: 'Task-specific temperature and sampling guidance'
+    reviewed: '2026-07-09'
+  - url: https://huggingface.co/deepseek-ai/DeepSeek-V3.2
+    title: 'DeepSeek-V3.2 model card (Hugging Face)'
+    governs: 'Weights, `generation_config.json` defaults, prompt template'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -23,14 +32,9 @@ DeepSeek V3.2 is a strong open-weight pick for multi-step reasoning and maths, a
 - **Constrain JSON tightly.** For structured output, instruct JSON-only in the system prompt, give a tight schema, avoid stray delimiter sequences, and lower the temperature.
 - **Put documents before the question.** For search/RAG over supplied documents, place the document block first and the instruction after it.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Temperature & parameter settings](https://api-docs.deepseek.com/quick_start/parameter_settings) | BP | Task-specific temperature and sampling guidance | 2026-07-09 |
-| [DeepSeek-V3.2 model card (Hugging Face)](https://huggingface.co/deepseek-ai/DeepSeek-V3.2) | BP | Weights, `generation_config.json` defaults, prompt template | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

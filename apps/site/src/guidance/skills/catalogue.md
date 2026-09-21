@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Skill catalogue
 description: Browse every capability in the canonical Knowledge Islands harness and learn when to use it.
 permalink: /guidance/skills/catalogue/
+sources:
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/README.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'Every skill entry restated here, and its source domain grouping'
+    reviewed: '2026-09-21'
 ---
 
 # Skill catalogue
@@ -196,3 +202,5 @@ Governs one interactive client-side React application bundled by Vite to `dist/`
 Governs Cloudflare hosting for either website implementation using **Workers Static Assets**, never Pages as the deployment target. It rejects the legacy `pages_build_output_dir` marker and any `main` server entry, matches `assets.directory` to `dist/`, and covers Workers Builds, workers.dev, custom domains, and deploy scripts.
 
 Where the set is going next is in the roadmap.
+
+{% include "partials/sources.njk" %}

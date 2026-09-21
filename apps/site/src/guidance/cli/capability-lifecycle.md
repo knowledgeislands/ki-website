@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Capability lifecycle
 description: Understand how KI installs harnesses separately from activating their capabilities.
 permalink: /guidance/cli/capability-lifecycle/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The install, activate, and audit commands the lifecycle is described in terms of'
+    reviewed: '2026-09-21'
 ---
 
 # Capability lifecycle
@@ -40,3 +46,5 @@ Remove user declarations first with `ki skill remove`, then repeat the lifecycle
 The canonical `knowledgeislands/ki-agentic-harness` cannot be uninstalled.
 
 When it is development-linked, restore its verified archive with `ki dev local off` before reinstalling it.
+
+{% include "partials/sources.njk" %}

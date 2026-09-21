@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Plan and deliver governed work
 description: Turn a deep audit or transferred concern into implementation-ready, governed roadmap work.
 permalink: /guidance/using-ki/planning-and-delivery/
+sources:
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/README.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'The ki-work, ki-plan, ki-implement, and ki-accept responsibilities the request template routes through'
+    reviewed: '2026-09-21'
 ---
 
 # Plan and deliver governed work
@@ -125,3 +131,5 @@ For a long-running filesystem task, write progress to the planning artefacts reg
 ```
 
 A useful short name for this style of request is **planning-only architecture audit with cold-agent implementation handoffs**.
+
+{% include "partials/sources.njk" %}

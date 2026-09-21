@@ -3,6 +3,7 @@ layout: layouts/base.njk
 title: Optional tools
 description: Evaluate optional machine-level tools for configuration, context management, skill discovery, and MCP access.
 permalink: /guidance/using-ki/recommended-tools/
+sources: original
 ---
 
 # Optional tools
@@ -190,3 +191,5 @@ Do not wire the same integration **both** ways on the same surface — that load
 ## VS Code command-execution MCP servers — evaluate before installing
 
 A recurring want on this surface: letting the agent trigger a VS Code command directly (e.g. "Developer: Reload Web Views" after a session `/rename`, since the extension does not refresh its own UI on rename). Community MCP servers exist that expose `vscode.commands.executeCommand()` as a callable tool — for example `louisfghbvc/mcp-vscode-commands`. Before adopting one, check two things: whether it ships a signed `.vsix`/verified publisher (unsigned third-party extensions granting arbitrary command execution over an unauthenticated local socket are a real trust boundary, not a formality), and which transport it speaks — Claude Code's `claude mcp add` and mcporter's `config add` both only accept `http` / `sse` / `stdio`, so a WebSocket-only server (as `mcp-vscode-commands` currently is) cannot be wired into either regardless of how it is packaged. No such server is currently adopted here; this is a note for the next time the want resurfaces, not a recommendation.
+
+{% include "partials/sources.njk" %}

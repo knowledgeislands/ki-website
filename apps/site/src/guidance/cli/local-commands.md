@@ -3,6 +3,17 @@ layout: layouts/base.njk
 title: Local utility commands
 description: Manage local KI capabilities, documentation locations, and supported machine projections.
 permalink: /guidance/cli/local-commands/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The ki manage command surface and its local-only boundary'
+    reviewed: '2026-09-21'
+  - repository: knowledgeislands/tools-ki
+    path: docs/guides/vscode-management.md
+    ref: v0.4.0
+    governs: 'The chezmoi ownership boundary and fail-closed behaviour of ki manage vscode'
+    reviewed: '2026-09-21'
 ---
 
 # Local utility commands
@@ -55,3 +66,5 @@ When a chezmoi source owns the machine's VS Code workspace files and shared agen
 `ki manage vscode sync` previews a reconciliation. Add `--write` only after reviewing the plan, then review the resulting source changes with `chezmoi diff`. The command never runs `chezmoi apply`.
 
 `ki manage vscode source create <repository>` similarly previews an opt-in OneDrive source store; add `--write` to create and associate it after review. See the [tools-ki VS Code projection management guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/vscode-management.md) for the ownership boundary and fail-closed behaviour.
+
+{% include "partials/sources.njk" %}

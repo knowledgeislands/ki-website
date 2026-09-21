@@ -17,7 +17,7 @@ A tool earns routes by being released and generally usable. A `tools-*` reposito
 
 ## The registry
 
-[`apps/site/src/_data/tools.json5`](../../apps/site/src/_data/tools.json5) is the single declaration. Each entry carries:
+[`apps/site/src/_data/tools.json5`](../../../apps/site/src/_data/tools.json5) is the single declaration. Each entry carries:
 
 | Field | Meaning |
 | --- | --- |
@@ -41,7 +41,7 @@ A tool earns routes by being released and generally usable. A `tools-*` reposito
 
 ## Adding or advancing a tool
 
-Advancing the registry is a **named release follow-up owned by the releasing repository**, not something the website discovers. After a tool publishes a release it intends to recommend, it hands the website an item naming the exact version and the immutable installer target, following the cross-repository convention in [AGENTS.md](../../AGENTS.md).
+Advancing the registry is a **named release follow-up owned by the releasing repository**, not something the website discovers. After a tool publishes a release it intends to recommend, it hands the website an item naming the exact version and the immutable installer target, following the cross-repository convention in [AGENTS.md](../../../AGENTS.md).
 
 The website then edits the registry entry — `version`, `installer`, `manual`, `changelog`, and `maturity` if it changed — and ships. Nothing else needs touching: the page, the card, the sitemap entry, and the redirect are all generated.
 

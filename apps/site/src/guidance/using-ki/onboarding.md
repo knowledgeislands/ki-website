@@ -3,6 +3,17 @@ layout: layouts/base.njk
 title: Onboard a repository
 description: Connect a repository to native KI governance with explicit capability declarations, trusted harnesses, and CI.
 permalink: /guidance/using-ki/onboarding/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The commands an onboarding repository runs and their order'
+    reviewed: '2026-09-21'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: docs/decisions/ADR-KI-HARNESS-012-compatible-harness-publication-and-governed-rubric-boundary.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'The publication and rubric boundary onboarding conforms a repository to'
+    reviewed: '2026-09-21'
 ---
 
 # Onboard a repository to native KI governance
@@ -78,3 +89,5 @@ If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or 
 User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
 
 Use `ki manage doctor` for environment health, `ki manage diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki <command> --help` for exact grammar.
+
+{% include "partials/sources.njk" %}

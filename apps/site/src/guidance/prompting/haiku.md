@@ -2,6 +2,15 @@
 title: Prompting Claude Haiku 4.5
 description: Model-specific prompting guidance for Claude Haiku 4.5.
 layout: layouts/base.njk
+sources:
+  - url: https://www.anthropic.com/claude-haiku-4-5-system-card
+    title: 'Claude Haiku 4.5 system card'
+    governs: 'Capabilities (extended thinking, computer use, context awareness), benchmarks, cost/speed positioning'
+    reviewed: '2026-07-13'
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: 'Prompting best practices'
+    governs: 'Effort-as-lever and the cross-model principles in the area index'
+    reviewed: '2026-07-13'
 ---
 
 <section class="section-parchment section-pad">
@@ -32,14 +41,9 @@ Haiku 4.5 is the tier for mechanical, bulk, and high-volume steps — the fan-ou
 - **Fan-out member.** This is Haiku's home: the many parallel sub-agents in a `pipeline()` / `parallel()` block where the lever is fan-out count, not per-step quality. Keep each member's prompt bounded and self-contained.
 - **Escalation, not replacement.** Default a flow to Haiku and escalate the specific steps that demonstrably need more — adversarial verify, hard synthesis — to a stronger type, rather than raising the whole flow's tier.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Claude Haiku 4.5 system card](https://www.anthropic.com/claude-haiku-4-5-system-card) | BP | Capabilities (extended thinking, computer use, context awareness), benchmarks, cost/speed positioning | 2026-07-13 |
-| [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) | BP | Effort-as-lever and the cross-model principles in the area index | 2026-07-13 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

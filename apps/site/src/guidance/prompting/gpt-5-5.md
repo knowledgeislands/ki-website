@@ -2,6 +2,19 @@
 title: Prompting OpenAI GPT-5.5
 description: Model-specific prompting guidance for OpenAI GPT-5.5.
 layout: layouts/base.njk
+sources:
+  - url: https://developers.openai.com/api/docs/guides/prompt-guidance
+    title: 'Prompt guidance'
+    governs: 'The prompting patterns and steers above'
+    reviewed: '2026-07-09'
+  - url: https://developers.openai.com/api/docs/guides/latest-model
+    title: 'Using GPT-5.5'
+    governs: 'Model-specific API behaviour (verbosity, phase, Responses API)'
+    reviewed: '2026-07-09'
+  - url: https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide
+    title: 'GPT-5 prompting guide (cookbook)'
+    governs: 'Agentic eagerness, coding-specific tips, GPT-5 → 5.5 deltas'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -34,15 +47,9 @@ GPT-5.5 is OpenAI's strong general reasoning-and-agentic tier, reached for codin
 - **Prompt skeleton.** Role → Personality → Goal → Success criteria → Constraints → Output → Stop rules. Keep each section short; add detail only where it changes behaviour.
 - **Migration.** Codex offers an automated path via the OpenAI Docs skill (`openai-docs migrate this project to gpt-5.5`) rather than hand-porting an older prompt stack.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Prompt guidance](https://developers.openai.com/api/docs/guides/prompt-guidance) | BP | The prompting patterns and steers above | 2026-07-09 |
-| [Using GPT-5.5](https://developers.openai.com/api/docs/guides/latest-model) | BP | Model-specific API behaviour (verbosity, phase, Responses API) | 2026-07-09 |
-| [GPT-5 prompting guide (cookbook)](https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide) | BP | Agentic eagerness, coding-specific tips, GPT-5 → 5.5 deltas | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: ChatGPT local-capture format
 description: Prepare the bounded local capture accepted by the KI ChatGPT import adapter.
 permalink: /guidance/cli/chatgpt-local-capture/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The ChatGPT import adapter and the capture shape it accepts'
+    reviewed: '2026-09-21'
 ---
 
 # ChatGPT local-capture format
@@ -60,3 +66,5 @@ Every referenced record and asset must exist. `conversation-order` positions are
 The importer copies originals and assets byte-for-byte, places records below `source/records/`, normalises relationship record paths below `source/records/`, and creates the KIS-0002 `kep.toml` plus lexicographically ordered SHA-256 checksums. Repeating an import with identical capture content produces byte-identical KEP payloads and the same `kep:sha256:` identity.
 
 Use `--dry-run` to validate and report the proposed package without creating the output directory.
+
+{% include "partials/sources.njk" %}

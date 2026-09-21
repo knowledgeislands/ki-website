@@ -11,13 +11,13 @@ How the website publishes a page for every public project in the Knowledge Islan
 | `/projects/` | The grouped index: principal knowledge bases, agentic capabilities, portable standards, command-line tools, MCP servers, platform and delivery. |
 | `/projects/<slug>/` | A page per project that has no richer home elsewhere on this site. |
 
-The directory is **descriptive**. It pins no version, hosts no artefact, and redirects no installer — a project page says what a repository is for and sends the reader to it. Every promise about a specific release belongs to [`tools.json5`](../../apps/site/src/_data/tools.json5) and the repository that published it.
+The directory is **descriptive**. It pins no version, hosts no artefact, and redirects no installer — a project page says what a repository is for and sends the reader to it. Every promise about a specific release belongs to [`tools.json5`](../../../apps/site/src/_data/tools.json5) and the repository that published it.
 
 Only public repositories appear. A private or internally operated repository is deliberately absent: the directory is a public surface, and listing a repository nobody can open leaks the existence of work that is not itself public.
 
 ## The registry
 
-[`apps/site/src/_data/projects.json5`](../../apps/site/src/_data/projects.json5) is the single declaration. Each entry carries:
+[`apps/site/src/_data/projects.json5`](../../../apps/site/src/_data/projects.json5) is the single declaration. Each entry carries:
 
 | Field | Meaning |
 | --- | --- |
@@ -48,7 +48,7 @@ Some projects already have a richer home on this site — `ki-specifications` ha
 
 ## Adding or amending an entry
 
-A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from [GDR-KI-FUNDAMENTALS-001](../decisions/GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) where that decision covers the repository, so the site's account of authority and the shared decision cannot diverge.
+A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from [GDR-KI-FUNDAMENTALS-001](../../decisions/GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) where that decision covers the repository, so the site's account of authority and the shared decision cannot diverge.
 
 Two things to check before adding an entry:
 

@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Update and upgrade
 description: Refresh verified KI installations and the harness providers selected by a repository.
 permalink: /guidance/cli/update-upgrade/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The update and upgrade commands and the verification they perform'
+    reviewed: '2026-09-21'
 ---
 
 # Update and upgrade
@@ -36,3 +42,5 @@ Run `ki repo upgrade` from a KI repository, or pass `--repo <path>` to select on
 It reads the repository's declared skills, requires each provider to resolve uniquely, and refreshes each distinct supplying harness only from configured immutable evidence.
 
 An unavailable, ambiguous, or capability-removing replacement is refused before that provider is changed.
+
+{% include "partials/sources.njk" %}

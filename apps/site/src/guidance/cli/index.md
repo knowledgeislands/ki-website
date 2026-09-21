@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: KI CLI guidance
 description: Use the KI command-line interface to manage capabilities, update verified installations, and prepare local imports.
 permalink: /guidance/cli/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The command surface this index routes readers to'
+    reviewed: '2026-09-21'
 ---
 
 # KI CLI guidance
@@ -16,3 +22,5 @@ The installed executable owns exact, version-specific command grammar. Use `ki -
 - [Prepare a local ChatGPT capture](/guidance/cli/chatgpt-local-capture/) explains the controlled local-capture format used by `ki acquire import --adapter chatgpt`.
 - [Use local utility commands](/guidance/cli/local-commands/) explains local capability search, safe cleanup reporting, and documentation locations.
 - [Read the operator guides](/guidance/cli/operator-guides/) indexes the `tools-ki` guides for the workflows that need more than a `--help` page.
+
+{% include "partials/sources.njk" %}

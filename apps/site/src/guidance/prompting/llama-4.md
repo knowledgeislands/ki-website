@@ -2,6 +2,19 @@
 title: Prompting Llama 4
 description: Model-specific prompting guidance for Meta's Llama 4 family.
 layout: layouts/base.njk
+sources:
+  - url: https://www.llama.com/docs/model-cards-and-prompt-formats/llama4/
+    title: 'Llama 4 model cards & prompt formats'
+    governs: 'Chat template, tokens, prompt guidance'
+    reviewed: '2026-07-09'
+  - url: https://www.llama.com/docs/how-to-guides/prompting/
+    title: 'Prompt engineering how-to'
+    governs: 'Zero-/few-shot, role prompts, RAG'
+    reviewed: '2026-07-09'
+  - url: https://llama.developer.meta.com/docs/guides/best-practices
+    title: 'Llama API best practices'
+    governs: 'Prompting, model selection, moderation'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -25,15 +38,9 @@ Llama 4 is the default "safe" open-weight choice — broadly supported across in
 - **Frame long documents first.** At long context, precede a large document block with a brief statement of what it is, its format, and what you need — before the content itself.
 - **Layer safety at the system level.** Don't rely on prompts alone for safety; pair with Llama Guard 4 as a system-level guardrail.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Llama 4 model cards & prompt formats](https://www.llama.com/docs/model-cards-and-prompt-formats/llama4/) | BP | Chat template, tokens, prompt guidance | 2026-07-09 |
-| [Prompt engineering how-to](https://www.llama.com/docs/how-to-guides/prompting/) | BP | Zero-/few-shot, role prompts, RAG | 2026-07-09 |
-| [Llama API best practices](https://llama.developer.meta.com/docs/guides/best-practices) | BP | Prompting, model selection, moderation | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

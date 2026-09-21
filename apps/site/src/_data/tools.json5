@@ -14,7 +14,7 @@
 //   description a fuller paragraph for the product page
 //   repository  canonical source repository
 //   version     published release this registry currently advertises
-//   maturity    stable | preview | experimental (see docs/guides/tool-routes.md)
+//   maturity    stable | preview | experimental (see docs/guides/developer/tool-routes.md)
 //   formula     Homebrew formula in knowledgeislands/tap, or null when untapped
 //   installer   immutable installer target the machine route redirects to
 //   manual      human manual at the declared version

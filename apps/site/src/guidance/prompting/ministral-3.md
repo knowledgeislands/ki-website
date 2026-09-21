@@ -2,6 +2,19 @@
 title: Prompting Ministral 3 (Mistral edge models)
 description: Model-specific prompting guidance for the Ministral 3 family.
 layout: layouts/base.njk
+sources:
+  - url: https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512
+    title: 'Ministral-3-14B-Instruct-2512 (Hugging Face)'
+    governs: 'Instruct sampling, system prompt, serving'
+    reviewed: '2026-07-09'
+  - url: https://huggingface.co/mistralai/Ministral-3-14B-Reasoning-2512
+    title: 'Ministral-3-14B-Reasoning-2512 (Hugging Face)'
+    governs: 'Reasoning sampling, `[THINK]` blocks, output length'
+    reviewed: '2026-07-09'
+  - url: https://mistral.ai/news/mistral-3/
+    title: 'Introducing Mistral 3'
+    governs: 'Family overview, sizes, licence'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -24,15 +37,9 @@ Ministral 3 is Mistral's local/edge line — small enough for a laptop or single
 - **Keep the tool set minimal.** For agentic use, define tools tightly and limit their number to what the task needs — don't overload it.
 - **Serve with the Mistral tokenizer.** Reliability depends on the runtime: use vLLM with `--tokenizer_mode mistral --config_format mistral --load_format mistral` (and the Mistral tool-call parser) rather than a generic template.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Ministral-3-14B-Instruct-2512 (Hugging Face)](https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512) | BP | Instruct sampling, system prompt, serving | 2026-07-09 |
-| [Ministral-3-14B-Reasoning-2512 (Hugging Face)](https://huggingface.co/mistralai/Ministral-3-14B-Reasoning-2512) | BP | Reasoning sampling, `[THINK]` blocks, output length | 2026-07-09 |
-| [Introducing Mistral 3](https://mistral.ai/news/mistral-3/) | BP | Family overview, sizes, licence | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

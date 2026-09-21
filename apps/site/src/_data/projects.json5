@@ -20,7 +20,7 @@
 //   role         the authority this project holds in the ecosystem
 //   usage        how a reader actually consumes it today, stated honestly
 //   repository   canonical source repository
-//   availability published | source (see docs/guides/projects-directory.md)
+//   availability published | source (see docs/guides/developer/projects-directory.md)
 //   route        an existing site page that is already this project's home;
 //                omit it and `/projects/<slug>/` is generated instead
 //   icon         KI symbol name from src/_includes/macros/icons.njk

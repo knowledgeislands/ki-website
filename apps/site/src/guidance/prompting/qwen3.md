@@ -2,6 +2,15 @@
 title: Prompting Qwen3 (small / coder)
 description: Model-specific prompting guidance for small and coder Qwen3 models.
 layout: layouts/base.njk
+sources:
+  - url: https://qwen.readthedocs.io/en/latest/getting_started/quickstart.html
+    title: 'Qwen documentation — Quickstart'
+    governs: 'Thinking modes, chat template, generation settings'
+    reviewed: '2026-07-09'
+  - url: https://huggingface.co/Qwen/Qwen3-32B
+    title: 'Qwen3-32B model card (Hugging Face)'
+    governs: 'Recommended sampling per mode, `enable_thinking`'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -23,14 +32,9 @@ Qwen3 is the versatile open-weight all-rounder, and its coder variants are a str
 - **Keep it lean for coder variants.** Name the language, framework, and versions and give the exact deliverable; the coder builds respond well to concrete, well-scoped tasks rather than open-ended prose.
 - **Mind the local context budget.** The small variants run in tight VRAM — keep prompts focused and cap output length so a long thinking trace doesn't exhaust the window on-device.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Qwen documentation — Quickstart](https://qwen.readthedocs.io/en/latest/getting_started/quickstart.html) | BP | Thinking modes, chat template, generation settings | 2026-07-09 |
-| [Qwen3-32B model card (Hugging Face)](https://huggingface.co/Qwen/Qwen3-32B) | BP | Recommended sampling per mode, `enable_thinking` | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

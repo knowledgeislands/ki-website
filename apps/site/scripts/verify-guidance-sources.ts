@@ -1,0 +1,278 @@
+/**
+ * Verifies that every published guidance page declares what it was written from.
+ *
+ * The site deliberately restates material owned by other repositories, so its prose drifts from
+ * those sources between refreshes. That is intended; invisible drift is not. Each page under
+ * `src/guidance/` therefore declares a `sources` list — or claims `original` — and this check
+ * refuses a page that declares neither.
+ *
+ * Offline checks run by default. `--network` additionally resolves each pinned ref against its
+ * upstream repository and reports pages whose source document has moved since it was reviewed.
+ * That is a warning, never a failure: an upstream repository editing its own guide must not break
+ * this site's build. See docs/guides/developer/guidance-provenance.md.
+ */
+
+import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { dirname, relative, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const guidanceDir = resolve(siteRoot, 'src/guidance')
+const sourcesPartial = 'partials/sources.njk'
+
+const repositoryOwner = 'knowledgeislands'
+const repositoryPattern = /^knowledgeislands\/[a-z0-9]+(?:[-.][a-z0-9]+)*$/
+const tagPattern = /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/
+const commitPattern = /^[0-9a-f]{40}$/
+const datePattern = /^\d{4}-\d{2}-\d{2}$/
+
+const knownKeys = new Set(['repository', 'path', 'ref', 'url', 'title', 'governs', 'reviewed'])
+
+/** Frontmatter values are quoted where a plain scalar would be ambiguous to Eleventy's YAML reader. */
+const unquote = (value: string): string => value.replace(/^'(.*)'$/, '$1').replace(/^"(.*)"$/, '$1')
+
+interface Source {
+  repository?: string
+  path?: string
+  ref?: string
+  url?: string
+  title?: string
+  governs?: string
+  reviewed?: string
+}
+
+const failures: string[] = []
+const warnings: string[] = []
+
+const fail = (message: string): void => {
+  failures.push(message)
+}
+
+const warn = (message: string): void => {
+  warnings.push(message)
+}
+
+const markdownFiles = (dir: string): string[] => {
+  const found: string[] = []
+  for (const entry of readdirSync(dir)) {
+    const full = resolve(dir, entry)
+    if (statSync(full).isDirectory()) {
+      found.push(...markdownFiles(full))
+    } else if (entry.endsWith('.md')) {
+      found.push(full)
+    }
+  }
+  return found.sort()
+}
+
+/**
+ * Reads the `sources` key out of a page's frontmatter.
+ *
+ * This is a deliberately narrow reader rather than a YAML parser: the site has no YAML dependency,
+ * and the schema is one scalar or a list of flat string entries. Anything outside that shape is
+ * reported rather than guessed at, so a malformed declaration fails loudly instead of parsing to
+ * something plausible.
+ */
+const readSources = (
+  contents: string
+):
+  | { kind: 'missing' }
+  | { kind: 'original' }
+  | { kind: 'list'; entries: Source[] }
+  | { kind: 'malformed'; reason: string } => {
+  if (!contents.startsWith('---\n')) {
+    return { kind: 'malformed', reason: 'the file has no frontmatter block' }
+  }
+  const end = contents.indexOf('\n---', 4)
+  if (end === -1) {
+    return { kind: 'malformed', reason: 'the frontmatter block is unterminated' }
+  }
+  const lines = contents.slice(4, end).split('\n')
+
+  const index = lines.findIndex((line) => line === 'sources: original' || line === 'sources:')
+  if (index === -1) {
+    return { kind: 'missing' }
+  }
+  if (lines[index] === 'sources: original') {
+    return { kind: 'original' }
+  }
+
+  const entries: Source[] = []
+  let current: Source | null = null
+  for (const line of lines.slice(index + 1)) {
+    if (line.trim() === '') continue
+    if (!line.startsWith('  ')) break
+    const item = line.match(/^ {2}- ([a-z]+): (.+)$/)
+    if (item) {
+      current = {}
+      entries.push(current)
+      current[item[1] as keyof Source] = unquote(item[2].trim())
+      continue
+    }
+    const field = line.match(/^ {4}([a-z]+): (.+)$/)
+    if (field && current) {
+      current[field[1] as keyof Source] = unquote(field[2].trim())
+      continue
+    }
+    return { kind: 'malformed', reason: `unreadable sources entry: ${line.trim()}` }
+  }
+
+  if (entries.length === 0) {
+    return { kind: 'malformed', reason: 'sources is declared but lists no entries' }
+  }
+  return { kind: 'list', entries }
+}
+
+const today = new Date().toISOString().slice(0, 10)
+
+const checkEntry = (page: string, position: number, source: Source): void => {
+  const where = `${page} source ${position + 1}`
+
+  for (const key of Object.keys(source)) {
+    if (!knownKeys.has(key)) {
+      fail(`${where}: unknown field "${key}".`)
+    }
+  }
+
+  if (source.repository && source.url) {
+    fail(`${where}: declares both "repository" and "url"; a source is one or the other.`)
+  }
+  if (!source.repository && !source.url) {
+    fail(`${where}: declares neither "repository" nor "url".`)
+  }
+
+  if (source.repository) {
+    if (!repositoryPattern.test(source.repository)) {
+      fail(`${where}: "${source.repository}" is not an ${repositoryOwner}/<repo> repository.`)
+    }
+    if (!source.path) {
+      fail(`${where}: a repository source must name the upstream "path".`)
+    } else if (source.path.startsWith('/') || source.path.includes('..')) {
+      fail(`${where}: "${source.path}" must be a plain repository-relative path.`)
+    }
+    if (!source.ref) {
+      fail(`${where}: a repository source must pin a "ref".`)
+    } else if (!tagPattern.test(source.ref) && !commitPattern.test(source.ref)) {
+      fail(`${where}: "${source.ref}" is not an immutable ref; pin an exact tag or a 40-character commit.`)
+    }
+  }
+
+  if (source.url) {
+    if (!source.url.startsWith('https://')) {
+      fail(`${where}: "${source.url}" must be an https URL.`)
+    }
+    if (!source.title) {
+      fail(`${where}: an external source must carry a readable "title"; the published table links it by name.`)
+    }
+  }
+
+  if (!source.governs) {
+    fail(`${where}: must say what it "governs" in this page.`)
+  }
+
+  if (!source.reviewed) {
+    fail(`${where}: must record the "reviewed" date.`)
+  } else if (!datePattern.test(source.reviewed)) {
+    fail(`${where}: "${source.reviewed}" is not an ISO date.`)
+  } else if (source.reviewed > today) {
+    fail(`${where}: reviewed date "${source.reviewed}" is in the future.`)
+  }
+}
+
+const upstreamHead = async (repository: string, path: string): Promise<string | null> => {
+  const endpoint = `https://api.github.com/repos/${repository}/commits?path=${encodeURIComponent(path)}&per_page=1`
+  const response = await fetch(endpoint, { headers: { Accept: 'application/vnd.github+json' } })
+  if (!response.ok) return null
+  const commits = (await response.json()) as { sha?: string }[]
+  return commits[0]?.sha ?? null
+}
+
+const checkDrift = async (page: string, source: Source): Promise<void> => {
+  if (!source.repository || !source.path || !source.ref) return
+
+  const pinned = `https://api.github.com/repos/${source.repository}/contents/${source.path}?ref=${source.ref}`
+  const pinnedResponse = await fetch(pinned, { headers: { Accept: 'application/vnd.github+json' } })
+  if (!pinnedResponse.ok) {
+    fail(`${page}: ${source.repository}@${source.ref} does not serve ${source.path} (HTTP ${pinnedResponse.status}).`)
+    return
+  }
+  const pinnedFile = (await pinnedResponse.json()) as { sha?: string }
+
+  const headResponse = await fetch(`https://api.github.com/repos/${source.repository}/contents/${source.path}`, {
+    headers: { Accept: 'application/vnd.github+json' }
+  })
+  if (!headResponse.ok) {
+    warn(
+      `${page}: ${source.repository} no longer serves ${source.path} on its default branch; the source may have moved.`
+    )
+    return
+  }
+  const headFile = (await headResponse.json()) as { sha?: string }
+
+  if (pinnedFile.sha && headFile.sha && pinnedFile.sha !== headFile.sha) {
+    const moved = await upstreamHead(source.repository, source.path)
+    const at = moved ? ` (now ${moved.slice(0, 7)})` : ''
+    warn(`${page}: ${source.repository}/${source.path} has changed since ${source.ref}${at}; a refresh is owed.`)
+  }
+}
+
+const network = process.argv.includes('--network')
+const pages = markdownFiles(guidanceDir)
+
+if (pages.length === 0) {
+  fail('No guidance pages found; expected Markdown below src/guidance/.')
+}
+
+const repositorySources: { page: string; source: Source }[] = []
+
+for (const file of pages) {
+  const page = relative(siteRoot, file)
+  const contents = readFileSync(file, 'utf-8')
+  const parsed = readSources(contents)
+
+  if (!contents.includes(sourcesPartial)) {
+    fail(`${page}: does not include "${sourcesPartial}". A declaration readers never see is not a published citation.`)
+  }
+
+  if (parsed.kind === 'malformed') {
+    fail(`${page}: ${parsed.reason}.`)
+    continue
+  }
+  if (parsed.kind === 'missing') {
+    fail(
+      `${page}: declares no "sources". Restated pages list their sources; pages with no upstream declare "sources: original".`
+    )
+    continue
+  }
+  if (parsed.kind === 'original') {
+    continue
+  }
+
+  parsed.entries.forEach((source, position) => {
+    checkEntry(page, position, source)
+    if (source.repository) repositorySources.push({ page, source })
+  })
+}
+
+if (network && failures.length === 0) {
+  for (const { page, source } of repositorySources) {
+    await checkDrift(page, source)
+  }
+}
+
+for (const message of warnings) {
+  console.warn(`warning: ${message}`)
+}
+
+if (failures.length > 0) {
+  for (const message of failures) {
+    console.error(`error: ${message}`)
+  }
+  console.error(`\nGuidance provenance check failed with ${failures.length} error(s).`)
+  process.exit(1)
+}
+
+const scope = network
+  ? `${pages.length} pages, ${repositorySources.length} repository sources resolved`
+  : `${pages.length} pages`
+console.log(`Guidance provenance verified (${scope}).`)

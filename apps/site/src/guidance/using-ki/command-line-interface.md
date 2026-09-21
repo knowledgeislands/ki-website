@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Command-line interface
 description: Understand what the KI CLI owns and where to find authoritative command help.
 permalink: /guidance/using-ki/command-line-interface/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The command surface, arguments, and exit behaviour described here'
+    reviewed: '2026-09-21'
 ---
 
 # Command-line interface
@@ -82,3 +88,5 @@ ki <command> --help
 ```
 
 for the delivered grammar and [Install and get started](/guidance/using-ki/getting-started/) for the end-to-end setup path.
+
+{% include "partials/sources.njk" %}

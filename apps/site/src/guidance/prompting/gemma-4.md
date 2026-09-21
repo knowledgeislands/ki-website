@@ -2,6 +2,19 @@
 title: Prompting Gemma 4 (31B)
 description: Model-specific prompting guidance for Gemma 4 31B.
 layout: layouts/base.njk
+sources:
+  - url: https://ai.google.dev/gemma/docs/core/prompt-formatting-gemma4
+    title: 'Gemma 4 prompt formatting'
+    governs: 'Chat template, roles, control tokens'
+    reviewed: '2026-07-09'
+  - url: https://ai.google.dev/gemma/docs/core/prompt-structure
+    title: 'Gemma prompt structure'
+    governs: 'System/user/model turn structure'
+    reviewed: '2026-07-09'
+  - url: https://ai.google.dev/gemma/docs/capabilities/text/function-calling-gemma4
+    title: 'Function calling with Gemma 4'
+    governs: 'Tool-calling tokens and handshake'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -24,15 +37,9 @@ Gemma 4 31B is a capable local model for a workstation or single accelerator, re
 - **Pass tools through the template.** Provide tools via the `tools=` argument to `apply_chat_template()` (name, description, JSON args from docstrings); it emits dedicated `tool_call`/`tool_response` tokens for the handshake.
 - **Watch the inference stack.** Tool-use and system-prompt reliability depend on the runtime, not just the weights — some stacks (e.g. certain llama.cpp builds) mishandle Gemma's tool-response tokens. Verify tool round-trips on your actual stack.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Gemma 4 prompt formatting](https://ai.google.dev/gemma/docs/core/prompt-formatting-gemma4) | BP | Chat template, roles, control tokens | 2026-07-09 |
-| [Gemma prompt structure](https://ai.google.dev/gemma/docs/core/prompt-structure) | BP | System/user/model turn structure | 2026-07-09 |
-| [Function calling with Gemma 4](https://ai.google.dev/gemma/docs/capabilities/text/function-calling-gemma4) | BP | Tool-calling tokens and handshake | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

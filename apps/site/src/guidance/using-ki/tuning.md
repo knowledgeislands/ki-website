@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Tune an agent session
 description: Reduce standing context and runtime cost while retaining the capabilities an agent needs.
 permalink: /guidance/using-ki/tuning/
+sources:
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/environment/ki-tokenomics/references/standards-tokenomics.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'The standing-surface and runtime budget model this operator guide defers to'
+    reviewed: '2026-09-21'
 ---
 
 # Tune an agent session
@@ -155,3 +161,5 @@ This repo is a governance-skills repo: it does not lean on `Workflow`, and it ke
 3. Keep memory, `CLAUDE.md`, and background/cron tooling unless you have measured they go unused.
 4. Treat MCP curation via `ki-binding` (and per-conversation connector toggles) as the structural lever — audit which servers each surface actually needs.
 5. Restart, confirm with `/context`, then re-measure with `ki repo audit --skill ki-tokenomics-claude` and iterate against the budgets in the portable `ki-tokenomics` standard.
+
+{% include "partials/sources.njk" %}

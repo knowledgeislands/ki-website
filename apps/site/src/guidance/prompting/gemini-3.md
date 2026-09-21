@@ -2,6 +2,19 @@
 title: Prompting Google Gemini 3
 description: Model-specific prompting guidance for Google's Gemini 3 line.
 layout: layouts/base.njk
+sources:
+  - url: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/gemini-3-prompting-guide
+    title: 'Gemini 3 prompting guide'
+    governs: 'The prompting patterns and steers above'
+    reviewed: '2026-07-09'
+  - url: https://ai.google.dev/gemini-api/docs/gemini-3
+    title: 'Gemini 3 developer guide'
+    governs: '`thinking_level`, temperature, media resolution, migration'
+    reviewed: '2026-07-09'
+  - url: https://ai.google.dev/gemini-api/docs/prompting-strategies
+    title: 'Prompt design strategies'
+    governs: 'Cross-model prompt structure and grounding'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -34,15 +47,9 @@ Gemini 3 is Google's frontier reasoning line, reached for long-context, multimod
 - **Effort mapping.** An OpenAI-style `reasoning_effort` auto-maps to `thinking_level`, easing cross-model harnesses.
 - **Knowledge cutoff.** January 2025 — for time-sensitive queries, state the current date in the system instruction and have it follow that when forming search queries.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Gemini 3 prompting guide](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/gemini-3-prompting-guide) | BP | The prompting patterns and steers above | 2026-07-09 |
-| [Gemini 3 developer guide](https://ai.google.dev/gemini-api/docs/gemini-3) | BP | `thinking_level`, temperature, media resolution, migration | 2026-07-09 |
-| [Prompt design strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies) | BP | Cross-model prompt structure and grounding | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

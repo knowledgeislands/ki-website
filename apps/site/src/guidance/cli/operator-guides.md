@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Operator guides
 description: Index of the tools-ki operator guides, linked at the release they describe.
 permalink: /guidance/cli/operator-guides/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: docs/guides/README.md
+    ref: v0.4.0
+    governs: 'The operator guide collection this page indexes and links at a pinned tag'
+    reviewed: '2026-09-21'
 ---
 
 # Operator guides
@@ -19,3 +25,5 @@ The links below are pinned to `v0.4.0`. A guide describes the release it shipped
 - [Associate external Agora references](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/agora-references.md) — declaring an ordinary Git repository that belongs in the working set without making it a Knowledge Islands member.
 
 The [collection index](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/README.md) also covers the contributor guides for developing and releasing `tools-ki` itself.
+
+{% include "partials/sources.njk" %}

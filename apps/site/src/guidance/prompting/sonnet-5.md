@@ -2,6 +2,19 @@
 title: Prompting Claude Sonnet 5
 description: Model-specific prompting guidance for Claude Sonnet 5.
 layout: layouts/base.njk
+sources:
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5
+    title: 'Prompting Claude Sonnet 5'
+    governs: 'The prompting patterns and steers above'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5
+    title: 'What''s new in Claude Sonnet 5'
+    governs: 'Capabilities and API changes (thinking, tokenizer)'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: 'Prompting best practices'
+    governs: 'The cross-model principles in the area index'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -34,15 +47,9 @@ Sonnet 5 has particular strengths in coding and agentic tasks and is the tier fo
 - **Interactive coding.** Use `xhigh`/`high` effort, add an auto mode, and specify task, intent, and constraints fully in the first turn to maximise autonomy and token efficiency.
 - **Code review.** As with Opus 4.8, a harness tuned for an older model may show lower reported recall because Sonnet 5 follows "be conservative / high-severity only" instructions more faithfully. Tell the finding stage its job is coverage and filter separately, or set a concrete severity bar.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5) | BP | The prompting patterns and steers above | 2026-07-09 |
-| [What's new in Claude Sonnet 5](https://platform.claude.com/docs/en/about-claude/models/whats-new-sonnet-5) | BP | Capabilities and API changes (thinking, tokenizer) | 2026-07-09 |
-| [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) | BP | The cross-model principles in the area index | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

@@ -2,6 +2,15 @@
 title: Prompting GLM-5.2
 description: Model-specific prompting guidance for Z.ai's GLM-5.2.
 layout: layouts/base.njk
+sources:
+  - url: https://github.com/zai-org/GLM-5
+    title: 'GLM-5 repository (zai-org/GLM-5)'
+    governs: 'Model card, thinking controls, agentic tool guidance'
+    reviewed: '2026-07-09'
+  - url: https://docs.together.ai/docs/glm-5.2-quickstart
+    title: 'GLM-5.2 quickstart (Together AI)'
+    governs: 'Hosted-inference parameters and effort mapping'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -24,14 +33,9 @@ GLM-5.2 is the open-weight choice for agentic software engineering and long-hori
 - **Structure the prompt explicitly.** Reduce ambiguity with a consistent skeleton — goal, context, constraints, inputs, output format, success criteria — rather than an aspirational free-text ask.
 - **Be concrete on coding specifics.** Name the language, framework, and versions, the project structure, and the exact deliverable. For agentic work, give the tools available and a rough decomposition.
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [GLM-5 repository (zai-org/GLM-5)](https://github.com/zai-org/GLM-5) | BP | Model card, thinking controls, agentic tool guidance | 2026-07-09 |
-| [GLM-5.2 quickstart (Together AI)](https://docs.together.ai/docs/glm-5.2-quickstart) | REF | Hosted-inference parameters and effort mapping | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

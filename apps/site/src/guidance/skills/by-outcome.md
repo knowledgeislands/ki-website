@@ -3,6 +3,12 @@ layout: layouts/base.njk
 title: Choose a skill by outcome
 description: Route a plain-language outcome to the smallest Knowledge Islands skill or journey that serves it.
 permalink: /guidance/skills/by-outcome/
+sources:
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/README.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'The skill names and responsibilities the outcome routes resolve to'
+    reviewed: '2026-09-21'
 ---
 
 # Choose a skill by outcome
@@ -113,3 +119,5 @@ Before acting, check three things:
 3. The target repository declares the governance capabilities that `ki repo audit` or `ki repo conform` must execute; user-level installation alone does not add them to repository audit scope.
 
 If none of the routes fits, start with `ki-skills` only when the missing outcome may warrant a new reusable capability. A one-off repository action normally belongs in the existing owning skill or local work record rather than a new skill.
+
+{% include "partials/sources.njk" %}

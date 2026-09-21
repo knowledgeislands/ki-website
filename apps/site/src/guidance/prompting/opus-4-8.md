@@ -2,6 +2,19 @@
 title: Prompting Claude Opus 4.8
 description: Model-specific prompting guidance for Claude Opus 4.8.
 layout: layouts/base.njk
+sources:
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8
+    title: 'Prompting Claude Opus 4.8'
+    governs: 'The prompting patterns and steers above'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8
+    title: 'What''s new in Claude Opus 4.8'
+    governs: 'Capabilities and API changes (effort, thinking)'
+    reviewed: '2026-07-09'
+  - url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: 'Prompting best practices'
+    governs: 'The cross-model principles in the area index'
+    reviewed: '2026-07-09'
 ---
 
 <section class="section-parchment section-pad">
@@ -35,15 +48,9 @@ Opus 4.8 is the strong general tier for complex reasoning, knowledge work, codin
 - **Interactive coding.** Opus 4.8 uses more tokens in interactive, multi-turn sessions (it reasons more after each user turn). To maximise both performance and efficiency, use `xhigh`/`high` effort, add an auto mode, and specify the task, intent, and constraints fully in the _first_ turn rather than dribbling them out.
 - **Code review.** It is meaningfully better at finding bugs, but a harness tuned for an older model may show _lower_ reported recall: it follows "only report high-severity" instructions more faithfully and drops findings below your stated bar. Tell the finding stage its job is coverage — report everything with a confidence and severity — and filter in a separate step, or set a concrete bar rather than a vague "important".
 
-## Sources
+{% include "partials/sources.njk" %}
 
-| Source | Tag | Governs | Last reviewed |
-| --- | --- | --- | --- |
-| [Prompting Claude Opus 4.8](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8) | BP | The prompting patterns and steers above | 2026-07-09 |
-| [What's new in Claude Opus 4.8](https://platform.claude.com/docs/en/about-claude/models/whats-new-claude-4-8) | BP | Capabilities and API changes (effort, thinking) | 2026-07-09 |
-| [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices) | BP | The cross-model principles in the area index | 2026-07-09 |
+</article>
 
-    </article>
-
-  </div>
+</div>
 </section>

@@ -3,6 +3,17 @@ layout: layouts/base.njk
 title: Install and get started
 description: Install the KI CLI, bootstrap compatible harnesses, activate skills, and govern a repository.
 permalink: /guidance/using-ki/getting-started/
+sources:
+  - repository: knowledgeislands/tools-ki
+    path: man/ki.1
+    ref: v0.4.0
+    governs: 'The bootstrap, skill activation, and audit commands the walkthrough runs'
+    reviewed: '2026-09-21'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: docs/decisions/ADR-KI-HARNESS-012-compatible-harness-publication-and-governed-rubric-boundary.md
+    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    governs: 'Which harness a repository selects and what activation means'
+    reviewed: '2026-09-21'
 ---
 
 # Install and get started
@@ -93,3 +104,5 @@ Keep unfamiliar legacy state in place until the maintainer [retirement guide](ht
 Once a required skill is active in the relevant scope, describe what you need in plain language or use the runtime's skill invocation mechanism.
 
 [Use skills](/guidance/using-ki/using-skills/) explains both approaches. [Onboard a repository](/guidance/using-ki/onboarding/) gives the detailed trust, activation, CI, and migration boundaries.
+
+{% include "partials/sources.njk" %}
