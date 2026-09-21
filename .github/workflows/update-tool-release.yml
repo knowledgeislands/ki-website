@@ -83,12 +83,12 @@ jobs:
             echo "formula_path=$formula_path"
           } >> "$GITHUB_OUTPUT"
       - name: Test registry synchronizer
-        run: bun test site/scripts/sync-tool-release.test.ts
+        run: bun test apps/site/scripts/sync-tool-release.test.ts
       - name: Verify release and prepare registry update
         env:
           GITHUB_TOKEN: ${{ steps.release-bot.outputs.token }}
         run: >-
-          bun site/scripts/sync-tool-release.ts
+          bun apps/site/scripts/sync-tool-release.ts
           --tool '${{ steps.release.outputs.tool }}'
           --version '${{ steps.release.outputs.version }}'
           --source-repository '${{ steps.release.outputs.source_repository }}'
@@ -103,7 +103,7 @@ jobs:
           TAP_COMMIT: ${{ steps.release.outputs.tap_commit }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- site/src/_data/tools.json5; then
+          if git diff --quiet -- apps/site/src/_data/tools.json5; then
             echo "$TOOL $VERSION is already current; no pull request needed." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
@@ -112,7 +112,7 @@ jobs:
           git config user.name "ki-tools-release-bot[bot]"
           git config user.email "ki-tools-release-bot[bot]@users.noreply.github.com"
           git switch -c "$branch"
-          git add -- site/src/_data/tools.json5
+          git add -- apps/site/src/_data/tools.json5
           git commit -m "chore(tooling): advertise $TOOL $VERSION"
           if git ls-remote --exit-code --heads origin "refs/heads/$branch" > /dev/null; then
             git fetch origin "refs/heads/$branch:refs/remotes/origin/$branch"

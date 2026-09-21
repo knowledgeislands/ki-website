@@ -3,7 +3,7 @@
   "ignore": [".ncurc.cjs", ".claude/skills/**", ".agents/skills/**"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
-    "site": {
+    "apps/site": {
       "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!", "scripts/**/*.ts!"],
       "project": ["**/*.ts", "**/*.css"]
     }

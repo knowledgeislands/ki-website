@@ -1,6 +1,6 @@
 # Cloudflare
 
-The KI Website is deployed as a Cloudflare Worker serving the static files generated in `site/dist/`. The versioned Worker configuration lives in `site/wrangler.jsonc`; this guide records the complementary settings owned by the Cloudflare dashboard.
+The KI Website is deployed as a Cloudflare Worker serving the static files generated in `apps/site/dist/`. The versioned Worker configuration lives in `apps/site/wrangler.jsonc`; this guide records the complementary settings owned by the Cloudflare dashboard.
 
 ## Workers Builds
 
@@ -11,7 +11,7 @@ Configure the Git-connected Workers Build from the repository root with these ex
 - Deploy command: `bun run ki:site:deploy`
 - Root directory: repository root
 
-Do not configure a Pages deploy directory. The `assets.directory` field in `site/wrangler.jsonc` selects the generated output.
+Do not configure a Pages deploy directory. The `assets.directory` field in `apps/site/wrangler.jsonc` selects the generated output.
 
 ## Domains
 

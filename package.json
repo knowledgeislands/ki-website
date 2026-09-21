@@ -18,6 +18,7 @@
     "lint-staged": "^17.5.1",
     "rumdl": "^0.2.74",
     "syncpack": "^15.3.3",
+    "turbo": "^2.11.2",
     "typescript": "^7.0.2"
   },
   "engines": {
@@ -46,18 +47,19 @@
     "url": "git+https://github.com/knowledgeislands/ki-website.git"
   },
   "scripts": {
-    "clean": "rm -rf {node_modules,site/dist}",
+    "build": "turbo run build",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
     "ki:deps:update": "bun update --latest",
-    "ki:site:build": "bun run --cwd site build",
-    "ki:site:clean": "bun run --cwd site clean",
-    "ki:site:deploy": "bun run --cwd site deploy",
-    "ki:site:dev": "bun run --cwd site ki:site:dev",
-    "ki:site:preview": "bun run --cwd site preview",
-    "ki:site:upload": "bun run --cwd site upload",
+    "ki:site:build": "bun run --cwd apps/site build",
+    "ki:site:clean": "bun run --cwd apps/site clean",
+    "ki:site:deploy": "bun run --cwd apps/site deploy",
+    "ki:site:dev": "bun run --cwd apps/site ki:site:dev",
+    "ki:site:preview": "bun run --cwd apps/site preview",
+    "ki:site:upload": "bun run --cwd apps/site upload",
     "prepare": "husky"
   },
   "type": "module",
   "workspaces": [
-    "site"
+    "apps/*"
   ]
 }

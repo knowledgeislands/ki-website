@@ -43,5 +43,5 @@
   },
   /* Root-level .ts files only — non-recursive so site/ keeps its own config. */
   "include": ["*.ts"],
-  "exclude": ["node_modules", "dist", "site"]
+  "exclude": ["node_modules", "dist", "apps"]
 }

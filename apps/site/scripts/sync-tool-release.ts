@@ -199,7 +199,7 @@ function parseArguments(args: string[]): CliOptions {
       tapCommit: required('tap-commit'),
       formulaPath: values.get('formula-path') ?? `Formula/${tool}.rb`
     },
-    registryPath: resolve(values.get('registry') ?? 'site/src/_data/tools.json5'),
+    registryPath: resolve(values.get('registry') ?? 'apps/site/src/_data/tools.json5'),
     checkOnly
   }
 }

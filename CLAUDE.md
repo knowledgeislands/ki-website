@@ -12,12 +12,12 @@ The public-facing **Knowledge Islands** website — a static site built with the
 
 ## Working here
 
-- **The neutral website seam** follows `ki-repo-website`: the root exposes the `ki:site:build`, `ki:site:dev`, and `ki:site:clean` lifecycle and the site emits a reproducible `site/dist/`.
+- **The neutral website seam** follows `ki-repo-website`: the root exposes the `ki:site:build`, `ki:site:dev`, and `ki:site:clean` lifecycle and the site emits a reproducible `apps/site/dist/`.
 - **The content implementation** follows `ki-repo-website-content` — the Eleventy/Nunjucks/Tailwind layout, the `src/_includes/{layouts,partials}/` structure, `tokens.css` design tokens, the portable-`dist/` URL transform, and SEO. Run `ki repo audit --skill ki-repo-website-content --repo .` before shipping a structural change.
 - **The toolchain** (package.json scripts, `tsconfig`, `biome`) follows `ki-engineering`; `ki repo audit --skill ki-engineering --repo .` is the gate. The per-tool `ki:lint:*` script family was retired by `ADR-KI-HARNESS-TOOLCHAIN-001`; those checks now resolve through the native rubric, and `ki:deps:update` is the one script-seam exception.
 - **Markdown / TOML style** follows `ki-authoring`; `ki repo audit --skill ki-authoring --repo .` is the mechanical Markdown gate.
-- **The repo shape** is a **monorepo** (`ki-engineering` §0): the root `package.json` declares `"workspaces": ["site"]` and the site lives in the `site/` workspace (`site/eleventy.config.ts`, `site/src/`, `site/tsconfig.json`). The generated output is `site/dist/`; root site scripts carry the `ki:site:` prefix.
-- **Hosting** follows `ki-repo-website-cloudflare` (Workers Static Assets serving `site/dist/`); `wrangler.jsonc` lives in `site/` (`assets.directory: "dist"`), and the `ki:site:deploy` / `ki:site:preview` / `ki:site:clean` scripts are the entry points.
+- **The repo shape** is a **monorepo** (`ki-engineering` §0): the root `package.json` declares `"workspaces": ["apps/*"]` and the site lives in the canonical `apps/site` workspace (`apps/site/eleventy.config.ts`, `apps/site/src/`, `apps/site/tsconfig.json`). The generated output is `apps/site/dist/`; root site scripts carry the `ki:site:` prefix and delegate through Turborepo, which owns the task graph (`turbo.json`).
+- **Hosting** follows `ki-repo-website-cloudflare` (Workers Static Assets serving `apps/site/dist/`); `wrangler.jsonc` lives in `apps/site/` (`assets.directory: "dist"`), and the `ki:site:deploy` / `ki:site:preview` / `ki:site:clean` scripts are the entry points.
 
 ## Toolchain
 
@@ -33,6 +33,6 @@ ki repo audit --skill ki-authoring --repo .  # rumdl check for authored Markdown
 
 <!-- headroom:learn:start -->
 
-- When removing or renaming a route, run `bun run ki:site:clean` before `bun run ki:site:build`; an ordinary Eleventy build can retain obsolete output in `site/dist/`.
+- When removing or renaming a route, run `bun run ki:site:clean` before `bun run ki:site:build`; an ordinary Eleventy build can retain obsolete output in `apps/site/dist/`.
 
 <!-- headroom:learn:end -->

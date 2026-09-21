@@ -17,7 +17,7 @@ A tool earns routes by being released and generally usable. A `tools-*` reposito
 
 ## The registry
 
-[`site/src/_data/tools.json5`](../../site/src/_data/tools.json5) is the single declaration. Each entry carries:
+[`apps/site/src/_data/tools.json5`](../../apps/site/src/_data/tools.json5) is the single declaration. Each entry carries:
 
 | Field | Meaning |
 | --- | --- |

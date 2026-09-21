@@ -7,7 +7,7 @@ import JSON5 from 'json5'
 // ─── Eleventy config ──────────────────────────────────────────────────────────
 
 export default function (eleventyConfig: UserConfig) {
-  // The build runs from the site/ workspace (cwd = site/), which owns dist/.
+  // The build runs from the apps/site workspace (cwd = apps/site), which owns dist/.
   const outputRoot = resolve(process.cwd(), 'dist')
 
   // ── Relative URL helper ──────────────────────────────────────────────────
