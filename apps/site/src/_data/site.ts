@@ -11,7 +11,6 @@ const site = {
     { label: 'Projects', href: '/projects/' },
     { label: 'Tooling', href: '/tooling/' },
     { label: 'Guidance', href: '/guidance/using-ki/' },
-    { label: 'Specifications', href: '/specifications/' },
     { label: 'Get Started', href: '/get-started/' },
     { label: 'Contribute', href: '/contribute/' }
   ]

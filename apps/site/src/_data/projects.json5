@@ -98,10 +98,9 @@
     description:
       'KIPs, KIS documents, schemas, templates, conformance rules, reference examples, and the portable capability identity and inventory contracts. Specifications formalise concepts once they are proven and once implementations have supplied evidence; an Active KIS then governs every implementation claiming conformance within its scope.',
     role: 'Canonical source of portable normative contracts. Active specifications constrain the harness and the CLI; neither of them constrains a specification.',
-    usage: 'Read the published specifications on this site, or the canonical documents and schemas in the repository.',
+    usage: 'Read the canonical documents and schemas in the repository. The corpus is not yet published on this site.',
     repository: 'https://github.com/knowledgeislands/ki-specifications',
     availability: 'source',
-    route: '/specifications/',
     icon: 'lighthouse',
     accent: 'gold'
   },
