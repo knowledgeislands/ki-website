@@ -76,6 +76,18 @@ With `--network`, it resolves each pinned ref against the upstream repository an
 
 `verify:guidance` runs as part of `bun run ki:site:build`, so a page cannot reach `dist/` without a declaration.
 
+GitHub allows unauthenticated callers sixty requests an hour, and a full `--network` sweep resolves more than that. Set `GITHUB_TOKEN` (`GITHUB_TOKEN="$(gh auth token)"`) to lift the limit. Without one, the first refusal stops the remaining network checks and says so; a refusal is never reported as a missing document, because "GitHub declined to answer" and "the upstream deleted it" are different facts and only one of them is worth acting on.
+
+## Links the prose makes
+
+A page also links upstream documents it never restated — an ADR it points a reader at, a guide it defers to. Those are not `sources`, and until the sweep looked at them nothing did. Two links sat published against documents the harness had deliberately removed: a retirement guide deleted in August, and a skills diagram replaced by a written guide three days later. Both were found by hand, which is not a mechanism.
+
+So `--network` also extracts every `https://github.com/knowledgeislands/<repo>/blob/<ref>/<path>` link from each page's body and resolves it. Links inside inline code count — a page quoting what `ki manage docs manual` prints is making the same promise to the reader as a Markdown link. Identical targets are resolved once however many pages carry them.
+
+An unresolvable link is a **warning**, on the same reasoning as drift: an upstream repository retiring its own document must not break this site's build. The warning names every page carrying the link, because a retired document is usually cited from more than one.
+
+Unlike `sources`, a prose link may point at `main`. A reader following a link wants the current document, and pinning prose links would freeze a reader's view of a living repository at whatever ref the page was last revised — the opposite of what the link is for. The check resolves whatever ref the link names.
+
 ## Refreshing a page
 
 1. Run the sweep with `--network` and take the reported pages.
@@ -87,4 +99,4 @@ Step 3 is where restating earns its keep. If every upstream change forced a matc
 
 ## What this does not cover
 
-Provenance records where prose came from. It makes no promise that the upstream document is correct, that it still exists at `main`, or that its repository is public — the [projects directory](projects-directory.md) rules on publicity still apply, and a page must not cite a source no reader can open. A private repository can be an honest source for the site's understanding, but it cannot be a published citation.
+Provenance records where prose came from. It makes no promise that the upstream document is correct, that a pinned source still exists at `main`, or that its repository is public — the [projects directory](projects-directory.md) rules on publicity still apply, and a page must not cite a source no reader can open. A private repository can be an honest source for the site's understanding, but it cannot be a published citation.

@@ -80,7 +80,7 @@ The harness's pre-commit hook audits a complete staged snapshot when governed sk
 
 The former models created `.ki/` or `.ki-meta/` executors and regular-file skill copies under repository runtime-discovery directories.
 
-That material is now migration evidence, not an executor or a managed runtime link. Use the maintainer [retirement guide](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/guides/developer/retiring-repository-vendored-ki.md) to map every consumer to its native replacement, prove generated ownership, and replace unchanged runtime copies through `ki repo skill`.
+That material is now migration evidence, not an executor or a managed runtime link. Map every consumer to its native replacement, prove generated ownership, and replace unchanged runtime copies through `ki repo skill`.
 
 If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or concurrently changed, preserve it and stop. A passing legacy runner does not prove that native governance is available.
 

@@ -97,7 +97,7 @@ The native host resolves declared capabilities from verified installed harnesses
 
 Former repository-vendored `.ki/` state is migration evidence, not an execution fallback.
 
-Keep unfamiliar legacy state in place until the maintainer [retirement guide](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/guides/developer/retiring-repository-vendored-ki.md) proves its native replacement and ownership. Do not recreate it or remove it piecemeal.
+Keep unfamiliar legacy state in place until its native replacement and ownership are proven. Do not recreate it or remove it piecemeal.
 
 ## Start using skills
 

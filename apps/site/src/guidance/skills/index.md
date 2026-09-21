@@ -78,7 +78,7 @@ Its universal modes apply at local scale:
 - **CONFORM** runs AUDIT first, then proposes and—only after confirmation—applies the appropriate source-state remediation.
 - **REFRESH** retires resolved concerns and promotes either a recurring cross-repository pattern into a named Knowledge Islands skill or multi-step change work into the repository roadmap.
 
-`ki-housekeeping-claude` recognises this boundary: it governs accumulated Claude machine state, while `ki-self` governs the repository-local concerns that sit beside it. The [single-page skills illustration](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/diagrams/skills-map.svg) places the shared foundations on the left and specialised capabilities on the right; colour and each node’s second line identify its family. `ki-self` remains visibly distinct as repository-local governance, with a promotion edge back to a named shared skill.
+`ki-housekeeping-claude` recognises this boundary: it governs accumulated Claude machine state, while `ki-self` governs the repository-local concerns that sit beside it. [Skills by outcome](/guidance/skills/by-outcome/) routes the same territory by what you are trying to do rather than by family, and keeps `ki-self` distinct as repository-local governance that can promote a recurring pattern into a named shared skill.
 
 ## The skill domains
 

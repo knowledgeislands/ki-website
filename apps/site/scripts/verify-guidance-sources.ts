@@ -7,9 +7,10 @@
  * refuses a page that declares neither.
  *
  * Offline checks run by default. `--network` additionally resolves each pinned ref against its
- * upstream repository and reports pages whose source document has moved since it was reviewed.
- * That is a warning, never a failure: an upstream repository editing its own guide must not break
- * this site's build. See docs/guides/developer/guidance-provenance.md.
+ * upstream repository and reports pages whose source document has moved since it was reviewed, and
+ * resolves the links a page's prose makes into Knowledge Islands repositories. Both are warnings,
+ * never failures: an upstream repository editing or retiring its own guide must not break this
+ * site's build. See docs/guides/developer/guidance-provenance.md.
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'
@@ -39,6 +40,12 @@ interface Source {
   title?: string
   governs?: string
   reviewed?: string
+}
+
+interface ProseLink {
+  repository: string
+  ref: string
+  path: string
 }
 
 const failures: string[] = []
@@ -179,10 +186,64 @@ const checkEntry = (page: string, position: number, source: Source): void => {
   }
 }
 
+const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
+const apiHeaders: Record<string, string> = { Accept: 'application/vnd.github+json' }
+if (token) apiHeaders.Authorization = `Bearer ${token}`
+
+let refused = false
+
+/**
+ * Asks GitHub about one path, returning `null` when the answer carries no verdict.
+ *
+ * Unauthenticated callers get sixty requests an hour, and this sweep resolves more than sixty paths.
+ * A 403 or 429 therefore means "GitHub declined to answer", not "the document is gone" — reporting
+ * one as the other is how a quiet afternoon turns into a page of invented breakages. The first
+ * refusal stops the remaining network calls, since they would all be refused too.
+ */
+const api = async (url: string): Promise<Response | null> => {
+  if (refused) return null
+  const response = await fetch(url, { headers: apiHeaders })
+  if (response.status !== 403 && response.status !== 429) return response
+
+  refused = true
+  warn(
+    `GitHub declined further requests (HTTP ${response.status}); the remaining network checks were skipped. Set GITHUB_TOKEN to lift the unauthenticated limit of sixty requests an hour.`
+  )
+  return null
+}
+
+/**
+ * Extracts links into Knowledge Islands repositories from a page's prose.
+ *
+ * These are not `sources` — a page links documents it never restated — but they rot the same way,
+ * and until this check existed nothing looked at them. Two links to documents the harness had
+ * deliberately removed sat published for weeks because the `sources` sweep only reads frontmatter.
+ */
+const proseLinks = (contents: string): ProseLink[] => {
+  // A link is as likely to sit in inline code — a command's printed output — as in a Markdown target,
+  // so the delimiter class carries backticks and quotes, and sentence punctuation is trimmed after.
+  const pattern = /https:\/\/github\.com\/(knowledgeislands\/[A-Za-z0-9._-]+)\/blob\/([^/\s)`>"']+)\/([^\s)`>"'#]+)/g
+  const found: ProseLink[] = []
+  for (const match of contents.matchAll(pattern)) {
+    found.push({ repository: match[1], ref: match[2], path: match[3].replace(/[.,;:]+$/, '') })
+  }
+  return found
+}
+
+const checkProseLink = async (pages: string[], link: ProseLink): Promise<void> => {
+  const endpoint = `https://api.github.com/repos/${link.repository}/contents/${link.path}?ref=${link.ref}`
+  const response = await api(endpoint)
+  if (!response || response.ok) return
+
+  warn(
+    `${pages.join(', ')}: links ${link.repository}/${link.path} at ${link.ref}, which does not resolve (HTTP ${response.status}). Readers following that link get nothing.`
+  )
+}
+
 const upstreamHead = async (repository: string, path: string): Promise<string | null> => {
   const endpoint = `https://api.github.com/repos/${repository}/commits?path=${encodeURIComponent(path)}&per_page=1`
-  const response = await fetch(endpoint, { headers: { Accept: 'application/vnd.github+json' } })
-  if (!response.ok) return null
+  const response = await api(endpoint)
+  if (!response?.ok) return null
   const commits = (await response.json()) as { sha?: string }[]
   return commits[0]?.sha ?? null
 }
@@ -191,16 +252,16 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
   if (!source.repository || !source.path || !source.ref) return
 
   const pinned = `https://api.github.com/repos/${source.repository}/contents/${source.path}?ref=${source.ref}`
-  const pinnedResponse = await fetch(pinned, { headers: { Accept: 'application/vnd.github+json' } })
+  const pinnedResponse = await api(pinned)
+  if (!pinnedResponse) return
   if (!pinnedResponse.ok) {
     fail(`${page}: ${source.repository}@${source.ref} does not serve ${source.path} (HTTP ${pinnedResponse.status}).`)
     return
   }
   const pinnedFile = (await pinnedResponse.json()) as { sha?: string }
 
-  const headResponse = await fetch(`https://api.github.com/repos/${source.repository}/contents/${source.path}`, {
-    headers: { Accept: 'application/vnd.github+json' }
-  })
+  const headResponse = await api(`https://api.github.com/repos/${source.repository}/contents/${source.path}`)
+  if (!headResponse) return
   if (!headResponse.ok) {
     warn(
       `${page}: ${source.repository} no longer serves ${source.path} on its default branch; the source may have moved.`
@@ -224,11 +285,23 @@ if (pages.length === 0) {
 }
 
 const repositorySources: { page: string; source: Source }[] = []
+const linkTargets = new Map<string, { link: ProseLink; pages: string[] }>()
 
 for (const file of pages) {
   const page = relative(siteRoot, file)
   const contents = readFileSync(file, 'utf-8')
   const parsed = readSources(contents)
+
+  // Gathered before the branches below: a page claiming `sources: original` still links upstream documents.
+  for (const link of proseLinks(contents)) {
+    const key = `${link.repository}@${link.ref}:${link.path}`
+    const target = linkTargets.get(key)
+    if (target) {
+      if (!target.pages.includes(page)) target.pages.push(page)
+    } else {
+      linkTargets.set(key, { link, pages: [page] })
+    }
+  }
 
   if (!contents.includes(sourcesPartial)) {
     fail(`${page}: does not include "${sourcesPartial}". A declaration readers never see is not a published citation.`)
@@ -258,6 +331,9 @@ if (network && failures.length === 0) {
   for (const { page, source } of repositorySources) {
     await checkDrift(page, source)
   }
+  for (const { link, pages: linkedFrom } of linkTargets.values()) {
+    await checkProseLink(linkedFrom, link)
+  }
 }
 
 for (const message of warnings) {
@@ -273,6 +349,6 @@ if (failures.length > 0) {
 }
 
 const scope = network
-  ? `${pages.length} pages, ${repositorySources.length} repository sources resolved`
+  ? `${pages.length} pages, ${repositorySources.length} repository sources and ${linkTargets.size} prose links resolved`
   : `${pages.length} pages`
 console.log(`Guidance provenance verified (${scope}).`)
