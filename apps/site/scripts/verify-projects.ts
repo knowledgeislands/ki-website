@@ -7,6 +7,13 @@
  * them — that boundary is what this check holds, along with completeness and
  * the rule that every card leads somewhere the build actually produced.
  *
+ * Completeness now includes the reader-facing fields a generated page is built
+ * from. An entry without a `route` becomes `/projects/<slug>/`, so it must be
+ * able to say what problem it solves, who has that problem, what it does, what
+ * state it is in and what it does not do. Without that gate the template would
+ * render a page with empty sections, which is worse than the thin page it
+ * replaced because it looks deliberate (KI-WEB-SITE-023).
+ *
  * The release fields themselves — version shape, pinned refs, immutable tags —
  * are `verify-tool-routes.ts`. This file owns which entries may declare them.
  *
@@ -27,6 +34,15 @@ const distDir = resolve(siteRoot, 'dist')
 
 const kinds = ['principal', 'capability', 'standard', 'tool', 'mcp', 'platform']
 const releaseFields = ['version', 'maturity', 'formula', 'installer', 'manual', 'changelog']
+const readerFields = ['problem', 'audience', 'state', 'limits']
+
+// Floors, not targets. They exist to catch a placeholder — a field filled with
+// "TODO" or a restated tagline — rather than to judge prose. Every entry in the
+// registry today clears them by a wide margin.
+const minimumReaderLength = 80
+const minimumCapabilities = 3
+const minimumCapabilityLength = 20
+
 const availabilities = ['published', 'source']
 const accents = ['gold', 'teal', 'forest']
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -46,6 +62,11 @@ interface Project {
   icon: string
   accent: string
   version?: string
+  problem?: string
+  audience?: string
+  capabilities?: string[]
+  state?: string
+  limits?: string
 }
 
 const failures: string[] = []
@@ -68,6 +89,54 @@ const declaredIcons = (): Set<string> => {
 const requireText = (record: Record<string, unknown>, field: string, where: string): void => {
   const value = record[field]
   if (typeof value !== 'string' || value.trim() === '') fail(`${where}: "${field}" must be a non-empty string`)
+}
+
+/**
+ * Holds a generated page's entry to the material that page is built from.
+ *
+ * An entry that declares a `route` has a richer home elsewhere on the site and
+ * is exempt; anything it does declare is still checked, so an exemption cannot
+ * be used to smuggle in a half-written field.
+ */
+const checkReaderFields = (project: Project, where: string): void => {
+  const record = project as unknown as Record<string, unknown>
+  const generated = typeof project.route !== 'string'
+
+  for (const field of readerFields) {
+    const value = record[field]
+    if (value === undefined) {
+      if (generated) fail(`${where}: a generated page must declare "${field}"`)
+      continue
+    }
+    if (typeof value !== 'string' || value.trim() === '') {
+      fail(`${where}: "${field}" must be a non-empty string`)
+      continue
+    }
+    if (value.trim().length < minimumReaderLength) {
+      fail(`${where}: "${field}" is ${value.trim().length} characters; a reader needs at least ${minimumReaderLength}`)
+    }
+  }
+
+  const capabilities = record.capabilities
+  if (capabilities === undefined) {
+    if (generated) fail(`${where}: a generated page must declare "capabilities"`)
+    return
+  }
+
+  if (!Array.isArray(capabilities)) {
+    fail(`${where}: "capabilities" must be an array of plain sentences`)
+    return
+  }
+
+  if (capabilities.length < minimumCapabilities) {
+    fail(`${where}: "capabilities" lists ${capabilities.length} item(s); at least ${minimumCapabilities} are needed`)
+  }
+
+  for (const [index, capability] of capabilities.entries()) {
+    if (typeof capability !== 'string' || capability.trim().length < minimumCapabilityLength) {
+      fail(`${where}: capabilities[${index}] must be a sentence of at least ${minimumCapabilityLength} characters`)
+    }
+  }
 }
 
 const readRegistry = <T>(path: string, label: string): T[] => {
@@ -143,6 +212,8 @@ const checkRegistry = (projects: Project[]): void => {
         fail(`${where}: "route" must not point back into /projects/; omit it and the page is generated`)
       }
     }
+
+    checkReaderFields(project, where)
 
     // A version and an installer are a promise about a specific release, and
     // only a released tool is allowed to make one. Requiring the whole set on a

@@ -33,6 +33,21 @@
 //   icon         KI symbol name from src/_includes/macros/icons.njk
 //   accent       symbol-circle accent: gold | teal | forest
 //
+// Every entry without a `route` gets a generated page, so it must also carry
+// the five reader-facing fields that page is built from (KI-WEB-SITE-023). They
+// answer, in order, the questions a reader deciding whether to adopt something
+// actually asks:
+//   problem      what problem this solves — the reason it exists at all
+//   audience     who has that problem, stated so a reader can rule themselves out
+//   capabilities 3 or more concrete things it does, as plain sentences
+//   state        what state it is in, honestly, including what is not done
+//   limits       what it deliberately does not do, and what stays elsewhere
+//
+// `usage` answers the fifth question — how to start — and predates them.
+// Plain prose only: these render as text, so Markdown syntax would show as
+// literal characters. `verify-projects.ts` fails a generated entry missing any
+// of them, so an unfilled page cannot reach `dist/`.
+//
 // Released tools (`kind: 'tool'`) carry six more, and every other kind must
 // carry none of them:
 //   version      published release this registry currently advertises
@@ -54,6 +69,21 @@
     tagline: 'The canonical record of the Knowledge Islands philosophy and conceptual model.',
     description:
       'Arcadia Principal is where the approach is developed and proved before anything is built on it. It holds the philosophy, the conceptual model, and the worked record that shows the model surviving contact with real knowledge work — and it does so without mandating any particular tooling implementation.',
+    problem:
+      'An approach to knowledge work that lives in slide decks and habits cannot be argued with, and cannot be inherited. Arcadia Principal is the opposite arrangement: one public knowledge base where the philosophy and the conceptual model are developed in the open and kept as a living record, so anything built downstream can be traced back to a stated idea rather than to an assumption nobody wrote down.',
+    audience:
+      'Read it if you want to understand why Knowledge Islands is shaped the way it is before deciding whether any of the tooling is worth adopting, or if you are working out how to hold your own approach explicitly. It is not a manual, and it will not tell you which command to run.',
+    capabilities: [
+      'A Philosophy pillar: the island metaphor, the conceptual model, and the realisation material that connects the two.',
+      'A Technē pillar carrying the conceptual tool-ecosystem map the implementation repositories are arranged by.',
+      'An Aesthetics pillar holding the symbol library, logo, diagrams and visual style this website is built from.',
+      'The ecosystem decision GDR-KI-FUNDAMENTALS-001, mirrored across six repositories, which fixes who owns what.',
+      'A Streams area carrying the live working record, so the reasoning is visible rather than only its conclusions.'
+    ],
+    state:
+      'Public and actively developed, in continuous revision rather than versioned releases. The distilled account of the philosophy and the model is published on this site; the repository holds the full working record behind it.',
+    limits:
+      'It mandates no implementation. Nothing here constrains any repository\'s code, and a change made in Arcadia obliges no tool to follow — KI Specifications exists for the cases where obligation is actually wanted. It is also not a tutorial: there is no getting-started path, because there is nothing here to install.',
     role: 'Canonical source of the philosophy and conceptual model. It informs every other repository and mandates none of their implementations.',
     usage: 'A public Markdown knowledge base. Read it in the repository, or read the distilled account under Philosophy and Model on this site.',
     repository: 'https://github.com/knowledgeislands/ki-arcadia-principal',
@@ -68,6 +98,21 @@
     tagline: 'The canonical record of the Knowledge Islands engineering discipline.',
     description:
       'Techne Principal translates the philosophy into engineering: architecture, operating models, workflows, technology posture, and the implementation patterns the tooling repositories follow. It informs how things are built without owning any repository\'s executable behaviour or its portable normative contracts.',
+    problem:
+      'AI-native engineering practice is mostly folklore. The conventions live in one person\'s head, work well, and evaporate when that person moves on — and an agent cannot read a habit. Techne Principal writes the practice down: what the architecture is, how work is run, what the technology posture is, and why each was chosen.',
+    audience:
+      'Read it if you are building something in this ecosystem and want to know the patterns before you meet them as audit findings, or if you are building your own and want a worked example of engineering discipline held explicitly rather than by habit.',
+    capabilities: [
+      'Foundations: the engineering principles everything else here is derived from.',
+      'Architecture: how systems are structured, where boundaries fall, and what may depend on what.',
+      'Operating model: how work is captured, planned, delivered and reviewed with agents in the loop.',
+      'Technology: the posture on languages, runtimes and tools, with the reasoning kept beside the choice.',
+      'The engineering material this site publishes as guidance is drawn from here.'
+    ],
+    state:
+      'Public and actively developed, revised continuously rather than released. Where this site publishes engineering guidance, Techne Principal is the upstream it restates.',
+    limits:
+      'It shapes implementations without owning them. No executable behaviour is defined here and no portable contract: a repository\'s own code is authoritative for what it does, and KI Specifications for what it must do. It describes one practice honestly rather than prescribing a universal one.',
     role: 'Canonical source of the engineering discipline. It shapes implementation repositories; it does not define their executables or standards.',
     usage: 'A public Markdown knowledge base. Read it in the repository alongside the guidance published on this site.',
     repository: 'https://github.com/knowledgeislands/ki-techne-principal',
@@ -99,6 +144,20 @@
     tagline: 'A Claude plugin marketplace projecting harness skills and agents onto the Cowork surface.',
     description:
       'The same capabilities the harness publishes, reprojected as a Claude plugin marketplace so they can be installed on surfaces that consume plugins rather than harnesses. It is a projection, not a second authority: the harness remains the source for what each skill and agent contains.',
+    problem:
+      'Some Claude surfaces install plugins and know nothing about harnesses. Without a projection, the governance skills simply are not available there — so this repository republishes the harness\'s skills and agents in the shape a plugin marketplace expects.',
+    audience:
+      'Reach for it only if you work in a Claude surface that reads plugin marketplaces and want the Knowledge Islands skills there. If you use the ki CLI, install the harness instead: it is the same content without the lossy projection in between.',
+    capabilities: [
+      'A marketplace manifest publishing a single plugin, knowledge-islands.',
+      'The ki governance skills, generated verbatim from the harness rather than rewritten.',
+      'The governance agents, flattened into the layout the plugin surface expects.',
+      'Registration handled by the harness\'s own binding skill, which adds the marketplace and toggles the plugin rather than leaving you to wire it by hand.'
+    ],
+    state:
+      'Paused. The projection is retained for possible future use and its generated contents are intact, but it is not currently refreshed, developed, or treated as an active distribution surface. Expect it to lag the harness until it is resumed.',
+    limits:
+      'It is generated, never hand-edited, and deliberately lossy: MCP servers are excluded because they read host filesystem paths and resolve secrets locally, while the plugin sandbox cannot reach the host. Bundled skill scripts ship as files but are not expected to run there. Public visibility does not grant a licence to use, copy or redistribute.',
     role: 'Delivery projection of harness capabilities onto the Claude plugin surface. It defines no capability of its own.',
     usage: 'Add the marketplace in a Claude client that supports plugins, then install the skills and agents you want.',
     repository: 'https://github.com/knowledgeislands/ki-plugins',
@@ -115,6 +174,20 @@
     tagline: 'The canonical source of normative, portable Knowledge Islands contracts.',
     description:
       'KIPs, KIS documents, schemas, templates, conformance rules, reference examples, and the portable capability identity and inventory contracts. Specifications formalise concepts once they are proven and once implementations have supplied evidence; an Active KIS then governs every implementation claiming conformance within its scope.',
+    problem:
+      'A convention that exists only inside an implementation cannot be conformed to, argued with, or versioned — the code is simultaneously the rule and the only evidence of it. This repository is where a proven concept becomes a written contract that something else can claim conformance with, and be measured against.',
+    audience:
+      'Reach for it if you are implementing something that has to interoperate with Knowledge Islands, or proposing a change to a foundational concept rather than to a single tool. If you want to know how the tooling behaves today, the tool repositories and this site\'s guidance answer that faster.',
+    capabilities: [
+      'The KIP series: numbered proposals moving Draft to Review to Accepted, then Implemented once a specification exists.',
+      'The KIS series: the normative specification an accepted proposal produces, moving Draft to Active once there is real implementation experience behind it.',
+      'Schemas, templates, conformance rules and reference examples published alongside a specification.',
+      'A documented process for raising a proposal and stewarding it through review, and registries that track both series.'
+    ],
+    state:
+      'The process, the registries and the governance are in place; no KIP or KIS document is registered yet. The series start afresh at KIP-000001 and KIS-0001, so today this repository is the mechanism rather than the corpus. It is MIT licensed, text and schemas alike.',
+    limits:
+      'It formalises what implementations have already proved rather than designing ahead of them, which is why it is deliberately empty rather than speculatively full. The corpus is not published on this site: with nothing Active, there would be nothing to read.',
     role: 'Canonical source of portable normative contracts. Active specifications constrain the harness and the CLI; neither of them constrains a specification.',
     usage: 'Read the canonical documents and schemas in the repository. The corpus is not yet published on this site.',
     repository: 'https://github.com/knowledgeislands/ki-specifications',
@@ -131,6 +204,21 @@
     tagline: 'The Knowledge Islands command-line interface.',
     description:
       'Installs verified compatible harnesses, activates skills in explicit scopes, and hosts the native repository operations that govern a Knowledge Islands checkout.',
+    problem:
+      'Agent capabilities usually arrive as files copied into place, after which nobody can say which version is where or which rules a given repository is actually subject to. ki replaces copying with declaration: it installs verified harnesses, activates capabilities in explicit scopes, and runs exactly the checks a repository declares — so the governance travels with the code rather than with your machine.',
+    audience:
+      'You want this if you work across more than one repository with an agent, or with anyone else, and the answer to "what governs this code" needs to be the same on every clone. For a single personal project with no rules to share, it is more machinery than the problem needs.',
+    capabilities: [
+      'bootstrap: one command that detects your installed agent runtimes, installs the verified canonical harness, and links the core user skills.',
+      'skill add and repo skill add: activate a capability for you, or for a repository, in an explicit scope that is never implied.',
+      'repo educate, audit and conform: explain what the declared skills expect, check it read-only, then apply the repairs.',
+      'manage doctor, diag, outdated and repair: what is installed, what is behind, what is broken, and what to do about it.',
+      'Eighty-eight commands across fourteen groups in total, listed in full on this site rather than left to the manual.'
+    ],
+    state:
+      'Published as v0.4.0 and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
+    limits:
+      'It runs only the operations a repository\'s declared skills register, from harnesses whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
     role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
     usage: 'Install it from the Homebrew tap or the pinned installer below, then run `ki bootstrap` to install a verified harness and activate the core user skills.',
     repository: 'https://github.com/knowledgeislands/tools-ki',
@@ -151,6 +239,21 @@
     tagline: 'Run commands across many Git repositories at once.',
     description:
       'Sweeps a directory of checkouts and runs the same Git or shell command across all of them, reporting per-repository results so a wide working set stays legible.',
+    problem:
+      'A directory full of related checkouts turns every routine question — what is dirty, what is behind, did that change land — into a hand-written shell loop that nobody maintains. mgit runs one command across the whole set and prints the repository name before each result, so the answer is readable at a glance instead of being reconstructed from scrollback.',
+    audience:
+      'You want this if you keep more than a handful of repositories side by side and have caught yourself writing for-loops over them. If you work in one repository at a time, it will not earn its place.',
+    capabilities: [
+      'Run any Git subcommand across every repository in the selected set, with the repository name printed before its output.',
+      'Run an arbitrary shell command instead, so the same sweep works for tests, builds or greps.',
+      'sync: fast-forward-only pulls and ordinary pushes on clean tracking branches, rolling already-current repositories into a single count so only the interesting ones are shown.',
+      'Discover the set by walking the current directory, or fix it explicitly in a checked-in workspace document with named groups.',
+      'register: write that workspace document, for a container directory or for a repository that owns cross-repository metadata.'
+    ],
+    state:
+      'Published as v0.13.0 and labelled preview — the most exercised of the four tools day to day. It is a standalone Bash script whose only runtime dependencies are Bash 3.2 or later and Git.',
+    limits:
+      'It executes commands and reports what happened. It holds no authority over the repositories it sweeps and changes none of their governance, and it is not a forge client: pull requests, issues and reviews are outside what it can see.',
     role: 'Owns multi-repository command execution across a working set. It holds no authority over the repositories it sweeps and changes none of their governance.',
     usage: 'Install it, point it at a directory of checkouts, and run one Git or shell command across all of them.',
     repository: 'https://github.com/knowledgeislands/tools-mgit',
@@ -171,6 +274,21 @@
     tagline: 'Inspect one local Git repository\'s calendars, authors and reports offline.',
     description:
       'Reads a single checkout and reports its calendars, authors, contributors and activity without contacting a forge, so repository history can be reviewed offline.',
+    problem:
+      'Seeing the shape of a repository\'s history normally means a forge account, a network round trip, and whatever visualisation that forge happens to offer. Git Almanac reads the checkout in front of you and reports the same material — calendars, authors, contributors, activity — without contacting anything, which also means it works for repositories that are on no forge at all.',
+    audience:
+      'You want this if you need to see who worked on something, when, and how the activity was distributed: reviewing a handover, writing a retrospective, or looking at a repository you have just inherited.',
+    capabilities: [
+      'calendar: activity calendars rendered as terminal output, SVG, HTML or JSON, with light and dark themes.',
+      'authors and contributors: per-identity reporting, filterable by date range and by path within the repository.',
+      'report: a complete linked static report written under the repository, rebuilt automatically when its inputs change and leaving unowned files alone.',
+      'A documented counting contract, so a number means the same thing on every run and between repositories.',
+      'Output to a file, a directory or standard output, with the format inferred from the extension unless you state it.'
+    ],
+    state:
+      'Published as v0.1.0 and labelled preview — the newest of the four tools, and the one most likely to gain options. The counting contract and the report manifest are the settled parts.',
+    limits:
+      'It reads one local repository and writes only where you point it. It makes no network request and contacts no forge, so it reports nothing about pull requests, issues or reviews: none of that lives in the checkout. It never modifies repository history.',
     role: 'Owns offline reporting over a single Git checkout. It contacts no forge, writes nothing, and holds no authority over how a repository is governed.',
     usage: 'Install it and run it inside any checkout to report that repository\'s calendars, authors, contributors and activity.',
     repository: 'https://github.com/knowledgeislands/tools-git-almanac',
@@ -191,6 +309,22 @@
     tagline: 'A declarative description manager for a person\'s working setup.',
     description:
       'Records preferred tools, what they are for and why they belong, resolves named profiles for machines and roles, and compares declared intent against what each provider actually observes.',
+    problem:
+      'A working setup is spread across a Brewfile, a dotfiles repository, a language toolchain manager and a few download scripts, none of which can answer "what is my setup, and why is this here?". Rig gives those separate answers one catalogue and one set of profiles, then compares what you declared against what the machine actually has.',
+    audience:
+      'You want this if you run more than one machine, or keep rebuilding one, and would rather the reasoning behind each tool were recorded than rediscovered. It is equally for the case where you need to hand someone a description of a setup without handing them your private machine state.',
+    capabilities: [
+      'A catalogue describing each tool: category, purpose, rationale, relationships and platforms.',
+      'Managed resources: services, scheduled jobs, typed machine settings and semantic layouts, declared together with their desired state.',
+      'Profiles that select a subset of that catalogue for a machine, a role or a context.',
+      'status and doctor: compare the selected profile against what Homebrew, uv, mise, npm, chezmoi, launchd and macOS defaults actually observe, reporting what is present, missing, drifted, unavailable or unknown.',
+      'apply, bootstrap, update and maintain: preview a complete plan, then let the native managers act on it.',
+      'export and publish: one deliberately public, allow-listed profile, shareable without exposing private machine state.'
+    ],
+    state:
+      'Published as v0.2.0 and labelled preview. Configuration is inert TOML that Rig never sources as shell code, external provider operations require an explicit allow-listed declaration, and read-only inspection stays separate from mutation and publication.',
+    limits:
+      'Rig is a manager of managers: it describes the whole and coordinates the parts, while the native systems still install and configure their own tools. It replaces no package manifest, no chezmoi source state, no provider credential store and no native configuration — and it installs nothing on your behalf without an explicit apply.',
     role: 'Owns the declared description of a working setup and the comparison between that intent and what providers observe. It installs nothing on your behalf.',
     usage: 'Install it, declare the tools and profiles you want, then compare that declaration against what each provider actually reports.',
     repository: 'https://github.com/knowledgeislands/tools-rig',
@@ -213,6 +347,20 @@
     tagline: 'Give an agent scoped read and write access to local knowledge-base directories.',
     description:
       'One registration serves many knowledge bases: the environment declares alias-to-path pairs and every tool call names the base it acts in. Each path is validated twice — lexically, then through realpath — so neither a traversal nor a symlink can reach outside the declared root, and no call under one alias can wander into a sibling base. Dotfiles and repository metadata stay hidden from ordinary tools. No network, no authentication.',
+    problem:
+      'An agent that can write notes needs somewhere bounded to write them. A general filesystem server gives it your whole disk; this one gives it exactly the knowledge-base directories you declared, with the boundary enforced on every call rather than trusted to a prompt.',
+    audience:
+      'You want this if you keep knowledge bases as Markdown on disk and want an agent reading and writing in them directly — particularly if there are several, since one registration serves them all.',
+    capabilities: [
+      'Read, write, list and delete notes across every declared base.',
+      'Create folders and rename entries, so the agent can restructure rather than only edit.',
+      'Report which aliases are declared and what each one resolves to, so the agent can discover its own boundaries.',
+      'Name the base on every call, which is what lets one registration serve many knowledge bases at once.'
+    ],
+    state:
+      'Public source, not published to any package registry. Clone it, build it, and register the built server with your MCP client. The path validation and the alias model are the settled parts; the tool surface is deliberately small.',
+    limits:
+      'Every path is validated twice, lexically and then through realpath, so neither a traversal nor a symlink reaches outside the declared root and no call under one alias wanders into a sibling base. Dotfiles and repository metadata stay hidden from ordinary tools. It makes no network request and performs no authentication: it reads and writes notes, and holds no knowledge of its own.',
     role: 'The knowledge-base filesystem adapter. It reads and writes notes; it holds no knowledge of its own.',
     usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-ki-kb-fs',
@@ -227,6 +375,21 @@
     tagline: 'Mirror knowledge-base notes into Notion for people who do not work in the repository.',
     description:
       'Pushes Markdown notes into Notion records and writes the resulting Notion URL back into the note\'s frontmatter. The knowledge base stays canonical and the mirror stays derivative — a read surface for readers who are not in the repository. It assumes no fixed root folder and no fixed wiki database; note, tree, and roots verbs let a caller drive exactly the subtree it means to mirror.',
+    problem:
+      'A knowledge base that lives in a Git repository is unreachable for everyone who does not work in that repository. Copying notes into Notion by hand solves that once and then drifts. This server mirrors them on demand and writes the resulting Notion URL back into the note, so each side knows about the other.',
+    audience:
+      'You want this if your canonical notes are Markdown under version control but the people who need to read them work in Notion, and you would rather publish deliberately than move the knowledge base.',
+    capabilities: [
+      'Note verbs: preflight, update, status, touch, move and delete a single note\'s mirror.',
+      'Tree verbs: update, status, touch, prune and delete a whole subtree in one call.',
+      'Roots: list and drive exactly the subtree you mean to mirror, with no fixed root folder or wiki database assumed.',
+      'Exclusions, so a note or a subtree can be kept out of the mirror deliberately rather than by omission.',
+      'Frontmatter write-back recording the Notion URL and when it was published.'
+    ],
+    state:
+      'Public source, not published to any package registry. Clone it, build it, supply a Notion integration token, and register the built server with your MCP client.',
+    limits:
+      'It publishes one way. The verbs push notes into Notion and record where they landed; edits made in Notion are not brought back, because the mirror is derivative by design and nothing written there becomes authoritative. The knowledge base stays canonical.',
     role: 'A derivative publication adapter. Nothing it writes to Notion becomes authoritative.',
     usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-ki-kb-notion-mirror',
@@ -241,6 +404,20 @@
     tagline: 'Audit a whole tree of Git repositories, read-only until an operator says otherwise.',
     description:
       'Walks a tree of checkouts and reports branch, working-tree status, ahead and behind counts, and last-commit metadata for each. The walk and the per-repository git calls are split into separate tools, so one cheap filesystem scan can be cached and re-audited many times. Remote and branch mutations exist but stay hidden until an operator raises the access level, and every walked path is validated against a configured allow-list of safe roots.',
+    problem:
+      'Asking an agent about thirty checkouts means thirty status calls and no overview, and giving it a shell to do that with means giving it the ability to change them. This server reports the state of a whole tree — branch, working-tree status, ahead and behind counts, last commit — and is read-only until someone deliberately says otherwise.',
+    audience:
+      'You want this if you keep a wide working set and want an agent able to tell you what is dirty, what is unpushed and what has been abandoned, without handing it the ability to act on any of it.',
+    capabilities: [
+      'A cheap filesystem scan that finds every repository under the allowed roots, separated from the git calls so it can be cached and re-audited many times.',
+      'A per-repository audit: branch, working-tree status, ahead and behind counts, and last-commit metadata.',
+      'A closer look at one repository, including its diff, when the summary raises a question.',
+      'Fetch, pull, push, commit and remote management, present but hidden until an operator raises the access level.'
+    ],
+    state:
+      'Public source, not published to any package registry. Clone it, build it, and register the built server with your MCP client. The scan-and-audit split and the access model are the settled parts.',
+    limits:
+      'Read-only unless an operator says otherwise: the access level defaults to read, and the mutating tools are not registered at all until it is raised. Every walked path is validated against a configured allow-list of safe roots, so it cannot wander. It observes repositories; it governs none of them and knows nothing about the forge they came from.',
     role: 'A read-only-by-default Git observation adapter for wide working sets.',
     usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-git-audit',
@@ -255,6 +432,21 @@
     tagline: 'Audit and safely clean the filesystem state Claude applications accumulate.',
     description:
       'Codified audits across the three storage areas Claude apps leave on macOS: Claude Desktop and Cowork sessions, Claude Code state under the user\'s home, and VSCode chat sessions. Each audit step is its own tool, so an agent orchestrates the checks and writes the report. Every tool maps to an access level derived from its MCP annotations, and the default exposes read-only tools only.',
+    problem:
+      'Claude applications accumulate sessions, memory files, caches, artifacts and orphaned project state across three separate storage areas, and none of it is safe to delete blind — some of it is the only copy of a conversation you may still want. This server codifies the audits, so an agent can report what is actually there and prune only what is demonstrably obsolete.',
+    audience:
+      'You want this if you use Claude Desktop, Cowork, Claude Code or the VSCode extension heavily enough that disk usage, session sprawl or stale memory files have become a real cost.',
+    capabilities: [
+      'Claude Code: projects, sessions, memory files, storage summaries, obsolete-session detection, orphaned-project pruning and project relocation.',
+      'Claude Desktop and Cowork: workspaces, sessions, artifacts health, plugin inventory, backups, reports and project cache status.',
+      'VSCode chat sessions: workspaces, storage summary and obsolete-session detection.',
+      'Session reading and checkpointing, so a conversation can be acquired before anything is pruned.',
+      'Pruning tools for each area, separated from the audits that identify what is eligible.'
+    ],
+    state:
+      'Public source, not published to any package registry, and macOS only — it addresses the paths those applications use there. Clone it, build it, and register the built server with your MCP client.',
+    limits:
+      'Each audit step is its own tool, so the agent orchestrates the checks and writes the report rather than the server deciding what matters. Every tool maps to an access level derived from its MCP annotations, and the default exposes read-only tools only, so pruning requires a deliberate change. It observes and prunes runtime state; it decides nothing about knowledge.',
     role: 'A local hygiene adapter for agent-runtime state. It observes and prunes; it decides nothing about knowledge.',
     usage: 'Not yet published to a registry. Clone the repository, build it, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-housekeeping-claude',
@@ -269,6 +461,22 @@
     tagline: 'Connect an agent to Google Workspace, with outbound mail confined to drafts.',
     description:
       'Gmail search, triage, threading, and label management over the full Gmail query syntax, with batch relabelling in a single API call. Outbound mail is deliberately drafts-only — the server composes, the person reviews in Gmail and clicks Send. Deletion is restricted to recoverable trash; the permanent-delete endpoints are not exposed at all. Calendar and Drive tools follow on the same client, scopes, and access gate.',
+    problem:
+      'Giving an agent your mailbox is easy. Giving it your mailbox without also giving it the ability to send mail in your name, or to destroy it, is the part that usually stops people — so this server draws that line in the tool surface itself rather than in an instruction the agent might not follow.',
+    audience:
+      'You want this if you want an agent searching, triaging and drafting in Gmail, and you are not willing to let it press Send. If you want autonomous outbound mail, this is deliberately the wrong server.',
+    capabilities: [
+      'Search and read at message and thread level, over the full Gmail query syntax rather than a simplified subset.',
+      'Triage: label, unlabel, archive, mark read or unread, with batch relabelling done in a single API call.',
+      'Labels: list, create, update and delete.',
+      'Drafts: create, read, update, list and delete — which is the entire outbound surface.',
+      'Attachment metadata and download, and raw message access when the parsed form is not enough.',
+      'An access gate derived from each tool\'s MCP annotations, so the default registration exposes read-only tools and nothing else.'
+    ],
+    state:
+      'Public source, not published to any package registry. Gmail is fully implemented; calendar and Drive tools follow on the same shared client, scopes and access gate. Clone it, build it, supply your own Google Cloud OAuth credentials, and register the built server with your MCP client.',
+    limits:
+      'Outbound mail is deliberately drafts-only: the server composes, you review in Gmail and click Send. Deletion is restricted to recoverable trash, and the permanent-delete endpoints are not exposed at all. Access level is a boot-time decision, so raising it is an explicit act rather than something an agent can talk its way into.',
     role: 'A Google Workspace adapter with a deliberately narrowed write surface.',
     usage: 'Not yet published to a registry. Clone the repository, supply your own Google Cloud OAuth credentials, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-gsuite',
@@ -283,6 +491,21 @@
     tagline: 'Connect an agent to Outlook and OneDrive through the Microsoft Graph API.',
     description:
       'Outlook coverage spans reading, searching, sending, and deleting mail, managing folders and rules, and creating or answering calendar events. OneDrive coverage spans listing, searching, download, chunked upload, folder creation, and sharing. A standalone auth server handles the OAuth consent flow and refreshes cached tokens transparently.',
+    problem:
+      'For anyone on Microsoft 365, the work sits in Outlook and OneDrive, and neither is reachable by an agent without an app registration, a consent flow and a token refresh loop. This server does that once and then exposes the two surfaces as ordinary tools.',
+    audience:
+      'You want this if your mail, calendar and files are in Microsoft 365 and you want an agent working in them directly rather than through copy and paste.',
+    capabilities: [
+      'Outlook mail: read, search, send, move and delete, with folders created, renamed and deleted as needed.',
+      'Inbox rules: list, create and reorder, with routing lint, drift and triage checks over the rule set itself.',
+      'Calendar: list, create, accept, decline, cancel and delete events.',
+      'OneDrive: list, search, download, upload including chunked upload of large files, create folders and share items.',
+      'A standalone auth server that handles the OAuth consent flow and refreshes cached tokens transparently.'
+    ],
+    state:
+      'Public source, not published to any package registry. Clone it, build it, supply your own Microsoft app registration, and register the built server with your MCP client.',
+    limits:
+      'Unlike the Google Workspace adapter, this one can send mail and delete it: the surface is wider, so the scopes on your app registration are where the line gets drawn. It reads and writes through Graph and stores nothing of its own beyond cached tokens.',
     role: 'A Microsoft 365 adapter covering the Outlook and OneDrive surfaces.',
     usage: 'Not yet published to a registry. Clone the repository, supply your own Microsoft app registration, and register the built server with your MCP client.',
     repository: 'https://github.com/knowledgeislands/mcp-m365',
@@ -299,6 +522,21 @@
     tagline: 'A runnable personal-controller execution fabric for the ecosystem.',
     description:
       'Where the agentic harness publishes capabilities an agent can use, the Techne harness provides somewhere for work to actually run: a Kubernetes-based personal controller and execution fabric that a single operator can stand up and keep. It is infrastructure for the ecosystem rather than a source of knowledge or capability semantics.',
+    problem:
+      'Agentic work eventually needs somewhere to run that is not a terminal you have to keep open. The Techne Harness is that somewhere: a Kubernetes-based personal controller and execution fabric sized for one operator to stand up and keep running, rather than for a platform team to administer.',
+    audience:
+      'You want this if agent work has outgrown your laptop and should run on infrastructure you control. It assumes you are comfortable operating Kubernetes; nothing here hides that from you.',
+    capabilities: [
+      'A dependency-free Telegram-to-Kubernetes controller, with its own tests.',
+      'Kubernetes resources for the controller and for the execution targets it dispatches to.',
+      'Replaceable AWS proof infrastructure, kept separable so the fabric is not tied to one cloud.',
+      'Harness lifecycle operations that sit behind the techne operator command.',
+      'Packaged controller-host and target-host deployment payloads.'
+    ],
+    state:
+      'Public source, developed as a product monorepo rather than released as a package. The operator command line is released separately, from tools-techne, which owns the command grammar, installer, diagnostics and manual.',
+    limits:
+      'It runs work; it defines neither capability semantics nor standards. It stores no credentials and no canonical operational state, both of which stay in their own systems. Techne Principal remains the authority for the engineering architecture this implements.',
     role: 'Execution infrastructure. It runs work; it defines neither capabilities nor standards.',
     usage: 'Public source. Clone the repository and follow its own operating documentation to stand a fabric up.',
     repository: 'https://github.com/knowledgeislands/ki-techne-harness',
@@ -313,6 +551,19 @@
     tagline: 'The Homebrew tap that packages the released Knowledge Islands command-line tools.',
     description:
       'A delivery repository, not an ecosystem authority. It implements the release transport that each tool repository owns: a validated formula per released tool, so Homebrew takes responsibility for installation, upgrade, and removal on a user\'s machine. It also fans a verified release event out to the repositories that consume one — this website among them.',
+    problem:
+      'A curl-to-shell installer is fine once and awkward afterwards: nothing owns the upgrade and nothing owns the removal. The tap gives the released tools a single versioned install surface, so they are installed, upgraded and removed with the same commands as everything else on the machine.',
+    audience:
+      'You want this if you are installing Knowledge Islands tools on macOS or Linux and would rather Homebrew owned them than a script you ran once and forgot.',
+    capabilities: [
+      'One validated formula per released tool — currently ki, mgit, rig and git-almanac.',
+      'Implicit tapping: naming the tap in the install argument is enough, with no separate tap step.',
+      'A verified release event fanned out to the repositories that consume one, this website among them.'
+    ],
+    state:
+      'Published and in use, with four formulae packaged. A formula is bumped when its tool cuts a release, so the tap follows the tools rather than leading them.',
+    limits:
+      'The tap holds no tool source. A formula points at an upstream release tarball and its checksum, which is why each tool repository remains the authority for what it released and the tap owns only the packaging.',
     role: 'Release transport for the command-line tools. Each tool repository remains the authority for what it released.',
     usage: 'brew install knowledgeislands/tap/<tool> — naming the tap in the argument taps it implicitly.',
     repository: 'https://github.com/knowledgeislands/homebrew-tap',

@@ -46,7 +46,25 @@ So a tool is a `kind: 'tool'` entry like any other, rendered by the same templat
 
 ### When to use `route`
 
-Some projects already have a richer home on this site — `ki-specifications` has its own section, `ki-website` is the site itself, `ki-agentic-harness` is covered by the harness guide. Those entries declare `route`, their card links there, and no `/projects/<slug>/` page is generated. Without a `route`, the page is generated and the card points at it.
+Two projects already have a richer home on this site: `ki-agentic-harness` is covered by the harness guidance at `/guidance/harnesses/`, and `ki-website` is the site itself. Those entries declare `route`, their card links there, and no `/projects/<slug>/` page is generated. Without `route`, a page is generated and the card points at it.
+
+### What a generated page needs
+
+A generated page answers five questions in order: what problem this solves, whether the reader has that problem, what it does and what state it is in, how to start, and what it deliberately does not do. An entry without a `route` therefore carries the fields those sections are built from, alongside `usage`, which answers how to start and predates them.
+
+| Field | Meaning |
+| --- | --- |
+| `problem` | The problem this solves, and the reason the project exists at all. |
+| `audience` | Who has that problem, written so a reader can rule themselves out. |
+| `capabilities` | An array of at least three plain sentences, each naming something concrete it does. |
+| `state` | What state it is in, honestly, including what is not finished. |
+| `limits` | What it deliberately does not do, and what stays somewhere else. |
+
+They render as text, so write plain prose — Markdown syntax appears as literal characters on the page.
+
+`verify:projects` fails a generated entry that omits any of them, and applies two floors: 80 characters for a prose field, and three capability sentences of at least 20 characters each. Those floors exist to catch a placeholder or a restated `tagline` rather than to judge prose, and every entry in the registry clears them by a wide margin. An entry that declares a `route` is exempt from the requirement, but anything it does declare is still checked.
+
+Keeping the material true is a standing obligation rather than a one-off. These fields are written by hand from the upstream repository's own account of itself, and nothing mechanical notices when that account changes — unlike the vendored guidance pages, which pin a `sources` ref and have [a provenance sweep](guidance-provenance.md) behind them. Purpose and posture move slowly, which is what makes hand-written fields defensible here; a command surface would not be.
 
 ## Adding or amending an entry
 

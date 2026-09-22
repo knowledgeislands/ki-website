@@ -7,7 +7,7 @@ permalink: "/projects/{{ project.slug }}/"
 layout: layouts/base.njk
 eleventyComputed:
   title: "{{ project.name | safe }}"
-  description: "{{ project.tagline | safe }} What it owns in the Knowledge Islands ecosystem, and where its canonical source lives."
+  description: "{{ project.tagline | safe }} What problem it solves, who it is for, what state it is in, and how to start."
 ---
 {% from "macros/icons.njk" import kiIcon %}
 
@@ -17,6 +17,12 @@ eleventyComputed:
   `formula`, `installer`, `manual` and `changelog`, and everything below that
   reads those fields is guarded by it. A tool page therefore gains the install
   material without a separate section or a second template (KI-WEB-SITE-020).
+
+  The section order answers the five questions a reader deciding whether to
+  adopt something asks, in the order they ask them: what problem, is it mine,
+  what does it do and where does it stand, how do I start, what does it not do
+  (KI-WEB-SITE-023). `verify-projects.ts` holds every generated entry to the
+  fields those sections need.
 #}
 {%- set released = project.version is defined %}
 
@@ -37,38 +43,56 @@ eleventyComputed:
   <div class="page-container" style="max-width: 64rem;">
     <div class="grid-2col" style="gap: 3rem; align-items: start;">
       <div class="prose-ki" style="max-width: none;">
-        <p class="overline">Authority</p>
-        <h2>What this repository owns.</h2>
-        <p>{{ project.role }}</p>
-        <p>That boundary is deliberate. The ecosystem separates philosophy, engineering discipline, capability semantics, portable standards, and executable behaviour so that none of them can quietly absorb another. <a href="/projects/">The full directory</a> shows where this project sits relative to the rest.</p>
+        <p class="overline">The problem</p>
+        <h2>What this is for.</h2>
+        <p>{{ project.problem }}</p>
 
-        <p class="overline" style="margin-top: 2.5rem;">Using it</p>
-        <h2>How to pick it up today.</h2>
-        <p>{{ project.usage }}</p>
+        <p class="overline" style="margin-top: 2.5rem;">Whose problem</p>
+        <h2>Whether it is yours.</h2>
+        <p>{{ project.audience }}</p>
       </div>
 
       <aside class="card-ki">
         <div class="symbol-circle symbol-circle-{{ project.accent }}">{{ kiIcon(project.icon, 22) }}</div>
         <h2 style="font-size: 1.125rem; margin-bottom: 0.75rem;"><code>{{ project.name }}</code> at source.</h2>
-        <p class="text-muted" style="font-size: 0.9375rem;">The repository is the authority for this project's contents, its interfaces and its current state. This page describes it; it does not stand in for it.</p>
+        <p class="text-muted" style="font-size: 0.9375rem;">{{ project.name }} is built{{ " and released" if released }} in the open. The repository is where its issues, history and current work live, and it is the authority for anything this page and the code disagree about.</p>
         {%- if released %}
-        <p style="margin: 0.75rem 0 0;"><a href="{{ project.manual }}">Read the manual</a></p>
+        <p style="margin: 0.75rem 0 0;"><a href="{{ project.manual }}">The manual at {{ project.version }}</a></p>
         <p style="margin: 0.375rem 0 0;"><a href="{{ project.changelog }}">Release history</a></p>
-        <p style="margin: 0.375rem 0 0;"><a href="{{ project.repository }}">Open the repository</a></p>
+        <p style="margin: 0.375rem 0 0;"><a href="{{ project.repository }}">Source repository</a></p>
         {%- else %}
-        <p style="margin: 0.75rem 0 0;"><a href="{{ project.repository }}">Open the repository</a></p>
-        <p style="margin: 0.375rem 0 0;"><a href="{{ project.repository }}#readme">Read the README</a></p>
+        <p style="margin: 0.75rem 0 0;"><a href="{{ project.repository }}">Source repository</a></p>
         {%- endif %}
       </aside>
     </div>
   </div>
 </section>
 
-{%- if released %}
 <section class="section-mist section-pad">
   <div class="page-container" style="max-width: 64rem;">
     <div class="prose-ki" style="max-width: none;">
-      <p class="overline">Install</p>
+      <p class="overline">Capabilities</p>
+      <h2>What it actually does.</h2>
+      <ul>
+        {%- for capability in project.capabilities %}
+        <li>{{ capability }}</li>
+        {%- endfor %}
+      </ul>
+
+      <p class="overline" style="margin-top: 2.5rem;">State</p>
+      <h2>How finished it is.</h2>
+      <p>{{ project.state }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Using it</p>
+      <h2>How to start.</h2>
+      <p>{{ project.usage }}</p>
+      {%- if released %}
       {% if project.formula %}
       <h2>Prefer Homebrew.</h2>
       <p>The <a href="https://github.com/knowledgeislands/homebrew-tap">Knowledge Islands tap</a> packages <code>{{ project.name }}</code>, so Homebrew owns upgrades and removal. Naming the tap in the argument taps it implicitly.</p>
@@ -79,12 +103,27 @@ eleventyComputed:
       {% endif %}
       <p>The URL below is this site's stable machine route. It redirects to the installer published at <code>{{ project.version }}</code> in <a href="{{ project.repository }}">the source repository</a>, which owns the installer's behaviour and any signature or checksum verification it performs.</p>
       <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL {{ site.url }}/install/{{ project.slug }} | sh</code></pre>
+      {%- endif %}
     </div>
   </div>
 </section>
-{%- endif %}
 
-<section class="{{ "section-parchment" if released else "section-mist" }} section-pad">
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">Boundaries</p>
+      <h2>What it deliberately does not do.</h2>
+      <p>{{ project.limits }}</p>
+
+      <p class="overline" style="margin-top: 2.5rem;">Authority</p>
+      <h2>What this repository owns.</h2>
+      <p>{{ project.role }}</p>
+      <p>That boundary is deliberate. The ecosystem separates philosophy, engineering discipline, capability semantics, portable standards, and executable behaviour so that none of them can quietly absorb another. <a href="/projects/">The full directory</a> shows where this project sits relative to the rest.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
   <div class="page-container" style="max-width: 64rem;">
     <div class="prose-ki" style="max-width: none;">
       <p class="overline">Nearby</p>
