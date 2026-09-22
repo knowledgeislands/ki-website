@@ -4,12 +4,12 @@ area: SITE
 title: One prose style
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 0f03d794cfcdb8ddd23b0879f6b01dfe94489f0b
 created_at: 2026-09-22T14:10:00Z
-updated_at: 2026-09-22T15:40:00Z
+updated_at: 2026-09-22T15:40:01Z
 ---
 
 ## Goal
@@ -156,5 +156,7 @@ Moving the provenance include into the layout was not in the plan and turned out
 Delivered the site's missing prose styling: thirteen element rules plus a dark-scheme mirror, the provenance table demoted from closing section to footer, and a new build gate that fails on an unstyled element. Verified by a clean build through all five gates, a demonstrated-and-restored negative test on the new gate, assertions against the compiled stylesheet, and six clean skill audits. Outstanding: the browser-level visual check, owed after the next deploy.
 
 ## Done
+
+Accepted 2026-09-22 by Kris Brown on the review packet above.
 
 ## Discussion

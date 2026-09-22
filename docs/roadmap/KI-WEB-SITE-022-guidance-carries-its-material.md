@@ -4,12 +4,12 @@ area: SITE
 title: Guidance carries its material
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: f59c9338e51d65f8a63ec94945443c01aa0c4f4c
 created_at: 2026-09-22T09:30:00Z
-updated_at: 2026-09-22T18:00:00Z
+updated_at: 2026-09-22T18:00:01Z
 ---
 
 ## Goal
@@ -186,6 +186,8 @@ What I would watch: `operator-guides` at thirteen outbound links is the page mos
 Two learnings worth keeping. **A check that walks one file extension is a check with a blind spot** — the provenance gate walked `.md` and the two worst pages on the site were `.njk`, so they published wrong commands for months with every gate green. And **"the build passed" and "the page is right" are different claims**: nothing in the build could have told me the site emitted no heading ids, or that a documented command had been renamed upstream. Both were found by reading the rendered output, not by running the gate.
 
 ## Done
+
+Accepted 2026-09-22 by Kris Brown on the review packet above.
 
 ## Discussion
 

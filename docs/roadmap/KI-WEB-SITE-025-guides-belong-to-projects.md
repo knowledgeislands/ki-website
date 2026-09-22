@@ -4,12 +4,12 @@ area: SITE
 title: Guides belong to projects
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 4f1ea1c17093695abee9bc453f5227eb1121b0dc
 created_at: 2026-09-22T15:50:00Z
-updated_at: 2026-09-22T17:30:00Z
+updated_at: 2026-09-22T17:30:01Z
 ---
 
 ## Goal
@@ -163,5 +163,7 @@ Restoring one file with `git checkout` after a negative test also silently rever
 Dissolved `/guidance/` into the projects that own it: nineteen guides moved under `/projects/ki/` and `/projects/ki-agentic-harness/`, bound by directory data rather than per-page frontmatter, surfaced by a generated Guides block on each project page, and gated by a new `verify:guides` that refuses a page without an opening claim or with link text that hands the reader off. The harness stopped using a guidance page as its project page. Fifteen pages that belong to no project stayed behind under a rewritten hub. Verified by a clean build through six gates, two demonstrated-and-restored negative tests, zero deferral anchors in `dist/`, and twenty-one redirects that all resolve.
 
 ## Done
+
+Accepted 2026-09-22 by Kris Brown on the review packet above.
 
 ## Discussion

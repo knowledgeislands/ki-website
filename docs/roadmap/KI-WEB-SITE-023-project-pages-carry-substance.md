@@ -4,12 +4,12 @@ area: SITE
 title: Project pages carry substance
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: ea763de90158026beecdcf1cb04b2b0d84cbc612
 created_at: 2026-09-22T09:35:00Z
-updated_at: 2026-09-22T12:55:00Z
+updated_at: 2026-09-22T12:55:01Z
 ---
 
 ## Goal
@@ -176,6 +176,8 @@ The section order is the other decision use will test. Putting boundaries and au
 Delivered the reader-facing half of the project directory: sixteen pages that say what a project solves, who it is for, what it does, where it stands and what it refuses to do, in that order, with the repository link surviving as a stated fact rather than as a substitute for content. Verified by a full clean build through every gate, a demonstrated negative test on the new requirement, and three clean skill audits. Outstanding: a knowingly accepted drift risk recorded in the guide, one pre-existing Turborepo warning, and an open question about whether `tools-techne` belongs in the directory.
 
 ## Done
+
+Accepted 2026-09-22 by Kris Brown on the review packet above.
 
 ## Discussion
 
