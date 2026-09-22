@@ -82,8 +82,8 @@ Making a repository public is not by itself a reason to list it. The directory d
 `bun run ki:site:build` runs the gate automatically after Eleventy writes `dist/`. Run it directly from the site workspace when iterating:
 
 ```bash
-bun run --cwd site verify:projects              # registry shape and generated routes
-bun run --cwd site verify:projects -- --network # additionally confirm every repository is public
+bun run --cwd apps/site verify:projects              # registry shape and generated routes
+bun run --cwd apps/site verify:projects -- --network # additionally confirm every repository is public
 ```
 
 Offline, the gate checks that every entry is complete and well-formed, that slugs are unique and collide with no tool, that `kind`, `availability`, and `accent` are known values, that each icon name exists in the icon macro, that every repository URL is under the `knowledgeislands` owner, and that no entry smuggles in a release promise. When `dist/` is present it also checks that `/projects/` was generated, that every entry without a `route` produced a page, and that every declared `route` resolves to a file the build actually wrote.

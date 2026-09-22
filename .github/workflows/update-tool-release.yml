@@ -28,6 +28,8 @@ permissions:
 jobs:
   prepare-pull-request:
     runs-on: ubuntu-latest
+    env:
+      REGISTRY_PATH: apps/site/src/_data/projects.json5
     steps:
       - name: Create tools release bot token
         id: release-bot
@@ -103,7 +105,12 @@ jobs:
           TAP_COMMIT: ${{ steps.release.outputs.tap_commit }}
         run: |
           set -euo pipefail
-          if git diff --quiet -- apps/site/src/_data/tools.json5; then
+          changed=$(git diff --name-only)
+          if [[ -n "$changed" && "$changed" != "$REGISTRY_PATH" ]]; then
+            echo "release synchronizer changed an unexpected path: $changed" >&2
+            exit 1
+          fi
+          if git diff --quiet -- "$REGISTRY_PATH"; then
             echo "$TOOL $VERSION is already current; no pull request needed." >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
@@ -112,7 +119,7 @@ jobs:
           git config user.name "ki-tools-release-bot[bot]"
           git config user.email "ki-tools-release-bot[bot]@users.noreply.github.com"
           git switch -c "$branch"
-          git add -- apps/site/src/_data/tools.json5
+          git add -- "$REGISTRY_PATH"
           git commit -m "chore(tooling): advertise $TOOL $VERSION"
           if git ls-remote --exit-code --heads origin "refs/heads/$branch" > /dev/null; then
             git fetch origin "refs/heads/$branch:refs/remotes/origin/$branch"

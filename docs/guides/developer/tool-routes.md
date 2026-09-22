@@ -69,8 +69,8 @@ Use receiver's manual workflow only to retry verified event, supplying same exac
 `bun run ki:site:build` runs the gate automatically after Eleventy writes `dist/`, so a broken declaration fails the build that a deployment is cut from. Run it directly from the site workspace when iterating on the registry:
 
 ```bash
-bun run --cwd site verify:routes              # registry shape and immutable-ref discipline
-bun run --cwd site verify:routes -- --network # additionally reach each installer and report upstream drift
+bun run --cwd apps/site verify:routes              # registry shape and immutable-ref discipline
+bun run --cwd apps/site verify:routes -- --network # additionally reach each installer and report upstream drift
 ```
 
 Offline, the gate checks that every entry is complete and well-formed, that slugs are unique, that versions are exact `v`-prefixed semantic versions, that every URL is pinned to the declared tag under the `knowledgeislands` owner, that each icon name actually exists in the icon macro, and that no page still names a retired route. When `dist/` is present it also checks that every tool page and `/install/<tool>` line was generated, and that the retired `dist/tooling/` tree and `/harness/install` line are gone.
