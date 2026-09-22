@@ -4,12 +4,12 @@ area: SITE
 title: Project pages carry substance
 theme: site-experience
 horizon: now
-status: draft
+status: ready
 blocks: []
-blocked_by: [KI-WEB-SITE-020]
+blocked_by: []
 baseline_ref: null
 created_at: 2026-09-22T09:35:00Z
-updated_at: 2026-09-22T10:00:00Z
+updated_at: 2026-09-22T11:30:00Z
 ---
 
 ## Goal
@@ -20,13 +20,13 @@ A reader landing on a project page learns what the project does, whether it is f
 
 Every project page today ends by disclaiming itself. `/projects/mcp-git-audit/` closes with "This page describes it; it does not stand in for it. Open the repository. Read README." The four tool pages close with "This page intentionally does not reproduce the executable contract. Read the manual."
 
-Those lines are the site's current ownership policy working exactly as designed, which is why this item waits on `KI-WEB-SITE-018` rather than arguing the point again.
+Those lines were the site's ownership policy working exactly as designed. `KI-WEB-SITE-018` replaced that policy, so this item now rewrites against [GDR-KI-WEBSITE-002](../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) rather than arguing the point again.
 
 The pages are also generated from a registry through two templates, so the thinness is structural: a page can only be as deep as the registry fields the template renders. Adding depth means deciding what a project page should say, then giving the registry somewhere to say it.
 
 ## Boundary
 
-Projects only, including the four tools once `KI-WEB-SITE-020` merges them. Guidance is `KI-WEB-SITE-022`.
+Projects only, including the four released tools `KI-WEB-SITE-020` merged in. Guidance is `KI-WEB-SITE-022`.
 
 Three registry entries are deliberately routeless and stay that way unless a page is warranted.
 
@@ -52,11 +52,11 @@ Main-content word counts from the built `dist/`, with the two-per-page provenanc
 
 | Page | Words |
 | --- | --- |
-| `/tooling/ki/` | 205 |
-| `/tooling/git-almanac/` | 207 |
+| `/projects/ki/` | 205 |
+| `/projects/git-almanac/` | 207 |
 | `/projects/ki-techne-principal/` | 210 |
-| `/tooling/mgit/` | 211 |
-| `/tooling/rig/` | 212 |
+| `/projects/mgit/` | 211 |
+| `/projects/rig/` | 212 |
 | `/projects/ki-plugins/` | 220 |
 | `/projects/ki-techne-harness/` | 223 |
 | `/projects/ki-arcadia-principal/` | 226 |
@@ -76,7 +76,7 @@ Each page carries two outbound GitHub links, and each tool page five, of which t
 
 - [ ] Settle what a project page answers, per the five questions in Shaping, and write it down before editing any template.
 - [ ] Extend `projects.json5` with the fields that answer them, and populate all routed entries.
-- [ ] Extend `project.njk` to render the new fields, absorbing the install and release material `KI-WEB-SITE-020` brings across from `tool.njk`.
+- [ ] Extend `project.njk` to render the new fields alongside the install and release material `KI-WEB-SITE-020` already folded in.
 - [ ] Make `verify-projects.ts` fail a routed entry missing a required reader-facing field, so an unfilled page cannot reach `dist/`.
 - [ ] Rewrite the closing sections of every page so a repository link is a stated fact rather than a substitute for the content above it.
 - [ ] Re-check the three routeless entries against the revised test and decide whether any now warrants a page.
@@ -94,13 +94,13 @@ Each page carries two outbound GitHub links, and each tool page five, of which t
 
 ## Dependencies / blocks
 
-Blocked by `KI-WEB-SITE-020`: extending `project.njk` before the tool fields arrive means extending it twice. The ownership test it is judged against was delivered by `KI-WEB-SITE-018` as GDR-KI-WEBSITE-002. It stays a draft in Now until the merge lands, since a blocked item is not awaiting execution.
+Unblocked. `KI-WEB-SITE-020` merged the tool entries and the install block into `project.njk`, so the template is extended once rather than twice, and `KI-WEB-SITE-018` delivered the ownership test this work is judged against as GDR-KI-WEBSITE-002.
 
 ## Documentation impact
 
 ### Decision Records
 
-None expected on its own. If `KI-WEB-SITE-020` records the section merge, the registry's widened role belongs in that record.
+None expected. `KI-WEB-SITE-020` recorded the section merge and the registry's widened role as ADR-KI-WEBSITE-002; adding reader-facing fields to entries that already exist does not change that decision.
 
 ### Specifications
 
