@@ -1,49 +1,110 @@
 ---
 title: Capability lifecycle
-description: Understand how KI installs harnesses separately from activating their capabilities.
+description: Why installing a harness and activating a skill are separate steps, the commands for each, and the refusals that protect the boundary between them.
 permalink: /guidance/cli/capability-lifecycle/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
     ref: v0.4.0
-    governs: 'The install, activate, and audit commands the lifecycle is described in terms of'
-    reviewed: '2026-09-21'
+    governs: 'The harness, skill and repository skill commands, and the refusals described here'
+    reviewed: '2026-09-22'
+  - repository: knowledgeislands/tools-ki
+    path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
+    ref: v0.4.0
+    governs: 'The compatible-harness registry and the installs-but-does-not-activate boundary'
+    reviewed: '2026-09-22'
 ---
 
 # Capability lifecycle
 
-`ki harness install`, `ki harness reinstall`, and `ki harness uninstall` manage verified installed harness payloads.
+Two things happen when a capability starts working for you, and `ki` keeps them apart on purpose.
 
-They do not activate or deactivate skills for a user or repository.
+**Installing a harness** puts a set of capabilities on your machine, verified and inventoried. Nothing about your repositories changes; nothing starts applying.
 
-Use `ki harness --help` and `ki skill --help` for exact grammar supported by the installed version.
+**Activating a skill** declares that one of those capabilities applies — either to you, in every repository you work in, or to one repository, for everyone who works in it.
 
-## Harness identifiers
+A capability that is installed but not activated is available and inert. That is the normal, intended resting state for most of what a harness ships.
 
-Use a harness identifier in `owner/name` form, such as `example/harness`.
+## Why the split exists
 
-Lifecycle operations do not accept capability-qualified or bare-skill targets.
+The alternative — install implies activate — fails in both directions.
 
-## Operations
+It over-applies: a harness ships dozens of skills, and installing it to get one would silently subject every repository on the machine to the rest. Governance you did not choose is governance you cannot reason about, and an audit that fails on rules you never adopted teaches you to ignore audits.
 
-`ki harness install <harness-id>` installs an absent configured harness, or reports an existing installed harness.
+And it under-records: if installation were the declaration, a repository could not state what governs it. It states that in its own `.ki.toml`, which travels with the repository, so a colleague cloning it gets the same governance without having made any choices on their machine.
 
-`ki harness reinstall <harness-id>` replaces an installed configured harness only after its replacement archive passes integrity and capability inspection.
+So the harness is a _supply_ of capability and the declaration is the _decision_. The commands below are two vocabularies over that one distinction.
 
-`ki harness uninstall <harness-id>` removes an installed non-canonical harness whose recognised payload belongs to KI.
+## Installing and inspecting harnesses
 
-Lifecycle commands apply their requested change immediately after validation; only `ki acquire import --adapter chatgpt` and `ki repo conform` provide a dry-run preview.
+Harnesses are addressed by identifier in `owner/name` form — `knowledgeislands/ki-agentic-harness`, for instance. These commands never accept a bare skill name or a capability-qualified target; a lifecycle operation acts on a whole payload.
 
-## Activation boundary
+| Command | Effect |
+| --- | --- |
+| `ki harness list` | Lists the compatible harnesses already installed. Changes nothing. |
+| `ki harness info <harness-id>` | Shows one installed harness's capability inventory. Changes nothing. |
+| `ki harness install <harness-id>` | Installs a configured harness, making its skills and subagents available to add. |
+| `ki harness reinstall <harness-id>` | Replaces one inactive installed harness from its verified archive. |
+| `ki harness uninstall <harness-id>` | Removes one non-canonical harness whose payload directories `ki` recognises. |
 
-Use `ki skill add` or `ki repo skill add` to activate an installed skill.
+`reinstall` replaces a harness only after the replacement archive passes integrity and capability inspection, so a corrupted or capability-losing archive cannot take the place of a working one.
 
-`ki harness reinstall` and `ki harness uninstall` refuse a harness that supplies active user skills.
+Lifecycle commands apply immediately once validation passes. There is no `--dry-run` here; among the commands that change state, only `ki acquire import --adapter chatgpt` and `ki repo conform` offer a preview.
 
-Remove user declarations first with `ki skill remove`, then repeat the lifecycle command. Repository declarations are managed independently with `ki repo skill remove`.
+## Activating skills
 
-The canonical `knowledgeislands/ki-agentic-harness` cannot be uninstalled.
+Activation has two scopes, and the command names say which.
 
-When it is development-linked, restore its verified archive with `ki dev local off` before reinstalling it.
+```bash
+ki skill add <skill>            # user scope: applies wherever you work
+ki skill remove <skill>
+
+ki repo skill add <skill>       # repository scope: applies to this repository
+ki repo skill remove <skill>
+```
+
+User-scope skills are the ones that are about _you_ — how you plan, how you recap, how you want an agent to behave. They link into your configured agents' skill spaces, and `ki bootstrap` establishes the core set for you.
+
+Repository-scope skills are the ones that are about _this codebase_ — its Markdown style, its toolchain, its roadmap discipline. They are recorded in the repository's `.ki.toml` and are what `ki repo audit` and `ki repo conform` resolve against. Either form takes `--replace` to overwrite an existing declaration rather than fail on it.
+
+The two scopes are managed independently. Removing a user skill does not touch any repository declaration, and removing a repository declaration does not affect your user scope.
+
+## The refusals
+
+Three refusals enforce the boundary. Each looks like an obstruction the first time and is the mechanism working.
+
+**A harness that supplies an active user skill cannot be reinstalled or uninstalled.** The declaration would be left pointing at nothing. Remove it first with `ki skill remove`, then repeat the lifecycle command. Repository declarations are managed separately, through `ki repo skill remove`.
+
+**The canonical harness cannot be uninstalled.** `knowledgeislands/ki-agentic-harness` is what `ki bootstrap` installs and what the core user skills come from; removing it would leave an installation that cannot describe itself.
+
+**A development-linked harness must be restored before it is reinstalled.** If `ki dev local on` has replaced a harness's root with a local checkout, run `ki dev local off` to reinstate the verified archive first. Otherwise the reinstall would be operating on a working tree rather than on a payload with integrity evidence.
+
+## A worked sequence
+
+Adding a capability from a harness you do not yet have:
+
+```bash
+ki harness install example/harness     # make its capabilities available
+ki harness info example/harness        # see what it actually ships
+ki repo skill add example-skill        # declare that it governs this repository
+ki repo audit --skill example-skill    # run its checks, read-only
+ki repo conform --skill example-skill  # apply the repairs it defines
+```
+
+And withdrawing it again, in the order the refusals require:
+
+```bash
+ki repo skill remove example-skill
+ki skill remove example-skill          # if it was also in user scope
+ki harness uninstall example/harness
+```
+
+`ki repo diag` is worth knowing for the state in between: it reports a repository's declared skills and the health of its runtime projections without changing anything, which is usually what you want when a declaration and an installation have drifted apart.
+
+## Related
+
+[Update and upgrade](/guidance/cli/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/guidance/cli/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/guidance/skills/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
+
+Use `ki harness --help` and `ki skill --help` for the exact grammar your installed version supports.
 
 {% include "partials/sources.njk" %}

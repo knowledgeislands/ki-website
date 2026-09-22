@@ -1,45 +1,80 @@
 ---
 title: Update and upgrade
-description: Refresh verified KI installations and the harness providers selected by a repository.
+description: Which of the two refresh commands you want, what each one verifies before changing anything, and why some installations are deliberately excluded from self-update.
 permalink: /guidance/cli/update-upgrade/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
     ref: v0.4.0
-    governs: 'The update and upgrade commands and the verification they perform'
-    reviewed: '2026-09-21'
+    governs: 'The update and upgrade commands and the verification each performs'
+    reviewed: '2026-09-22'
+  - repository: knowledgeislands/tools-ki
+    path: docs/decisions/PDR-KI-TOOLS-001-installer-version-pinning.md
+    ref: v0.4.0
+    governs: 'Why the installer pins an exact release and what a receipt records'
+    reviewed: '2026-09-22'
 ---
 
 # Update and upgrade
 
-`ki manage update` refreshes verified installation surfaces.
+Two commands refresh things, and the names are not interchangeable.
 
-`ki repo upgrade` refreshes the verified harness providers selected by one repository's declarations.
+| Command | Scope | Refreshes |
+| --- | --- | --- |
+| `ki manage update` | Your machine | The installed harnesses, and the `ki` executable itself where it may. |
+| `ki repo upgrade` | One repository | The harness providers that repository's declarations select. |
 
-Neither command activates or deactivates skills.
-
-Use `ki manage update --help` and `ki repo upgrade --help` for exact grammar supported by the installed version.
+Neither activates or deactivates anything. A refresh changes _which version_ supplies a capability, never _whether_ it applies — that stays with [the capability lifecycle](/guidance/cli/capability-lifecycle/).
 
 ## `ki manage update`
 
-`ki manage update` refreshes every installed harness that has configured immutable release evidence.
+```bash
+ki manage update          # harnesses, and the executable if it is eligible
+ki manage update --cli    # require the executable update to succeed
+```
 
-It retains every capability currently supplied by a refreshed harness, so existing user and repository skill links remain valid.
+This refreshes every installed harness against configured immutable release evidence. "Immutable" is doing real work in that sentence: a harness advances to an exact published release, not to whatever a branch currently holds, so two machines running the same update land on the same payload.
 
-The command also updates the executable only when the running regular executable matches an installer receipt written by a verified `install.sh` installation.
+Every capability the refreshed harness currently supplies is retained. That is what makes the command safe to run without auditing your declarations first — existing user and repository skill links remain valid afterwards, because a replacement that would drop a capability in use is refused before anything changes.
 
-Use `ki manage update --cli` to require that executable update target.
+### When the executable updates itself
 
-Linked development checkouts and externally managed executables, including Homebrew installations, are not self-updated.
+`ki manage update` also updates the `ki` binary, but only when the running executable matches the installer receipt written by a verified `install.sh` installation. If you installed through the [stable installer endpoint](/projects/ki/), that is your case.
 
-Use their owning checkout or distribution manager instead.
+If not, self-update is deliberately skipped, and the two exclusions are the common ones:
+
+- **Homebrew installations.** Homebrew owns upgrades and removal for anything it installed. A tool that wrote over its own Homebrew-managed binary would leave the formula describing a version that is not there. Run `brew upgrade knowledgeislands/tap/ki` instead.
+- **Linked development checkouts.** The binary is being built from a working tree you control. Replacing it with a release would discard whatever you were working on.
+
+`--cli` makes the executable update a requirement rather than an opportunity: the command fails rather than quietly refreshing only the harnesses. Reach for it in a script, where a partial refresh that reports success is worse than a clear failure.
 
 ## `ki repo upgrade`
 
-Run `ki repo upgrade` from a KI repository, or pass `--repo <path>` to select one explicitly.
+```bash
+ki repo upgrade                  # the repository containing the current directory
+ki repo upgrade --repo <path>    # one named explicitly
+```
 
-It reads the repository's declared skills, requires each provider to resolve uniquely, and refreshes each distinct supplying harness only from configured immutable evidence.
+This reads one repository's declared skills, resolves which harness supplies each, and refreshes those distinct harnesses — again, only against configured immutable evidence.
 
-An unavailable, ambiguous, or capability-removing replacement is refused before that provider is changed.
+The resolution step is where it refuses. A provider must resolve _uniquely_: if two installed harnesses both supply a declared skill, the command stops rather than choosing. So does an unavailable provider, and so does a replacement that would remove a capability the repository still declares. All three refusals happen before any provider changes, so a failed upgrade leaves the repository exactly as it was.
+
+Like `update`, it changes neither user nor repository skill activation.
+
+## Which one do you want
+
+**Everything is behind, or you have not updated in a while.** `ki manage update`. It is the broader command and the usual answer.
+
+**One repository's checks are behaving oddly, or its declarations changed.** `ki repo upgrade`, then `ki repo diag` to confirm the declarations and projections agree.
+
+**You want to know whether anything is behind before touching it.** Neither. `ki manage outdated` reports installed harnesses against available release evidence and changes nothing. Note what it will not do: where it cannot compare against real evidence it says the evidence is unavailable, rather than reporting that you are current. Those are different facts and it refuses to conflate them.
+
+**A skill you expect is missing rather than stale.** `ki manage missing` reports desired user capabilities with no installed provider — a declaration problem, which no amount of refreshing fixes.
+
+## Related
+
+[Local utility commands](/guidance/cli/local-commands/) covers the rest of the inspection surface, including `diag`, `doctor` and `repair`. [Every `ki` command](/guidance/cli/commands/) has the full inventory.
+
+Use `ki manage update --help` and `ki repo upgrade --help` for the exact grammar your installed version supports.
 
 {% include "partials/sources.njk" %}

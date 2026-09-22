@@ -19,7 +19,7 @@ sources:
 
 Knowledge Islands repository governance resolves declared capabilities from verified installed compatible harnesses and executes them through the native `ki` host.
 
-The governing contract is [ADR-KI-HARNESS-012](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/decisions/ADR-KI-HARNESS-012-compatible-harness-publication-and-governed-rubric-boundary.md).
+The contract behind that sentence is ADR-KI-HARNESS-012, in the KI Agentic Harness. It is recorded in the sources at the foot of this page; you do not need to read it to follow what is here.
 
 ## Trust and installation
 
@@ -31,7 +31,7 @@ Each user has a KI XDG configuration and an installed compatible-harness set. `k
 
 ## Repository declaration and activation
 
-A KI repository carries a regular `.ki.toml` at its Git worktree root. Each `[ki-<skill>]` table declares one governance capability.
+A KI repository carries a regular `.ki.toml` at its Git worktree root. `[repo]` names the harnesses it may draw from, and each `[skills.<name>]` table declares one governance capability by bare name. [Govern a repository](/guidance/repositories/) shows the file.
 
 Activate a repository skill with:
 

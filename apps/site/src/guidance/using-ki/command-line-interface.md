@@ -1,91 +1,95 @@
 ---
 title: Command-line interface
-description: Understand what the KI CLI owns and where to find authoritative command help.
+description: Where ki sits in a working day, how capabilities are named, where it keeps its files, and what its refusals mean.
 permalink: /guidance/using-ki/command-line-interface/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
     ref: v0.4.0
-    governs: 'The command surface, arguments, and exit behaviour described here'
-    reviewed: '2026-09-21'
+    governs: 'The declaration form, path resolution, and refusal behaviour described here'
+    reviewed: '2026-09-22'
+  - repository: knowledgeislands/tools-ki
+    path: docs/decisions/ADR-KI-TOOLS-002-compatible-harness-registry-and-native-operations.md
+    ref: v0.4.0
+    governs: 'The native-operation resolution boundary and what the host refuses to execute'
+    reviewed: '2026-09-22'
 ---
 
-# Command-line interface
+# The command line in practice
 
-`ki` is the end-user Knowledge Islands command-line interface. It installs compatible harnesses, activates their capabilities in explicit scopes, and hosts native repository operations.
+`ki` is not where the work happens. Most of a Knowledge Islands day is spent talking to an agent, and `ki` is what made the agent capable of the conversation — it installed the harness, it activated the skills, and it runs the checks when the work is done.
 
-This page explains the command groups and their ownership boundaries. The installed command's `ki --help` output and the [`ki` page](/projects/ki/) are the authority for exact, version-specific grammar.
+So the command line shows up at three moments, and almost nowhere else:
 
-## Bootstrap and diagnostics
+1. **Setting up** — once per machine, and once per repository. `ki bootstrap`, then `ki repo skill add`.
+2. **Checking** — `ki repo audit` before you commit, `ki repo conform` to fix what it found.
+3. **When something is wrong** — `ki manage doctor`, `ki repo diag`, `ki manage outdated`.
 
-`ki bootstrap` establishes the user environment: it detects supported local agent runtimes, creates the KI configuration when needed, installs the verified canonical harness, and activates the core user skills. It does not declare governance for a repository.
+[The CLI collection](/guidance/cli/) covers the command surface itself: [what the groups mean](/guidance/cli/), [every command there is](/guidance/cli/commands/), and the pages on lifecycle and refresh. This page covers the parts that are about living with the tool rather than about its grammar.
 
-Use `ki bootstrap --refresh` to reconcile detected runtimes and recorded installed state. Use `ki manage diag` to inspect installation mode and paths, and `ki manage doctor` to check configuration, agents, harnesses, and user skills.
+## How capabilities are named
 
-## Harness installation
-
-The `ki harness` group manages the verified installed compatible-harness set. The canonical `knowledgeislands/ki-agentic-harness` is installed during bootstrap and cannot be uninstalled.
-
-Installing another harness makes its registered capabilities available for explicit activation. It does not activate every capability or change a repository automatically.
-
-## Skill activation
-
-Skill activation always has an explicit scope:
-
-- **User scope** makes a skill discoverable across configured user agent runtimes.
-- **Repository scope** declares a skill in one repository's `.ki.toml` and creates only the managed runtime-discovery links required there.
-
-A fully qualified capability name identifies both the provider and skill:
-
-```text
-knowledgeislands/ki-agentic-harness:ki-work-roadmap
-```
-
-A bare skill name is accepted only when exactly one installed harness provides it. Removal only reverses state whose ownership KI can prove; it does not uninstall the providing harness.
-
-## Repository operations
-
-The repository commands operate on capabilities declared by the selected repository:
-
-```text
-ki repo educate
-ki repo audit
-ki repo conform
-```
-
-- `educate` renders maintenance guidance for declared rubrics.
-- `audit` runs their registered read-only operations.
-- `conform` applies registered safe mechanical changes; its dry-run mode reports proposed changes without publishing them.
-
-The host resolves operations only from verified installed harnesses. It does not execute repository-local wrappers, copied rubric runners, package aliases, or arbitrary skill scripts.
-
-## Rubric publication and harness development
-
-Harness maintainers can verify or refresh a skill's generated rubric publication through `ki dev skill rubric <skill>`.
-
-Local harness development is explicit. `ki dev local set <harness-id> <local-harness-path>` records a validated checkout, `ki dev local on [harness-id]` selects it, and `ki dev local off [harness-id]` restores the verified archive. A nearby checkout is never used implicitly.
-
-## Installation and user-owned locations
-
-Install the released CLI with Homebrew:
+A skill is named by its bare name — `ki-work-roadmap`, `ki-authoring`, `ki-mcp`:
 
 ```bash
-brew install knowledgeislands/tap/ki
+ki skill add ki-recap
+ki repo skill add ki-work-roadmap
 ```
 
-KI data, configuration, cache, and state follow their KI-specific environment variables when set, then the corresponding XDG locations, then standard home-directory defaults.
+**Harness-qualified keys are invalid.** Writing `knowledgeislands/ki-agentic-harness:ki-work-roadmap` will be rejected, and a declaration in `.ki.toml` written that way is not a valid declaration. The reason is that a repository declares _what governs it_, not _where that came from_: the provider is declared separately, under `[repo]`, and is a property of the installation rather than of the governance.
 
-## Errors and recovery
+```toml
+[repo]
+harnesses = ["knowledgeislands/ki-agentic-harness"]
 
-Commands refuse unknown options, ambiguous capabilities, unsafe paths, and unfamiliar managed state. Follow the recovery route named by the command rather than manually replacing or deleting KI-managed files.
+[skills.ki-work-roadmap]
+# this skill's own configuration goes here
+```
 
-Use:
+A provider must appear in that harness list before any of its skills can be added. Each installed harness declares which capability prefixes it owns, through `[skills.ki-repo-harness]` in its own root configuration, so two harnesses cannot both claim to supply the same skill name.
+
+If exactly one installed harness provides the name you ask for, the bare name resolves. If two do, the command stops rather than choosing — which is the same refusal `ki repo upgrade` makes, for the same reason.
+
+## Where `ki` keeps things
+
+Four locations, each resolved from the first non-empty value in its row:
+
+| Contents | Resolution order |
+| --- | --- |
+| Data — installed harness payloads | `$KI_DATA_HOME`, then `$XDG_DATA_HOME/ki`, then `~/.local/share/ki` |
+| Configuration — your user-scope declarations | `$KI_CONFIG_HOME`, then `$XDG_CONFIG_HOME/ki`, then `~/.config/ki` |
+| Cache — recoverable working material | `$KI_CACHE_HOME`, then `$XDG_CACHE_HOME/ki`, then `~/.cache/ki` |
+| State — the repository registry, among other things | `$KI_STATE_HOME`, then `$XDG_STATE_HOME/ki`, then `~/.local/state/ki` |
+
+`ki manage diag` prints the values actually in force, which is faster than reasoning about the table.
+
+The one file that does not live in any of them is `.ki.toml`, at each KI repository's root. That is deliberate: it travels with the repository, so a colleague who clones it inherits the same governance without configuring anything on their own machine.
+
+## What the host will and will not run
+
+`ki repo audit` and `ki repo conform` do not implement any checks. They resolve the operations a repository's declared skills register, verify them against the installed harness's integrity evidence, and run those.
+
+It will not run anything else. Not a repository-local wrapper script, not a copied rubric runner sitting in the tree, not a package alias, not a checkout that happens to be nearby. If you want a repository to have rules of its own, the supported route is a declared `ki-self` provider — see [operator guides](/guidance/cli/operator-guides/) — and it is still resolved rather than discovered.
+
+This is why "the audit passed" is a precise claim: it means the operations registered by the skills this repository declared, from harnesses whose payloads verified, all succeeded. It does not mean the code is good, and it does not mean anything about rules nobody declared.
+
+## When a command refuses
+
+`ki` refuses unknown options, ambiguous capabilities, unsafe paths, and managed state it does not recognise. Each refusal names a recovery route, and following it is meaningfully safer than fixing the symptom by hand.
+
+The reason is that most of what `ki` manages is a _link_ between two records — a declaration and a payload, a registry entry and a checkout. Deleting a file that looks stale usually breaks the other half of a pair, and the tool then cannot tell a deliberate removal from damage. `ki repo repair` and `ki manage repair` exist to reconcile exactly those projections; `ki manage doctor` tells you which are broken.
+
+Legacy repository-vendored `.ki/` directories are the case worth stating explicitly. They are migration evidence, not an execution fallback — the host never runs anything from them. Leave unfamiliar legacy state in place until its native replacement is proven, rather than recreating it or removing it piecemeal.
+
+## Getting the exact grammar
 
 ```bash
 ki --help
 ki <command> --help
 ```
 
-for the delivered grammar and [Install and get started](/guidance/using-ki/getting-started/) for the end-to-end setup path.
+Your installed binary is the authority for your version. [Every `ki` command](/guidance/cli/commands/) is the same inventory taken from the manual at the release this site advertises, which is the right reference when you are reading rather than typing.
+
+[Install and get started](/guidance/using-ki/getting-started/) is the end-to-end setup path if you have not run any of this yet.
 
 {% include "partials/sources.njk" %}

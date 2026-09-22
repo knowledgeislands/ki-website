@@ -41,6 +41,37 @@ export default function (eleventyConfig: UserConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/images')
   eleventyConfig.addPassthroughCopy('src/assets/js')
 
+  // ── Transform: give prose headings a stable id ───────────────────────────
+  // Long reference pages need in-page anchors to be navigable at all: the
+  // vendored command inventory runs to eighty-four entries, and a link to one
+  // section of it is only useful if the section has an address. markdown-it
+  // emits bare <h2>/<h3>, so the ids are derived here rather than by adding a
+  // plugin dependency for one rule.
+  //
+  // The slug is the heading's visible text, so an author writing "## Coverage
+  // by runtime" can link to "#coverage-by-runtime" without declaring anything.
+  // A repeated heading gets a numeric suffix so every id stays unique.
+  const headingSlug = (html: string): string =>
+    html
+      .replace(/<[^>]+>/g, '')
+      .replace(/&[a-z]+;|&#\d+;/gi, ' ')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+
+  eleventyConfig.addTransform('heading-anchors', (content: string, outputPath: string | undefined) => {
+    if (!outputPath?.endsWith('.html')) return content
+    const used = new Map<string, number>()
+    return content.replace(/<(h2|h3|h4)>([\s\S]*?)<\/\1>/gi, (match, tag: string, inner: string) => {
+      const base = headingSlug(inner)
+      if (base === '') return match
+      const seen = used.get(base) ?? 0
+      used.set(base, seen + 1)
+      const id = seen === 0 ? base : `${base}-${seen + 1}`
+      return `<${tag} id="${id}">${inner}</${tag}>`
+    })
+  })
+
   // ── Transform: inject external-link icons ────────────────────────────────
   // Marks any prose <a href="https://..."> link with an external-link glyph.
   // The SVG is inlined rather than rendered by an icon runtime: the marker is

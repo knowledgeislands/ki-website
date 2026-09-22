@@ -120,18 +120,45 @@ Start a new Codex turn after installation so the newly installed skills are avai
 
 ## Future tooling under observation
 
-These are research leads, not harness dependencies or recommendations. Before adopting any candidate, assess its supply-chain provenance, permission model, runtime fit, maintenance, and claimed token or cost effects in a contained evaluation.
+These are research leads, not harness dependencies or recommendations. Nothing below has been assessed by this site, and a link here is a record of where an evaluation could start — not evidence that a project is secure, active, maintained, compatible, or suitable for Knowledge Islands use.
 
-The current watch areas are model routing and identity, MCP aggregation and discovery, context compression, and multi-runtime harnesses or working methods.
+### What to establish before adopting any of them
 
-### Watch sources — 2026-07-20
+The same five questions decide every candidate, and they are worth asking in this order because each one can end the evaluation:
 
-- **Model routing and identity:** [Claude Code Router releases](https://github.com/musistudio/claude-code-router/releases), [routectl releases](https://github.com/meepolabs/routectl/releases), and [9router](https://github.com/decolua/9router).
-- **MCP aggregation and gateways:** [MCPorter change log](https://github.com/openclaw/mcporter/blob/main/CHANGELOG.md) and [AIRIS MCP Gateway](https://github.com/agiletec-inc/airis-mcp-gateway).
-- **Context compression:** [RTK releases](https://github.com/rtk-ai/rtk/releases), [Headroom releases](https://github.com/chopratejas/headroom/releases), and [LeanCTX](https://github.com/yvgude/lean-ctx).
-- **Harnesses and working methods:** [Superpowers](https://github.com/obra/superpowers), [OpenClaw 2026.7.1](https://github.com/openclaw/openclaw/releases/tag/v2026.7.1), [Pi releases](https://github.com/earendil-works/pi/releases), [caveman releases](https://github.com/JuliusBrussee/caveman/releases), [Odysseus](https://github.com/pewdiepie-archdaemon/odysseus), [Omnigent](https://github.com/omnigent-ai/omnigent), and [Claurst](https://github.com/Kuberwastaken/claurst).
+1. **Supply-chain provenance.** Who publishes it, from where, and is a release pinned to something immutable? A tool that installs from a moving branch into your agent's path is a standing risk regardless of how good it is.
+2. **Permission model.** What can it read, and what can it send? Anything sitting between an agent and a model sees every prompt, including whatever was in context at the time.
+3. **Runtime fit.** Does it work with the runtimes you actually use, or only with the one its author uses? Multi-runtime claims are common and often thin.
+4. **Maintenance.** Is there evidence of sustained upkeep rather than a strong first release? Agent tooling moves fast enough that a six-month gap is usually terminal.
+5. **Claimed effects, measured.** Token and cost claims are the reason most of these exist and the least often verified. Measure in a contained evaluation against your own traffic; vendor benchmarks rarely transfer.
 
-The list records where future evaluation can begin. It does not establish that a project is secure, active, compatible, or suitable for Knowledge Islands use.
+The [Headroom coverage table](#coverage-by-runtime) above is the worked example of why the last one matters: an installed tool, a running proxy and a healthy endpoint together establish nothing about whether your model traffic is actually routed through it.
+
+### Model routing and identity
+
+The problem is sending different requests to different models — cheap ones for mechanical work, capable ones for reasoning — without rewriting how each agent is configured. The risk is that a router becomes an undeclared dependency sitting in the credential path of every request.
+
+[Claude Code Router releases](https://github.com/musistudio/claude-code-router/releases), [routectl releases](https://github.com/meepolabs/routectl/releases), [9router](https://github.com/decolua/9router).
+
+### MCP aggregation and gateways
+
+The problem is that each MCP server added to a runtime is another process, another entry in a configuration file, and another thing to keep alive. A gateway consolidates them behind one endpoint. This is the area where something is already adopted here — [mcporter](#mcporter-mcp-proxy-daemon), below — so the watch is for whether a better consolidation appears, particularly around discovery.
+
+[MCPorter change log](https://github.com/openclaw/mcporter/blob/main/CHANGELOG.md), [AIRIS MCP Gateway](https://github.com/agiletec-inc/airis-mcp-gateway).
+
+### Context compression
+
+The problem is that long sessions fill a context window with material that has stopped earning its place, and the compaction a runtime does by itself is blunt. The risk is specific and worth naming: a compressor that silently drops or rewrites content changes what the agent believes, and a wrong answer produced from a lossily compressed context looks exactly like a wrong answer produced from a complete one.
+
+[RTK releases](https://github.com/rtk-ai/rtk/releases), [Headroom releases](https://github.com/chopratejas/headroom/releases), [LeanCTX](https://github.com/yvgude/lean-ctx).
+
+### Harnesses and working methods
+
+The problem is the one Knowledge Islands exists to solve, approached differently. These are other people's answers to how an agent should be given capability and discipline, and they are worth reading for their ideas whether or not anything is adopted. The evaluation question is not "is this good" but "does this contain a mechanism that would work better than ours" — which is a reading exercise, not an installation.
+
+[Superpowers](https://github.com/obra/superpowers), [OpenClaw 2026.7.1](https://github.com/openclaw/openclaw/releases/tag/v2026.7.1), [Pi releases](https://github.com/earendil-works/pi/releases), [caveman releases](https://github.com/JuliusBrussee/caveman/releases), [Odysseus](https://github.com/pewdiepie-archdaemon/odysseus), [Omnigent](https://github.com/omnigent-ai/omnigent), [Claurst](https://github.com/Kuberwastaken/claurst).
+
+The watch sources above were last reviewed on 2026-07-20.
 
 ## mcporter (MCP proxy daemon)
 

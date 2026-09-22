@@ -55,14 +55,26 @@ This is a claim, not a default. It says someone decided the page has no source, 
 
 ### Vendored pages
 
-A third case sits between the two. A **vendored** page declares `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. `/guidance/skills/catalogue/` is the one that exists today, rendering the harness's generated capability inventory from `apps/site/src/_data/skillCatalogue.json5` — see [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md).
+A third case sits between the two. A **vendored** page declares its `sources` in the ordinary way but does not restate them: it reproduces an upstream artefact and renders it. Two pages do this today.
 
-Vendoring is the right answer only where the upstream artefact is itself a specified interface and the site adds nothing by rewording it. That is a narrow case: the catalogue qualifies because `ki-repo-harness` names its markers normatively and fixes its fields, and because an inventory reworded is still an inventory. Most guidance is not like that, and [the ownership test](guidance-ownership.md#the-test) still decides.
+| Page | Vendors | Sync script | Record |
+| --- | --- | --- | --- |
+| `/guidance/skills/catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) |
+| `/guidance/cli/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-003](../../decisions/ADR-KI-WEBSITE-003-vendoring-an-unspecified-published-interface.md) |
+
+Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
+
+Vendoring is the right answer only where the upstream artefact is itself an inventory the site would add nothing by rewording — an inventory reworded is still an inventory, and it ages with every release. Most guidance is not like that, and [the ownership test](guidance-ownership.md#the-test) still decides.
+
+**The two cases are not equally safe, and the difference is worth stating.** The catalogue vendors a _specified_ interface: `ki-repo-harness` names the markers, normatively fixes the fields, and the harness's own rubric tests assert them, so the site consumes a contract someone maintains. The command reference vendors a _published_ one: `man/ki.1` ships with every release and is complete, but nothing names it an interface and no upstream test asserts its shape.
+
+Where the interface is only published, the parser carries the weight a contract would have carried. It throws on any construct it does not recognise, on a missing purpose or description, on a duplicate, and on a total below a structural floor — because an inventory that silently loses half its commands is worse than one that refuses to build, and nobody would notice the first. Where the manual's own two inventories disagree, the sync reconciles them and the page publishes the discrepancy rather than inheriting it. And the handoff asking for a real contract is recorded rather than assumed: `KI-TOOL-CLI-080` in `tools-ki`.
 
 Refresh a vendored page by re-running its sync at a new ref and advancing the declared `ref` and `reviewed` in the same change:
 
 ```bash
 bun run --cwd apps/site sync:skills -- --ref <tag-or-commit>
+bun run --cwd apps/site sync:cli    -- --ref <tag-or-commit>
 ```
 
 The snapshot's ref and the page's declared ref must agree, and the check **fails** when they do not — offline, unlike everything else in this guide. Upstream moving is not the site's fault and warns; the site citing one ref while publishing another is the site contradicting itself, and no amount of upstream good behaviour will fix it.

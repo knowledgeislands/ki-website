@@ -4,12 +4,12 @@ area: SITE
 title: Guidance carries its material
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: f59c9338e51d65f8a63ec94945443c01aa0c4f4c
 created_at: 2026-09-22T09:30:00Z
-updated_at: 2026-09-22T10:00:00Z
+updated_at: 2026-09-22T18:00:00Z
 ---
 
 ## Goal
@@ -67,12 +67,12 @@ The collections not listed are in better shape: `using-ki/tuning/` (2,656 words)
 
 ## Steps
 
-- [ ] Apply the revised ownership test from `KI-WEB-SITE-018` to all 31 guidance pages and record, per page, whether it carries, defers with a stated reason, or vendors.
-- [ ] Rewrite `/guidance/cli/` and its six pages, which carry the heaviest deferral and the shortest index on the site.
-- [ ] Rewrite the thin `using-ki` pages — `using-skills`, `getting-started`, `command-line-interface` — to carry what a reader needs to act.
-- [ ] Resolve `recommended-tools`, where sixteen repository links sit in a long page: decide per link whether it is a fact about a tool or a deferral standing in for content.
-- [ ] Where a command inventory is needed, vendor a published interface at a pinned ref following `sync-skill-catalogue.ts`, rather than restating it by hand.
-- [ ] Re-declare `sources:` for any page whose relationship to upstream changes from restating to carrying, and re-run the provenance sweep.
+- [x] Apply the revised ownership test from `KI-WEB-SITE-018` to all 31 guidance pages and record, per page, whether it carries, defers with a stated reason, or vendors.
+- [x] Rewrite `/guidance/cli/` and its six pages, which carry the heaviest deferral and the shortest index on the site.
+- [x] Rewrite the thin `using-ki` pages — `using-skills`, `getting-started`, `command-line-interface` — to carry what a reader needs to act.
+- [x] Resolve `recommended-tools`, where sixteen repository links sit in a long page: decide per link whether it is a fact about a tool or a deferral standing in for content.
+- [x] Where a command inventory is needed, vendor a published interface at a pinned ref following `sync-skill-catalogue.ts`, rather than restating it by hand.
+- [x] Re-declare `sources:` for any page whose relationship to upstream changes from restating to carrying, and re-run the provenance sweep.
 
 ## Files touched
 
@@ -111,6 +111,81 @@ None. The site publishes no contract.
 ### Roadmap
 
 A handoff may fall out: if a page needs a command inventory the harness or `tools-ki` does not publish in consumable form, that is a request to the owning repository. `KI-WEB-SITE-016` established the discipline — check whether the interface already exists as a specification before designing a request for it.
+
+## Review
+
+### Delivered
+
+Every guidance page now carries what a reader needs to act, or says why it does not. The collection went from 31 pages and roughly 12,000 words to 35 pages and 35,833, and the four new pages are not padding: a hub, a vendored command reference, and two rewritten collection indexes that had been publishing wrong commands.
+
+The instruction behind the item — do not send readers to Git repositories for guides — is met in the only way that survives a release: by vendoring the inventory rather than transcribing it, and by leaving exactly six deferrals that each state what is on the other end and why it is not here.
+
+**The per-page ownership audit**, applying the test from GDR-KI-WEBSITE-002 to all 35 pages. Word counts are main-content words in the built `dist/`; GitHub links include the one or two per page from the provenance footer.
+
+| Page | Words | GitHub links | Disposition |
+| --- | --- | --- | --- |
+| `/guidance/` | 604 | 0 | Carries — routing, authored here |
+| `/guidance/cli/` | 1,109 | 2 | Carries — rewritten from 133 words |
+| `/guidance/cli/capability-lifecycle/` | 945 | 2 | Carries — rewritten from 245 |
+| `/guidance/cli/chatgpt-local-capture/` | 341 | 1 | Carries — a format description, complete at its length |
+| `/guidance/cli/commands/` | 4,737 | 1 | Vendors — `man/ki.1` at `v0.4.0` |
+| `/guidance/cli/local-commands/` | 489 | 3 | Carries — two links are URLs a command prints |
+| `/guidance/cli/operator-guides/` | 1,178 | 13 | Defers with reason — six release-specific procedures, each summarised and bounded here |
+| `/guidance/cli/update-upgrade/` | 694 | 2 | Carries — rewritten from 213 |
+| `/guidance/harnesses/` | 969 | 3 | Carries — was a 208-word landing page with three wrong commands |
+| `/guidance/prompting/` | 836 | 2 | Carries |
+| `/guidance/prompting/*` (13 model guides) | 254–658 | 0–2 | Carries — vendor model documentation is an external source, not a repository deferral |
+| `/guidance/repositories/` | 1,108 | 3 | Carries — was a 243-word landing page ending in "refer to `tools-ki`" |
+| `/guidance/skills/` | 1,493 | 1 | Carries |
+| `/guidance/skills/by-outcome/` | 1,625 | 2 | Carries — a routing table authored here |
+| `/guidance/skills/catalogue/` | 3,779 | 1 | Vendors — the harness catalogue block (ADR-KI-WEBSITE-001) |
+| `/guidance/using-ki/` | 1,257 | 4 | Carries |
+| `/guidance/using-ki/command-line-interface/` | 881 | 2 | Carries — rewritten and de-duplicated against the CLI collection |
+| `/guidance/using-ki/getting-started/` | 917 | 2 | Carries — five steps, each with a check |
+| `/guidance/using-ki/onboarding/` | 649 | 2 | Carries — the declaration form corrected |
+| `/guidance/using-ki/planning-and-delivery/` | 1,031 | 1 | Carries |
+| `/guidance/using-ki/recommended-tools/` | 2,033 | 16 | Carries — every link is a third-party tool's own home or release notes, which is a fact about the tool |
+| `/guidance/using-ki/tuning/` | 2,659 | 1 | Carries |
+
+No page defers without a stated reason. The six that remain are all in `operator-guides`, and each says what the guide settles, what it refuses to do, whether you need it, and why the procedure stays at a pinned ref upstream.
+
+### Summary of changes
+
+- **Vendored the command inventory.** `apps/site/scripts/sync-cli-commands.ts` parses `man/ki.1` at an immutable ref into `src/_data/cliCommands.json5`, and `/guidance/cli/commands/` renders it — 88 commands in 14 groups at `v0.4.0`. The parser throws on any roff construct, missing description, duplicate, or structural floor it does not recognise. Twelve unit tests cover the roff handling and six of the refusals.
+- **Reconciled the manual against itself.** Parsing found the manual's two inventories disagree: SYNOPSIS carries a `Batch records` group and its four commands, COMMAND GROUPS does not, and the divergence is still present on `tools-ki`'s default branch. The sync parses both, carries the omitted group with the synopsis's own descriptions, and the page marks it as an upstream omission rather than inheriting the gap silently.
+- **Rewrote the CLI collection.** `index` 136 → 1,115 words, `capability-lifecycle` 245 → 950, `update-upgrade` 213 → 700, `operator-guides` 255 → 1,183 with its `sources` expanded from one entry to seven.
+- **Rewrote the thin `using-ki` pages** — `getting-started`, `using-skills`, `command-line-interface` — and de-duplicated them against the new CLI collection.
+- **Replaced the two Nunjucks collection landing pages** — `/guidance/harnesses/` and `/guidance/repositories/` — with Markdown pages. They were the worst offenders and nothing had caught them: `verify-guidance-sources` walks only `.md`, so neither page had ever declared provenance, and both published commands that do not exist (`ki doctor`, `ki skill user add`, `ki skill repo add`) plus a "fully qualified skill" form the manual says is invalid.
+- **Added heading anchors.** A `heading-anchors` transform in `eleventy.config.ts` gives every `h2`/`h3`/`h4` in built output a slug id. The site emitted none, so every in-page fragment link on the site — including pre-existing ones — resolved to nothing.
+- **Corrected two content errors while carrying material.** `getting-started` and `command-line-interface` both described `knowledgeislands/ki-agentic-harness:ki-work-roadmap` as a valid skill key; the manual says harness-qualified keys are invalid. `onboarding` documented the declaration as `[ki-<skill>]`; it is `[skills.<name>]` under a provider list in `[repo]`.
+
+### Verification
+
+- `bun run ki:site:clean && bun run ki:site:build` — 60 files written. `verify-tool-routes: 4`, `verify-projects: 18 entries / 4 released tools`, `verify-guidance-sources` clean, `verify-guidance-reachable: 35 guidance pages reachable from the home page`.
+- `bun test scripts/` — 32 pass, 0 fail.
+- `bunx @biomejs/biome check apps/site/scripts/` — clean.
+- `GITHUB_TOKEN=… verify:guidance -- --network` — 35 pages, 38 sources, 13 warnings, no errors. Every warning is upstream moving past the pinned `v0.4.0`: `man/ki.1` has advanced, and six `tools-ki` user guides moved from `docs/guides/` to `docs/guides/user/`. The pinned links still resolve; the moves are `KI-TOOL-CLI-078`'s subject in that repository.
+- `ki repo audit --skill ki-decision-records --repo .` — PASS.
+
+### Outstanding concerns
+
+The site now depends on an interface nobody promised to keep stable. That is recorded honestly in ADR-KI-WEBSITE-003 rather than glossed, and the request for a real contract is `KI-TOOL-CLI-080` in `tools-ki`. Until it lands, a manual restructure breaks the sync loudly at the next ref bump — which is the intended failure mode, but it is still a failure mode.
+
+The pinned `v0.4.0` sources are drifting. Thirteen network warnings today, none of them breaking. The refresh is a ref bump and a `reviewed` date when `tools-ki` next releases.
+
+### Post-change review
+
+Reading the built pages back, the collection reads as one thing now rather than as six unrelated efforts. The hub answers a question, each collection index carries its own material, and the two landing pages that used to end in "read the README" end in the material instead.
+
+The heading-anchor transform turned out to matter more than its size suggests. Several pages already linked to in-page fragments that silently went nowhere; with ids emitted, the 4,737-word command reference is navigable and the older cross-references started working without being touched.
+
+What I would watch: `operator-guides` at thirteen outbound links is the page most likely to be read as a link farm, even though each link is now bounded by a summary and a stated reason. If `tools-ki` consolidates those guides under `KI-TOOL-CLI-078`, that page should be revisited rather than merely re-pinned.
+
+### Mini recap
+
+Two learnings worth keeping. **A check that walks one file extension is a check with a blind spot** — the provenance gate walked `.md` and the two worst pages on the site were `.njk`, so they published wrong commands for months with every gate green. And **"the build passed" and "the page is right" are different claims**: nothing in the build could have told me the site emitted no heading ids, or that a documented command had been renamed upstream. Both were found by reading the rendered output, not by running the gate.
+
+## Done
 
 ## Discussion
 

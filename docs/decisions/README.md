@@ -9,3 +9,4 @@ This directory holds the significant, durable decisions for the KI Website. Reco
 3. [ADR-KI-WEBSITE-001](ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) - vendors the harness capability catalogue rather than restating it.
 4. [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) - reverses the publishing default so the site carries what a reader needs rather than routing them to a repository.
 5. [ADR-KI-WEBSITE-002](ADR-KI-WEBSITE-002-one-section-for-every-project.md) - merges the tooling section into projects, leaving one registry and one section for every public repository.
+6. [ADR-KI-WEBSITE-003](ADR-KI-WEBSITE-003-vendoring-an-unspecified-published-interface.md) - vendors the `ki` command inventory from a published but unspecified manual, and states what the parser owes in place of a contract.
