@@ -1,7 +1,8 @@
 ---
 title: Capability lifecycle
 description: Why installing a harness and activating a skill are separate steps, the commands for each, and the refusals that protect the boundary between them.
-permalink: /guidance/cli/capability-lifecycle/
+permalink: /projects/ki/capability-lifecycle/
+order: 5
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -103,6 +104,6 @@ ki harness uninstall example/harness
 
 ## Related
 
-[Update and upgrade](/guidance/cli/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/guidance/cli/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/guidance/skills/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
+[Update and upgrade](/projects/ki/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/projects/ki/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/projects/ki-agentic-harness/skills/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
 
 Use `ki harness --help` and `ki skill --help` for the exact grammar your installed version supports.

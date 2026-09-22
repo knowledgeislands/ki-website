@@ -1,7 +1,8 @@
 ---
-title: Command-line interface
+title: Naming, locations and refusals
 description: Where ki sits in a working day, how capabilities are named, where it keeps its files, and what its refusals mean.
-permalink: /guidance/using-ki/command-line-interface/
+permalink: /projects/ki/naming-and-locations/
+order: 3
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -15,7 +16,7 @@ sources:
     reviewed: '2026-09-22'
 ---
 
-# The command line in practice
+# Naming, locations and refusals
 
 `ki` is not where the work happens. Most of a Knowledge Islands day is spent talking to an agent, and `ki` is what made the agent capable of the conversation — it installed the harness, it activated the skills, and it runs the checks when the work is done.
 
@@ -25,7 +26,7 @@ So the command line shows up at three moments, and almost nowhere else:
 2. **Checking** — `ki repo audit` before you commit, `ki repo conform` to fix what it found.
 3. **When something is wrong** — `ki manage doctor`, `ki repo diag`, `ki manage outdated`.
 
-[The CLI collection](/guidance/cli/) covers the command surface itself: [what the groups mean](/guidance/cli/), [every command there is](/guidance/cli/commands/), and the pages on lifecycle and refresh. This page covers the parts that are about living with the tool rather than about its grammar.
+[How the command groups divide](/projects/ki/command-groups/) covers the command surface itself, and [every command there is](/projects/ki/commands/) is the inventory. This page covers the parts that are about living with the tool rather than about its grammar: what a capability is called, where your files end up, and what a refusal means.
 
 ## How capabilities are named
 
@@ -69,7 +70,7 @@ The one file that does not live in any of them is `.ki.toml`, at each KI reposit
 
 `ki repo audit` and `ki repo conform` do not implement any checks. They resolve the operations a repository's declared skills register, verify them against the installed harness's integrity evidence, and run those.
 
-It will not run anything else. Not a repository-local wrapper script, not a copied rubric runner sitting in the tree, not a package alias, not a checkout that happens to be nearby. If you want a repository to have rules of its own, the supported route is a declared `ki-self` provider — see [operator guides](/guidance/cli/operator-guides/) — and it is still resolved rather than discovered.
+It will not run anything else. Not a repository-local wrapper script, not a copied rubric runner sitting in the tree, not a package alias, not a checkout that happens to be nearby. If you want a repository to have rules of its own, the supported route is a declared `ki-self` provider — see [operator guides](/projects/ki/operator-guides/) — and it is still resolved rather than discovered.
 
 This is why "the audit passed" is a precise claim: it means the operations registered by the skills this repository declared, from harnesses whose payloads verified, all succeeded. It does not mean the code is good, and it does not mean anything about rules nobody declared.
 
@@ -88,6 +89,6 @@ ki --help
 ki <command> --help
 ```
 
-Your installed binary is the authority for your version. [Every `ki` command](/guidance/cli/commands/) is the same inventory taken from the manual at the release this site advertises, which is the right reference when you are reading rather than typing.
+Your installed binary is the authority for your version. [Every `ki` command](/projects/ki/commands/) is the same inventory taken from the manual at the release this site advertises, which is the right reference when you are reading rather than typing.
 
-[Install and get started](/guidance/using-ki/getting-started/) is the end-to-end setup path if you have not run any of this yet.
+[Install and get started](/projects/ki/getting-started/) is the end-to-end setup path if you have not run any of this yet.

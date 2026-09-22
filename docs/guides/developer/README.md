@@ -17,6 +17,7 @@ For the developer maintaining the Knowledge Islands website: how it deploys, how
 
 ## Published guidance
 
+- [Project guides](project-guides.md) — where a project's guides live, what binds one to its project, and the opening claim and no-deferral rules `verify:guides` enforces.
 - [Deciding what this site publishes](guidance-ownership.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.
-- [Guidance provenance](guidance-provenance.md) — the `sources` declaration every guidance page carries, and how a refresh sweep finds pages whose upstream has moved.
-- [Guidance reachability](guidance-reachability.md) — how the build proves every published guidance page can be reached by navigating, and which link to add when one cannot.
+- [Guidance provenance](guidance-provenance.md) — the `sources` declaration every published page carries, and how a refresh sweep finds pages whose upstream has moved.
+- [Guidance reachability](guidance-reachability.md) — how the build proves every published page can be reached by navigating, and which link to add when one cannot.

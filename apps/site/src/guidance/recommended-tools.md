@@ -1,13 +1,13 @@
 ---
 title: Optional tools
 description: Evaluate optional machine-level tools for configuration, context management, skill discovery, and MCP access.
-permalink: /guidance/using-ki/recommended-tools/
+permalink: /guidance/recommended-tools/
 sources: original
 ---
 
 # Optional tools
 
-Optional user- and system-level tools that affect a person's machine rather than a governed repository. Skills, MCP servers, and day-to-day sessions can benefit from them, but none is required merely to read or audit the harness. [Install and get started](/guidance/using-ki/getting-started/) explains `ki bootstrap`, explicit skill activation, and when optional user-environment setup is appropriate.
+Optional user- and system-level tools that affect a person's machine rather than a governed repository. Skills, MCP servers, and day-to-day sessions can benefit from them, but none is required merely to read or audit the harness. [Install and get started](/projects/ki/getting-started/) explains `ki bootstrap`, explicit skill activation, and when optional user-environment setup is appropriate.
 
 ## chezmoi (dotfile and machine-config management)
 
@@ -212,7 +212,7 @@ Which route to prefer, per integration:
 
 † The KI-owned `mcp-*` servers (workspace MCPs with the annotation-driven access-level gate and audit logging) are always the local route — there is no managed equivalent.
 
-Do not wire the same integration **both** ways on the same surface — that loads two copies of its tool schemas. `ki-binding` governs which surface runs which server from the single `mcps.yaml` source and audits that the surfaces agree; see [Tuning](/guidance/using-ki/tuning/) for the leanness view of the same choice.
+Do not wire the same integration **both** ways on the same surface — that loads two copies of its tool schemas. `ki-binding` governs which surface runs which server from the single `mcps.yaml` source and audits that the surfaces agree; see [Tuning](/projects/ki-agentic-harness/tuning/) for the leanness view of the same choice.
 
 ## VS Code command-execution MCP servers — evaluate before installing
 

@@ -1,7 +1,8 @@
 ---
 title: Repositories
 description: What makes a repository a KI repository, what its .ki.toml declares, and the educate–audit–conform cycle that acts on those declarations.
-permalink: /guidance/repositories/
+permalink: /projects/ki-agentic-harness/repositories/
+order: 3
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -69,9 +70,9 @@ Adding resolves one installed provider for the bare name, writes the declaration
 
 Both take `--repo <path>` to act on a repository other than the one you are standing in.
 
-Repository scope is about _this codebase_: its Markdown style, its toolchain, its roadmap discipline. It is separate from user scope, which is about how _you_ work and is managed with `ki skill add`. Removing one never touches the other. [The capability lifecycle](/guidance/cli/capability-lifecycle/) covers both scopes together.
+Repository scope is about _this codebase_: its Markdown style, its toolchain, its roadmap discipline. It is separate from user scope, which is about how _you_ work and is managed with `ki skill add`. Removing one never touches the other. [The capability lifecycle](/projects/ki/capability-lifecycle/) covers both scopes together.
 
-Choosing what to declare is its own question — [choose a skill by outcome](/guidance/skills/by-outcome/) routes a plain-language goal to the capability that serves it.
+Choosing what to declare is its own question — [choose a skill by outcome](/projects/ki-agentic-harness/skills-by-outcome/) routes a plain-language goal to the capability that serves it.
 
 ## The three operations
 
@@ -96,7 +97,7 @@ They will not run anything else — not a repository-local wrapper script, not a
 
 This is why "the audit passed" is a precise claim. It means the operations registered by the declared skills, from harnesses whose payloads verified, all succeeded. It says nothing about rules nobody declared.
 
-A repository that needs rules of its own declares a `ki-self` provider, and those are still resolved rather than discovered. [Operator guides](/guidance/cli/operator-guides/) covers that route.
+A repository that needs rules of its own declares a `ki-self` provider, and those are still resolved rather than discovered. [Operator guides](/projects/ki/operator-guides/) covers that route.
 
 ## When declarations and reality drift
 
@@ -130,4 +131,4 @@ Run the governance audit before the test suite. Automation fails when acquisitio
 
 ## Related
 
-[Onboard a repository](/guidance/using-ki/onboarding/) covers the trust, migration and legacy-state boundaries in full, including what to do with a repository-vendored `.ki/` directory from an older layout. [Install and get started](/guidance/using-ki/getting-started/) is the end-to-end first run, and [every `ki` command](/guidance/cli/commands/) is the full inventory.
+[Onboard a repository](/projects/ki-agentic-harness/onboarding/) covers the trust, migration and legacy-state boundaries in full, including what to do with a repository-vendored `.ki/` directory from an older layout. [Install and get started](/projects/ki/getting-started/) is the end-to-end first run, and [every `ki` command](/projects/ki/commands/) is the full inventory.

@@ -1,7 +1,8 @@
 ---
 title: Skill catalogue
 description: Browse every capability in the canonical Knowledge Islands harness and learn when to use it.
-permalink: /guidance/skills/catalogue/
+permalink: /projects/ki-agentic-harness/skill-catalogue/
+order: 6
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
@@ -12,9 +13,9 @@ sources:
 
 # Skill catalogue
 
-Every skill in the harness, grouped by [source domain](/guidance/skills/#the-skill-domains). Each entry says what the skill governs and when to reach for it.
+Every skill in the harness, grouped by [source domain](/projects/ki-agentic-harness/skills/#the-skill-domains). Each entry says what the skill governs and when to reach for it.
 
-This inventory is **vendored, not rewritten**. The harness generates it from each skill's own declaration and publishes it as a specified block in its `skills/` README; this page takes that block verbatim at a pinned commit, so a skill renamed, added, or removed upstream cannot leave the site describing one that is not there. What the site adds is the routing around it: [choose a skill by outcome](/guidance/skills/by-outcome/) if you know the result you want but not the name, and [skills and journeys](/guidance/skills/) for how the set fits together.
+This inventory is **vendored, not rewritten**. The harness generates it from each skill's own declaration and publishes it as a specified block in its `skills/` README; this page takes that block verbatim at a pinned commit, so a skill renamed, added, or removed upstream cannot leave the site describing one that is not there. What the site adds is the routing around it: [choose a skill by outcome](/projects/ki-agentic-harness/skills-by-outcome/) if you know the result you want but not the name, and [skills and journeys](/projects/ki-agentic-harness/skills/) for how the set fits together.
 
 The harness publishes **{{ skillCatalogue.counts.total }} skills** at this snapshot: {{ skillCatalogue.counts.governance }} governance skills that hold a standard, and {{ skillCatalogue.counts.process }} process skills that drive a workflow.
 

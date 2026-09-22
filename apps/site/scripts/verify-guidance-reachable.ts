@@ -12,9 +12,14 @@
  * page is entirely within this site's control, unlike the upstream drift that
  * `verify-guidance-sources.ts` reports as a warning.
  *
- * Pages outside `dist/guidance/` are reported as warnings. They are reachable
- * today and should stay so, but this gate was built for the guidance corpus
- * and should say plainly what it holds to.
+ * `dist/projects/` is held to the same standard, because the guides each
+ * project owns now live there: a guide moved out of `/guidance/` must not
+ * become unreachable in the move, and the project page that lists its guides
+ * must itself be on the far end of a link (KI-WEB-SITE-025).
+ *
+ * Pages outside those two trees are reported as warnings. They are reachable
+ * today and should stay so, but this gate was built for published prose and
+ * should say plainly what it holds to.
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'
@@ -85,17 +90,20 @@ const seen = reachable()
 const all = pages(distDir)
 const where = (page: string): string => relative(distDir, page)
 
+/** The trees whose pages a reader has to be able to arrive at by navigating. */
+const published = (path: string): boolean => path.startsWith('guidance/') || path.startsWith('projects/')
+
 for (const page of all) {
   if (seen.has(page)) continue
   const path = where(page)
-  if (path.startsWith('guidance/')) {
+  if (published(path)) {
     failures.push(`dist/${path} cannot be reached by following links from dist/index.html`)
   } else {
     warnings.push(`dist/${path} cannot be reached by following links from dist/index.html`)
   }
 }
 
-const guidance = all.filter((page) => where(page).startsWith('guidance/'))
+const guidance = all.filter((page) => published(where(page)))
 
 for (const message of warnings) console.warn(`warning: ${message}`)
 
@@ -105,4 +113,4 @@ if (failures.length > 0) {
   process.exit(1)
 }
 
-console.log(`verify-guidance-reachable: ${guidance.length} guidance page(s) reachable from the home page`)
+console.log(`verify-guidance-reachable: ${guidance.length} published page(s) reachable from the home page`)

@@ -2,9 +2,14 @@
  * Verifies that every published guidance page declares what it was written from.
  *
  * The site deliberately restates material owned by other repositories, so its prose drifts from
- * those sources between refreshes. That is intended; invisible drift is not. Each page under
- * `src/guidance/` therefore declares a `sources` list — or claims `original` — and this check
+ * those sources between refreshes. That is intended; invisible drift is not. Every published
+ * Markdown page therefore declares a `sources` list — or claims `original` — and this check
  * refuses a page that declares neither.
+ *
+ * Two directories hold those pages. `src/guidance/` is the residual set that belongs to no
+ * project, and `src/projects/<slug>/` holds the guides each project owns (KI-WEB-SITE-025).
+ * Provenance does not care which: a page restating somebody's material declares it wherever it
+ * lives, and moving a page must not be a way to shed the declaration.
  *
  * Offline checks run by default. `--network` additionally resolves each pinned ref against its
  * upstream repository and reports pages whose source document has moved since it was reviewed, and
@@ -19,7 +24,7 @@ import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const guidanceDir = resolve(siteRoot, 'src/guidance')
+const guidanceDirs = [resolve(siteRoot, 'src/guidance'), resolve(siteRoot, 'src/projects')]
 const sourcesPartial = 'partials/sources.njk'
 const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
 const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
@@ -281,10 +286,10 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
 }
 
 const network = process.argv.includes('--network')
-const pages = markdownFiles(guidanceDir)
+const pages = guidanceDirs.flatMap(markdownFiles).sort()
 
 if (pages.length === 0) {
-  fail('No guidance pages found; expected Markdown below src/guidance/.')
+  fail('No published pages found; expected Markdown below src/guidance/ or src/projects/.')
 }
 
 // A declaration readers never see is not a published citation. Every page here

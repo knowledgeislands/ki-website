@@ -1,7 +1,8 @@
 ---
-title: KI CLI guidance
-description: What the ki command-line interface is for, how its command groups divide by scope, and which safety boundaries it holds.
-permalink: /guidance/cli/
+title: How the command groups divide
+description: What the ki command-line interface is for, how its command groups divide by what they can change, and the three refusals that look like bugs the first time you meet one.
+order: 2
+permalink: /projects/ki/command-groups/
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -21,7 +22,7 @@ sources:
 
 It is deliberately not much of a program. `ki` installs verified harnesses, activates capabilities in an explicit scope, and runs the operations a repository has declared. It originates no capability content and holds no standard of its own: the harness owns what a skill says, the principal knowledge bases own the reasoning, and a repository owns what it has declared. That boundary is why the command surface is mostly verbs about _state_ — install, activate, record, report — rather than verbs about work.
 
-[All {{ cliCommands.counts.commands }} commands are listed on one page](/guidance/cli/commands/), taken verbatim from the tool's own manual. This page is for the part an inventory cannot give you: what the groups mean, and which of them you actually need.
+[All {{ cliCommands.counts.commands }} commands are listed on one page](/projects/ki/commands/), taken verbatim from the tool's own manual. This page is for the part an inventory cannot give you: what the groups mean, and which of them you actually need.
 
 ## The one command to start with
 
@@ -29,7 +30,7 @@ It is deliberately not much of a program. `ki` installs verified harnesses, acti
 ki bootstrap
 ```
 
-This detects which agent runtimes are present on your machine, installs the canonical harness, and installs the core user skills. It does not activate anything in a repository — that stays a decision you make per repository, and [the repositories guide](/guidance/repositories/) covers it.
+This detects which agent runtimes are present on your machine, installs the canonical harness, and installs the core user skills. It does not activate anything in a repository — that stays a decision you make per repository, and [the repositories guide](/projects/ki-agentic-harness/repositories/) covers it.
 
 After that, three commands cover most days:
 
@@ -49,9 +50,9 @@ The CLI groups commands by **what they can change**, not by subject matter. The 
 
 `ki bootstrap`, `ki manage …`, `ki skill …`, `ki harness …` and `ki dev …` act on the user-managed KI environment — the installation, its configuration, your declared user skills, and the machine-local registry.
 
-`ki manage` is the read-first surface. `search`, `list`, `outdated`, `missing`, `diag` and `doctor` change nothing; they report what is installed, what is stale, and what is configured but broken. [Local utility commands](/guidance/cli/local-commands/) covers the ones whose boundaries are easy to misread — in particular `cleanup`, which reports only state KI itself recorded and never guesses from a directory's name.
+`ki manage` is the read-first surface. `search`, `list`, `outdated`, `missing`, `diag` and `doctor` change nothing; they report what is installed, what is stale, and what is configured but broken. [Local utility commands](/projects/ki/local-commands/) covers the ones whose boundaries are easy to misread — in particular `cleanup`, which reports only state KI itself recorded and never guesses from a directory's name.
 
-`ki harness` and `ki skill` are two halves of one lifecycle that the CLI keeps deliberately separate: installing a harness makes capabilities _available_, and activating a skill makes one _apply_. [The capability lifecycle](/guidance/cli/capability-lifecycle/) is the page on why, and on what happens when you try to remove a harness something still depends on.
+`ki harness` and `ki skill` are two halves of one lifecycle that the CLI keeps deliberately separate: installing a harness makes capabilities _available_, and activating a skill makes one _apply_. [The capability lifecycle](/projects/ki/capability-lifecycle/) is the page on why, and on what happens when you try to remove a harness something still depends on.
 
 `ki dev` swaps an installed harness for a local checkout and back. It is for working on a harness, not for using one.
 
@@ -67,7 +68,7 @@ The important property is that `ki` does not define what an audit checks. A repo
 
 `ki registry …`, `ki agora …` and `ki trade …` are about relationships between repositories: which roots this machine knows about, which named groups they form, and which typed routes carry work or knowledge between them. They matter once you have more than a handful of repositories and not before.
 
-`ki acquire …` is the intake surface, pulling bounded external material into a package a repository can hold. Each adapter defines its own accepted shape; [the ChatGPT capture format](/guidance/cli/chatgpt-local-capture/) documents the one that asks the most of you.
+`ki acquire …` is the intake surface, pulling bounded external material into a package a repository can hold. Each adapter defines its own accepted shape; [the ChatGPT capture format](/projects/ki/chatgpt-local-capture/) documents the one that asks the most of you.
 
 ## What the CLI will not do
 
@@ -81,15 +82,10 @@ Three refusals are worth knowing in advance, because each looks like a bug the f
 
 ## Keeping an installation current
 
-`ki manage update` refreshes the installation; `ki repo upgrade` refreshes the harness providers one repository's declarations select. Neither activates or deactivates anything. [Update and upgrade](/guidance/cli/update-upgrade/) covers which one you want and why a Homebrew or development installation is deliberately excluded from self-update.
+`ki manage update` refreshes the installation; `ki repo upgrade` refreshes the harness providers one repository's declarations select. Neither activates or deactivates anything. [Update and upgrade](/projects/ki/update-upgrade/) covers which one you want and why a Homebrew or development installation is deliberately excluded from self-update.
 
-## The rest of this collection
+## Where the authority is
 
-- [Every `ki` command](/guidance/cli/commands/) — the full inventory, vendored from the manual at `v0.4.0`.
-- [Capability lifecycle](/guidance/cli/capability-lifecycle/) — installing harnesses against activating skills, and the refusals between them.
-- [Update and upgrade](/guidance/cli/update-upgrade/) — the two refresh commands and what each verifies.
-- [Local utility commands](/guidance/cli/local-commands/) — the inspection surface, and the boundaries `cleanup` and `docs` hold.
-- [ChatGPT local-capture format](/guidance/cli/chatgpt-local-capture/) — the directory layout and metadata the import adapter accepts.
-- [Operator guides](/guidance/cli/operator-guides/) — the workflows `tools-ki` documents at release length, and what each one settles.
+The installed executable is always the authority on exact grammar for your version. `ki --help` and `ki <command> --help` answer from your binary; this page answers what the commands are _for_, which no help output does.
 
-The installed executable is always the authority on exact grammar for your version. `ki --help` and `ki <command> --help` answer from your binary; these pages explain what the commands are _for_, which no help output does.
+Start with [install and get started](/projects/ki/getting-started/) if you have run none of this yet. [Every `ki` command](/projects/ki/commands/) is the inventory, vendored from the manual at `v0.4.0`. The rest of `ki`'s guides are listed on [the project's page](/projects/ki/).

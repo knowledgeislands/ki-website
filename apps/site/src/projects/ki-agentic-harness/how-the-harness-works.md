@@ -1,7 +1,8 @@
 ---
-title: Using Knowledge Islands
-description: Understand the Knowledge Islands harness, its governed capabilities, and the path from installation to day-to-day use.
-permalink: /guidance/using-ki/
+title: How the harness works
+description: What an agentic harness is, the five kinds of thing this one bundles, and why the standards live in skills with mechanical checks rather than in prose an agent may or may not read.
+order: 1
+permalink: /projects/ki-agentic-harness/how-the-harness-works/
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: docs/decisions/ADR-KI-HARNESS-003-mechanical-first-agent-judgment-progressively-enhances.md
@@ -15,15 +16,13 @@ sources:
     reviewed: '2026-09-21'
 ---
 
-# Using Knowledge Islands
+# How the harness works
 
-A short, plain-language guide to what this repository is, what it does for its owner, and where to go for detail.
-
-## Introduction
+Read this to understand what you get when you install the harness and why it is shaped the way it is: the five kinds of thing it bundles, the reason a standard is held as a skill with a checker rather than as a document, and the line between what it publishes and what the `ki` CLI does with it. Everything else on this project's pages assumes it.
 
 An agentic harness is everything around an agent that helps it do a job well. Like a capable person, an agent needs tools to act, knowledge and training to use them, and guardrails that keep work safe and consistent. This harness brings those things together: tools and automation let an agent act; skills and specialist agents provide reusable knowledge and ways of working; and governance checks make good practice repeatable. Keeping them together gives each project a dependable working environment rather than a collection of unrelated prompts and scripts.
 
-## What this harness does for its owner
+## What it does for its owner
 
 The harness turns loose conventions into something an agent can apply and check consistently. A skill usually combines guidance with the practical checks or actions that put it to work. Governance skills share four modes:
 
@@ -69,19 +68,8 @@ ki repo audit
 ki repo conform
 ```
 
-The command ownership boundary is in [the CLI guide](/guidance/using-ki/command-line-interface/); the onboarding and migration flow is in [the onboarding guide](/guidance/using-ki/onboarding/). Existing vendored `.ki` state is migration evidence only, never a compatibility executor for the native model.
+The command ownership boundary is in [the CLI guide](/projects/ki/naming-and-locations/); the onboarding and migration flow is in [the onboarding guide](/projects/ki-agentic-harness/onboarding/). Existing vendored `.ki` state is migration evidence only, never a compatibility executor for the native model.
 
 ## What "Knowledge Islands" means
 
 Several of the skills are built for **Knowledge Islands** work and take its shape as given. A Knowledge Islands base is a single Markdown store organised into five fixed zones — `Calendar`, `Pillars`, `Resources`, `Streams`, and `Admin` — flanked by an inbound (`+`) and an outbound (`-`) staging area. The whole base is an "island"; within it a **Pillar** is a major strand of subject matter — a case, a client, a domain, a theme. The skills assume this structure rather than redefining it, so a base supplies only a few local bindings. For the idea in full, see [knowledgeislands.info](https://knowledgeislands.info).
-
-## Where to go deeper
-
-- **[Getting started](/guidance/using-ki/getting-started/)** covers CLI installation, user bootstrap, harnesses, skill activation, and repository governance.
-- **[Use skills](/guidance/using-ki/using-skills/)** covers how a skill fires — by plain-language request or slash command.
-- **[Optional tools](/guidance/using-ki/recommended-tools/)** explains optional machine-level tools such as chezmoi, headroom-ai, and mcporter.
-- **[Tuning](/guidance/using-ki/tuning/)** covers making a session lean — the standing surface vs runtime split, which built-in tools and MCP servers to load, and where a compression proxy does and does not help.
-- **[Onboarding reference](/guidance/using-ki/onboarding/)** explains installed harnesses, activation scopes, native operations, CI, and legacy retirement.
-- **[Command-line interface](/guidance/using-ki/command-line-interface/)** explains the current end-user `ki` command surface and its scope boundaries.
-- **[Planning and delivery](/guidance/using-ki/planning-and-delivery/)** covers the route from a live session to governed roadmap work.
-- **[Skills and journeys](/guidance/skills/)** covers what a skill is, how the process skills coordinate, the domain taxonomy, and the shape they all share; the **[skill catalogue](/guidance/skills/catalogue/)** then describes them one by one.

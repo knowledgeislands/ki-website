@@ -129,11 +129,25 @@
     tagline: 'The canonical source of reusable agentic capabilities and compatible harnesses.',
     description:
       'A capability here is a typed published member of a compatible harness: a skill, an agent, an MCP server, a hook, an eval, or a future registered kind. The harness defines what each capability contains and what it means. It does not implement the ki executable, and it does not originate portable normative contracts.',
+    problem:
+      'Working conventions that live only in prose erode. An agent applies them if it happens to be told to, and nobody finds out when it was not; a reviewer catches what they have time to read. Holding each standard as a skill that registers its own mechanical checks makes the clear-cut cases deterministic, so attention goes to the parts that genuinely need judgement.',
+    audience:
+      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what `ki bootstrap` installs, and what `ki repo audit` resolves its checks from — you do not read this repository to use it. If you work in a Claude surface that reads plugin marketplaces instead of harnesses, ki-plugins is the projection to reach for.',
+    capabilities: [
+      'Skills — reusable standards, each registering the operations that audit and conform a target against it.',
+      'Subagents — focused specialist roles an agent can delegate a piece of work to.',
+      'Hooks — optional automation around a coding session, such as plan-mode lifecycle and stale Git-lock recovery.',
+      'Evals — scenarios that check a skill changes behaviour, rather than only that it installed.',
+      'A declared capability-prefix namespace, which is how two installed harnesses are stopped from both claiming to supply the same skill.'
+    ],
+    state:
+      'The canonical harness: it is what ki bootstrap installs, and it supplies the core user skills an installation needs to describe itself. It cannot be uninstalled, because an installation without it could not report what it has. The skills are the most built-out part; the MCP shelf is scaffolded, and the servers it will hold currently live in their own repositories.',
+    limits:
+      'It publishes capability content and installs nothing. Acquisition, verification and activation belong to the ki CLI, and which capabilities govern a repository belongs to that repository\'s own declaration — installing a harness activates nothing. Public visibility does not grant a licence to use, copy or redistribute.',
     role: 'Canonical source of capability content and semantics, and of the compatible-harness contract that ki installs against.',
     usage: 'Install a compatible harness with the ki CLI, then activate only the capabilities a piece of work needs.',
     repository: 'https://github.com/knowledgeislands/ki-agentic-harness',
     availability: 'source',
-    route: '/guidance/harnesses/',
     icon: 'archipelago',
     accent: 'teal'
   },

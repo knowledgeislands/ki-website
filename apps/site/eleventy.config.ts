@@ -6,6 +6,11 @@ import JSON5 from 'json5'
 
 // ─── Eleventy config ──────────────────────────────────────────────────────────
 
+/** One page in the `guides` collection: enough of an Eleventy item to sort it. */
+interface GuidePage {
+  data: { project?: unknown; order?: number; title?: string }
+}
+
 export default function (eleventyConfig: UserConfig) {
   // The build runs from the apps/site workspace (cwd = apps/site), which owns dist/.
   const outputRoot = resolve(process.cwd(), 'dist')
@@ -194,6 +199,26 @@ export default function (eleventyConfig: UserConfig) {
   // Add collections here as new sections are built out.
   // Standard pattern: tag pages with e.g. `tags: blog` (via front matter or
   // a directory data file) and access them as `collections.blog` in templates.
+
+  // guides - every project guide, keyed by the project it belongs to.
+  //
+  // The binding comes from the directory data file beside the pages
+  // (`src/projects/ki/ki.json5`), never from the page itself, so a guide added
+  // later joins its project's list because of where it lives. `project.njk`
+  // paginates over an *object* of the same name, hence the string test: it
+  // keeps the generated project pages out of their own Guides section.
+  //
+  // `order` is the reading order a project intends; anything without one sorts
+  // after those that have one, then by title (KI-WEB-SITE-025).
+  eleventyConfig.addCollection('guides', (collectionApi: { getAll: () => GuidePage[] }) =>
+    collectionApi
+      .getAll()
+      .filter((item) => typeof item.data.project === 'string')
+      .sort((a, b) => {
+        const rank = (a.data.order ?? 99) - (b.data.order ?? 99)
+        return rank !== 0 ? rank : String(a.data.title).localeCompare(String(b.data.title))
+      })
+  )
 
   // ── Project-specific shortcodes ──────────────────────────────────────────
   // Add domain-specific shortcodes here. Example pattern:

@@ -1,7 +1,8 @@
 ---
 title: Install and get started
 description: A first-run walkthrough from installing the CLI to a repository that audits clean, with a check to run and a recovery route at each step.
-permalink: /guidance/using-ki/getting-started/
+permalink: /projects/ki/getting-started/
+order: 1
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -96,7 +97,7 @@ Use a **bare skill name**. Harness-qualified keys such as `knowledgeislands/ki-a
 
 Add `--replace` to overwrite an existing declaration rather than fail on it, and `--repo <path>` to act on a repository other than the one you are standing in.
 
-Not sure which skill you want? [Choose a skill by outcome](/guidance/skills/by-outcome/) routes a plain-language goal to the right one, and [the catalogue](/guidance/skills/catalogue/) is the full inventory.
+Not sure which skill you want? [Choose a skill by outcome](/projects/ki-agentic-harness/skills-by-outcome/) routes a plain-language goal to the right one, and [the catalogue](/projects/ki-agentic-harness/skill-catalogue/) is the full inventory.
 
 **Check it worked:**
 
@@ -138,11 +139,11 @@ ki harness install <harness-id>
 ki harness info <harness-id>       # see what it actually ships
 ```
 
-Installing makes capabilities available for explicit activation; it activates nothing on its own. [The capability lifecycle](/guidance/cli/capability-lifecycle/) covers why, and the refusals that protect it.
+Installing makes capabilities available for explicit activation; it activates nothing on its own. [The capability lifecycle](/projects/ki/capability-lifecycle/) covers why, and the refusals that protect it.
 
 ## Where to go next
 
-- [Use skills](/guidance/using-ki/using-skills/) — how a skill actually fires once it is active, which is the part that changes your day.
-- [Onboard a repository](/guidance/using-ki/onboarding/) — the trust, activation, CI, and migration boundaries in full.
-- [The CLI collection](/guidance/cli/) — what each command group is for, and [every command there is](/guidance/cli/commands/).
-- [Optional tools](/guidance/using-ki/recommended-tools/) — machine-level additions such as chezmoi and mcporter, and whether you need them.
+- [Use skills](/projects/ki-agentic-harness/using-skills/) — how a skill actually fires once it is active, which is the part that changes your day.
+- [Onboard a repository](/projects/ki-agentic-harness/onboarding/) — the trust, activation, CI, and migration boundaries in full.
+- [How the command groups divide](/projects/ki/command-groups/) — what each group of commands can change, and [every command there is](/projects/ki/commands/).
+- [Optional tools](/guidance/recommended-tools/) — machine-level additions such as chezmoi and mcporter, and whether you need them.

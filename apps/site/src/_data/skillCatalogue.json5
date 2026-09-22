@@ -7,7 +7,7 @@
 // ki-repo-harness:capability-catalogue markers, which that standard names normatively.
 //
 // The ref below must match the ref declared in the sources frontmatter of
-// src/guidance/skills/catalogue.md; verify:guidance fails the build when they disagree.
+// src/projects/ki-agentic-harness/skill-catalogue.md; verify:guidance fails the build when they disagree.
 // See docs/guides/developer/guidance-provenance.md.
 //
 // Snapshot taken at 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb.

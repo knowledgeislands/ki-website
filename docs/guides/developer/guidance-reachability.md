@@ -1,6 +1,6 @@
 # Guidance reachability
 
-How the build proves every published guidance page can be reached by navigating, and what to do when it says one cannot.
+How the build proves every published page can be reached by navigating, and what to do when it says one cannot.
 
 [Guidance provenance](guidance-provenance.md) makes the site honest about where a page's material came from. This guide covers the other half of publishing: whether a reader can get to the page at all. A page can be perfectly sourced, perfectly written, and still be invisible.
 
@@ -14,7 +14,7 @@ This is the same reasoning that made the provenance sweep worth building. A cond
 
 ## The check
 
-`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/guidance/` that the walk never reaches is a failure.
+`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/guidance/` or `dist/projects/` that the walk never reaches is a failure.
 
 It follows links, not routes. A `permalink` in frontmatter, an entry in the sitemap, and a redirect in `_redirects` all declare that an address exists; none of them is a way for a reader to find it. Existence is owned elsewhere — `verify-tool-routes.ts` and `verify-projects.ts` check that advertised routes resolve. This gate owns arrival.
 
@@ -28,7 +28,9 @@ Three consequences of walking the built output rather than the source follow fro
 
 The provenance sweep reports upstream drift as a warning, because another repository editing its own README must never break this site's build. An orphaned page is the opposite case: it is entirely this site's own doing, fixable here, and fixable now. So `verify:reachable` exits non-zero, and it is wired into `bun run ki:site:build` alongside the other verify scripts — a page that no route reaches cannot reach production.
 
-Pages outside `dist/guidance/` are reported as warnings instead. They are all reachable today and should stay so, but the gate was built for the guidance corpus and says plainly what it holds itself to rather than quietly expanding its remit.
+`dist/projects/` is held to the same standard as `dist/guidance/`, because [the guides each project owns](project-guides.md) live there. A guide that moved out of `/guidance/` must not become unreachable in the move, and the project page that lists its guides has to be on the far end of a link itself.
+
+Pages outside those two trees are reported as warnings instead. They are all reachable today and should stay so, but the gate was built for published prose and says plainly what it holds itself to rather than quietly expanding its remit.
 
 ## When it fails
 
@@ -40,11 +42,12 @@ error: dist/guidance/prompting/gemini-3/index.html cannot be reached by followin
 
 The fix is a link, and the question is which one. In order of preference:
 
-1. **From its collection index.** Most pages belong to a collection, and the collection index is where a reader looking for that page will be. This is nearly always the answer.
-2. **From the [guidance hub](../../../apps/site/src/guidance/index.md).** Correct when the page _is_ a collection index, or when it answers a question the hub routes on. The hub introduces each collection by the question it answers rather than listing links, so adding one means writing a sentence, not appending a bullet.
-3. **From the navigation.** Reserved for the hub itself. The navigation is a small fixed set and the reason the hub exists.
+1. **From its project's page.** A project guide needs no link written by hand: the Guides block on `/projects/<slug>/` is generated from the `guides` collection, so a page in the right directory with the right directory data is listed automatically. An unreachable guide here nearly always means the binding is wrong, not that a link is missing.
+2. **From its collection index.** For the residual guidance pages, the collection index is where a reader looking for that page will be.
+3. **From the [guidance hub](../../../apps/site/src/guidance/index.md).** Correct when the page _is_ a collection index, or when it answers a question the hub routes on. The hub introduces each collection by the question it answers rather than listing links, so adding one means writing a sentence, not appending a bullet.
+4. **From the navigation.** Reserved for the hub itself. The navigation is a small fixed set and the reason the hub exists.
 
-Resist the fourth option of linking a page from wherever is convenient. A link that exists only to satisfy the gate satisfies the gate and not the reader; if no page has a reason to link to it, the real question is whether the page should exist.
+Resist the further option of linking a page from wherever is convenient. A link that exists only to satisfy the gate satisfies the gate and not the reader; if no page has a reason to link to it, the real question is whether the page should exist.
 
 ## What it does not cover
 

@@ -1,0 +1,17 @@
+{#
+  An escape route upward, from wherever the reader actually landed.
+
+  Nineteen of thirty-one guidance pages had no inbound link from outside their own
+  collection, so a reader arriving from a search engine had no way to discover that
+  anything else existed (KI-WEB-SITE-019). A project guide has the same problem and a
+  better answer: its way up is the project it belongs to, which is also the page that
+  lists its siblings (KI-WEB-SITE-025).
+
+  `project` is set by the directory data file beside the guides, so the link is
+  derived from where the page lives rather than from a line each page repeats.
+#}
+{%- if project %}
+<p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1.5rem;"><a href="/projects/{{ project }}/">← {{ project }}</a></p>
+{%- elif page.url.startsWith('/guidance/') and page.url != '/guidance/' %}
+<p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1.5rem;"><a href="/guidance/">← All guidance</a></p>
+{%- endif %}

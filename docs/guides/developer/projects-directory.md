@@ -46,7 +46,9 @@ So a tool is a `kind: 'tool'` entry like any other, rendered by the same templat
 
 ### When to use `route`
 
-Two projects already have a richer home on this site: `ki-agentic-harness` is covered by the harness guidance at `/guidance/harnesses/`, and `ki-website` is the site itself. Those entries declare `route`, their card links there, and no `/projects/<slug>/` page is generated. Without `route`, a page is generated and the card points at it.
+One project has a richer home on this site than a generated page: `ki-website` is the site itself. That entry declares `route`, its card links there, and no `/projects/ki-website/` page is generated. Without `route`, a page is generated and the card points at it.
+
+`ki-agentic-harness` used to declare one too, pointing at the harness guidance. It does not any more: its guides moved under the project rather than the project pointing at a guide, so it has an ordinary generated page with the reader fields every other entry needs ([project guides](project-guides.md)). Reach for `route` only when the destination is genuinely not a project page — a `route` to a guide is a sign the guides belong to the project.
 
 ### What a generated page needs
 

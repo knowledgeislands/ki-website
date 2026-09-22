@@ -1,7 +1,8 @@
 ---
 title: Use skills
 description: How a skill actually fires — by trigger or by slash command — how to find the one you want, and what to do when the wrong one loads.
-permalink: /guidance/using-ki/using-skills/
+permalink: /projects/ki-agentic-harness/using-skills/
+order: 7
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
@@ -38,8 +39,8 @@ Use this when you want certainty about which skill runs, or when you want a spec
 
 The slash command needs a name, and three routes get you one:
 
-- **[Choose a skill by outcome](/guidance/skills/by-outcome/)** — a routing table from a plain-language goal to the smallest capability that serves it. Start here when you know the result you want.
-- **[The skill catalogue](/guidance/skills/catalogue/)** — every published capability, grouped by domain, with what each governs. Start here when you are browsing rather than aiming.
+- **[Choose a skill by outcome](/projects/ki-agentic-harness/skills-by-outcome/)** — a routing table from a plain-language goal to the smallest capability that serves it. Start here when you know the result you want.
+- **[The skill catalogue](/projects/ki-agentic-harness/skill-catalogue/)** — every published capability, grouped by domain, with what each governs. Start here when you are browsing rather than aiming.
 - **`ki manage search <query>`** — searches only what is _installed on your machine_, matching case-insensitively against harness identifier, capability kind, and capability name. Start here when you want to know what you actually have rather than what exists.
 
 The third is the one people forget. A skill in the catalogue is not necessarily a skill you can invoke; it has to come from a harness you installed and be active in a scope that applies.
@@ -72,4 +73,4 @@ A skill's `description` documents _when_ it fires and its `argument-hint` docume
 
 ## Related
 
-[Skills and journeys](/guidance/skills/) explains what a skill contains and how the two kinds — governance and process — differ. [Install and get started](/guidance/using-ki/getting-started/) covers activating one in the first place. [Tuning](/guidance/using-ki/tuning/) covers shaping how an agent behaves once the skills are in place.
+[Skills and journeys](/projects/ki-agentic-harness/skills/) explains what a skill contains and how the two kinds — governance and process — differ. [Install and get started](/projects/ki/getting-started/) covers activating one in the first place. [Tuning](/projects/ki-agentic-harness/tuning/) covers shaping how an agent behaves once the skills are in place.

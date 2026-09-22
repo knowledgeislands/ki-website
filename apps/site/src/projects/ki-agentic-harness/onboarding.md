@@ -1,7 +1,8 @@
 ---
 title: Onboard a repository
 description: Connect a repository to native KI governance with explicit capability declarations, trusted harnesses, and CI.
-permalink: /guidance/using-ki/onboarding/
+permalink: /projects/ki-agentic-harness/onboarding/
+order: 8
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -31,7 +32,7 @@ Each user has a KI XDG configuration and an installed compatible-harness set. `k
 
 ## Repository declaration and activation
 
-A KI repository carries a regular `.ki.toml` at its Git worktree root. `[repo]` names the harnesses it may draw from, and each `[skills.<name>]` table declares one governance capability by bare name. [Govern a repository](/guidance/repositories/) shows the file.
+A KI repository carries a regular `.ki.toml` at its Git worktree root. `[repo]` names the harnesses it may draw from, and each `[skills.<name>]` table declares one governance capability by bare name. [Govern a repository](/projects/ki-agentic-harness/repositories/) shows the file.
 
 Activate a repository skill with:
 

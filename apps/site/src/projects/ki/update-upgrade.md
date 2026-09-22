@@ -1,7 +1,8 @@
 ---
 title: Update and upgrade
 description: Which of the two refresh commands you want, what each one verifies before changing anything, and why some installations are deliberately excluded from self-update.
-permalink: /guidance/cli/update-upgrade/
+permalink: /projects/ki/update-upgrade/
+order: 6
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -24,7 +25,7 @@ Two commands refresh things, and the names are not interchangeable.
 | `ki manage update` | Your machine | The installed harnesses, and the `ki` executable itself where it may. |
 | `ki repo upgrade` | One repository | The harness providers that repository's declarations select. |
 
-Neither activates or deactivates anything. A refresh changes _which version_ supplies a capability, never _whether_ it applies — that stays with [the capability lifecycle](/guidance/cli/capability-lifecycle/).
+Neither activates or deactivates anything. A refresh changes _which version_ supplies a capability, never _whether_ it applies — that stays with [the capability lifecycle](/projects/ki/capability-lifecycle/).
 
 ## `ki manage update`
 
@@ -73,6 +74,6 @@ Like `update`, it changes neither user nor repository skill activation.
 
 ## Related
 
-[Local utility commands](/guidance/cli/local-commands/) covers the rest of the inspection surface, including `diag`, `doctor` and `repair`. [Every `ki` command](/guidance/cli/commands/) has the full inventory.
+[Local utility commands](/projects/ki/local-commands/) covers the rest of the inspection surface, including `diag`, `doctor` and `repair`. [Every `ki` command](/projects/ki/commands/) has the full inventory.
 
 Use `ki manage update --help` and `ki repo upgrade --help` for the exact grammar your installed version supports.

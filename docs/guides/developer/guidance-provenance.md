@@ -8,20 +8,20 @@ The two are easy to confuse and do different jobs. **Ownership decides what the 
 
 ## The problem this solves
 
-The site's derived accounts drift from their sources by design — the drift is the point, because the site is writing for a different reader. What is not acceptable is drift nobody can see. Before this declaration existed, `/guidance/skills/catalogue/` restated harness skill descriptions with nothing recording that fact, so a skill could be renamed upstream and the site would keep describing the old one until a person happened to notice.
+The site's derived accounts drift from their sources by design — the drift is the point, because the site is writing for a different reader. What is not acceptable is drift nobody can see. Before this declaration existed, `/projects/ki-agentic-harness/skill-catalogue/` restated harness skill descriptions with nothing recording that fact, so a skill could be renamed upstream and the site would keep describing the old one until a person happened to notice.
 
 The [tool routes](tool-routes.md) contract already solved the same problem for versions: a released tool pins an exact release in the registry, and `verify:routes --network` warns when upstream has published a newer one. Provenance applies that shape to prose.
 
 ## The declaration
 
-Every Markdown page under `apps/site/src/guidance/` carries a `sources` key in its frontmatter.
+Every Markdown page under `apps/site/src/guidance/` or `apps/site/src/projects/<slug>/` carries a `sources` key in its frontmatter. The two trees hold different things — the residual guidance that belongs to no project, and [the guides each project owns](project-guides.md) — and provenance does not distinguish between them, because moving a page must not be a way to shed its declaration.
 
 ```yaml
 ---
 layout: layouts/base.njk
 title: Canonical batch records
 description: Prepare, bind, and close an exact-set batch authority envelope.
-permalink: /guidance/cli/batch-records/
+permalink: /projects/ki/batch-records/
 sources:
   - repository: knowledgeislands/tools-ki
     path: docs/guides/user/batch-records.md
@@ -59,8 +59,8 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/guidance/skills/catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) |
-| `/guidance/cli/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-003](../../decisions/ADR-KI-WEBSITE-003-vendoring-an-unspecified-published-interface.md) |
+| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) |
+| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-003](../../decisions/ADR-KI-WEBSITE-003-vendoring-an-unspecified-published-interface.md) |
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 

@@ -18,9 +18,36 @@ eleventyExcludeFromCollections: true
 
 # Tooling was merged into Projects (KI-WEB-SITE-020). A tool is a project that
 # ships a binary, so /tooling/<slug>/ becomes /projects/<slug>/. The two pages
-# that were task guidance filed under released tools move into /guidance/.
+# that were task guidance filed under released tools follow the guidance move
+# below, so they point at their final home rather than at a redirect.
 # Cloudflare takes the first matching rule, so the named paths precede the splat.
-/tooling/harnesses /guidance/harnesses/ 301
-/tooling/guidance /guidance/repositories/ 301
+/tooling/harnesses /projects/ki-agentic-harness/installing-a-harness/ 301
+/tooling/guidance /projects/ki-agentic-harness/repositories/ 301
 {% for tool in tools %}/tooling/{{ tool.slug }} /projects/{{ tool.slug }}/ 301
 {% endfor %}/tooling / 301
+
+# Guidance dissolved into the projects that own it (KI-WEB-SITE-025). A guide
+# belongs to the project it is about, so /guidance/<collection>/<page>/ becomes
+# /projects/<slug>/<page>/. Every one of these URLs was published, so each gets
+# a rule; the four pages whose material merged into another page redirect to
+# the page that now carries it.
+/guidance/cli /projects/ki/command-groups/ 301
+/guidance/cli/commands /projects/ki/commands/ 301
+/guidance/cli/capability-lifecycle /projects/ki/capability-lifecycle/ 301
+/guidance/cli/local-commands /projects/ki/local-commands/ 301
+/guidance/cli/update-upgrade /projects/ki/update-upgrade/ 301
+/guidance/cli/operator-guides /projects/ki/operator-guides/ 301
+/guidance/cli/chatgpt-local-capture /projects/ki/chatgpt-local-capture/ 301
+/guidance/harnesses /projects/ki-agentic-harness/installing-a-harness/ 301
+/guidance/repositories /projects/ki-agentic-harness/repositories/ 301
+/guidance/skills /projects/ki-agentic-harness/skills/ 301
+/guidance/skills/by-outcome /projects/ki-agentic-harness/skills-by-outcome/ 301
+/guidance/skills/catalogue /projects/ki-agentic-harness/skill-catalogue/ 301
+/guidance/using-ki /projects/ki-agentic-harness/how-the-harness-works/ 301
+/guidance/using-ki/command-line-interface /projects/ki/naming-and-locations/ 301
+/guidance/using-ki/getting-started /projects/ki/getting-started/ 301
+/guidance/using-ki/onboarding /projects/ki-agentic-harness/onboarding/ 301
+/guidance/using-ki/planning-and-delivery /projects/ki-agentic-harness/planning-and-delivery/ 301
+/guidance/using-ki/tuning /projects/ki-agentic-harness/tuning/ 301
+/guidance/using-ki/using-skills /projects/ki-agentic-harness/using-skills/ 301
+/guidance/using-ki/recommended-tools /guidance/recommended-tools/ 301

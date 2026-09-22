@@ -1,7 +1,8 @@
 ---
 title: Harnesses
 description: What a compatible harness packages, how one arrives on your machine verified, and why installing it changes nothing about your repositories.
-permalink: /guidance/harnesses/
+permalink: /projects/ki-agentic-harness/installing-a-harness/
+order: 2
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1
@@ -24,13 +25,13 @@ sources:
 
 A **compatible harness** is a published, versioned package of agentic capability — skills, subagents, hooks, and the reference material they carry. It is the supply side of Knowledge Islands. Nothing else in the ecosystem originates capability content: the `ki` CLI installs harnesses and runs what they register, and a repository declares which of their capabilities govern it.
 
-This page is about getting one onto your machine and knowing what you have. [The capability lifecycle](/guidance/cli/capability-lifecycle/) is about the separate decision of activating something from it.
+This page is about getting one onto your machine and knowing what you have. [The capability lifecycle](/projects/ki/capability-lifecycle/) is about the separate decision of activating something from it.
 
 ## What a harness contains
 
 Three kinds of thing, and the distinction matters when you go looking for something:
 
-- **Skills** — the bulk of it. A governance skill holds a standard and registers the operations that check and repair against it; a process skill drives a lifecycle you invoke. [Skills and journeys](/guidance/skills/) explains the difference, and [the catalogue](/guidance/skills/catalogue/) lists every published one.
+- **Skills** — the bulk of it. A governance skill holds a standard and registers the operations that check and repair against it; a process skill drives a lifecycle you invoke. [Skills and journeys](/projects/ki-agentic-harness/skills/) explains the difference, and [the catalogue](/projects/ki-agentic-harness/skill-catalogue/) lists every published one.
 - **Subagents and hooks** — runtime material that a supported agent picks up once the harness is installed and the capability is active.
 - **Registered operations** — the executable side of a governance skill. These are what `ki repo audit` and `ki repo conform` resolve and run; they exist only inside a harness payload with integrity evidence behind it.
 
@@ -62,7 +63,7 @@ A harness is addressed by identifier in `owner/name` form. These commands never 
 
 `install` acquires a **configured** harness: one the installation knows about, from immutable published release evidence rather than from whatever a branch currently holds. The payload is verified and its capability inventory is recorded before it is installed, so two machines installing the same harness at the same release get the same thing.
 
-**Installing activates nothing.** A freshly installed harness sits on your machine available and inert until you declare one of its capabilities in a scope. That separation is deliberate and is covered in full, with the refusals that protect it, in [the capability lifecycle](/guidance/cli/capability-lifecycle/).
+**Installing activates nothing.** A freshly installed harness sits on your machine available and inert until you declare one of its capabilities in a scope. That separation is deliberate and is covered in full, with the refusals that protect it, in [the capability lifecycle](/projects/ki/capability-lifecycle/).
 
 ## Keeping one current, replacing one, removing one
 
@@ -73,7 +74,7 @@ ki harness reinstall <harness-id>   # replace one from its verified archive
 ki harness uninstall <harness-id>   # remove one non-canonical harness
 ```
 
-`reinstall` replaces a harness only after the replacement archive passes integrity and capability inspection, so a corrupted archive — or one that would silently drop a capability you are using — cannot take the place of a working one. [Update and upgrade](/guidance/cli/update-upgrade/) covers the difference between refreshing your machine and refreshing one repository's providers.
+`reinstall` replaces a harness only after the replacement archive passes integrity and capability inspection, so a corrupted archive — or one that would silently drop a capability you are using — cannot take the place of a working one. [Update and upgrade](/projects/ki/update-upgrade/) covers the difference between refreshing your machine and refreshing one repository's providers.
 
 `uninstall` removes a harness whose payload directories `ki` recognises. It refuses if the harness supplies an active user skill: the declaration would be left pointing at nothing. Remove the skill first with `ki skill remove`, then uninstall.
 
@@ -99,8 +100,8 @@ ki manage doctor    # environment health, with a recovery route per finding
 ki manage diag      # installation mode and the four resolved paths
 ```
 
-`doctor` is the one to reach for when something is not behaving: it checks the configuration, the agents it found, the installed harnesses and the user-skill links, and says what to do about anything broken. [Local utility commands](/guidance/cli/local-commands/) covers the inspection surface in full.
+`doctor` is the one to reach for when something is not behaving: it checks the configuration, the agents it found, the installed harnesses and the user-skill links, and says what to do about anything broken. [Local utility commands](/projects/ki/local-commands/) covers the inspection surface in full.
 
 ## Related
 
-[Install and get started](/guidance/using-ki/getting-started/) is the end-to-end first run. [Govern a repository](/guidance/repositories/) is the other half of setup — declaring what applies where. [Every `ki` command](/guidance/cli/commands/) is the full inventory, taken from the tool's own manual.
+[Install and get started](/projects/ki/getting-started/) is the end-to-end first run. [Govern a repository](/projects/ki-agentic-harness/repositories/) is the other half of setup — declaring what applies where. [Every `ki` command](/projects/ki/commands/) is the full inventory, taken from the tool's own manual.

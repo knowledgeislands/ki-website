@@ -1,7 +1,7 @@
 /**
  * Vendors the harness's generated capability catalogue into site data.
  *
- * `/guidance/skills/catalogue/` used to restate all sixty-one skills in hand-written prose, which is
+ * `/projects/ki-agentic-harness/skill-catalogue/` used to restate all sixty-one skills in hand-written prose, which is
  * the one guidance page where the derived account added nothing: it was the upstream inventory,
  * reworded, and it rotted accordingly. The harness already publishes that inventory as a specified
  * interface — `ki-repo-harness` names the two markers normatively and fixes the fields between them
@@ -168,7 +168,7 @@ const header = (ref: string): string => `// Vendored snapshot of the harness's g
 // ki-repo-harness:capability-catalogue markers, which that standard names normatively.
 //
 // The ref below must match the ref declared in the sources frontmatter of
-// src/guidance/skills/catalogue.md; verify:guidance fails the build when they disagree.
+// src/projects/ki-agentic-harness/skill-catalogue.md; verify:guidance fails the build when they disagree.
 // See docs/guides/developer/guidance-provenance.md.
 //
 // Snapshot taken at ${ref}.

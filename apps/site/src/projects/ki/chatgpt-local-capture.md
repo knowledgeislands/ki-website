@@ -1,7 +1,8 @@
 ---
 title: ChatGPT local-capture format
 description: Prepare the bounded local capture accepted by the KI ChatGPT import adapter.
-permalink: /guidance/cli/chatgpt-local-capture/
+permalink: /projects/ki/chatgpt-local-capture/
+order: 9
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1

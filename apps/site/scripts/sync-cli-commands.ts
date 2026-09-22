@@ -1,7 +1,7 @@
 /**
  * Vendors the `ki` command inventory out of the tool's own manual page.
  *
- * `/guidance/cli/` was 136 words and five links — the shortest page on the
+ * `/projects/ki/command-groups/` was 136 words and five links — the shortest page on the
  * site, and a reader who wanted to know what `ki` can do had to leave for a
  * repository to find out. Carrying that inventory in hand-written prose is the
  * wrong fix: eighty-four commands that change every release is exactly the
@@ -294,7 +294,7 @@ const header = (ref: string): string => `// GENERATED FILE — do not edit by ha
 // Vendored from ${SOURCE_REPOSITORY} ${SOURCE_PATH} at ${ref},
 // parsed out of its COMMAND GROUPS section, reconciled against its SYNOPSIS.
 //
-// The page that renders it is src/guidance/cli/index.md; the reason the site
+// The page that renders it is src/projects/ki/command-groups.md; the reason the site
 // vendors rather than paraphrases is in docs/guides/developer/guidance-provenance.md.
 
 `

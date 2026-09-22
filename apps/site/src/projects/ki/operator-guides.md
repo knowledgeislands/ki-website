@@ -1,7 +1,8 @@
 ---
 title: Operator guides
 description: The six workflows tools-ki documents at release length — what each one settles, what it refuses to do, and when you need it.
-permalink: /guidance/cli/operator-guides/
+permalink: /projects/ki/operator-guides/
+order: 8
 sources:
   - repository: knowledgeislands/tools-ki
     path: docs/guides/README.md
@@ -44,7 +45,7 @@ sources:
 
 Six workflows need more than a `--help` page, because each one crosses a boundary where getting it wrong is expensive: another tool's source of truth, another repository's authority, or an external account's credentials.
 
-This page tells you what each guide settles, what it refuses to do, and whether you need it. The step-by-step procedures stay in `tools-ki`, and that deferral is deliberate rather than deferred work: each of these procedures is specific to the release that ships it, and several are written against `tools-ki`'s own accepted-behaviour specifications, which the tool's conformance tests verify. Restating a procedure here would put a second, unverified copy between you and a contract that is checked in exactly one place.
+What each one settles, what it refuses to do, and how to tell whether you need it, is below. The step-by-step commands are not, and that is a decision rather than an omission: each procedure is specific to the release that ships it, and several are written against `tools-ki`'s accepted-behaviour specifications, which its conformance tests verify. A second copy here would be unverified, and would go stale in exactly the way the boundary it describes is expensive to get wrong.
 
 The links are pinned to `v0.4.0`, the release this site currently advertises. A guide describes the release it shipped with; following `main` would silently republish whatever that branch happens to hold.
 
@@ -56,7 +57,7 @@ The links are pinned to `v0.4.0`, the release this site currently advertises. A 
 
 **The boundary that matters:** the command changes chezmoi _source_ state and never runs `chezmoi apply`. Rendering those changes onto the machine stays with your dotfiles workflow, after you have reviewed `chezmoi diff`. The two-step is the point — `ki` proposes, chezmoi applies, and neither silently becomes the other's authority.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/vscode-management.md) also covers `ki manage vscode source create`, the opt-in store for material unsuitable for Git.
+`ki manage vscode source create` is the other half of the command: it creates an opt-in store for binary and media material unsuitable for Git, and associates it with a repository through the same source state. [The VS Code management procedure shipped with `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/vscode-management.md) has the reconciliation sequence step by step.
 
 ## Repository-local governance
 
@@ -66,7 +67,7 @@ Declaring an empty `[skills.ki-self]` table in `.ki.toml` grants native-operatio
 
 **The boundary that matters:** `ki-self` is treated as one narrow repository-owned provider, not as installed harness content, and its authority stops at that repository's root. It is the escape hatch for rules that should not be portable — not a way to fork a harness skill locally.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/repository-local-governance.md) gives the required source layout.
+The source layout is fixed rather than conventional — `SKILL.md`, a `references/` rubric, and the scripts the skill registers, at a canonical path the operation resolves — and [the repository-local governance procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/repository-local-governance.md) gives it file by file.
 
 ## Canonical batch records
 
@@ -76,7 +77,7 @@ Declaring an empty `[skills.ki-self]` table in `.ki.toml` grants native-operatio
 
 **The boundary that matters:** `ki batch` provides file mechanics around an approval that already exists. It does not select work, infer authority from a conversation, run an agent, change roadmap lifecycle, accept or prune items, push, or release. `--approved` records an assertion the caller supplied; it does not prove approval. That refusal is the guide's whole reason for existing.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/batch-records.md) has the command sequence and the record format.
+[The batch-records procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/batch-records.md) carries the command sequence and the on-disk record format.
 
 ## Acquiring Granola meetings
 
@@ -86,7 +87,7 @@ The adapter runs through a locally installed `mcporter` executable with a config
 
 **The boundary that matters:** acquisition passes `--no-oauth` on every provider call, so missing or expired credentials fail visibly rather than opening a browser mid-run. Tokens never enter repository configuration, staged documents, journals, or checkpoints. Imports are resumable, and the guide covers recovering an interrupted one safely.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/granola-acquisition.md) covers activation, resumption, and reset disposition; the accepted behaviour is recorded in `tools-ki`'s acquisition specification.
+[The Granola acquisition procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/granola-acquisition.md) covers activation, resumption, and reset disposition; the accepted behaviour is recorded in `tools-ki`'s acquisition specification.
 
 ## Standing knowledge intake
 
@@ -96,7 +97,7 @@ The receiving repository declares a subtype it owns — a name and a description
 
 **The boundary that matters:** the grant is reciprocal and neither repository gains authority to write into the other. The receiver owns the subtype vocabulary, and a subtype cannot be removed while a standing import still uses it.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/standing-knowledge-intake.md) has the declaration sequence; the command contract is specified as TRADE-009 through TRADE-011.
+[The standing-intake procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/standing-knowledge-intake.md) has the declaration sequence; the command contract is specified as TRADE-009 through TRADE-011.
 
 ## External Agora references
 
@@ -106,8 +107,8 @@ The Agora owner declares the canonical repository identity in `references`; each
 
 **The boundary that matters:** the association adds no `.ki.toml`, registers nothing, and writes nothing into the referenced repository. Resolved references participate in the same ordered projection as members for `ki agora roots`, `open` and `inspect`, while `ki agora show` still labels them distinctly.
 
-[The full guide](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/agora-references.md) covers inspection and re-association.
+[The Agora-reference procedure at `v0.4.0`](https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/docs/guides/agora-references.md) covers inspection and re-association.
 
 ## Where these sit
 
-All six are operator workflows — things you do to a machine or between repositories. The day-to-day surface is elsewhere: [every `ki` command](/guidance/cli/commands/) for the inventory, [the CLI overview](/guidance/cli/) for what the groups mean, and [the guidance hub](/guidance/) for everything that is not about the command line at all.
+All six are operator workflows — things you do to a machine, or between repositories, rather than inside one. The day-to-day surface is elsewhere: [every `ki` command](/projects/ki/commands/) is the inventory, and [how the command groups divide](/projects/ki/command-groups/) is what each group is for. The rest of `ki`'s guides are listed on [the project's page](/projects/ki/).

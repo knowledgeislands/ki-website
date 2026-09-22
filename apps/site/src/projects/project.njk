@@ -92,6 +92,24 @@ eleventyComputed:
       <p class="overline">Using it</p>
       <h2>How to start.</h2>
       <p>{{ project.usage }}</p>
+
+      {#
+        A project's guides are its own pages on this site, not a section of
+        their own: they are collected from `src/projects/<slug>/`, so a project
+        with nothing written about it renders nothing here (KI-WEB-SITE-025).
+      #}
+      {%- set guides = [] %}
+      {%- for guide in collections.guides %}
+        {%- if guide.data.project == project.slug %}{% set guides = (guides.push(guide), guides) %}{% endif %}
+      {%- endfor %}
+      {%- if guides.length %}
+      <h2 style="margin-top: 2.5rem;">Guides on this site.</h2>
+      <ul>
+        {%- for guide in guides %}
+        <li><a href="{{ guide.url }}">{{ guide.data.title }}</a> — {{ guide.data.description }}</li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
       {%- if released %}
       {% if project.formula %}
       <h2>Prefer Homebrew.</h2>

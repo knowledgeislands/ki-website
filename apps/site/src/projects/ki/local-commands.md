@@ -1,7 +1,8 @@
 ---
 title: Local utility commands
 description: Manage local KI capabilities, documentation locations, and supported machine projections.
-permalink: /guidance/cli/local-commands/
+permalink: /projects/ki/local-commands/
+order: 7
 sources:
   - repository: knowledgeislands/tools-ki
     path: man/ki.1

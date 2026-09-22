@@ -41,13 +41,15 @@ eleventyExcludeFromCollections: true
     <priority>0.6</priority>
   </url>
 {%- endfor %}
+{%- for guide in collections.guides %}
   <url>
-    <loc>https://knowledgeislands.info/guidance/harnesses/</loc>
+    <loc>{{ site.url }}{{ guide.url }}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+{%- endfor %}
   <url>
-    <loc>https://knowledgeislands.info/guidance/repositories/</loc>
+    <loc>https://knowledgeislands.info/guidance/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
