@@ -14,7 +14,7 @@ sources:
 
 `ki` is the end-user Knowledge Islands command-line interface. It installs compatible harnesses, activates their capabilities in explicit scopes, and hosts native repository operations.
 
-This page explains the command groups and their ownership boundaries. The installed command's `ki --help` output and the [`ki` page](/tooling/ki/) are the authority for exact, version-specific grammar.
+This page explains the command groups and their ownership boundaries. The installed command's `ki --help` output and the [`ki` page](/projects/ki/) are the authority for exact, version-specific grammar.
 
 ## Bootstrap and diagnostics
 

@@ -9,7 +9,6 @@ const site = {
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
     { label: 'Projects', href: '/projects/' },
-    { label: 'Tooling', href: '/tooling/' },
     { label: 'Guidance', href: '/guidance/using-ki/' },
     { label: 'Get Started', href: '/get-started/' },
     { label: 'Contribute', href: '/contribute/' }

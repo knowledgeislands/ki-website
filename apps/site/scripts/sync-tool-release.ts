@@ -17,6 +17,7 @@ export interface ToolReleaseRequest {
 
 interface RegistryTool {
   slug: string
+  kind?: string
   repository: string
   version: string
   installer: string
@@ -74,7 +75,7 @@ function compareVersions(left: string, right: string): number {
 
 function registryTools(source: string): RegistryTool[] {
   const parsed = JSON5.parse(source) as unknown
-  if (!Array.isArray(parsed)) throw new Error('tool registry must be an array')
+  if (!Array.isArray(parsed)) throw new Error('project registry must be an array')
   return parsed as RegistryTool[]
 }
 
@@ -85,7 +86,8 @@ export function updateRegistrySource(
   validateRequest(request)
   const tools = registryTools(source)
   const tool = tools.find((candidate) => candidate.slug === request.tool)
-  if (!tool) throw new Error(`tool registry has no entry for ${request.tool}`)
+  if (!tool) throw new Error(`project registry has no entry for ${request.tool}`)
+  if (tool.kind !== 'tool') throw new Error(`${request.tool}: registry entry is not a released tool`)
   if (tool.repository !== `https://github.com/${request.sourceRepository}`) {
     throw new Error(`${request.tool}: registry repository does not match ${request.sourceRepository}`)
   }
@@ -199,7 +201,7 @@ function parseArguments(args: string[]): CliOptions {
       tapCommit: required('tap-commit'),
       formulaPath: values.get('formula-path') ?? `Formula/${tool}.rb`
     },
-    registryPath: resolve(values.get('registry') ?? 'apps/site/src/_data/tools.json5'),
+    registryPath: resolve(values.get('registry') ?? 'apps/site/src/_data/projects.json5'),
     checkOnly
   }
 }

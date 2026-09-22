@@ -17,15 +17,23 @@ export default function (eleventyConfig: UserConfig) {
     if (!url.startsWith('/')) return url
     if (url.startsWith('//')) return url
 
+    // A fragment is addressed within the target document, so it is set aside
+    // before the path is resolved and reattached afterwards. Without this a
+    // link to /projects/#tool normalizes to a bare directory, which a served
+    // site resolves and a dist/ opened from the filesystem does not.
+    const hash = url.indexOf('#')
+    const fragment = hash < 0 ? '' : url.slice(hash)
+    const path = hash < 0 ? url : url.slice(0, hash)
+
     // Make internal page URLs explicit to avoid directory-index assumptions.
-    let normalized = url
+    let normalized = path
     if (normalized === '/') normalized = '/index.html'
     else if (normalized.endsWith('/')) normalized = `${normalized}index.html`
 
     const fromDir = dirname(outputPath)
     const targetPath = resolve(outputRoot, `.${normalized}`)
     const rel = relative(fromDir, targetPath).split(sep).join('/')
-    return rel || './'
+    return `${rel || './'}${fragment}`
   }
 
   // ── Passthrough copies ───────────────────────────────────────────────────

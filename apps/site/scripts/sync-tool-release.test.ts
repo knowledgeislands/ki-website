@@ -16,9 +16,16 @@ const request: ToolReleaseRequest = {
   formulaPath: 'Formula/ki.rb'
 }
 
+/** Mirrors the merged registry: released tools sit among projects of other kinds. */
 const registry = `[
   {
+    slug: 'mcp-git-audit',
+    kind: 'mcp',
+    repository: 'https://github.com/knowledgeislands/mcp-git-audit',
+  },
+  {
     slug: 'ki',
+    kind: 'tool',
     repository: 'https://github.com/knowledgeislands/tools-ki',
     version: 'v0.3.6',
     installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.3.6/install.sh',
@@ -27,6 +34,7 @@ const registry = `[
   },
   {
     slug: 'mgit',
+    kind: 'tool',
     repository: 'https://github.com/knowledgeislands/tools-mgit',
     version: 'v0.13.0',
     installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-mgit/v0.13.0/install.sh',
@@ -78,6 +86,14 @@ describe('registry update', () => {
     assert.match(update.source, /\/tools-ki\/v0\.4\.0\/install\.sh/)
     assert.match(update.source, /\/tools-ki\/blob\/v0\.4\.0\/README\.md/)
     assert.match(update.source, /version: 'v0\.13\.0'/)
+  })
+
+  test('refuses an entry that is not a released tool', () => {
+    assert.throws(
+      () =>
+        updateRegistrySource(registry, { ...request, tool: 'mcp-git-audit', formulaPath: 'Formula/mcp-git-audit.rb' }),
+      /not a released tool/
+    )
   })
 
   test('is idempotent and rejects downgrades', () => {

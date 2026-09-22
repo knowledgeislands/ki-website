@@ -10,7 +10,7 @@ The two are easy to confuse and do different jobs. **Ownership decides what the 
 
 The site's derived accounts drift from their sources by design — the drift is the point, because the site is writing for a different reader. What is not acceptable is drift nobody can see. Before this declaration existed, `/guidance/skills/catalogue/` restated harness skill descriptions with nothing recording that fact, so a skill could be renamed upstream and the site would keep describing the old one until a person happened to notice.
 
-The [tool routes](tool-routes.md) registry already solved the same problem for versions: `tools.json5` pins an exact release, and `verify:routes --network` warns when upstream has published a newer one. Provenance applies that shape to prose.
+The [tool routes](tool-routes.md) contract already solved the same problem for versions: a released tool pins an exact release in the registry, and `verify:routes --network` warns when upstream has published a newer one. Provenance applies that shape to prose.
 
 ## The declaration
 

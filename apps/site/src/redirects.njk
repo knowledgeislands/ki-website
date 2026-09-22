@@ -2,7 +2,7 @@
 permalink: /_redirects
 eleventyExcludeFromCollections: true
 ---
-# Generated from src/_data/tools.json5 by src/redirects.njk — edit the registry, not this file.
+# Generated from the released tools in src/_data/projects.json5 by src/redirects.njk — edit the registry, not this file.
 #
 # Machine routes: each /install/<tool> is this site's stable endpoint for a tool
 # whose installer is published at an immutable release tag in its own repository.
@@ -11,5 +11,16 @@ eleventyExcludeFromCollections: true
 # Repository bootstrap, owned by the KI Agentic Harness.
 /harness/bootstrap https://raw.githubusercontent.com/knowledgeislands/ki-agentic-harness/main/skills/keystone/ki-bootstrap/scripts/repo-bootstrap.sh 302
 
-# Retired sections. The specifications corpus is not yet ready to publish here (KI-WEB-SITE-021).
+# Retired sections.
+#
+# The specifications corpus is not yet ready to publish here (KI-WEB-SITE-021).
 /specifications / 302
+
+# Tooling was merged into Projects (KI-WEB-SITE-020). A tool is a project that
+# ships a binary, so /tooling/<slug>/ becomes /projects/<slug>/. The two pages
+# that were task guidance filed under released tools move into /guidance/.
+# Cloudflare takes the first matching rule, so the named paths precede the splat.
+/tooling/harnesses /guidance/harnesses/ 301
+/tooling/guidance /guidance/repositories/ 301
+{% for tool in tools %}/tooling/{{ tool.slug }} /projects/{{ tool.slug }}/ 301
+{% endfor %}/tooling / 301

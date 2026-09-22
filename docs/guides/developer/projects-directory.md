@@ -11,7 +11,7 @@ How the website publishes a page for every public project in the Knowledge Islan
 | `/projects/` | The grouped index: principal knowledge bases, agentic capabilities, portable standards, command-line tools, MCP servers, platform and delivery. |
 | `/projects/<slug>/` | A page per project that has no richer home elsewhere on this site. |
 
-The directory is **descriptive**. It pins no version, hosts no artefact, and redirects no installer — a project page says what a repository is for and sends the reader to it. Every promise about a specific release belongs to [`tools.json5`](../../../apps/site/src/_data/tools.json5) and the repository that published it.
+The directory is **descriptive**. It hosts no artefact and computes no checksum — a project page says what a repository is for and, where that repository has released something, how to install it. Released command-line tools are the one kind that pins a version, and [tool routes](tool-routes.md) fixes what they may declare; every promise about a specific release still belongs to the repository that published it.
 
 Only public repositories appear. A private or internally operated repository is deliberately absent: the directory is a public surface, and listing a repository nobody can open leaks the existence of work that is not itself public.
 
@@ -23,7 +23,7 @@ Only public repositories appear. A private or internally operated repository is 
 | --- | --- |
 | `slug` | The route segment for `/projects/<slug>/`. |
 | `name` | The repository as its owners name it. |
-| `kind` | `principal`, `capability`, `standard`, `mcp`, or `platform`.† |
+| `kind` | `principal`, `capability`, `standard`, `tool`, `mcp`, or `platform`.† |
 | `tagline` | One sentence, used on cards and as the page headline. |
 | `description` | A fuller paragraph for the project page. |
 | `role` | The authority this project holds, and by implication what it does not. |
@@ -34,13 +34,15 @@ Only public repositories appear. A private or internally operated repository is 
 | `icon` | A KI symbol name defined in `src/_includes/macros/icons.njk`. |
 | `accent` | The card accent: `gold`, `teal`, or `forest`. |
 
-† The five kinds are the group headings on `/projects/`, in that order. Released command-line tools are a sixth group on the page, but they are **not** declared here — see below.
+† The six kinds are the group headings on `/projects/`, in that order. A `tool` entry carries six release fields the other kinds must not; see below.
 
 ‡ `published` means there is a live public surface or a released artefact a reader can consume directly. `source` means public source to read, clone, or build; it makes no claim that a release exists. An MCP server with no published package is `source`, and its `usage` field should say so plainly rather than implying an install command that would not resolve.
 
-### Released tools are not declared here
+### Released tools are declared here too
 
-`/projects/` renders its command-line tools group straight from `tools.json5` and links each card to `/tooling/<slug>/`. A tool therefore has exactly one declaration, and its version, maturity, and installer cannot drift between two registries. The gate rejects any `projects.json5` entry whose slug collides with a tool, and any entry carrying a `version`, `installer`, `formula`, or `changelog` field.
+They used to have a registry of their own, and `/projects/` read it to render a sixth group linking out to `/tooling/<slug>/`. That kept the version in one place but left the site with two sections describing the same kind of thing in the same voice, which is what a reader actually saw. [ADR-KI-WEBSITE-002](../../decisions/ADR-KI-WEBSITE-002-one-section-for-every-project.md) merged them.
+
+So a tool is a `kind: 'tool'` entry like any other, rendered by the same template, with six release fields the other kinds must not carry. [Tool routes](tool-routes.md) owns what those fields mean and how they advance.
 
 ### When to use `route`
 

@@ -1,11 +1,14 @@
 /**
  * Verifies the website-owned directory of ecosystem projects.
  *
- * The directory is descriptive: it pins no version, hosts no artefact and
- * redirects no installer. What it can be held to is that every entry is
- * complete, that every card leads somewhere the build actually produced, and
- * that it never contradicts the release registry in `tools.json5` — the one
- * declaration allowed to make a version or installer promise.
+ * This is the one registry behind `/projects/`, released command-line tools
+ * included. A tool is a project that ships a binary, so a `kind: 'tool'` entry
+ * carries release and install fields and every other kind must carry none of
+ * them — that boundary is what this check holds, along with completeness and
+ * the rule that every card leads somewhere the build actually produced.
+ *
+ * The release fields themselves — version shape, pinned refs, immutable tags —
+ * are `verify-tool-routes.ts`. This file owns which entries may declare them.
  *
  * Offline checks run by default. `--network` additionally confirms every
  * declared repository is a public `knowledgeislands` repository, so the
@@ -19,11 +22,11 @@ import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const registryPath = resolve(siteRoot, 'src/_data/projects.json5')
-const toolsPath = resolve(siteRoot, 'src/_data/tools.json5')
 const iconsPath = resolve(siteRoot, 'src/_includes/macros/icons.njk')
 const distDir = resolve(siteRoot, 'dist')
 
-const kinds = ['principal', 'capability', 'standard', 'mcp', 'platform']
+const kinds = ['principal', 'capability', 'standard', 'tool', 'mcp', 'platform']
+const releaseFields = ['version', 'maturity', 'formula', 'installer', 'manual', 'changelog']
 const availabilities = ['published', 'source']
 const accents = ['gold', 'teal', 'forest']
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -42,10 +45,7 @@ interface Project {
   route?: string
   icon: string
   accent: string
-}
-
-interface Tool {
-  slug: string
+  version?: string
 }
 
 const failures: string[] = []
@@ -86,9 +86,8 @@ const readRegistry = <T>(path: string, label: string): T[] => {
  */
 const outputFor = (route: string): string => resolve(distDir, `.${route.endsWith('/') ? `${route}index.html` : route}`)
 
-const checkRegistry = (projects: Project[], tools: Tool[]): void => {
+const checkRegistry = (projects: Project[]): void => {
   const icons = declaredIcons()
-  const toolSlugs = new Set(tools.map((tool) => tool.slug))
   const seen = new Set<string>()
 
   for (const [index, project] of projects.entries()) {
@@ -115,11 +114,6 @@ const checkRegistry = (projects: Project[], tools: Tool[]): void => {
       if (!slugPattern.test(project.slug)) fail(`${where}: "slug" must be lowercase kebab-case`)
       if (seen.has(project.slug)) fail(`${where}: duplicate slug "${project.slug}"`)
       seen.add(project.slug)
-      if (toolSlugs.has(project.slug)) {
-        fail(
-          `${where}: "${project.slug}" is already a released tool in tools.json5; released tools are rendered from that registry and must not be restated here`
-        )
-      }
     }
 
     if (!kinds.includes(project.kind)) {
@@ -150,11 +144,17 @@ const checkRegistry = (projects: Project[], tools: Tool[]): void => {
       }
     }
 
-    // The directory describes; it never promises a version or an installer.
-    // Those live in tools.json5 and must not be smuggled in through a card.
-    for (const field of ['version', 'installer', 'formula', 'changelog']) {
-      if (record[field] !== undefined) {
-        fail(`${where}: "${field}" belongs in tools.json5, not the project directory`)
+    // A version and an installer are a promise about a specific release, and
+    // only a released tool is allowed to make one. Requiring the whole set on a
+    // tool matters as much as forbidding it elsewhere: a half-declared entry
+    // renders an install block with a missing link rather than failing here.
+    for (const field of releaseFields) {
+      const declared = record[field] !== undefined
+      if (project.kind === 'tool' && !declared) {
+        fail(`${where}: a released tool must declare "${field}"`)
+      }
+      if (project.kind !== 'tool' && declared) {
+        fail(`${where}: "${field}" belongs to a kind: 'tool' entry, not to a ${project.kind} project`)
       }
     }
   }
@@ -220,8 +220,7 @@ const checkNetwork = async (projects: Project[]): Promise<void> => {
 }
 
 const projects = readRegistry<Project>(registryPath, 'src/_data/projects.json5')
-const tools = readRegistry<Tool>(toolsPath, 'src/_data/tools.json5')
-checkRegistry(projects, tools)
+checkRegistry(projects)
 checkBuild(projects)
 if (process.argv.includes('--network')) await checkNetwork(projects)
 
@@ -233,4 +232,7 @@ if (failures.length > 0) {
   process.exit(1)
 }
 
-console.log(`verify-projects: ${projects.length} project entr(ies) verified alongside ${tools.length} released tool(s)`)
+const tools = projects.filter((project) => project.kind === 'tool')
+console.log(
+  `verify-projects: ${projects.length} project entr(ies) verified, including ${tools.length} released tool(s)`
+)

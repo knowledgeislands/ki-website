@@ -1,6 +1,6 @@
 ---
 title: Projects — Knowledge Islands
-description: "Every public project in the Knowledge Islands ecosystem: the principal knowledge bases, the agentic harness, the specifications, the released command-line tools, and the MCP servers."
+description: "Every public project in the Knowledge Islands ecosystem: the principal knowledge bases, the agentic harness, the released command-line tools, the MCP servers, and platform delivery."
 layout: layouts/base.njk
 ---
 {% from "macros/icons.njk" import kiIcon %}
@@ -9,6 +9,7 @@ layout: layouts/base.njk
   { kind: "principal", overline: "Principal knowledge bases", heading: "Where the thinking is kept.", blurb: "Two repositories hold the ecosystem's reasoning. Arcadia Principal owns the philosophy and the conceptual model; Techne Principal owns the engineering discipline that turns it into buildable practice. Everything else in this list is downstream of them." },
   { kind: "capability", overline: "Agentic capabilities", heading: "What an agent is actually given.", blurb: "A capability is a typed, published thing an agent can be handed — a skill, an agent definition, an MCP server, a hook, an eval. These repositories define what each one contains and how it is delivered to a runtime." },
   { kind: "standard", overline: "Portable standards", heading: "The contracts implementations must keep.", blurb: "Normative, portable contracts, written only once a concept is proven and implementations have supplied evidence. An Active specification then governs anything claiming conformance within its scope." },
+  { kind: "tool", overline: "Command-line tools", heading: "What you can install today.", blurb: "The four executables that are released and installable right now. Each has a stable installer endpoint on this site that redirects to the installer published at the exact version named on its card, so the page, the endpoint, and the advertised release always move together. Everything else in this directory is read, cloned, or consumed rather than installed." },
   { kind: "mcp", overline: "MCP servers", heading: "Adapters onto the systems where work already lives.", blurb: "Model Context Protocol servers that give an agent bounded access to a real system — a knowledge base, a mail account, a tree of repositories. Each one defaults to read-only, validates every path or identifier it is handed, and hides its destructive tools until an operator opts in. None of them is published to a package registry yet; each is built and registered from source." },
   { kind: "platform", overline: "Platform and delivery", heading: "How the rest of it reaches a machine.", blurb: "Infrastructure and transport. These repositories run work, package releases, and publish pages; none of them is an authority on knowledge, capability, or standards." }
 ] -%}
@@ -26,7 +27,7 @@ layout: layouts/base.njk
   <div class="page-container" style="max-width: 64rem;">
 
 {%- for group in groups %}
-    <div class="prose-ki" style="max-width: none; margin-bottom: 2rem;">
+    <div class="prose-ki" id="{{ group.kind }}" style="max-width: none; margin-bottom: 2rem; scroll-margin-top: 2rem;">
       <p class="overline">{{ group.overline }}</p>
       <h2>{{ group.heading }}</h2>
       <p>{{ group.blurb }}</p>
@@ -39,30 +40,16 @@ layout: layouts/base.njk
         <div class="symbol-circle symbol-circle-{{ project.accent }}">{{ kiIcon(project.icon, 22) }}</div>
         <h3 style="font-size: 1.25rem; margin-bottom: 0.625rem;"><code>{{ project.name }}</code></h3>
         <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ project.tagline }}</p>
+        {%- if project.version %}
+        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ project.version }} · {{ project.maturity }}</p>
+        {%- else %}
         <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ project.availability }}{% if project.route %} · {{ project.route }}{% endif %}</p>
+        {%- endif %}
       </a>
     {%- endif %}
   {%- endfor %}
     </div>
 
-  {%- if group.kind == "standard" %}
-    <div class="prose-ki" style="max-width: none; margin-bottom: 2rem;">
-      <p class="overline">Command-line tools</p>
-      <h2>The released executables.</h2>
-      <p>Each released tool has a product page and a stable installer endpoint, both generated from the registry that also pins the version this site recommends. The cards below go to those pages; <a href="/tooling/">Tooling</a> explains the contract they share.</p>
-    </div>
-
-    <div class="grid-2col" style="gap: 1.5rem; margin-bottom: 3.5rem;">
-    {%- for tool in tools %}
-      <a href="/tooling/{{ tool.slug }}/" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
-        <div class="symbol-circle symbol-circle-{{ tool.accent }}">{{ kiIcon(tool.icon, 22) }}</div>
-        <h3 style="font-size: 1.25rem; margin-bottom: 0.625rem;"><code>{{ tool.name }}</code></h3>
-        <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ tool.tagline }}</p>
-        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">{{ tool.version }} · {{ tool.maturity }}</p>
-      </a>
-    {%- endfor %}
-    </div>
-  {%- endif %}
 {%- endfor %}
 
   </div>
@@ -74,7 +61,7 @@ layout: layouts/base.njk
       <p class="overline">Why the list is shaped this way</p>
       <h2>Separate authority is the point, not an accident of history.</h2>
       <p>The split exists so that a philosophical claim cannot quietly become an engineering mandate, a CLI implementation cannot quietly define a standard, and a page on this site cannot quietly become the source of truth for something it merely describes. Each repository states its own place in the ecosystem near the top of its README, and every card above links to that repository rather than trying to replace it.</p>
-      <p>This directory is descriptive. It pins no version, hosts no artefact, and redirects no installer — those promises belong to <a href="/tooling/">the tooling registry</a> and to the repositories that publish releases.</p>
+      <p>One registry stands behind this page, including the released tools. A tool is a project that happens to ship a binary, so it carries a version and an installer where the others do not; the site still hosts no artefact and owns no executable behaviour. Every promise about a specific release belongs to the repository that published it.</p>
     </div>
   </div>
 </section>

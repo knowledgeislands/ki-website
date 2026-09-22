@@ -1,11 +1,18 @@
 // Website-owned directory of the public Knowledge Islands ecosystem.
 //
 // This file answers one question: what are the projects, what is each one for,
-// and who owns it. It is a directory, not a release channel — it pins no
-// version, hosts no artefact and redirects no installer. Released command-line
-// tools keep that contract in `tools.json5`, and `/projects/` renders them from
-// there rather than restating them here, so a tool's version and installer have
-// exactly one declaration.
+// and who owns it. It is the single registry behind `/projects/`, including the
+// released command-line tools, which are projects that happen to ship a binary
+// and therefore carry release and install fields the others leave out. Keeping
+// them in a second file preserved a split in the data that the reader could see
+// as two indistinguishable sections (KI-WEB-SITE-020).
+//
+// It is still a directory, not an artefact host. Each tool repository remains
+// the authority for its executable behaviour, release artefacts, checksums and
+// installer script; the Homebrew tap remains the authority for its formula. The
+// site promises only that `/projects/<slug>/` describes the tool and that
+// `/install/<slug>` redirects to the installer published at the declared
+// immutable release tag.
 //
 // Only public repositories appear. A private or internally operated repository
 // is deliberately absent; the directory is a public surface and must not leak
@@ -14,7 +21,7 @@
 // Fields
 //   slug         route segment for `/projects/<slug>/`, and the card anchor
 //   name         the repository as its owners name it
-//   kind         principal | capability | standard | mcp | platform
+//   kind         principal | capability | standard | tool | mcp | platform
 //   tagline      one short sentence for cards and page headers
 //   description  a fuller paragraph for the project page
 //   role         the authority this project holds in the ecosystem
@@ -26,7 +33,18 @@
 //   icon         KI symbol name from src/_includes/macros/icons.njk
 //   accent       symbol-circle accent: gold | teal | forest
 //
-// `bun run ki:site:verify:projects` gates the declaration before deployment.
+// Released tools (`kind: 'tool'`) carry six more, and every other kind must
+// carry none of them:
+//   version      published release this registry currently advertises
+//   maturity     stable | preview | experimental
+//   formula      Homebrew formula in knowledgeislands/tap, or null when untapped
+//   installer    immutable installer target the machine route redirects to
+//   manual       human manual at the declared version
+//   changelog    release history at the declared version
+//
+// Advancing a tool entry is a release follow-up performed by the tool's own
+// repository through `scripts/sync-tool-release.ts`; `bun run verify:routes`
+// and `bun run verify:projects` gate the declaration before deployment.
 [
   // ── Principal knowledge bases ───────────────────────────────────────────
   {
@@ -70,7 +88,7 @@
     usage: 'Install a compatible harness with the ki CLI, then activate only the capabilities a piece of work needs.',
     repository: 'https://github.com/knowledgeislands/ki-agentic-harness',
     availability: 'source',
-    route: '/tooling/harnesses/',
+    route: '/guidance/harnesses/',
     icon: 'archipelago',
     accent: 'teal'
   },
@@ -102,6 +120,88 @@
     repository: 'https://github.com/knowledgeislands/ki-specifications',
     availability: 'source',
     icon: 'lighthouse',
+    accent: 'gold'
+  },
+
+  // ── Command-line tools ──────────────────────────────────────────────────
+  {
+    slug: 'ki',
+    name: 'ki',
+    kind: 'tool',
+    tagline: 'The Knowledge Islands command-line interface.',
+    description:
+      'Installs verified compatible harnesses, activates skills in explicit scopes, and hosts the native repository operations that govern a Knowledge Islands checkout.',
+    role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
+    usage: 'Install it from the Homebrew tap or the pinned installer below, then run `ki bootstrap` to install a verified harness and activate the core user skills.',
+    repository: 'https://github.com/knowledgeislands/tools-ki',
+    availability: 'published',
+    version: 'v0.4.0',
+    maturity: 'preview',
+    formula: 'ki',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.4.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/CHANGELOG.md',
+    icon: 'anchor',
+    accent: 'gold'
+  },
+  {
+    slug: 'mgit',
+    name: 'mgit',
+    kind: 'tool',
+    tagline: 'Run commands across many Git repositories at once.',
+    description:
+      'Sweeps a directory of checkouts and runs the same Git or shell command across all of them, reporting per-repository results so a wide working set stays legible.',
+    role: 'Owns multi-repository command execution across a working set. It holds no authority over the repositories it sweeps and changes none of their governance.',
+    usage: 'Install it, point it at a directory of checkouts, and run one Git or shell command across all of them.',
+    repository: 'https://github.com/knowledgeislands/tools-mgit',
+    availability: 'published',
+    version: 'v0.13.0',
+    maturity: 'preview',
+    formula: 'mgit',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-mgit/v0.13.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.13.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-mgit/blob/v0.13.0/CHANGELOG.md',
+    icon: 'route',
+    accent: 'teal'
+  },
+  {
+    slug: 'git-almanac',
+    name: 'git-almanac',
+    kind: 'tool',
+    tagline: 'Inspect one local Git repository\'s calendars, authors and reports offline.',
+    description:
+      'Reads a single checkout and reports its calendars, authors, contributors and activity without contacting a forge, so repository history can be reviewed offline.',
+    role: 'Owns offline reporting over a single Git checkout. It contacts no forge, writes nothing, and holds no authority over how a repository is governed.',
+    usage: 'Install it and run it inside any checkout to report that repository\'s calendars, authors, contributors and activity.',
+    repository: 'https://github.com/knowledgeislands/tools-git-almanac',
+    availability: 'published',
+    version: 'v0.1.0',
+    maturity: 'preview',
+    formula: 'git-almanac',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-git-almanac/v0.1.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-git-almanac/blob/v0.1.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-git-almanac/blob/v0.1.0/CHANGELOG.md',
+    icon: 'book',
+    accent: 'forest'
+  },
+  {
+    slug: 'rig',
+    name: 'rig',
+    kind: 'tool',
+    tagline: 'A declarative description manager for a person\'s working setup.',
+    description:
+      'Records preferred tools, what they are for and why they belong, resolves named profiles for machines and roles, and compares declared intent against what each provider actually observes.',
+    role: 'Owns the declared description of a working setup and the comparison between that intent and what providers observe. It installs nothing on your behalf.',
+    usage: 'Install it, declare the tools and profiles you want, then compare that declaration against what each provider actually reports.',
+    repository: 'https://github.com/knowledgeislands/tools-rig',
+    availability: 'published',
+    version: 'v0.2.0',
+    maturity: 'preview',
+    formula: 'rig',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-rig/v0.2.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-rig/blob/v0.2.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-rig/blob/v0.2.0/CHANGELOG.md',
+    icon: 'compass',
     accent: 'gold'
   },
 

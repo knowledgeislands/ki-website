@@ -1,5 +1,10 @@
 /**
- * Verifies the website-owned tool registry and the routes generated from it.
+ * Verifies the released tools in the project registry and the routes from them.
+ *
+ * A released tool is a `kind: 'tool'` entry in `projects.json5` — a project
+ * that happens to ship a binary, and therefore carries the release and install
+ * fields checked here. They used to live in a registry of their own; the split
+ * produced two indistinguishable sections and was merged (KI-WEB-SITE-020).
  *
  * The website is a discoverability and indirection layer: it does not own any
  * tool's executable behaviour, release artefacts or installer script. What it
@@ -19,7 +24,7 @@ import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const registryPath = resolve(siteRoot, 'src/_data/tools.json5')
+const registryPath = resolve(siteRoot, 'src/_data/projects.json5')
 const iconsPath = resolve(siteRoot, 'src/_includes/macros/icons.njk')
 const distDir = resolve(siteRoot, 'dist')
 
@@ -107,10 +112,12 @@ const checkPinnedUrl = (url: unknown, field: string, tool: Tool, where: string):
 const readRegistry = (): Tool[] => {
   const parsed = JSON5.parse(readFileSync(registryPath, 'utf-8')) as unknown
   if (!Array.isArray(parsed) || parsed.length === 0) {
-    fail('src/_data/tools.json5 must be a non-empty array of tool declarations')
+    fail('src/_data/projects.json5 must be a non-empty array of project declarations')
     return []
   }
-  return parsed as Tool[]
+  const tools = (parsed as (Tool & { kind?: string })[]).filter((entry) => entry.kind === 'tool')
+  if (tools.length === 0) fail("src/_data/projects.json5 declares no kind: 'tool' entries")
+  return tools
 }
 
 const checkRegistry = (tools: Tool[]): void => {
@@ -194,13 +201,13 @@ const checkBuild = (tools: Tool[]): void => {
   }
 
   for (const tool of tools) {
-    if (!existsSync(resolve(distDir, 'tooling', tool.slug, 'index.html'))) {
-      fail(`dist/tooling/${tool.slug}/index.html was not generated`)
+    if (!existsSync(resolve(distDir, 'projects', tool.slug, 'index.html'))) {
+      fail(`dist/projects/${tool.slug}/index.html was not generated`)
     }
   }
 
-  if (existsSync(resolve(distDir, 'tooling', 'cli'))) {
-    fail('dist/tooling/cli/ still exists; run the clean script before building')
+  if (existsSync(resolve(distDir, 'tooling'))) {
+    fail('dist/tooling/ still exists; run the clean script before building')
   }
 }
 
@@ -245,7 +252,7 @@ const checkNetwork = async (tools: Tool[]): Promise<void> => {
  * only link and redirect targets are rejected.
  */
 const checkRetiredRoutes = (): void => {
-  const retired = ['/tooling/cli/', '/harness/install']
+  const retired = ['/tooling/', '/harness/install']
   const walk = (dir: string): string[] =>
     readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
       const path = resolve(dir, entry.name)
