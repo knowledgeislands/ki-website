@@ -106,5 +106,3 @@ ki harness uninstall example/harness
 [Update and upgrade](/guidance/cli/update-upgrade/) covers refreshing an installation without changing any of these declarations. [Every `ki` command](/guidance/cli/commands/) has the full inventory, including the options each command accepts. [Skills and journeys](/guidance/skills/) explains what a skill actually contains, which is the other half of deciding whether to activate one.
 
 Use `ki harness --help` and `ki skill --help` for the exact grammar your installed version supports.
-
-{% include "partials/sources.njk" %}

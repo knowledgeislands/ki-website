@@ -11,6 +11,10 @@ For the developer maintaining the Knowledge Islands website: how it deploys, how
 - [Tool routes](tool-routes.md) — how each released tool gets its page and installation endpoint, and what a tool repository hands over when it releases.
 - [Projects directory](projects-directory.md) — how every public ecosystem repository earns a card and a page, and why the directory makes no release promises.
 
+## Presentation
+
+- [Prose styling](prose-styling.md) — where the rules for Markdown elements live, which elements must be covered, and why an inline style on a prose element is a bug.
+
 ## Published guidance
 
 - [Deciding what this site publishes](guidance-ownership.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.

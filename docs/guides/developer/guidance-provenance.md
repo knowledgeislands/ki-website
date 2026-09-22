@@ -83,15 +83,17 @@ Nothing is fetched during a build. `apps/site/dist/` has to be reproducible, so 
 
 ## Publishing the declaration
 
-The frontmatter is not an internal note. Every guidance page ends with
+The frontmatter is not an internal note. The prose layout, `src/_includes/layouts/page.njk`, ends every page it renders with
 
 ```njk
 {% include "partials/sources.njk" %}
 ```
 
-which renders the `sources` list as the page's **Sources** table, linking each repository source at its pinned ref. A page declaring `sources: original` renders nothing.
+which renders the `sources` list as a provenance footer, linking each repository source at its pinned ref. A page declaring `sources: original` renders nothing.
 
-The check requires that include. A citation readers cannot see is not a citation, and a hand-written table beside a frontmatter declaration is two records that will disagree — which is the failure this whole mechanism exists to prevent. The prompting guides previously carried exactly such a hand-written table; it is now generated from the same declaration the sweep reads.
+The check requires that include, and requires it of the layout rather than of each page. A citation readers cannot see is not a citation, and a hand-written table beside the frontmatter declaration is two records that will disagree — which is the failure the whole mechanism exists to prevent. The prompting guides once carried exactly that hand-written table; it is now generated from the same declaration the sweep reads.
+
+It renders as a footer rather than as a `## Sources` heading. As a heading it was the last section of nearly every page, which made a table of links into other repositories read as the page's conclusion rather than as its provenance (KI-WEB-SITE-024). The declaration is unchanged and still complete; only its weight on the page is.
 
 ## The sweep
 

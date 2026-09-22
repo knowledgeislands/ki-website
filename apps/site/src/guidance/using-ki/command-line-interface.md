@@ -91,5 +91,3 @@ ki <command> --help
 Your installed binary is the authority for your version. [Every `ki` command](/guidance/cli/commands/) is the same inventory taken from the manual at the release this site advertises, which is the right reference when you are reading rather than typing.
 
 [Install and get started](/guidance/using-ki/getting-started/) is the end-to-end setup path if you have not run any of this yet.
-
-{% include "partials/sources.njk" %}

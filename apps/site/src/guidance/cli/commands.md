@@ -47,5 +47,3 @@ The version you have installed is the authority on exact grammar. `ki --help` an
 An inventory says what exists, not when to reach for it. The commands that carry a real decision have a page of their own: [the capability lifecycle](/guidance/cli/capability-lifecycle/) for `harness` and `skill`, [update and upgrade](/guidance/cli/update-upgrade/) for keeping an installation current, [local utility commands](/guidance/cli/local-commands/) for the inspection surface, and [the ChatGPT capture format](/guidance/cli/chatgpt-local-capture/) for the one import adapter with a format of its own.
 
 It also says nothing about exit codes, configuration file locations, or the environment variables `ki` reads. Those are in the same manual, under sections this page does not vendor, and `man ki` on a machine with the tool installed is the fastest way to them.
-
-{% include "partials/sources.njk" %}

@@ -32,5 +32,3 @@ Llama 4 is the default "safe" open-weight choice — broadly supported across in
 - **Few-shot + prefilled structure.** For structured output, give one or two input/output examples and prefill the opening token (`{` for JSON, `<summary>` for XML) to lock the format. Tag sections (`<task>`, `<rules>`) to stop instruction overlap.
 - **Frame long documents first.** At long context, precede a large document block with a brief statement of what it is, its format, and what you need — before the content itself.
 - **Layer safety at the system level.** Don't rely on prompts alone for safety; pair with Llama Guard 4 as a system-level guardrail.
-
-{% include "partials/sources.njk" %}

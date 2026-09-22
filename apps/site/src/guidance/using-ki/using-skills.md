@@ -73,5 +73,3 @@ A skill's `description` documents _when_ it fires and its `argument-hint` docume
 ## Related
 
 [Skills and journeys](/guidance/skills/) explains what a skill contains and how the two kinds — governance and process — differ. [Install and get started](/guidance/using-ki/getting-started/) covers activating one in the first place. [Tuning](/guidance/using-ki/tuning/) covers shaping how an agent behaves once the skills are in place.
-
-{% include "partials/sources.njk" %}

@@ -104,5 +104,3 @@ ki manage diag      # installation mode and the four resolved paths
 ## Related
 
 [Install and get started](/guidance/using-ki/getting-started/) is the end-to-end first run. [Govern a repository](/guidance/repositories/) is the other half of setup — declaring what applies where. [Every `ki` command](/guidance/cli/commands/) is the full inventory, taken from the tool's own manual.
-
-{% include "partials/sources.njk" %}

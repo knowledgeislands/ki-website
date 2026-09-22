@@ -130,5 +130,3 @@ For a long-running filesystem task, write progress to the planning artefacts reg
 ```
 
 A useful short name for this style of request is **planning-only architecture audit with cold-agent implementation handoffs**.
-
-{% include "partials/sources.njk" %}

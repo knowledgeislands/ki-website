@@ -75,5 +75,3 @@ These apply to the Claude guides only:
 ## Refreshing
 
 Each guide is distilled from the vendor pages its **Sources** table lists — tagged and dated. To update a guide, re-read those pages and re-date the "Last reviewed" column. The cross-cutting Anthropic reference is [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
-
-{% include "partials/sources.njk" %}

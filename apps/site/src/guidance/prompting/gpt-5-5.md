@@ -41,5 +41,3 @@ GPT-5.5 is OpenAI's strong general reasoning-and-agentic tier, reached for codin
 - **`phase` field.** Long-running Responses workflows distinguish intermediate updates from final answers via `phase` (introduced GPT-5.4, unchanged in 5.5). With `previous_response_id`, prior assistant state is preserved automatically; if you replay assistant items manually, preserve `phase` values exactly — `commentary` for interim updates, `final_answer` for completed answers — and never set `phase` on user messages.
 - **Prompt skeleton.** Role → Personality → Goal → Success criteria → Constraints → Output → Stop rules. Keep each section short; add detail only where it changes behaviour.
 - **Migration.** Codex offers an automated path via the OpenAI Docs skill (`openai-docs migrate this project to gpt-5.5`) rather than hand-porting an older prompt stack.
-
-{% include "partials/sources.njk" %}

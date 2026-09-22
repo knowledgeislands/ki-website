@@ -41,5 +41,3 @@ Sonnet 5 has particular strengths in coding and agentic tasks and is the tier fo
 
 - **Interactive coding.** Use `xhigh`/`high` effort, add an auto mode, and specify task, intent, and constraints fully in the first turn to maximise autonomy and token efficiency.
 - **Code review.** As with Opus 4.8, a harness tuned for an older model may show lower reported recall because Sonnet 5 follows "be conservative / high-severity only" instructions more faithfully. Tell the finding stage its job is coverage and filter separately, or set a concrete severity bar.
-
-{% include "partials/sources.njk" %}

@@ -26,5 +26,3 @@ DeepSeek V3.2 is a strong open-weight pick for multi-step reasoning and maths, a
 - **Set temperature by task.** DeepSeek publishes task-specific temperatures: `0.0` for coding and maths (determinism), ~~`1.0` for general conversation, higher (~~`1.3`) for translation, and higher still for creative writing. The API also remaps temperature internally, so tune against observed behaviour.
 - **Constrain JSON tightly.** For structured output, instruct JSON-only in the system prompt, give a tight schema, avoid stray delimiter sequences, and lower the temperature.
 - **Put documents before the question.** For search/RAG over supplied documents, place the document block first and the instruction after it.
-
-{% include "partials/sources.njk" %}

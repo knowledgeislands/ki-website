@@ -93,5 +93,3 @@ Three refusals are worth knowing in advance, because each looks like a bug the f
 - [Operator guides](/guidance/cli/operator-guides/) — the workflows `tools-ki` documents at release length, and what each one settles.
 
 The installed executable is always the authority on exact grammar for your version. `ki --help` and `ki <command> --help` answer from your binary; these pages explain what the commands are _for_, which no help output does.
-
-{% include "partials/sources.njk" %}

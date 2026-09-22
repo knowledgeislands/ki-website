@@ -111,5 +111,3 @@ The Agora owner declares the canonical repository identity in `references`; each
 ## Where these sit
 
 All six are operator workflows — things you do to a machine or between repositories. The day-to-day surface is elsewhere: [every `ki` command](/guidance/cli/commands/) for the inventory, [the CLI overview](/guidance/cli/) for what the groups mean, and [the guidance hub](/guidance/) for everything that is not about the command line at all.
-
-{% include "partials/sources.njk" %}

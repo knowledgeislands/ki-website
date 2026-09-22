@@ -41,5 +41,3 @@ Gemini 3 is Google's frontier reasoning line, reached for long-context, multimod
 - **Media resolution.** Test `media_resolution_high` for dense document parsing. Gemini 3 defaults may raise token usage on PDFs but lower it on video; reduce media resolution explicitly if a request exceeds the context window.
 - **Effort mapping.** An OpenAI-style `reasoning_effort` auto-maps to `thinking_level`, easing cross-model harnesses.
 - **Knowledge cutoff.** January 2025 — for time-sensitive queries, state the current date in the system instruction and have it follow that when forming search queries.
-
-{% include "partials/sources.njk" %}

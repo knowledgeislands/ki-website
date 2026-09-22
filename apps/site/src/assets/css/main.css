@@ -284,8 +284,136 @@
     list-style: disc;
   }
 
+  .prose-ki ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    list-style: decimal;
+  }
+
   .prose-ki li {
     margin-bottom: 0.5rem;
+  }
+
+  .prose-ki h4 {
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-ki strong {
+    font-weight: 600;
+    color: var(--color-ocean);
+  }
+
+  .prose-ki hr {
+    border: 0;
+    border-top: 1px solid var(--color-border-light);
+    margin: 2.5rem 0;
+  }
+
+  .prose-ki img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Markdown tables carry as much of the corpus as its prose does, so they are a
+     first-class element here rather than browser defaults showing through. */
+  .prose-ki table {
+    width: 100%;
+    margin-bottom: 1.75rem;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .prose-ki th {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--color-ocean);
+    text-align: left;
+    padding: 0.625rem 0.875rem 0.625rem 0;
+    border-bottom: 2px solid var(--color-border);
+  }
+
+  .prose-ki td {
+    padding: 0.625rem 0.875rem 0.625rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: top;
+  }
+
+  .prose-ki tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .prose-ki pre {
+    background: var(--color-navy);
+    color: var(--color-parchment);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  /* Inline code only. `pre > code` inherits the block above and must not gain a
+     second ground on top of it. */
+  .prose-ki :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-mist);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-sm);
+    padding: 0.1em 0.35em;
+  }
+
+  .prose-ki pre code {
+    font-family: var(--font-mono);
+    font-size: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+
+  .prose-ki blockquote {
+    border-left: 3px solid var(--color-gold);
+    padding-left: 1.25rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-ink-light);
+  }
+
+  /* Where a page's sources are declared, they are provenance rather than the
+     page's conclusion — see partials/sources.njk. */
+  .prose-provenance {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border-light);
+    color: var(--color-ink-light);
+    font-size: 0.8125rem;
+  }
+
+  .prose-provenance .overline {
+    margin-bottom: 0.625rem;
+  }
+
+  .prose-provenance table {
+    font-size: 0.8125rem;
+    margin-bottom: 0;
+  }
+
+  .prose-provenance th,
+  .prose-provenance td {
+    padding: 0.4375rem 0.75rem 0.4375rem 0;
+  }
+
+  .prose-provenance th {
+    color: var(--color-ink-light);
+    border-bottom-width: 1px;
   }
 
   /* External-link marker injected by the external-link-icons transform. */
@@ -462,8 +590,17 @@
   }
 
   .prose-ki h2,
-  .prose-ki h3 {
+  .prose-ki h3,
+  .prose-ki th,
+  .prose-ki strong {
     color: #7ab0d8;
+  }
+
+  /* The light scheme sets a navy block against parchment. Against the dark page
+     that ground all but disappears, so it goes darker still and takes an edge. */
+  .prose-ki pre {
+    background: #0a1524;
+    border: 1px solid var(--color-border);
   }
 
   /* Links: teal is already brightened via token override above */

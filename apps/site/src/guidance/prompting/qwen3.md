@@ -26,5 +26,3 @@ Qwen3 is the versatile open-weight all-rounder, and its coder variants are a str
 - **Set sampling by mode, and never greedy-decode while thinking.** Qwen recommends temperature `0.6` / top-p `0.95` in thinking mode and temperature `0.7` / top-p `0.8` in non-thinking mode. Greedy decoding (temp `0`) in thinking mode causes repetition and degraded output — avoid it.
 - **Keep it lean for coder variants.** Name the language, framework, and versions and give the exact deliverable; the coder builds respond well to concrete, well-scoped tasks rather than open-ended prose.
 - **Mind the local context budget.** The small variants run in tight VRAM — keep prompts focused and cap output length so a long thinking trace doesn't exhaust the window on-device.
-
-{% include "partials/sources.njk" %}

@@ -96,13 +96,13 @@ eleventyComputed:
       {% if project.formula %}
       <h2>Prefer Homebrew.</h2>
       <p>The <a href="https://github.com/knowledgeislands/homebrew-tap">Knowledge Islands tap</a> packages <code>{{ project.name }}</code>, so Homebrew owns upgrades and removal. Naming the tap in the argument taps it implicitly.</p>
-      <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>brew install knowledgeislands/tap/{{ project.formula }}</code></pre>
+      <pre><code>brew install knowledgeislands/tap/{{ project.formula }}</code></pre>
       <h2>Or use the stable installer endpoint.</h2>
       {% else %}
       <h2>Use the stable installer endpoint.</h2>
       {% endif %}
       <p>The URL below is this site's stable machine route. It redirects to the installer published at <code>{{ project.version }}</code> in <a href="{{ project.repository }}">the source repository</a>, which owns the installer's behaviour and any signature or checksum verification it performs.</p>
-      <pre style="overflow-x: auto; padding: 1rem; border-radius: var(--radius-md); background: var(--color-navy); color: var(--color-parchment); font-size: 0.8125rem;"><code>curl -fsSL {{ site.url }}/install/{{ project.slug }} | sh</code></pre>
+      <pre><code>curl -fsSL {{ site.url }}/install/{{ project.slug }} | sh</code></pre>
       {%- endif %}
     </div>
   </div>

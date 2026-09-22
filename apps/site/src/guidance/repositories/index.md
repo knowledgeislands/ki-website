@@ -131,5 +131,3 @@ Run the governance audit before the test suite. Automation fails when acquisitio
 ## Related
 
 [Onboard a repository](/guidance/using-ki/onboarding/) covers the trust, migration and legacy-state boundaries in full, including what to do with a repository-vendored `.ki/` directory from an older layout. [Install and get started](/guidance/using-ki/getting-started/) is the end-to-end first run, and [every `ki` command](/guidance/cli/commands/) is the full inventory.
-
-{% include "partials/sources.njk" %}

@@ -28,8 +28,10 @@
   /* Typography */
   --font-heading: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
   /* Shape */
+  --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
 }

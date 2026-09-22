@@ -38,5 +38,3 @@ The harness publishes **{{ skillCatalogue.counts.total }} skills** at this snaps
 {% endfor %}
 
 Where the set is going next is in the roadmap.
-
-{% include "partials/sources.njk" %}

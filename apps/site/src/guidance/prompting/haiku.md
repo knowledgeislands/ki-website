@@ -35,5 +35,3 @@ Haiku 4.5 is the tier for mechanical, bulk, and high-volume steps — the fan-ou
 
 - **Fan-out member.** This is Haiku's home: the many parallel sub-agents in a `pipeline()` / `parallel()` block where the lever is fan-out count, not per-step quality. Keep each member's prompt bounded and self-contained.
 - **Escalation, not replacement.** Default a flow to Haiku and escalate the specific steps that demonstrably need more — adversarial verify, hard synthesis — to a stronger type, rather than raising the whole flow's tier.
-
-{% include "partials/sources.njk" %}

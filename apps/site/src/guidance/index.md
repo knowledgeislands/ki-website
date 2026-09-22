@@ -46,5 +46,3 @@ One page each, both task-shaped: install a compatible harness and activate capab
 These pages restate things other repositories own — the harness owns capability content, `tools-ki` owns the command surface, the principal knowledge bases own the reasoning. Every page here declares the upstream documents it was written from and the commit or tag it read them at, published at the foot of the page, and a build-time check refuses a page that declares neither sources nor authorship of its own. Where the material is an inventory that changes with every release, this site vendors the upstream block rather than paraphrasing it.
 
 That is deliberate, and it is the reason these pages try to answer your question here rather than sending you to a repository to find it.
-
-{% include "partials/sources.njk" %}

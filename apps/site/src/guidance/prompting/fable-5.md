@@ -53,5 +53,3 @@ Effort is the primary intelligence, latency, and cost control, set on the API re
 - **Longer turns.** Hard tasks can run for minutes to hours. Use streaming, raise client timeouts, and prefer asynchronous or scheduled patterns over blocking calls.
 - **Refactor legacy prompts.** Instructions written for prior models are often over-prescriptive and can degrade Fable 5. Strip them back and re-test against its default behaviour.
 - **Reasoning visibility.** If an application needs the model's reasoning, read structured `thinking` blocks — do not instruct the model to reproduce its reasoning in the response.
-
-{% include "partials/sources.njk" %}

@@ -88,5 +88,3 @@ If legacy state is altered, partial, unfamiliar, linked, dangling, escaping, or 
 User-owned state comprises the XDG configuration, installed harnesses, and managed user-runtime links. Repository-owned state comprises `.ki.toml`, managed repository-runtime links, the committed repository-local `ki-self` source, and writes proposed by registered native operations.
 
 Use `ki manage doctor` for environment health, `ki manage diag` for installation mode and paths, `ki bootstrap --refresh` to reconcile configured inventory, and `ki <command> --help` for exact grammar.
-
-{% include "partials/sources.njk" %}

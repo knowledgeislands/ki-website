@@ -184,5 +184,3 @@ Governance skills share one layout, so a reader can move between them; the layou
 - **`scripts/rubric/items/index.ts`** — the canonical structured catalogue hosted by `ki`; its family modules carry deterministic checks and safe proposals.
 
 The universal modes are **AUDIT**, **CONFORM**, **EDUCATE**, and **REFRESH**, with **HELP** as the safe explanation path and skill-specific modes where they fit. The verified `ki` host executes governance catalogues; skills do not carry compatibility runners.
-
-{% include "partials/sources.njk" %}

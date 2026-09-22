@@ -31,5 +31,3 @@ Gemma 4 31B is a capable local model for a workstation or single accelerator, re
 - **Steer thinking via the system prompt.** Chain-of-thought runs on internal `<|think|>`/channel tokens and is nominally boolean, but instruction-following is flexible: a "LOW"-style system instruction cuts thinking (~20% fewer thinking tokens) for latency-sensitive local runs.
 - **Pass tools through the template.** Provide tools via the `tools=` argument to `apply_chat_template()` (name, description, JSON args from docstrings); it emits dedicated `tool_call`/`tool_response` tokens for the handshake.
 - **Watch the inference stack.** Tool-use and system-prompt reliability depend on the runtime, not just the weights — some stacks (e.g. certain llama.cpp builds) mishandle Gemma's tool-response tokens. Verify tool round-trips on your actual stack.
-
-{% include "partials/sources.njk" %}

@@ -118,5 +118,3 @@ Before acting, check three things:
 3. The target repository declares the governance capabilities that `ki repo audit` or `ki repo conform` must execute; user-level installation alone does not add them to repository audit scope.
 
 If none of the routes fits, start with `ki-skills` only when the missing outcome may warrant a new reusable capability. A one-off repository action normally belongs in the existing owning skill or local work record rather than a new skill.
-
-{% include "partials/sources.njk" %}

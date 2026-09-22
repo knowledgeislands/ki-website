@@ -76,5 +76,3 @@ Like `update`, it changes neither user nor repository skill activation.
 [Local utility commands](/guidance/cli/local-commands/) covers the rest of the inspection surface, including `diag`, `doctor` and `repair`. [Every `ki` command](/guidance/cli/commands/) has the full inventory.
 
 Use `ki manage update --help` and `ki repo upgrade --help` for the exact grammar your installed version supports.
-
-{% include "partials/sources.njk" %}

@@ -50,5 +50,3 @@ A repo running under Codex declares these in `["knowledgeislands/ki-agentic-harn
 - **Re-evaluate effort downward first.** As with GPT-5.5, a sharper prompt plus clear stop rules often recovers what a higher effort would buy — reach for `Extra High` / `Max` / `Ultra` only when the task genuinely needs it, since the top modes consume usage limits fastest.
 - **Match tier to the step, not the session.** Run a bulk fan-out on Luna and escalate only the irreducible reasoning step to Sol — the same barbell discipline `ki-tokenomics` prescribes for Claude tiers.
 - **Everything in [Prompting OpenAI GPT-5.5](/guidance/prompting/gpt-5-5/) still applies** — the Responses API, `phase` field, verbosity param, and tool-preamble guidance are unchanged across the GPT-5 line.
-
-{% include "partials/sources.njk" %}

@@ -85,5 +85,3 @@ Several of the skills are built for **Knowledge Islands** work and take its shap
 - **[Command-line interface](/guidance/using-ki/command-line-interface/)** explains the current end-user `ki` command surface and its scope boundaries.
 - **[Planning and delivery](/guidance/using-ki/planning-and-delivery/)** covers the route from a live session to governed roadmap work.
 - **[Skills and journeys](/guidance/skills/)** covers what a skill is, how the process skills coordinate, the domain taxonomy, and the shape they all share; the **[skill catalogue](/guidance/skills/catalogue/)** then describes them one by one.
-
-{% include "partials/sources.njk" %}

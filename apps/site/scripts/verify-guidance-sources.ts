@@ -21,6 +21,7 @@ import JSON5 from 'json5'
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const guidanceDir = resolve(siteRoot, 'src/guidance')
 const sourcesPartial = 'partials/sources.njk'
+const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
 const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
 
 const repositoryOwner = 'knowledgeislands'
@@ -286,6 +287,14 @@ if (pages.length === 0) {
   fail('No guidance pages found; expected Markdown below src/guidance/.')
 }
 
+// A declaration readers never see is not a published citation. Every page here
+// renders through the prose layout, so the layout is where that is held: the
+// check used to run per page, back when thirty-five bodies each pasted the
+// include in for themselves (KI-WEB-SITE-024).
+if (!readFileSync(proseLayout, 'utf-8').includes(sourcesPartial)) {
+  fail(`${relative(siteRoot, proseLayout)}: does not include "${sourcesPartial}", so no page publishes its sources.`)
+}
+
 const repositorySources: { page: string; source: Source }[] = []
 const linkTargets = new Map<string, { link: ProseLink; pages: string[] }>()
 
@@ -303,10 +312,6 @@ for (const file of pages) {
     } else {
       linkTargets.set(key, { link, pages: [page] })
     }
-  }
-
-  if (!contents.includes(sourcesPartial)) {
-    fail(`${page}: does not include "${sourcesPartial}". A declaration readers never see is not a published citation.`)
   }
 
   if (parsed.kind === 'malformed') {

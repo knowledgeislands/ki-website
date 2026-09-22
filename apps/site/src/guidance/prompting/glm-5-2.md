@@ -27,5 +27,3 @@ GLM-5.2 is the open-weight choice for agentic software engineering and long-hori
 - **Escalate effort for hard coding.** Switch to deeper/Max compute for complex, multi-step engineering — it produces markedly better results there. Reserve lower effort for simple queries, documentation, and review. In Claude Code the `/effort` levels (`xhigh`, `max`, `ultracode`) map onto its Max effort mode.
 - **Structure the prompt explicitly.** Reduce ambiguity with a consistent skeleton — goal, context, constraints, inputs, output format, success criteria — rather than an aspirational free-text ask.
 - **Be concrete on coding specifics.** Name the language, framework, and versions, the project structure, and the exact deliverable. For agentic work, give the tools available and a rough decomposition.
-
-{% include "partials/sources.njk" %}

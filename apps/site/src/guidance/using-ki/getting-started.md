@@ -146,5 +146,3 @@ Installing makes capabilities available for explicit activation; it activates no
 - [Onboard a repository](/guidance/using-ki/onboarding/) — the trust, activation, CI, and migration boundaries in full.
 - [The CLI collection](/guidance/cli/) — what each command group is for, and [every command there is](/guidance/cli/commands/).
 - [Optional tools](/guidance/using-ki/recommended-tools/) — machine-level additions such as chezmoi and mcporter, and whether you need them.
-
-{% include "partials/sources.njk" %}

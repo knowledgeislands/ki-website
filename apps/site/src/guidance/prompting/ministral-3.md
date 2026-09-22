@@ -31,5 +31,3 @@ Ministral 3 is Mistral's local/edge line — small enough for a laptop or single
 - **Reasoning variant uses `[THINK]` blocks.** Its chain-of-thought runs inside `[THINK]…[/THINK]`; keep multi-turn thinking traces in context across turns. Size output generously — ~32k tokens for reasoning, ~16k for instruct.
 - **Keep the tool set minimal.** For agentic use, define tools tightly and limit their number to what the task needs — don't overload it.
 - **Serve with the Mistral tokenizer.** Reliability depends on the runtime: use vLLM with `--tokenizer_mode mistral --config_format mistral --load_format mistral` (and the Mistral tool-call parser) rather than a generic template.
-
-{% include "partials/sources.njk" %}
