@@ -1,0 +1,53 @@
+# Guidance reachability
+
+How the build proves every published guidance page can be reached by navigating, and what to do when it says one cannot.
+
+[Guidance provenance](guidance-provenance.md) makes the site honest about where a page's material came from. This guide covers the other half of publishing: whether a reader can get to the page at all. A page can be perfectly sourced, perfectly written, and still be invisible.
+
+## The problem it solves
+
+A static site generator will happily write a file nothing links to. The page builds, the build passes, the sitemap lists it, and a reader who does not already know the URL never sees it.
+
+That is not hypothetical here. When the check was first run against a clean build, twenty-one of thirty-three guidance pages were reachable only by typing their address. The whole fourteen-page prompting collection had no inbound link from outside its own subtree — the string `prompting` appeared nowhere else in `dist/`. Those guides had presumably had a way in once and lost it silently, which is exactly the failure a person cannot notice: nothing is broken, there is simply nothing to click.
+
+This is the same reasoning that made the provenance sweep worth building. A condition nobody can see is a condition nobody fixes.
+
+## The check
+
+`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/guidance/` that the walk never reaches is a failure.
+
+It follows links, not routes. A `permalink` in frontmatter, an entry in the sitemap, and a redirect in `_redirects` all declare that an address exists; none of them is a way for a reader to find it. Existence is owned elsewhere — `verify-tool-routes.ts` and `verify-projects.ts` check that advertised routes resolve. This gate owns arrival.
+
+Three consequences of walking the built output rather than the source follow from that choice, and are worth knowing:
+
+- It runs after the build, so it sees the [portable `dist/` URL transform](../../../apps/site/eleventy.config.ts) — the relative `../guidance/index.html` form a reader's browser actually follows, not the authored `/guidance/` form.
+- A link to something the build did not write is skipped rather than counted, so a typo in an `href` shows up as an unreachable page on the far end rather than as a phantom hit.
+- `dist/` must be current. Run `bun run ki:site:clean` before `bun run ki:site:build` when a route has been removed or renamed; an ordinary build retains obsolete output, and a stale orphan will be reported against a page that no longer exists.
+
+## Why it fails rather than warns
+
+The provenance sweep reports upstream drift as a warning, because another repository editing its own README must never break this site's build. An orphaned page is the opposite case: it is entirely this site's own doing, fixable here, and fixable now. So `verify:reachable` exits non-zero, and it is wired into `bun run ki:site:build` alongside the other verify scripts — a page that no route reaches cannot reach production.
+
+Pages outside `dist/guidance/` are reported as warnings instead. They are all reachable today and should stay so, but the gate was built for the guidance corpus and says plainly what it holds itself to rather than quietly expanding its remit.
+
+## When it fails
+
+The message names the file:
+
+```text
+error: dist/guidance/prompting/gemini-3/index.html cannot be reached by following links from dist/index.html
+```
+
+The fix is a link, and the question is which one. In order of preference:
+
+1. **From its collection index.** Most pages belong to a collection, and the collection index is where a reader looking for that page will be. This is nearly always the answer.
+2. **From the [guidance hub](../../../apps/site/src/guidance/index.md).** Correct when the page _is_ a collection index, or when it answers a question the hub routes on. The hub introduces each collection by the question it answers rather than listing links, so adding one means writing a sentence, not appending a bullet.
+3. **From the navigation.** Reserved for the hub itself. The navigation is a small fixed set and the reason the hub exists.
+
+Resist the fourth option of linking a page from wherever is convenient. A link that exists only to satisfy the gate satisfies the gate and not the reader; if no page has a reason to link to it, the real question is whether the page should exist.
+
+## What it does not cover
+
+The gate proves a path exists, not that anyone would find it. A link buried in the last paragraph of a page nobody reads passes. Reachability is a floor, not a measure of navigation quality — [GDR-KI-WEBSITE-002](../../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) governs whether a page earns its place, and this check only guarantees the reader can get to the ones that do.
+
+It also says nothing about outbound links. A page may link to a document that has been deleted upstream; that is the provenance sweep's `--network` mode, described in [guidance provenance](guidance-provenance.md).

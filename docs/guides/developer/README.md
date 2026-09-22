@@ -1,6 +1,6 @@
 # Developer guides
 
-For the developer maintaining the Knowledge Islands website: how it deploys, how its generated routes are declared, and how its published guidance stays honest about where it came from.
+For the developer maintaining the Knowledge Islands website: how it deploys, how its generated routes are declared, and how its published guidance stays honest about where it came from and reachable once it is there.
 
 ## Deployment
 
@@ -15,3 +15,4 @@ For the developer maintaining the Knowledge Islands website: how it deploys, how
 
 - [Deciding what this site publishes](guidance-ownership.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.
 - [Guidance provenance](guidance-provenance.md) — the `sources` declaration every guidance page carries, and how a refresh sweep finds pages whose upstream has moved.
+- [Guidance reachability](guidance-reachability.md) — how the build proves every published guidance page can be reached by navigating, and which link to add when one cannot.
