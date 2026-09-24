@@ -13,6 +13,8 @@ sources:
 
 How to prompt the leading models — one guide per model, distilled from that vendor's own model-specific prompting page and refreshed when the guidance changes. The guides support cross-model work: building on, targeting, self-hosting, or evaluating another model. Each guide carries only the deltas that are distinctive to its model — the cross-cutting principles are below, stated once.
 
+These are guides to other people's models, not to Knowledge Islands. Everything about using a project here — the `ki` command surface, installing a harness, governing a repository, choosing a skill — is written on that project's own pages: [`ki`](/projects/ki/) carries the command-line guides and [`ki-agentic-harness`](/projects/ki-agentic-harness/) carries the capability governance guides.
+
 Filenames carry the model version (`opus-4-8`, `gpt-5-5`, `glm-5-2`) so a new generation adds a file rather than rewriting an old one in place.
 
 ## The guides
@@ -21,10 +23,10 @@ Filenames carry the model version (`opus-4-8`, `gpt-5-5`, `glm-5-2`) so a new ge
 
 | Model | Guide | When to reach for it |
 | --- | --- | --- |
-| Claude Fable 5 / Mythos 5 | [Guide](/guidance/prompting/fable-5/) | The hardest long-horizon, ambiguous, autonomous work — multi-hour runs, subagent orchestrations, unsolved problems |
-| Claude Opus 4.8 | [Guide](/guidance/prompting/opus-4-8/) | The heavy-lifting tier: reasoning, coding, agentic work where Fable 5 is overkill |
-| Claude Sonnet 5 | [Guide](/guidance/prompting/sonnet-5/) | Fast, cost-efficient tier: well-scoped coding and agentic tasks, high-volume or latency-sensitive workloads |
-| Claude Haiku 4.5 | [Guide](/guidance/prompting/haiku/) | Fastest, lowest-cost tier: mechanical/bulk steps, sub-agent fan-out, scaffolding and conform-style edits |
+| Claude Fable 5 / Mythos 5 | [Guide](/prompting/fable-5/) | The hardest long-horizon, ambiguous, autonomous work — multi-hour runs, subagent orchestrations, unsolved problems |
+| Claude Opus 4.8 | [Guide](/prompting/opus-4-8/) | The heavy-lifting tier: reasoning, coding, agentic work where Fable 5 is overkill |
+| Claude Sonnet 5 | [Guide](/prompting/sonnet-5/) | Fast, cost-efficient tier: well-scoped coding and agentic tasks, high-volume or latency-sensitive workloads |
+| Claude Haiku 4.5 | [Guide](/prompting/haiku/) | Fastest, lowest-cost tier: mechanical/bulk steps, sub-agent fan-out, scaffolding and conform-style edits |
 
 The model pick — how to trade cost against capability — is governed by the `ki-tokenomics` skill, while `ki-delegate` turns banked planning reasoning into bounded, cold-agent-ready execution briefs.
 
@@ -34,10 +36,10 @@ The KI harness declares work by a portable **model type** (purpose), not a vendo
 
 | Type | Purpose | Claude Code | Codex (GPT-5.6) |
 | --- | --- | --- | --- |
-| `frontier` | Long-horizon, minimally-supervised autonomous execution — multi-hour runs, subagent orchestration | [Fable 5](/guidance/prompting/fable-5/) | [Sol @ Ultra](/guidance/prompting/gpt-5-6/) |
-| `reasoning` | Hardest one-shot judgment — architecture, research, novel design | [Opus 4.8](/guidance/prompting/opus-4-8/) | [Sol @ High/Max](/guidance/prompting/gpt-5-6/) |
-| `standard` | Well-scoped default — everyday coding, high-volume or latency-sensitive work | [Sonnet 5](/guidance/prompting/sonnet-5/) | [Terra @ Medium](/guidance/prompting/gpt-5-6/) |
-| `fast` | Mechanical/bulk steps where full reasoning is wasted | [Haiku 4.5](/guidance/prompting/haiku/) | [Luna @ Light](/guidance/prompting/gpt-5-6/) |
+| `frontier` | Long-horizon, minimally-supervised autonomous execution — multi-hour runs, subagent orchestration | [Fable 5](/prompting/fable-5/) | [Sol @ Ultra](/prompting/gpt-5-6/) |
+| `reasoning` | Hardest one-shot judgment — architecture, research, novel design | [Opus 4.8](/prompting/opus-4-8/) | [Sol @ High/Max](/prompting/gpt-5-6/) |
+| `standard` | Well-scoped default — everyday coding, high-volume or latency-sensitive work | [Sonnet 5](/prompting/sonnet-5/) | [Terra @ Medium](/prompting/gpt-5-6/) |
+| `fast` | Mechanical/bulk steps where full reasoning is wasted | [Haiku 4.5](/prompting/haiku/) | [Luna @ Light](/prompting/gpt-5-6/) |
 
 Model and effort are two independent axes on both vendors' real pickers — a single config value (`reasoning = "opus, gpt-5.6-sol"`) can list both runtimes' models and each resolves the first it supports.
 
@@ -45,15 +47,15 @@ Model and effort are two independent axes on both vendors' real pickers — a si
 
 | Model | Guide | When to reach for it |
 | --- | --- | --- |
-| OpenAI GPT-5.5 | [Guide](/guidance/prompting/gpt-5-5/) | Building on or comparing against the OpenAI stack: coding, agentic, knowledge work |
-| OpenAI GPT-5.6 (Sol / Terra / Luna) | [Guide](/guidance/prompting/gpt-5-6/) | The Codex CLI tier family (Sol/Terra/Luna × effort); the Codex-side resolution of the portable model types |
-| Google Gemini 3 | [Guide](/guidance/prompting/gemini-3/) | The Gemini stack: long-context, multimodal, agentic work |
-| GLM-5.2 (Z.ai) | [Guide](/guidance/prompting/glm-5-2/) | Leading open-weight model for agentic/coding; self-hostable under MIT |
-| DeepSeek V3.2 | [Guide](/guidance/prompting/deepseek-v3-2/) | Open reasoning/maths baseline; low-cost self-hosting |
-| Llama 4 (Meta) | [Guide](/guidance/prompting/llama-4/) | The most-deployed open-weight family; broad tooling and long context |
-| Gemma 4 31B | [Guide](/guidance/prompting/gemma-4/) | Local/on-device, single-GPU; Google's open, runnable option |
-| Qwen3 (small / coder) | [Guide](/guidance/prompting/qwen3/) | Local all-rounder and local coding on consumer hardware |
-| Ministral 3 (Mistral edge) | [Guide](/guidance/prompting/ministral-3/) | Local/edge on a laptop or single GPU; instruct + reasoning variants |
+| OpenAI GPT-5.5 | [Guide](/prompting/gpt-5-5/) | Building on or comparing against the OpenAI stack: coding, agentic, knowledge work |
+| OpenAI GPT-5.6 (Sol / Terra / Luna) | [Guide](/prompting/gpt-5-6/) | The Codex CLI tier family (Sol/Terra/Luna × effort); the Codex-side resolution of the portable model types |
+| Google Gemini 3 | [Guide](/prompting/gemini-3/) | The Gemini stack: long-context, multimodal, agentic work |
+| GLM-5.2 (Z.ai) | [Guide](/prompting/glm-5-2/) | Leading open-weight model for agentic/coding; self-hostable under MIT |
+| DeepSeek V3.2 | [Guide](/prompting/deepseek-v3-2/) | Open reasoning/maths baseline; low-cost self-hosting |
+| Llama 4 (Meta) | [Guide](/prompting/llama-4/) | The most-deployed open-weight family; broad tooling and long context |
+| Gemma 4 31B | [Guide](/prompting/gemma-4/) | Local/on-device, single-GPU; Google's open, runnable option |
+| Qwen3 (small / coder) | [Guide](/prompting/qwen3/) | Local all-rounder and local coding on consumer hardware |
+| Ministral 3 (Mistral edge) | [Guide](/prompting/ministral-3/) | Local/edge on a laptop or single GPU; instruct + reasoning variants |
 
 ## Principles
 

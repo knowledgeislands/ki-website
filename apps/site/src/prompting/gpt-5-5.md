@@ -18,7 +18,7 @@ sources:
 
 # Prompting OpenAI GPT-5.5
 
-How to prompt OpenAI's GPT-5.5, the current flagship of the GPT-5 line. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to GPT-5.5. This guide is reference for cross-model work: building on, targeting, or evaluating GPT-5.5.
+How to prompt OpenAI's GPT-5.5, the current flagship of the GPT-5 line. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to GPT-5.5. This guide is reference for cross-model work: building on, targeting, or evaluating GPT-5.5.
 
 ## When to reach for it
 

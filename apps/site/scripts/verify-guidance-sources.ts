@@ -6,10 +6,10 @@
  * Markdown page therefore declares a `sources` list — or claims `original` — and this check
  * refuses a page that declares neither.
  *
- * Two directories hold those pages. `src/guidance/` is the residual set that belongs to no
- * project, and `src/projects/<slug>/` holds the guides each project owns (KI-WEB-SITE-025).
- * Provenance does not care which: a page restating somebody's material declares it wherever it
- * lives, and moving a page must not be a way to shed the declaration.
+ * Three directories hold those pages. `src/projects/<slug>/` holds the guides each project owns
+ * (KI-WEB-SITE-025); `src/prompting/` and `src/optional-tools/` hold what belongs to no project
+ * (KI-WEB-SITE-028). Provenance does not care which: a page restating somebody's material declares
+ * it wherever it lives, and moving a page must not be a way to shed the declaration.
  *
  * Offline checks run by default. `--network` additionally resolves each pinned ref against its
  * upstream repository and reports pages whose source document has moved since it was reviewed, and
@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const guidanceDirs = [resolve(siteRoot, 'src/guidance'), resolve(siteRoot, 'src/projects')]
+const guidanceDirs = ['src/projects', 'src/prompting', 'src/optional-tools'].map((dir) => resolve(siteRoot, dir))
 const sourcesPartial = 'partials/sources.njk'
 const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
 const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
@@ -334,7 +334,7 @@ const network = process.argv.includes('--network')
 const pages = guidanceDirs.flatMap(markdownFiles).sort()
 
 if (pages.length === 0) {
-  fail('No published pages found; expected Markdown below src/guidance/ or src/projects/.')
+  fail('No published pages found; expected Markdown below src/projects/, src/prompting/ or src/optional-tools/.')
 }
 
 // A declaration readers never see is not a published citation. Every page here

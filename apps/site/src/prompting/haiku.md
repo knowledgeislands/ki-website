@@ -14,7 +14,7 @@ sources:
 
 # Prompting Claude Haiku 4.5
 
-How to prompt Claude Haiku 4.5, the fastest, lowest-cost Claude tier. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Haiku 4.5. It is the resolution of the portable `fast` model type ([`ki-tokenomics`](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/skills/environment/ki-tokenomics/references/standards-tokenomics.md), [ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md)).
+How to prompt Claude Haiku 4.5, the fastest, lowest-cost Claude tier. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Haiku 4.5. It is the resolution of the portable `fast` model type ([`ki-tokenomics`](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/skills/environment/ki-tokenomics/references/standards-tokenomics.md), [ADR-KI-HARNESS-009](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/docs/decisions/ADR-KI-HARNESS-009-portable-model-types-not-vendor-model-names-in-governance-config.md)).
 
 ## When to reach for it
 

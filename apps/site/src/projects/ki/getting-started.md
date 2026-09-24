@@ -146,4 +146,4 @@ Installing makes capabilities available for explicit activation; it activates no
 - [Use skills](/projects/ki-agentic-harness/using-skills/) — how a skill actually fires once it is active, which is the part that changes your day.
 - [Onboard a repository](/projects/ki-agentic-harness/onboarding/) — the trust, activation, CI, and migration boundaries in full.
 - [How the command groups divide](/projects/ki/command-groups/) — what each group of commands can change, and [every command there is](/projects/ki/commands/).
-- [Optional tools](/guidance/recommended-tools/) — machine-level additions such as chezmoi and mcporter, and whether you need them.
+- [Optional tools](/optional-tools/) — machine-level additions such as chezmoi and mcporter, and whether you need them.

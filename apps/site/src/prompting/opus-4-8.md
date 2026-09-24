@@ -18,7 +18,7 @@ sources:
 
 # Prompting Claude Opus 4.8
 
-How to prompt Claude Opus 4.8, the default heavy-lifting tier. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Opus 4.8. It performs well out of the box on existing Opus 4.7 prompts — the steers below are the behaviours that most often need tuning.
+How to prompt Claude Opus 4.8, the default heavy-lifting tier. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Opus 4.8. It performs well out of the box on existing Opus 4.7 prompts — the steers below are the behaviours that most often need tuning.
 
 ## When to reach for it
 

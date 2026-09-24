@@ -48,9 +48,21 @@ eleventyExcludeFromCollections: true
     <priority>0.7</priority>
   </url>
 {%- endfor %}
+{#- Every prompting guide, listed by where it lives rather than by hand: the collection used to
+    appear here as the single `/guidance/` hub URL, so thirteen model pages were never submitted
+    at all (KI-WEB-SITE-028). #}
+{%- for item in collections.all %}
+{%- if item.url and item.url.startsWith('/prompting/') %}
   <url>
-    <loc>https://knowledgeislands.info/guidance/</loc>
+    <loc>{{ site.url }}{{ item.url }}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+{%- endif %}
+{%- endfor %}
+  <url>
+    <loc>{{ site.url }}/optional-tools/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

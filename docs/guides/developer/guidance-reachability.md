@@ -14,13 +14,13 @@ This is the same reasoning that made the provenance sweep worth building. A cond
 
 ## The check
 
-`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/guidance/` or `dist/projects/` that the walk never reaches is a failure.
+`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/projects/`, `dist/prompting/` or `dist/optional-tools/` that the walk never reaches is a failure.
 
 It follows links, not routes. A `permalink` in frontmatter, an entry in the sitemap, and a redirect in `_redirects` all declare that an address exists; none of them is a way for a reader to find it. Existence is owned elsewhere — `verify-tool-routes.ts` and `verify-projects.ts` check that advertised routes resolve. This gate owns arrival.
 
 Three consequences of walking the built output rather than the source follow from that choice, and are worth knowing:
 
-- It runs after the build, so it sees the [portable `dist/` URL transform](../../../apps/site/eleventy.config.ts) — the relative `../guidance/index.html` form a reader's browser actually follows, not the authored `/guidance/` form.
+- It runs after the build, so it sees the [portable `dist/` URL transform](../../../apps/site/eleventy.config.ts) — the relative `../prompting/index.html` form a reader's browser actually follows, not the authored `/prompting/` form.
 - A link to something the build did not write is skipped rather than counted, so a typo in an `href` shows up as an unreachable page on the far end rather than as a phantom hit.
 - `dist/` must be current. Run `bun run ki:site:clean` before `bun run ki:site:build` when a route has been removed or renamed; an ordinary build retains obsolete output, and a stale orphan will be reported against a page that no longer exists.
 
@@ -28,7 +28,7 @@ Three consequences of walking the built output rather than the source follow fro
 
 The provenance sweep reports upstream drift as a warning, because another repository editing its own README must never break this site's build. An orphaned page is the opposite case: it is entirely this site's own doing, fixable here, and fixable now. So `verify:reachable` exits non-zero, and it is wired into `bun run ki:site:build` alongside the other verify scripts — a page that no route reaches cannot reach production.
 
-`dist/projects/` is held to the same standard as `dist/guidance/`, because [the guides each project owns](project-guides.md) live there. A guide that moved out of `/guidance/` must not become unreachable in the move, and the project page that lists its guides has to be on the far end of a link itself.
+All three trees are held to the same standard, because each holds published prose: [the guides each project owns](project-guides.md), the prompting guides, and `optional-tools`. A page that moved between them must not become unreachable in the move, and the index that lists a collection has to be on the far end of a link itself.
 
 Pages outside those two trees are reported as warnings instead. They are all reachable today and should stay so, but the gate was built for published prose and says plainly what it holds itself to rather than quietly expanding its remit.
 
@@ -37,15 +37,15 @@ Pages outside those two trees are reported as warnings instead. They are all rea
 The message names the file:
 
 ```text
-error: dist/guidance/prompting/gemini-3/index.html cannot be reached by following links from dist/index.html
+error: dist/prompting/gemini-3/index.html cannot be reached by following links from dist/index.html
 ```
 
 The fix is a link, and the question is which one. In order of preference:
 
 1. **From its project's page.** A project guide needs no link written by hand: the Guides block on `/projects/<slug>/` is generated from the `guides` collection, so a page in the right directory with the right directory data is listed automatically. An unreachable guide here nearly always means the binding is wrong, not that a link is missing.
 2. **From its collection index.** For the residual guidance pages, the collection index is where a reader looking for that page will be.
-3. **From the [guidance hub](../../../apps/site/src/guidance/index.md).** Correct when the page _is_ a collection index, or when it answers a question the hub routes on. The hub introduces each collection by the question it answers rather than listing links, so adding one means writing a sentence, not appending a bullet.
-4. **From the navigation.** Reserved for the hub itself. The navigation is a small fixed set and the reason the hub exists.
+3. **From a page that has a reason to send the reader there.** `optional-tools` is reached from the `ki` getting-started guide and from the harness tuning guide, because those are where a reader needs it. That is a better link than one written to satisfy the gate.
+4. **From the navigation.** Reserved for a collection index. The navigation is a small fixed set, and a page that needs an entry there is making a claim about the shape of the site, not about its own reachability.
 
 Resist the further option of linking a page from wherever is convenient. A link that exists only to satisfy the gate satisfies the gate and not the reader; if no page has a reason to link to it, the real question is whether the page should exist.
 

@@ -46,7 +46,7 @@ This is the rule the whole arrangement exists for. A page that moved out of `/gu
 
 ### It declares its provenance
 
-`sources` or `sources: original`, exactly as before — see [guidance provenance](guidance-provenance.md). `verify:guidance` reads `src/projects/` as well as `src/guidance/`, so moving a page is not a way to shed its declaration.
+`sources` or `sources: original`, exactly as before — see [guidance provenance](guidance-provenance.md). `verify:guidance` reads `src/projects/` alongside the trees that belong to no project, so moving a page is not a way to shed its declaration.
 
 ## How a guide is found
 
@@ -56,11 +56,11 @@ Three things happen without the page doing anything:
 - **It carries a way back up.** `partials/up-link.njk` renders a link to the project whenever `project` is set, which is the page that lists its siblings.
 - **The sitemap includes it**, from the same collection.
 
-`verify:reachable` holds `dist/projects/` to the same standard as `dist/guidance/`: a guide that nothing links to fails the build.
+`verify:reachable` holds `dist/projects/` to the same standard as the other published trees: a guide that nothing links to fails the build.
 
-## What stays in `/guidance/`
+## What belongs to no project
 
-Pages that belong to no project: the model prompting guides, and `recommended-tools`. They cite vendor and third-party documentation rather than Knowledge Islands repositories, so they are the site's own material in a way the project guides are not. They are held there as a residual set while it is clear whether they earn a section of their own.
+Two things, and they live apart because they are not one collection (KI-WEB-SITE-028). `apps/site/src/prompting/` holds the model prompting guides, which cite vendor documentation rather than Knowledge Islands repositories and are the site's own material in a way a project guide is not. `apps/site/src/optional-tools/` holds the one page about a reader's own machine. Neither is a project guide, so neither carries a `project` binding, and neither is listed by a project page.
 
 ## Running the check
 

@@ -18,7 +18,7 @@ sources:
 
 # Prompting Llama 4
 
-How to prompt Meta's Llama 4 (Scout, Maverick), the most widely-deployed open-weight family in enterprise. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Llama 4. This is reference for when you target, self-host, or evaluate Llama 4.
+How to prompt Meta's Llama 4 (Scout, Maverick), the most widely-deployed open-weight family in enterprise. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Llama 4. This is reference for when you target, self-host, or evaluate Llama 4.
 
 ## When to reach for it
 

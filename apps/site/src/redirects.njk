@@ -50,4 +50,16 @@ eleventyExcludeFromCollections: true
 /guidance/using-ki/planning-and-delivery /projects/ki-agentic-harness/planning-and-delivery/ 301
 /guidance/using-ki/tuning /projects/ki-agentic-harness/tuning/ 301
 /guidance/using-ki/using-skills /projects/ki-agentic-harness/using-skills/ 301
-/guidance/using-ki/recommended-tools /guidance/recommended-tools/ 301
+/guidance/using-ki/recommended-tools /optional-tools/ 301
+
+# What guidance had left was not a collection (KI-WEB-SITE-028). Once the project
+# guides moved out, the directory held thirteen prompting guides for other vendors'
+# models, their index, and one page about a reader's own machine — two unrelated
+# things under a name that described neither, offered as a top-level section. Each
+# half now lives at an address that says what it is. The splat covers the model
+# pages without naming thirteen of them; the bare path needs its own rule because
+# Cloudflare's splat does not match it.
+/guidance/recommended-tools /optional-tools/ 301
+/guidance/prompting/* /prompting/:splat 301
+/guidance/prompting /prompting/ 301
+/guidance /prompting/ 301

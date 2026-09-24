@@ -12,14 +12,16 @@
  * page is entirely within this site's control, unlike the upstream drift that
  * `verify-guidance-sources.ts` reports as a warning.
  *
- * `dist/projects/` is held to the same standard, because the guides each
- * project owns now live there: a guide moved out of `/guidance/` must not
- * become unreachable in the move, and the project page that lists its guides
- * must itself be on the far end of a link (KI-WEB-SITE-025).
+ * `dist/guidance/` no longer exists. The guides each project owns moved to
+ * `dist/projects/` (KI-WEB-SITE-025), and what was left — the prompting guides
+ * and the optional-tools page — moved to `dist/prompting/` and
+ * `dist/optional-tools/` (KI-WEB-SITE-028). All three are held to the same
+ * standard: a page that moved must not become unreachable in the move, and the
+ * index that lists a collection must itself be on the far end of a link.
  *
- * Pages outside those two trees are reported as warnings. They are reachable
- * today and should stay so, but this gate was built for published prose and
- * should say plainly what it holds to.
+ * Pages outside those trees are reported as warnings. They are reachable today
+ * and should stay so, but this gate was built for published prose and should
+ * say plainly what it holds to.
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'
@@ -91,7 +93,9 @@ const all = pages(distDir)
 const where = (page: string): string => relative(distDir, page)
 
 /** The trees whose pages a reader has to be able to arrive at by navigating. */
-const published = (path: string): boolean => path.startsWith('guidance/') || path.startsWith('projects/')
+const publishedTrees = ['projects/', 'prompting/', 'optional-tools/']
+
+const published = (path: string): boolean => publishedTrees.some((tree) => path.startsWith(tree))
 
 for (const page of all) {
   if (seen.has(page)) continue

@@ -9,7 +9,7 @@ const site = {
     { label: 'Philosophy', href: '/philosophy/' },
     { label: 'Model', href: '/model/' },
     { label: 'Projects', href: '/projects/' },
-    { label: 'Guidance', href: '/guidance/' },
+    { label: 'Prompting', href: '/prompting/' },
     { label: 'Get Started', href: '/get-started/' },
     { label: 'Contribute', href: '/contribute/' }
   ]

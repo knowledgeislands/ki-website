@@ -18,7 +18,7 @@ sources:
 
 # Prompting Google Gemini 3
 
-How to prompt Google's Gemini 3 line (3.1 Pro, 3 Flash, 3.5 Flash). Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Gemini 3. This guide is reference for cross-model work: building on, targeting, or evaluating Gemini 3.
+How to prompt Google's Gemini 3 line (3.1 Pro, 3 Flash, 3.5 Flash). Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Gemini 3. This guide is reference for cross-model work: building on, targeting, or evaluating Gemini 3.
 
 ## When to reach for it
 

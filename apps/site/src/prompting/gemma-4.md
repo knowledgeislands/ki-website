@@ -18,7 +18,7 @@ sources:
 
 # Prompting Gemma 4 (31B)
 
-How to prompt Google's Gemma 4 31B, an open-weight model sized for local and single-GPU deployment. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Gemma 4. This is reference for when you run Gemma 4 locally, target it, or evaluate it. (The family also ships smaller instruct variants — E2B/E4B/12B/26B-A4B — that share the format.)
+How to prompt Google's Gemma 4 31B, an open-weight model sized for local and single-GPU deployment. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Gemma 4. This is reference for when you run Gemma 4 locally, target it, or evaluate it. (The family also ships smaller instruct variants — E2B/E4B/12B/26B-A4B — that share the format.)
 
 ## When to reach for it
 

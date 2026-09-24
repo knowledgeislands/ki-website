@@ -72,8 +72,8 @@ MCP tool schemas are the **largest standing cost** in a session with several ser
 
 - **Per surface** — `ki-binding` governs the single `mcp-servers.yaml` inventory and each server's `clients:` targeting. `ki-binding-claude` and `ki-binding-codex` govern their runtime-native surfaces. A server the current surface never uses should not be enabled on it.
 - **Per project** — scope servers to the repos that need them rather than enabling them globally.
-- **Connectors vs plugins** — on claude.ai / Desktop, the MCP tools bucket is driven by _connectors_ (e.g. Google Calendar / Drive / Slack), toggled per-conversation in the compose-bar tools menu. These are distinct from _plugins_ (which surface under Skills / Custom agents). Turn off a connector for a conversation that does not need it. For a SaaS integration, a managed connector is often the lower-friction route than a local MCP server in the first place — see [Optional tools](/guidance/recommended-tools/#claudeai-connectors--the-managed-alternative).
-- **The mcporter caveat** — mcporter (see [Optional tools](/guidance/recommended-tools/)) consolidates the `~/.claude.json` `mcpServers` block from many entries to one URL. That trims _config_, not the in-session tool _schemas_ — every consolidated server's tools still load into the prefix. mcporter and schema curation are complementary, not substitutes.
+- **Connectors vs plugins** — on claude.ai / Desktop, the MCP tools bucket is driven by _connectors_ (e.g. Google Calendar / Drive / Slack), toggled per-conversation in the compose-bar tools menu. These are distinct from _plugins_ (which surface under Skills / Custom agents). Turn off a connector for a conversation that does not need it. For a SaaS integration, a managed connector is often the lower-friction route than a local MCP server in the first place — see [Optional tools](/optional-tools/#claudeai-connectors--the-managed-alternative).
+- **The mcporter caveat** — mcporter (see [Optional tools](/optional-tools/)) consolidates the `~/.claude.json` `mcpServers` block from many entries to one URL. That trims _config_, not the in-session tool _schemas_ — every consolidated server's tools still load into the prefix. mcporter and schema curation are complementary, not substitutes.
 
 ### Manage the MCP inventory
 
@@ -133,7 +133,7 @@ Treat it as a curated cache, not an append-only log:
 
 ## Runtime — compress and cache what does load
 
-- **Headroom** compresses tool _results_ — it reversibly substitutes large output blocks it has already seen in the stream (see [Optional tools](/guidance/recommended-tools/) for proxy vs wrap mode). This is a runtime lever; it does not touch tool definitions.
+- **Headroom** compresses tool _results_ — it reversibly substitutes large output blocks it has already seen in the stream (see [Optional tools](/optional-tools/) for proxy vs wrap mode). This is a runtime lever; it does not touch tool definitions.
 - **Prompt caching** rewards a stable prefix. Set your `env` disables once and leave them; avoid anything that mutates the tool list mid-session.
 - **Model tier, compaction, verbosity** — right-cost model for the work, compaction hygiene on long conversations, and not dumping raw logs into the turn. The `ki-tokenomics` standard covers each.
 

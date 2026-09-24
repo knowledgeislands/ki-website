@@ -1,7 +1,7 @@
 ---
 title: Optional tools
 description: Evaluate optional machine-level tools for configuration, context management, skill discovery, and MCP access.
-permalink: /guidance/recommended-tools/
+permalink: /optional-tools/
 sources: original
 ---
 

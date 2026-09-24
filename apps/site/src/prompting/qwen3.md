@@ -14,7 +14,7 @@ sources:
 
 # Prompting Qwen3 (small / coder)
 
-How to prompt Alibaba's smaller Qwen3 models — the dense 4B/8B/14B/32B variants and the coder builds — sized for local and single-GPU use under Apache 2.0. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Qwen3. This is reference for when you run Qwen3 locally, target it, or evaluate it.
+How to prompt Alibaba's smaller Qwen3 models — the dense 4B/8B/14B/32B variants and the coder builds — sized for local and single-GPU use under Apache 2.0. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Qwen3. This is reference for when you run Qwen3 locally, target it, or evaluate it.
 
 ## When to reach for it
 

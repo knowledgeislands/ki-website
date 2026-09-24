@@ -18,7 +18,7 @@ sources:
 
 # Prompting Claude Fable 5
 
-How to prompt Claude Fable 5 (and its safeguard-free sibling Mythos 5). Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Fable 5.
+How to prompt Claude Fable 5 (and its safeguard-free sibling Mythos 5). Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Fable 5.
 
 ## When to reach for it
 

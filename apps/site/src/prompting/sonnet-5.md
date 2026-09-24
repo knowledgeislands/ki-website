@@ -18,7 +18,7 @@ sources:
 
 # Prompting Claude Sonnet 5
 
-How to prompt Claude Sonnet 5, the fast, cost-efficient tier. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to Sonnet 5. It performs well out of the box on existing Sonnet 4.6 prompts — the steers below are the behaviours that most often need tuning.
+How to prompt Claude Sonnet 5, the fast, cost-efficient tier. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to Sonnet 5. It performs well out of the box on existing Sonnet 4.6 prompts — the steers below are the behaviours that most often need tuning.
 
 ## When to reach for it
 

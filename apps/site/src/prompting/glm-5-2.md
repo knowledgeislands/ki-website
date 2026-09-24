@@ -14,7 +14,7 @@ sources:
 
 # Prompting GLM-5.2
 
-How to prompt Z.ai's GLM-5.2, the leading open-weight model for agentic and coding work (MIT-licensed, ~750B-parameter MoE, 1M-token context). Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to GLM-5.2. This is reference for when you target, self-host, or evaluate GLM-5.2.
+How to prompt Z.ai's GLM-5.2, the leading open-weight model for agentic and coding work (MIT-licensed, ~750B-parameter MoE, 1M-token context). Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to GLM-5.2. This is reference for when you target, self-host, or evaluate GLM-5.2.
 
 ## When to reach for it
 

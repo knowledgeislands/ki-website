@@ -18,7 +18,7 @@ sources:
 
 # Prompting Ministral 3 (Mistral edge models)
 
-How to prompt Mistral's Ministral 3 (2512) family — the 3B/8B/14B edge models, in base, instruct, and reasoning variants, under Apache 2.0. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to them. This is reference for when you run Ministral locally, target it, or evaluate it. (The larger Mistral Small sits above this line; the 14B Instruct is roughly comparable to it.)
+How to prompt Mistral's Ministral 3 (2512) family — the 3B/8B/14B edge models, in base, instruct, and reasoning variants, under Apache 2.0. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to them. This is reference for when you run Ministral locally, target it, or evaluate it. (The larger Mistral Small sits above this line; the 14B Instruct is roughly comparable to it.)
 
 ## When to reach for it
 

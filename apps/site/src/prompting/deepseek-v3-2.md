@@ -14,7 +14,7 @@ sources:
 
 # Prompting DeepSeek V3.2
 
-How to prompt DeepSeek V3.2, an open-weight reasoning-and-general model with a 1M-token context. Read the shared [Prompting guides](/guidance/prompting/) principles first; this guide carries only what is distinctive to V3.2. This is reference for when you target, self-host, or evaluate DeepSeek. (DeepSeek V4, released April 2026, is the newer flagship; V3.2 remains a widely-deployed open-weight baseline.)
+How to prompt DeepSeek V3.2, an open-weight reasoning-and-general model with a 1M-token context. Read the shared [Prompting guides](/prompting/) principles first; this guide carries only what is distinctive to V3.2. This is reference for when you target, self-host, or evaluate DeepSeek. (DeepSeek V4, released April 2026, is the newer flagship; V3.2 remains a widely-deployed open-weight baseline.)
 
 ## When to reach for it
 
