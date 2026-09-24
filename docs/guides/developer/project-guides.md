@@ -38,7 +38,7 @@ Prose before the first `##`, saying what the reader will be able to do. At least
 
 Link text may not be a hand-off phrase:
 
-`the full guide`, `the full documentation`, `full documentation`, `see the README`, `see the docs`, `read more`, `more here`, `the guide`, and a bare `here`, `docs`, `README` or `this page`.
+`the full guide`, `full guide`, `the full documentation`, `full documentation`, `see the README`, `see the docs`, `see the documentation`, `read more`, `more here`, `learn more`, `the guide`, and a bare `here`, `docs`, `documentation`, `README` or `this page`.
 
 A link into a repository is fine, and often right, when it cites a fact the page has already stated: _the installer published at `v0.4.0`_, _the VS Code management procedure shipped with `v0.4.0`_. It is wrong when it is the place the answer lives. The test, from GDR-KI-WEBSITE-002, is whether the link survives as a fact rather than as a destination — remove the link and the sentence should still say something true and useful.
 
