@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-09-24T08:18:55Z
+updated_at: 2026-09-24T21:20:00Z
 ---
 
 ## Goal
@@ -42,6 +42,21 @@ The site builds clean through seven gates and renders 53 published pages. Nobody
 - `.prose-provenance` — smaller, lighter, separated by a rule, and demonstrably chrome rather than the page's conclusion, which was the whole point of moving it.
 - The Guides block on a project page — spacing against the surrounding `section-parchment`, and the rendered order matching each project's assigned sequence.
 - Dark mode for all of the above, which is mirrored in a separate `@media (prefers-color-scheme: dark)` block and is the half most likely to have been missed.
+
+**Contrast has since been measured rather than looked at**, which removes one unknown from the list and narrows another. Every prose foreground/background pair in both schemes was computed against WCAG AA:
+
+| Pair | Light | Dark |
+| --- | --- | --- |
+| Body ink on the page ground | 14.16 | 11.83 |
+| `h2`/`h3` on the page ground | 10.13 | 7.36 |
+| `pre` ink on `pre` ground | 13.59 | 12.66 |
+| Inline `code` ink on its ground | 14.33 | 10.96 |
+| `.prose-provenance` on the page ground | 6.56 | 5.92 |
+| Link colour on the page ground | **3.52** | 7.26 |
+
+All but one clear 4.5 comfortably, and the dark scheme — the half expected to be weakest — is fine everywhere. The exception is the light-scheme link colour, which fails AA on all three light surfaces; that is `KI-WEB-SITE-036`, raised separately because fixing it means revisiting the token set, which this item's Boundary excludes.
+
+So the remaining unknowns are the ones a number cannot answer: whether the table rules read as structure rather than clutter, whether a hundred inline `code` elements fragment a paragraph, whether `pre` overflow scrolls rather than clips on a narrow viewport, whether the provenance footer reads as chrome, and whether the Guides block sits right against the section above it. Those still need somebody at a browser.
 
 ## Steps
 
