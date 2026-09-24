@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-09-24T21:20:00Z
+updated_at: 2026-09-24T22:05:00Z
 ---
 
 ## Goal
@@ -57,6 +57,8 @@ The site builds clean through seven gates and renders 53 published pages. Nobody
 All but one clear 4.5 comfortably, and the dark scheme — the half expected to be weakest — is fine everywhere. The exception is the light-scheme link colour, which fails AA on all three light surfaces; that is `KI-WEB-SITE-036`, raised separately because fixing it means revisiting the token set, which this item's Boundary excludes.
 
 So the remaining unknowns are the ones a number cannot answer: whether the table rules read as structure rather than clutter, whether a hundred inline `code` elements fragment a paragraph, whether `pre` overflow scrolls rather than clips on a narrow viewport, whether the provenance footer reads as chrome, and whether the Guides block sits right against the section above it. Those still need somebody at a browser.
+
+One more joins them. `KI-WEB-SITE-036` darkened `--color-teal` from `#3d8a8a` to `#317070` to clear AA, which moves every link, every uppercase label and two white-on-teal circles across the whole site, not just the prose. The numbers are settled; whether the site still reads as itself with a deeper accent is a judgment, and this is the item that holds it.
 
 ## Steps
 
