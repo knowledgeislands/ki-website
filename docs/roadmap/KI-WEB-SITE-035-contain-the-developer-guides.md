@@ -4,12 +4,12 @@ area: SITE
 title: Contain the developer guides
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: 9d3d158b2094f508a315e308e4d79b65db1cb926
 created_at: 2026-09-24T19:25:00Z
-updated_at: 2026-09-24T19:25:00Z
+updated_at: 2026-09-24T19:45:00Z
 ---
 
 ## Goal
@@ -50,10 +50,10 @@ Every link into `apps/site/` source — scripts, data files, directories — pas
 ## Steps
 
 - [x] Measure the collection against `GUIDE-4` and record every finding.
-- [ ] Convert each link to a prose name, rereading the sentence so it states the substance rather than the destination.
-- [ ] Reread the `AGENTS.md` reference in `tool-routes.md`, which names orientation rather than a decision and may need more than a name.
-- [ ] Confirm the collection passes `ki repo audit --skill ki-guides --repo .`.
-- [ ] Confirm nothing in `apps/site/` changed and the build still passes.
+- [x] Convert each link to a prose name, rereading the sentence so it states the substance rather than the destination.
+- [x] Reread the `AGENTS.md` reference in `tool-routes.md`, which names orientation rather than a decision and may need more than a name.
+- [x] Confirm the collection passes `ki repo audit --skill ki-guides --repo .`.
+- [x] Confirm nothing in `apps/site/` changed.
 
 ## Files touched
 
@@ -69,7 +69,7 @@ Every link into `apps/site/` source — scripts, data files, directories — pas
 
 - `ki repo audit --skill ki-guides --repo .` passes with no `GUIDE-4` finding.
 - `ki repo audit --skill ki-authoring --repo .` passes.
-- `git diff --stat -- apps/` is empty.
+- `git diff --stat -- apps/` is empty, so nothing the build reads has changed.
 - Each edited paragraph reads as a complete statement with the citation removed entirely, which is the test the rule is for.
 
 ## Dependencies / blocks
@@ -93,6 +93,50 @@ Six, and they are the deliverable.
 ### Roadmap
 
 None beyond this record.
+
+## Review
+
+### Delivered
+
+`docs/guides/developer/` reads completely without following a link. All eleven `GUIDE-4` findings are gone, and the collection can be handed to somebody who does not have `docs/decisions/` — or the rest of the repository — without losing anything it was relying on.
+
+Every citation survived. Not one Decision Record reference was dropped; each became a name in prose, which is what `ROUTE-3` permits a guide written for somebody working in this repository.
+
+### Change Summary
+
+Ten links into `docs/decisions/` and one into the root `AGENTS.md`, across six guides, converted to prose names.
+
+Nine were mechanical: `[GDR-KI-WEBSITE-002](../../decisions/…)` became `GDR-KI-WEBSITE-002` and the surrounding sentence already read correctly, because the guides were citing a decision rather than deferring to it. Two needed more.
+
+`project-guides.md` opened its second paragraph with "… is [ADR-KI-WEBSITE-003]", where the link was doing the work of a verb; it now reads "… is decided by ADR-KI-WEBSITE-003".
+
+`tool-routes.md` linked `AGENTS.md` for the cross-repository handoff convention, which is the one case where the link was genuinely load-bearing — the reader was being sent somewhere to find out what the convention is. That sentence now states the convention: the receiving repository owns its priority, plan and execution, and both sides record the originating item and whether the relationship blocks. `AGENTS.md` is named after the substance rather than instead of it.
+
+### Verification
+
+`ki repo audit --skill ki-guides --repo .` passes with no findings; it reported eleven before the change. `ki repo audit --skill ki-authoring --repo .` passes. `ki repo audit --skill ki-work-roadmap --repo .` passes.
+
+`git diff --stat -- apps/` is empty. No build was run, and none was needed: nothing the build reads was touched, and `docs/guides/` is not an input to it.
+
+Every link into `apps/site/` source survived untouched — `eleventy.config.ts`, `src/_data/projects.json5`, and the rest. That is the rule working as designed rather than an omission: those paths are the subjects the guides explain.
+
+### Outstanding concerns
+
+None with work attached.
+
+Worth recording without an identifier: the rule's cost here was almost entirely in one sentence. Nine of eleven links were citations that read identically as names, which is evidence that the collection was already close to self-contained and that the containment rule mostly ratifies how these guides were being written. The remaining two are the interesting sample, and only one of those — the `AGENTS.md` reference — was actually hiding content behind a link.
+
+### Post-change review
+
+The item is small and finished as scoped. The estimate was accurate because the audit produced the complete work list before any editing started, which is the difference between this and `KI-WEB-SITE-031`, whose survey underestimated its reference repair by half. A mechanical finding list is a better plan than a grep and a memory.
+
+The one judgment the audit could not make was `tool-routes.md`'s `AGENTS.md` link. `GUIDE-4` reports a link to a document outside the collection and cannot tell whether removing it loses a fact; a person reading the sentence can. That division is why the standard has both a mechanical item and a judgment one, and this item exercised both.
+
+Risk introduced is nil. No route, permalink, published page, gate or generated file changed, and no published reader has a stale link, because none of these files is published.
+
+### Mini recap
+
+`KI-WEB-SITE-035` converted eleven document links in `docs/guides/developer/` to prose names, so the collection satisfies the `GUIDE-4` containment rule adopted in `ki-guides` earlier the same day. Ten pointed into `docs/decisions/` and one into `AGENTS.md`; every citation survived as a name, and the `AGENTS.md` sentence now states the handoff convention it used to point at. Links into `apps/site/` source are untouched by design. Three skill audits pass and `apps/` is unchanged.
 
 ## Discussion
 

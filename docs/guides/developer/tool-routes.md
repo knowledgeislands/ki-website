@@ -36,7 +36,7 @@ The split is enforced in both directions: `verify:projects` fails a `tool` entry
 
 ## Adding or advancing a tool
 
-Advancing the registry is a **named release follow-up owned by the releasing repository**, not something the website discovers. After a tool publishes a release it intends to recommend, it hands the website an item naming the exact version and the immutable installer target, following the cross-repository convention in [AGENTS.md](../../../AGENTS.md).
+Advancing the registry is a **named release follow-up owned by the releasing repository**, not something the website discovers. After a tool publishes a release it intends to recommend, it hands the website an item naming the exact version and the immutable installer target. The cross-repository convention that governs such a handoff — the receiving repository owns its priority, plan and execution, and both sides record the originating item and whether the relationship blocks — is stated in this repository's `AGENTS.md`.
 
 The website then edits the registry entry — `version`, `installer`, `manual`, `changelog`, and `maturity` if it changed — and ships. Nothing else needs touching: the page, the card, the sitemap entry, and the redirect are all generated.
 
@@ -81,6 +81,6 @@ With `--network` it fetches each installer target — a failure means the declar
 
 `/harness/install` and `/tooling/cli/` are gone; `/install/ki` and `/projects/ki/` replace them. No compatibility redirect was kept for either, because a permanent alias for a route that was only ever special-cased would preserve exactly the inconsistency the contract removes.
 
-The whole `/tooling/` section is gone as well. A tool is a project that ships a binary, so it is rendered by the project template like everything else in the directory ([ADR-KI-WEBSITE-002](../../decisions/ADR-KI-WEBSITE-002-one-section-for-every-project.md)). Those routes were published and were not a special case, so unlike the two above they redirect rather than disappear: `/tooling/<slug>` to `/projects/<slug>/`, `/tooling/` to `/projects/`, and the two task-guidance pages filed there to `/projects/ki-agentic-harness/installing-a-harness/` and `/projects/ki-agentic-harness/repositories/`.
+The whole `/tooling/` section is gone as well. A tool is a project that ships a binary, so it is rendered by the project template like everything else in the directory (ADR-KI-WEBSITE-002). Those routes were published and were not a special case, so unlike the two above they redirect rather than disappear: `/tooling/<slug>` to `/projects/<slug>/`, `/tooling/` to `/projects/`, and the two task-guidance pages filed there to `/projects/ki-agentic-harness/installing-a-harness/` and `/projects/ki-agentic-harness/repositories/`.
 
 `/harness/bootstrap` is unaffected. It is a repository-bootstrap script owned by the KI Agentic Harness rather than a tool installer, so it is not part of this contract and keeps its own route.

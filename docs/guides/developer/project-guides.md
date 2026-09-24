@@ -2,7 +2,7 @@
 
 A guide on this site belongs to the project it is about. This guide says where a project guide lives, what it has to contain, and what `verify:guides` refuses.
 
-The arrangement itself — why there is no general guidance section, and why a page's identity comes from its directory rather than from its own frontmatter — is [ADR-KI-WEBSITE-003](../../decisions/ADR-KI-WEBSITE-003-a-page-lives-with-what-it-is-about.md).
+The arrangement itself — why there is no general guidance section, and why a page's identity comes from its directory rather than from its own frontmatter — is decided by ADR-KI-WEBSITE-003.
 
 ## Where a guide lives
 

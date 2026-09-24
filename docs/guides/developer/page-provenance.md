@@ -4,7 +4,7 @@ How every published page records what it was written from, and how a refresh swe
 
 [Deciding what this site publishes](what-to-publish.md) sets out how much of another repository's material the site carries. This guide is the mechanism that makes carrying it safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
 
-The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since [GDR-KI-WEBSITE-002](../../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
+The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since GDR-KI-WEBSITE-002 made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
 
 ## The problem this solves
 
@@ -59,8 +59,8 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) |
-| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) |
+| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | ADR-KI-WEBSITE-001 |
+| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | ADR-KI-WEBSITE-001 |
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 

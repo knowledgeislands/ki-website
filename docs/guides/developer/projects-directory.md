@@ -40,7 +40,7 @@ Only public repositories appear. A private or internally operated repository is 
 
 ### Released tools are declared here too
 
-They used to have a registry of their own, and `/projects/` read it to render a sixth group linking out to `/tooling/<slug>/`. That kept the version in one place but left the site with two sections describing the same kind of thing in the same voice, which is what a reader actually saw. [ADR-KI-WEBSITE-002](../../decisions/ADR-KI-WEBSITE-002-one-section-for-every-project.md) merged them.
+They used to have a registry of their own, and `/projects/` read it to render a sixth group linking out to `/tooling/<slug>/`. That kept the version in one place but left the site with two sections describing the same kind of thing in the same voice, which is what a reader actually saw. ADR-KI-WEBSITE-002 merged them.
 
 So a tool is a `kind: 'tool'` entry like any other, rendered by the same template, with six release fields the other kinds must not carry. [Tool routes](tool-routes.md) owns what those fields mean and how they advance.
 
@@ -70,7 +70,7 @@ Keeping the material true is a standing obligation rather than a one-off. These 
 
 ## Adding or amending an entry
 
-A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from [GDR-KI-FUNDAMENTALS-001](../../decisions/GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) where that decision covers the repository, so the site's account of authority and the shared decision cannot diverge.
+A new public repository is added by editing the registry: nothing else needs touching, because the index card, the project page, and the sitemap entry are all generated. Take the `role` sentence from GDR-KI-FUNDAMENTALS-001 where that decision covers the repository, so the site's account of authority and the shared decision cannot diverge.
 
 Two things to check before adding an entry:
 
