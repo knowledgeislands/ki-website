@@ -4,7 +4,7 @@ area: SITE
 title: Settle residual guidance section
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: fae4a6b7f4ddef245ebf4770f5f9b07e32eba441
@@ -121,6 +121,10 @@ The risk introduced is bounded to addresses, and addresses are what redirects ar
 ### Mini recap
 
 `KI-WEB-SITE-028` split the residual guidance collection in two: `/prompting/` for the thirteen model guides and their index, `/optional-tools/` for the one page about a reader's machine. The `/guidance/` hub and directory are retired, the navigation entry became `Prompting`, both gate scripts follow the new trees, every retired address has a 301, and the sitemap now lists every prompting page rather than one hub URL. The structural Decision Record is `KI-WEB-SITE-030`'s to write, covering this and the `KI-WEB-SITE-025` move together.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

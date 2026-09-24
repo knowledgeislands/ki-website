@@ -4,7 +4,7 @@ area: SITE
 title: Consolidate the decision records
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 2cd4936ce75d7800014d0cd1d9219b401bcdb874
@@ -137,6 +137,10 @@ The useful finding is about what a merge costs that a rename does not. Merging t
 ### Mini recap
 
 `KI-WEB-SITE-030` merged `ADR-KI-WEBSITE-001` and `ADR-KI-WEBSITE-003` into one record on vendoring a published inventory, carrying the specified-versus-published asymmetry as a rule rather than a comparison, and wrote the missing structural decision as the new `ADR-KI-WEBSITE-003`. `GDR-KI-WEBSITE-002` moved ahead of the vendoring record to break the cycle the merge created, `ADR-KI-WEBSITE-002`'s stale addresses were corrected, three records gained `decision_depends_on` edges, and the index was rewritten. The audit passes. One peer citation in `tools-ki` needs correcting, which is a step on `KI-WEB-SITE-027`.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

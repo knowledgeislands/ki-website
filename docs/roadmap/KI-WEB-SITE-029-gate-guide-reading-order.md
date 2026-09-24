@@ -4,7 +4,7 @@ area: SITE
 title: Gate guide reading order
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 59f53d0d4b7f4aa013dfc96ab99e7694e3305a83
@@ -113,6 +113,10 @@ The item's real finding is that the corpus was clean. A gate added over conformi
 ### Mini recap
 
 `KI-WEB-SITE-029` makes `order` required, positive, and unique per project, enforced in `verify-guides.ts` and stated in the guide contract. All nineteen existing guides already complied, so no content changed. Both failure modes were proven and reverted. The browser verification this item could not perform is now `KI-WEB-SITE-032` rather than a deferral inside a Review section.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

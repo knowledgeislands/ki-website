@@ -4,7 +4,7 @@ area: SITE
 title: Compare refs against releases
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 4d4d80ecaf7af3e01ab216428f61764d5cab1e6a
@@ -100,6 +100,8 @@ A repository that publishes releases but pins a source to a commit rather than a
 
 The check trusts GitHub's `releases/latest`, which means the newest non-prerelease release. A repository whose newest useful artefact is a prerelease would be reported as current when it is not.
 
+Both of those are cases where the check reports success while being wrong, so they are `KI-WEB-SITE-034` rather than three sentences that vanish when this record is pruned.
+
 ### Post-change review
 
 The goal is met: the sweep is quiet on a correctly pinned corpus and specific when a citation falls behind, and both states were demonstrated rather than reasoned about. The change is read-only against upstream, confined to one script and one guide sentence, and cannot affect the build, because drift remains a warning. The risk it introduces is under-reporting — a repository using prereleases, or a commit-pinned source — which is stated above rather than hidden, and is a smaller failure than the unconditional warning it replaces.
@@ -109,6 +111,10 @@ The wider lesson is the one worth keeping: the item's stated premise was wrong, 
 ### Mini recap
 
 `KI-WEB-SITE-026` opened as a refresh and delivered a measurement fix, because the refresh had no target — `v0.4.0` is the newest `tools-ki` release. The drift sweep now compares release-pinned sources against the newest release instead of the default branch, so it warns only when a newer release exists. Proven in both directions; the guide follows the code. Prerelease handling and commit-pinned sources are named as limits rather than solved.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

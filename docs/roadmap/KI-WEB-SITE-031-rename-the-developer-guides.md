@@ -4,7 +4,7 @@ area: SITE
 title: Rename the developer guides
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: bda856fad54384385e338085d1deecfe8aaa0f01
@@ -117,7 +117,7 @@ A link checker walked every relative link in `docs/` and the root Markdown, reso
 
 **A bulk rewrite reached `docs/roadmap/` and had to be undone.** The reference sweep rewrote three accepted roadmap records — 026, 030 and 031 itself — turning statements about which file an item touched at the time into statements about a file that did not then exist. The damage to 031 was self-referential and absurd: its own Context began arguing that `what-to-publish.md` should be renamed to `what-to-publish.md`. All three were restored with `git checkout` before anything was staged. `AGENTS.md` already carries the rule that a bulk rewrite stays inside `apps/site/src/` and that `git diff --stat -- docs/` is checked before staging; the rule is right and was not followed, and the only reason it cost nothing is that the diff was read.
 
-The gate name is now the one place the old vocabulary survives in live code. `page-provenance.md` documents a script called `verify-guidance-sources.ts`, run as `verify:guidance`. That was a deliberate exclusion — renaming a gate wired into `package.json` and Turborepo's task graph is a different kind of change — but it means the guide opens by explaining a name it no longer shares.
+The gate name is now the one place the old vocabulary survives in live code. `page-provenance.md` documents a script called `verify-guidance-sources.ts`, run as `verify:guidance`. That was a deliberate exclusion — renaming a gate wired into `package.json` and Turborepo's task graph is a different kind of change — but it means the guide opens by explaining a name it no longer shares. The question is `KI-WEB-SITE-033`, so the exclusion outlives this record.
 
 `docs/roadmap/` now names files that do not exist. That is correct and is how the standard treats an accepted record, but a reader following a filename out of an old item will not find it.
 
@@ -130,6 +130,10 @@ The risk introduced is close to nil. No route, no permalink, no published URL an
 ### Mini recap
 
 `KI-WEB-SITE-031` renamed the three `guidance-*` developer guides to `what-to-publish.md`, `page-provenance.md` and `page-reachability.md`, and repointed thirteen inbound references across the decision records, both READMEs, `AGENTS.md`, three scripts, a Nunjucks partial and two generated data files. Section headings and opening paragraphs were reworded off a word that now names nothing. `docs/roadmap/` was left as history, after a bulk rewrite briefly falsified three records and was reverted. Every relative link and anchor resolves, and the clean build and four skill audits pass.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 
