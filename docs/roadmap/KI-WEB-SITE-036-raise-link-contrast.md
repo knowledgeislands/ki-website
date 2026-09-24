@@ -4,12 +4,12 @@ area: SITE
 title: Raise link contrast
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 09696cb0ddd5d9144a15e08454c17c57ccb596f6
 created_at: 2026-09-24T21:15:00Z
-updated_at: 2026-09-24T22:05:00Z
+updated_at: 2026-09-25T09:30:00Z
 ---
 
 ## Goal
@@ -139,6 +139,10 @@ The general lesson is that a contrast obligation is a property of the rendered s
 ### Mini recap
 
 `KI-WEB-SITE-036` closed a live WCAG AA failure affecting every link and every uppercase label on the light-scheme site, by moving one token value. The measurement that raised it came from `KI-WEB-SITE-032`'s arithmetic half; the visual half of both items remains open and needs a person.
+
+## Done
+
+Accepted 2026-09-25 by Kris Brown on the review packet above.
 
 ## Discussion
 
