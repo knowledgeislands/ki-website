@@ -27,7 +27,7 @@ The default reverses. **The site carries the material a reader needs to understa
 
 The test is no longer "does this age with a version?" but "what is the reader trying to do, and does this page let them do it?" The version question survives, relocated: it no longer decides _whether_ the site carries material, only _how_.
 
-Because where material changes per release, carrying it by hand is how the site rots. The catalogue is the evidence — hand-written prose describing 42 skills against an upstream 61, undetectable because nothing could detect it. So the guide gains a fourth outcome between carrying and linking: **vendor a published interface at a pinned ref**, parse it, fail loudly when its shape changes, refresh by advancing one ref. That is [ADR-KI-WEBSITE-001](ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) generalised from one page into a standing option.
+Because where material changes per release, carrying it by hand is how the site rots. The catalogue is the evidence — hand-written prose describing 42 skills against an upstream 61, undetectable because nothing could detect it. So the guide gains a fourth outcome between carrying and linking: **vendor a published interface at a pinned ref**, parse it, fail loudly when its shape changes, refresh by advancing one ref. This record names the outcome; how it is done, and what the site owes when the upstream interface is published but not specified, is decided separately.
 
 A repository link remains legitimate as a **fact about a project** — where it is developed, where to file an issue. What is removed is the link that stands in for content. The test on any given sentence is whether it transfers information or postpones it.
 
@@ -46,4 +46,4 @@ This decision governs **ownership** only. Provenance — the `sources:` declarat
 
 - [Deciding what this site publishes](../guides/developer/guidance-ownership.md) — the guide this decision rewrites.
 - [Guidance provenance](../guides/developer/guidance-provenance.md) — the citation mechanism this decision leaves intact.
-- [ADR-KI-WEBSITE-001](ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) — the vendored route, now a standing option rather than one page's exception.
+- [Deciding what this site publishes](../guides/developer/guidance-ownership.md) — where the fourth outcome is written down for the next page that needs it.

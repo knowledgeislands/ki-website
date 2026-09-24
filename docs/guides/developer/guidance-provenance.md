@@ -59,8 +59,8 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 | Page | Vendors | Sync script | Record |
 | --- | --- | --- | --- |
-| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-the-harness-capability-catalogue.md) |
-| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-003](../../decisions/ADR-KI-WEBSITE-003-vendoring-an-unspecified-published-interface.md) |
+| `/projects/ki-agentic-harness/skill-catalogue/` | The harness's generated capability inventory, from its marker-delimited block in `skills/README.md` | `sync-skill-catalogue.ts` → `src/_data/skillCatalogue.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) |
+| `/projects/ki/commands/` | The `ki` command inventory, from `man/ki.1` | `sync-cli-commands.ts` → `src/_data/cliCommands.json5` | [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) |
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 

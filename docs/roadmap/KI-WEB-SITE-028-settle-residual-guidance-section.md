@@ -92,7 +92,7 @@ None. No published interface or machine route is involved.
 
 The fifteen pages that belonged to no project now live at two addresses that each name what they hold, and the site's top-level navigation offers `Prompting` — a category a reader can predict — in place of `Guidance`, which by this week described neither half of what sat under it.
 
-### Summary of changes
+### Change Summary
 
 `src/guidance/prompting/` became `src/prompting/`, keeping its thirteen model guides and index; the directory data file moved with it, so every page is still styled because of where it lives rather than because of a frontmatter line. `src/guidance/recommended-tools.md` became `src/optional-tools/index.md` at `/optional-tools/` — the name every inbound link already used for it in prose. The hub page was retired: its only remaining job was introducing a collection that no longer exists, and the orientation it carried, that a project's own guides live on the project's pages, moved into the prompting index where a reader who arrives from the navigation will meet it.
 

@@ -84,7 +84,7 @@ None. The refresh this item was opened to perform does not exist; when `tools-ki
 
 A drift check that distinguishes unreleased upstream change from a refresh the site actually owes. A page pinned to a release tag is now measured against the newest release rather than the upstream default branch, so it reports work only when work exists. The original scope — advancing twelve pages and two data files past `v0.4.0` — was found on inspection to have no target and was not performed.
 
-### Summary of changes
+### Change Summary
 
 `verify-guidance-sources.ts` gained `latestRelease`, a per-repository cached lookup of the newest published release, and `checkDrift` now branches on whether the pinned ref matches `tagPattern`. A tag with a newer release warns and names it; a tag that is the newest release returns without reporting; a repository publishing no releases, or a source pinned to a commit, keeps the default-branch comparison unchanged. A refusal from GitHub is not cached as an answer. `guidance-provenance.md` replaced the sentence describing the old comparison.
 

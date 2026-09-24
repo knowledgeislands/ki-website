@@ -88,7 +88,7 @@ None. No published interface is involved.
 
 `order` is now a requirement of the guide contract rather than a convention, enforced in the gate that already reads every guide's frontmatter. A guide with no position, a non-numeric position, or a position another guide in the same project holds fails the build and says which page and which conflict.
 
-### Summary of changes
+### Change Summary
 
 `verify-guides.ts` gained a per-directory `Map` of taken positions and three checks inside the existing page loop: presence, positive-integer shape, and uniqueness within the project. `project-guides.md` replaced the sentence describing `order` as optional with the requirement and the reason for it. No guide page was edited, because none needed one.
 

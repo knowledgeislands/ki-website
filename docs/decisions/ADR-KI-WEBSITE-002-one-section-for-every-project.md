@@ -27,7 +27,7 @@ A second registry also carried a cost the reader never saw: `verify-projects.ts`
 
 **The retired routes redirect.** `/tooling/<slug>` to `/projects/<slug>/`, `/tooling/` to `/projects/`, permanently. This differs deliberately from how `/tooling/cli/` and `/harness/install` were retired without aliases: those were special cases whose inconsistency an alias would have preserved, whereas `/tooling/ki/` was a correct published address for a page that still exists at a different one.
 
-**Two pages leave rather than merge.** `/tooling/harnesses/` and `/tooling/guidance/` were task guidance — how to bootstrap a harness, how to activate a skill in a scope — filed under released tools by accident of navigation. They become `/guidance/harnesses/` and `/guidance/repositories/`.
+**Two pages leave rather than merge.** `/tooling/harnesses/` and `/tooling/guidance/` were task guidance — how to bootstrap a harness, how to activate a skill in a scope — filed under released tools by accident of navigation. They are not tool pages, so they leave the section. Both are about the agentic harness, and both are published under it, at `/projects/ki-agentic-harness/installing-a-harness/` and `/projects/ki-agentic-harness/repositories/`.
 
 ## Consequences
 
