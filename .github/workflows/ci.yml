@@ -55,4 +55,5 @@ jobs:
           } >> "$GITHUB_ENV"
           echo "$KI_CLI_INSTALL_DIR" >> "$GITHUB_PATH"
       - run: ki repo audit --repo .
+      - run: bun run test
       - run: bun run ki:site:build

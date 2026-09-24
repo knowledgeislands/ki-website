@@ -56,7 +56,9 @@
     "ki:site:dev": "bun run --cwd apps/site ki:site:dev",
     "ki:site:preview": "bun run --cwd apps/site preview",
     "ki:site:upload": "bun run --cwd apps/site upload",
-    "prepare": "husky"
+    "prepare": "husky",
+    "self:typecheck": "bunx tsc --noEmit && turbo run typecheck",
+    "test": "turbo run test"
   },
   "type": "module",
   "workspaces": [

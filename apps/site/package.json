@@ -20,6 +20,8 @@
     "preview": "bun run build && bunx wrangler dev",
     "sync:cli": "bun scripts/sync-cli-commands.ts",
     "sync:skills": "bun scripts/sync-skill-catalogue.ts",
+    "test": "bun test scripts",
+    "typecheck": "bunx tsc --noEmit -p tsconfig.json",
     "upload": "bunx wrangler versions upload",
     "verify:guidance": "bun scripts/verify-guidance-sources.ts",
     "verify:guides": "bun scripts/verify-guides.ts",

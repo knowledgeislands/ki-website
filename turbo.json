@@ -17,6 +17,10 @@
       "outputs": ["dist/**"]
     },
     "clean": { "cache": false },
+    // Each stage is its own cache unit per workspace, so a stage that nobody
+    // touched is replayed rather than re-run.
+    "test": { "dependsOn": ["^typecheck"] },
+    "typecheck": { "dependsOn": ["^typecheck"] },
     "ki:site:dev": { "cache": false, "persistent": true },
     "preview": { "cache": false, "persistent": true },
     "deploy": { "cache": false },
