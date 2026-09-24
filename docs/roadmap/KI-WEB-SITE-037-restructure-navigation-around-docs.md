@@ -3,13 +3,13 @@ id: KI-WEB-SITE-037
 area: SITE
 title: Restructure navigation around docs
 theme: site-experience
-horizon: next
-status: draft
-blocks: [KI-WEB-SITE-038]
+horizon: now
+status: in-progress
+blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: ae5276d789e9aef37b3e434f748d3aba6d013913
 created_at: 2026-09-24T22:30:00Z
-updated_at: 2026-09-25T09:00:00Z
+updated_at: 2026-09-25T10:00:00Z
 ---
 
 ## Goal
@@ -32,7 +32,9 @@ This item is the information architecture and the navigation that expresses it: 
 
 It is not a visual redesign. The token set, the prose treatment, and the page templates stay as they are; `KI-WEB-SITE-032` and `KI-WEB-SITE-036` own how the site looks.
 
-**It does not rewrite page content, and this is the boundary that matters here**, because the restructure surfaces a content problem it must not try to solve in passing. Three of the six sections it creates are a single page each. Growing them, redistributing their material, and deciding what a section owes a reader is `KI-WEB-SITE-038`, raised from this item's own Current state. Doing both at once would produce a change nobody can review: a move and a rewrite in one diff make it impossible to tell which one broke a page.
+**It rewrites page content where a section needs it.** This was originally excluded and handed to `KI-WEB-SITE-038`; that record is now merged in, because the user's direction is that the structure and the content are one pass. The reasoning for the split assumed two passes and does not survive the merge. So the scope includes growing a section that is currently one page, redistributing material between sections, and deciding what a section owes a reader.
+
+It does not revisit what the site is willing to publish. `GDR-KI-WEBSITE-002` and [what-to-publish.md](../guides/developer/what-to-publish.md) still decide whether material belongs here at all, and a thin section is not a licence to restate an upstream repository's guide wholesale to reach a page count. A section with four honest pages beats one with ten padded ones, and if a section genuinely holds one page's worth of material the right answer may be to merge it away rather than grow it.
 
 It does not commit to client-side search. Paperclip's `⌘K` is part of why Docs is navigable at 285 pages; at roughly 40 it may not be needed, and a search index is its own decision with its own cost.
 
@@ -63,7 +65,7 @@ Under the decision above, Docs would hold six sections:
 | Optional Tools | 1 | `src/optional-tools/index.md` |
 | Contribute | 1 | `src/contribute/index.njk` |
 
-**Three of the six are a single page.** That is the finding this item hands to `KI-WEB-SITE-038`, and it is the structural argument for the user's instinct that the documentation needs rethinking: a card reading "Get Started · 1 page" next to "Prompting · 14 pages" does not present a site that teaches. Either those sections grow into real ones or the card has to admit what it is, and the first is plainly what the site wants.
+**Three of the six are a single page**, and that is the substance of the content half of this item. They are not small sections; they are articles the current navigation promotes to section rank, which is why nobody has noticed. A card reading "Get Started · 1 page" beside "Prompting · 14 pages" states it plainly for the first time. Either those sections grow into real ones or the card has to admit what they are.
 
 Sixteen of the eighteen projects have no guides at all, which the split handles correctly — they stay registry entries in the catalogue and never appear in Docs.
 
@@ -80,7 +82,10 @@ Sixteen of the eighteen projects have no guides at all, which the split handles 
 - [ ] Reduce the top nav to Philosophy, Model, Docs in `src/_data/site.ts`.
 - [ ] Add a 301 in `src/redirects.njk` for every moved page.
 - [ ] Add within-section navigation, so a reader who finishes a page is offered the next one rather than the back button.
-- [ ] Fix any opening line that refers to a page's old position, and nothing else about its prose.
+- [ ] Fix any opening line that refers to a page's old position.
+- [ ] Settle what a section owes a reader, and write it down where the guide contract lives.
+- [ ] Judge each thin section on its own: grow Get Started into a sequence from material that already exists scattered; decide whether Optional Tools has a reason to be a section beyond symmetry; decide whether Contribute is a section at all or site chrome.
+- [ ] Write what the judgments call for, and merge away any section that honestly holds one page.
 
 ## Files touched
 
@@ -98,15 +103,18 @@ Sixteen of the eighteen projects have no guides at all, which the split handles 
 - `bun run ki:site:clean && bun run ki:site:build` passes; `verify-reachable.ts` is what proves every moved page is still findable by navigating from the root.
 - Every 301 resolves against the built `_redirects`, and no moved URL 404s.
 - Each card's page count equals the number of pages the registry declares for it — checked mechanically, not read.
+- No section exists that the record has not justified at its size, and no page was written purely to raise a count.
 - `ki repo audit --skill ki-repo-website-content --repo .` passes; this is a structural change and that is its gate.
 - `ki repo audit --skill ki-engineering --repo .` and `--skill ki-authoring --repo .` pass.
 - `bun run --cwd apps/site verify:provenance -- --network` still resolves, since moving a page must not disturb its `sources` declaration.
 
 ## Dependencies / blocks
 
-Blocks `KI-WEB-SITE-038`, which rethinks what the sections contain. The order is deliberate: the structure has to exist before there is anything to write into, and 038's whole subject is the three one-page sections this item creates.
+Nothing blocks this and it blocks nothing.
 
-Nothing blocks this. It overlaps `KI-WEB-SITE-032` only in that both touch pages a reviewer would look at; neither needs the other.
+`KI-WEB-SITE-038` was merged into this record rather than sequenced behind it. It held the content half, and while the two were going to be separate passes the `blocked_by` declaration was right; in one pass it would hold executable work behind a review queue, which the roadmap standard names as a dependency that "makes the audit fail for a reason that is not true".
+
+`KI-WEB-SITE-032` reviews the result. It is the visual pass and it needs a person at a browser, which is the one input this session cannot supply — so it stays its own record and its list is rewritten against the restructured site rather than the old one.
 
 ## Documentation impact
 
@@ -124,7 +132,7 @@ None. No published interface is involved.
 
 ### Roadmap
 
-`KI-WEB-SITE-038`, raised by this item.
+`KI-WEB-SITE-038` is merged into this record. `KI-WEB-SITE-032` is repointed at the restructured site.
 
 ## Discussion
 
@@ -145,3 +153,19 @@ This is the usual value of a structural change: it does not create problems so m
 It would be easy to take the card grid and not the counter. The counter is most of the value. "Prompting" says nothing about whether it is an afternoon or a reference you dip into; "Prompting · 14 pages" tells a reader what they are agreeing to. It also keeps the site honest, because a section that cannot state a respectable number is a section that needs work — which is exactly how the finding above surfaced.
 
 Deriving the count from a registry rather than writing it by hand is the difference between a fact and a claim that rots.
+
+### The three thin sections are not one problem
+
+Carried from `KI-WEB-SITE-038`, because the judgment survives the merge.
+
+**Get Started** most obviously wants to be a sequence. It is the first thing a reader meets, and a path through install, first repository, first skill, and seeing something happen is the shape Paperclip's Quickstart uses well. The material largely exists already, scattered across `/projects/ki/getting-started/`, the harness's installation guide, and the current single page — mostly a redistribution rather than net new writing.
+
+**Contribute** may honestly be one page. Plenty of good sites have a single contribution page and lose nothing by it. The real question is whether it belongs in Docs at all or is site chrome like a footer link. Forcing it to be a section to satisfy a grid would be the grid dictating to the content.
+
+**Optional Tools** is a list of recommendations about a reader's own machine. It could become one page per tool, but it would want a reason beyond symmetry.
+
+So the outcome is not "grow all three", and at least one answer may be "this is not a section".
+
+### What a section owes a reader
+
+Worth settling before writing anything, because it is the standard the content half is measured against. A first draft: a section names a capability; its first page says what you will be able to do and what it assumes; its pages read in an order that builds; its last page leaves you able to do the thing rather than pointing elsewhere. `verify-guides.ts` already enforces the opening-claim half and bans the hand-off, so part of this is mechanised — the sequence and the ending are not.

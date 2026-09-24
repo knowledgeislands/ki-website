@@ -4,12 +4,14 @@ area: SITE
 title: Rethink the documentation content
 theme: site-experience
 horizon: triage
-status: draft
+status: done
 blocks: []
-blocked_by: [KI-WEB-SITE-037]
+blocked_by: []
+intake_disposition: merged
+intake_disposition_target: KI-WEB-SITE-037
 baseline_ref: null
 created_at: 2026-09-25T09:00:00Z
-updated_at: 2026-09-25T09:00:00Z
+updated_at: 2026-09-25T09:45:00Z
 ---
 
 ## Goal
@@ -42,6 +44,18 @@ It does not change the navigation, the card grid, the section registry, or the r
 It does not revisit what the site is willing to publish. `GDR-KI-WEBSITE-002` and [what-to-publish.md](../guides/developer/what-to-publish.md) still decide whether material belongs here at all, and a thin section is not a licence to restate an upstream repository's guide wholesale in order to reach a page count. A section with four honest pages is better than one with ten padded ones, and if a section genuinely has one page's worth of material, the right answer may be to merge it rather than grow it.
 
 Every page it writes still declares its `sources`, and every page it moves keeps the declaration it had.
+
+## Intake disposition
+
+**Merged into `KI-WEB-SITE-037`.** The retained target carries this item's scope in its own Boundary, Steps and Verify.
+
+Splitting the move from the rewrite was the right call while they were going to be sequential — a move and a rewrite in one diff are hard to review separately. That reasoning assumed two passes. In one pass the split becomes an obstacle rather than a safeguard: `blocked_by: KI-WEB-SITE-037` would hold executable work behind a review queue, which the roadmap standard names as a declaration that "makes the audit fail for a reason that is not true".
+
+Nothing in the analysis is discarded. The three thin sections, the judgment that Contribute may honestly not be a section, and the question of what a section owes a reader all move into 037 intact.
+
+## Done
+
+Accepted 2026-09-25 by Kris Brown on the intake disposition above.
 
 ## Discussion
 
