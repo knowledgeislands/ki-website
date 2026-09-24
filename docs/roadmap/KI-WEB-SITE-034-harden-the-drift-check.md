@@ -4,12 +4,12 @@ area: SITE
 title: Harden the drift check
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: e1659627913d42a1c0580a23125fd38208561dba
 created_at: 2026-09-24T10:39:48Z
-updated_at: 2026-09-24T21:00:00Z
+updated_at: 2026-09-24T21:40:00Z
 ---
 
 ## Goal
@@ -122,6 +122,10 @@ Risk introduced is low. The guard narrows a comparison rather than widening it, 
 ### Mini recap
 
 `KI-WEB-SITE-034` re-measured the two drift-check blind spots `KI-WEB-SITE-026` recorded. The commit-pin case turned out not to be a defect — it is a per-file comparison that a commit pin can always act on, and it warns correctly on the five pages that hold this site's one commit pin. The `releases/latest` case split: a prerelease above the newest stable release stays deliberately invisible, and a page pinned to a prerelease is no longer compared against the release list, because that comparison reported a refresh backwards. Both accepted limits are now recorded in `page-provenance.md`.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

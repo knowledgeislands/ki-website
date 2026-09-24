@@ -4,12 +4,12 @@ area: SITE
 title: Rename the provenance gate
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 34cdffd8a97e76ac0b55aa295d00e3aec04a7fe5
 created_at: 2026-09-24T10:39:48Z
-updated_at: 2026-09-24T20:40:00Z
+updated_at: 2026-09-24T21:40:00Z
 ---
 
 ## Goal
@@ -139,6 +139,10 @@ Risk is low but not nil, unlike 031. This changed an executable chain: a script 
 ### Mini recap
 
 `KI-WEB-SITE-033` renamed `verify-guidance-sources.ts` to `verify-provenance.ts` and `verify-guidance-reachable.ts` to `verify-reachable.ts`, with the `verify:guidance` script becoming `verify:provenance`, and removed the word "guidance" from both scripts' identifiers, headers and output. Eleven prose and configuration files were repointed; `docs/roadmap/` was left as history. `turbo.json` turned out not to be involved. A clean build and five skill audits pass, after the build caught an identifier collision and a script-ordering failure.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 
