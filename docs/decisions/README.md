@@ -5,7 +5,7 @@ This directory holds the significant, durable decisions for the KI Website. Reco
 ## Reading order
 
 1. [GDR-KI-WEBSITE-001](GDR-KI-WEBSITE-001-adopting-decision-records.md) - adopts Decision Records for this repository.
-2. [GDR-KI-FUNDAMENTALS-001](GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) - defines the six repository authorities, publication flows, and choreography.
+2. [GDR-KI-FUNDAMENTALS-001](GDR-KI-FUNDAMENTALS-001-knowledge-islands-ecosystem-fundamentals.md) - routing responsibility, repository structures and boundaries, and ecosystem coordination.
 3. [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) - reverses the publishing default so the site carries what a reader needs rather than routing them to a repository, and names vendoring as the outcome for material that changes per release.
 4. [ADR-KI-WEBSITE-001](ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) - vendors the skill catalogue and the `ki` command inventory from their upstreams at pinned refs, and states what the parse owes when the upstream is published but not specified.
 5. [ADR-KI-WEBSITE-002](ADR-KI-WEBSITE-002-one-section-for-every-project.md) - merges the tooling section into projects, leaving one registry and one section for every public repository.
