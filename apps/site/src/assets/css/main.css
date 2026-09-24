@@ -321,6 +321,45 @@
     margin-bottom: 1.25rem;
   }
 
+  /* Overline labels — small uppercase section/component tags */
+  .overline {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-teal);
+    margin-bottom: 1rem;
+  }
+
+  /* Where a page's sources are declared, they are provenance rather than the
+     page's conclusion — see partials/sources.njk. */
+  .prose-provenance {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border-light);
+    color: var(--color-ink-light);
+    font-size: 0.8125rem;
+  }
+
+  .prose-provenance .overline {
+    margin-bottom: 0.625rem;
+  }
+
+  .prose-provenance table {
+    font-size: 0.8125rem;
+    margin-bottom: 0;
+  }
+
+  .prose-provenance th,
+  .prose-provenance td {
+    padding: 0.4375rem 0.75rem 0.4375rem 0;
+  }
+
+  .prose-provenance th {
+    color: var(--color-ink-light);
+    border-bottom-width: 1px;
+  }
+
   /* Markdown tables carry as much of the corpus as its prose does, so they are a
      first-class element here rather than browser defaults showing through. */
   .prose-ki table {
@@ -387,51 +426,12 @@
     color: var(--color-ink-light);
   }
 
-  /* Where a page's sources are declared, they are provenance rather than the
-     page's conclusion — see partials/sources.njk. */
-  .prose-provenance {
-    margin-top: 3.5rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--color-border-light);
-    color: var(--color-ink-light);
-    font-size: 0.8125rem;
-  }
-
-  .prose-provenance .overline {
-    margin-bottom: 0.625rem;
-  }
-
-  .prose-provenance table {
-    font-size: 0.8125rem;
-    margin-bottom: 0;
-  }
-
-  .prose-provenance th,
-  .prose-provenance td {
-    padding: 0.4375rem 0.75rem 0.4375rem 0;
-  }
-
-  .prose-provenance th {
-    color: var(--color-ink-light);
-    border-bottom-width: 1px;
-  }
-
   /* External-link marker injected by the external-link-icons transform. */
   .prose-ext-icon {
     display: inline-block;
     vertical-align: -0.1em;
     margin-left: 0.25em;
     opacity: 0.65;
-  }
-
-  /* Overline labels — small uppercase section/component tags */
-  .overline {
-    font-size: 0.8125rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: var(--color-teal);
-    margin-bottom: 1rem;
   }
 
   .overline-gold {
