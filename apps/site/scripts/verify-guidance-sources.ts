@@ -256,6 +256,31 @@ const upstreamHead = async (repository: string, path: string): Promise<string | 
   return commits[0]?.sha ?? null
 }
 
+/**
+ * The newest release tag a repository has published, or `null` when it publishes none.
+ *
+ * Resolved once per repository. A sweep touching a dozen pages of one repository would
+ * otherwise spend a dozen of the sixty unauthenticated requests an hour asking the same
+ * question, and the first refusal stops every check after it.
+ */
+const latestReleases = new Map<string, string | null>()
+
+const latestRelease = async (repository: string): Promise<string | null> => {
+  const cached = latestReleases.get(repository)
+  if (cached !== undefined) return cached
+
+  const response = await api(`https://api.github.com/repos/${repository}/releases/latest`)
+  if (!response?.ok) {
+    // A refusal is not an answer, so it is not cached as one.
+    if (response) latestReleases.set(repository, null)
+    return null
+  }
+  const release = (await response.json()) as { tag_name?: string }
+  const tag = release.tag_name ?? null
+  latestReleases.set(repository, tag)
+  return tag
+}
+
 const checkDrift = async (page: string, source: Source): Promise<void> => {
   if (!source.repository || !source.path || !source.ref) return
 
@@ -267,6 +292,26 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
     return
   }
   const pinnedFile = (await pinnedResponse.json()) as { sha?: string }
+
+  // A page pinned to a release tag is asking about releases, so that is what it is told about.
+  // Comparing such a page against the default branch reports every unreleased upstream commit as
+  // a refresh this site owes — which is true of any correctly pinned tag, fires from the moment
+  // upstream merges anything, and cannot be resolved by refreshing, because there is nothing newer
+  // to refresh to. A warning in that state is permanent, and a permanent warning teaches its reader
+  // to skip the whole sweep. So the question becomes the one the page can act on: is there a newer
+  // release? (KI-WEB-SITE-026)
+  if (tagPattern.test(source.ref)) {
+    const latest = await latestRelease(source.repository)
+    if (latest) {
+      if (latest !== source.ref) {
+        warn(
+          `${page}: cites ${source.repository}/${source.path} at ${source.ref}, but ${latest} is released; a refresh is owed.`
+        )
+      }
+      return
+    }
+    // No published release to compare against, so fall through to the branch comparison below.
+  }
 
   const headResponse = await api(`https://api.github.com/repos/${source.repository}/contents/${source.path}`)
   if (!headResponse) return

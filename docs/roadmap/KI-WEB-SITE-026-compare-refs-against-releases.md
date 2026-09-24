@@ -1,89 +1,125 @@
 ---
 id: KI-WEB-SITE-026
 area: SITE
-title: Refresh pinned CLI citations
+title: Compare refs against releases
 theme: site-experience
-horizon: next
-status: draft
+horizon: now
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: 4d4d80ecaf7af3e01ab216428f61764d5cab1e6a
 created_at: 2026-09-24T08:06:42Z
-updated_at: 2026-09-24T08:06:42Z
+updated_at: 2026-09-24T08:34:10Z
 ---
 
 ## Goal
 
-A reader following the site's account of what `ki` can do sees the current release, not a snapshot taken at `v0.4.0`. The vendored command inventory and the pages that cite it advance together to one newer ref, and the provenance sweep stops reporting drift it cannot resolve.
+The provenance sweep reports a refresh as owed when one genuinely is, and stays quiet when the site already cites the newest release. A maintainer who runs it can trust that a warning means work, so the sweep is worth running.
 
 ## Context
 
-Twelve published pages and two data files under `apps/site/src/` cite `tools-ki` at `v0.4.0`: the nine `ki` project guides, three `ki-agentic-harness` guides, `src/_data/cliCommands.json5`, and the `manual` field in `src/_data/projects.json5`.
+This item was opened to refresh twelve pages and two data files pinned to `tools-ki` at `v0.4.0`, on the evidence that `bun run --cwd apps/site verify:guidance -- --network` reported drift there. Checking the premise before acting on it showed the refresh does not exist to be done: `v0.4.0` is `tools-ki`'s latest release, published 2026-09-18. The site is correctly pinned to the newest thing upstream has shipped.
 
-`bun run --cwd apps/site verify:guidance -- --network` reported this as a warning during `KI-WEB-SITE-025` and the concern was deferred there as separate work. The record was accepted and pruned, so the concern currently exists nowhere.
+The warning was real but was measuring something else. `verify-guidance-sources.ts` compared the pinned ref's blob against the same path on the upstream **default branch**. Those differ — `man/ki.1` is `7a53b86` at `v0.4.0` and `d9f729f` on `main` — because upstream has merged work since it released. That is what a release tag means.
 
-The pages are not wrong. Each declares the ref it was written from, which is exactly what `verify:guidance` requires, so the site is honestly stale rather than quietly false. The cost is that a reader deciding whether `ki` suits them is reading an older command surface than the one they would install, and `ADR-KI-WEBSITE-003` accepted vendoring specifically on the understanding that refreshing is a deliberate act someone performs.
+The consequence is that the warning was unconditional. Any page pinned to any tag warns from the moment its upstream merges anything, and the warning cannot be cleared by doing what it asks, because there is nothing newer to pin to. A sweep that always reports drift teaches its reader that its output is noise, which is worse than not running it: the genuine case — a page left on `v0.3.6` after `v0.4.0` shipped — arrives in the same undifferentiated list as the permanent one.
 
-The refresh is not a bulk `sed`. `sync:cli` reparses `man/ki.1` at the new ref, and `ADR-KI-WEBSITE-003` records that the manual is published but unspecified — its SYNOPSIS and COMMAND GROUPS sections had already drifted from each other at `v0.4.0`. A newer manual may have changed shape, and the parser is meant to fail loudly when it does. That failure is the work, not an obstacle to it.
+This is the session's recurring shape in a new place. A check that passes tells you the check ran, not that the property holds; a check that always warns tells you nothing at all.
 
 ## Boundary
 
-This item advances citations of `tools-ki` to one chosen newer ref. It does not change the vendoring mechanism, the parser's contract, or `ADR-KI-WEBSITE-003`. It does not introduce a build-time network fetch — the reproducible-`dist/` constraint stands. It does not refresh `ki-agentic-harness` citations beyond the three pages that name a `tools-ki` ref, and it does not rewrite refs quoted in `docs/decisions/` or `docs/roadmap/`, where they are historical statements.
+This item changes what the drift comparison asks. It does not change the warning's severity — drift stays a warning and never fails the build, for the reason the guide already gives. It does not change the offline checks, the prose-link resolution, the `sources` schema, or the vendoring scripts. It does not refresh any citation, because none is behind. It does not add a release check to `verify:routes`, which already has its own. It does not introduce a build-time network call.
 
 ## Current state
 
-`src/_data/cliCommands.json5` holds a snapshot parsed from `man/ki.1` at `v0.4.0`. The `ki` registry entry's `manual` field points at the same tag. Fourteen source files name that version in prose or data. The network sweep reports the upstream has moved; nothing in the repository records which newer ref the site should adopt or what changed between them.
+Delivered. `checkDrift` branches on the pinned ref's form. A tag is compared against the repository's newest published release and warns only when a later one exists; a commit ref keeps the default-branch comparison, since no release corresponds to it. A repository that publishes no releases falls through to the old behaviour. The latest release is resolved once per repository and cached, so a sweep across a dozen pages of one repository spends one request rather than twelve against the unauthenticated limit of sixty an hour.
 
 ## Steps
 
-- [ ] Choose the target `tools-ki` release ref and record why that one — a tag the site can cite immutably, not a branch.
-- [ ] Re-run `bun run --cwd apps/site sync:cli` at the chosen ref and read the diff to `cliCommands.json5` as evidence of what the release changed.
-- [ ] Resolve any parser failure the newer manual causes, or record it as a handoff to `tools-ki` if the manual's shape regressed rather than the parser.
-- [ ] Update the `manual` field in `projects.json5` and the prose citations and `sources` refs across the twelve affected pages.
-- [ ] Reread the pages whose command counts or group names the diff changed, so prose and data agree.
+- [x] Check the premise: establish whether a newer `tools-ki` release exists before refreshing anything against one.
+- [x] Identify why the sweep reported drift — default-branch comparison against a release-pinned source.
+- [x] Branch the drift check on the ref's form, comparing a tag against the newest release and a commit against the default branch.
+- [x] Cache the latest release per repository so the change does not cost rate limit.
+- [x] Prove both directions: silent on the newest release, warning by name when genuinely behind.
+- [x] Correct `docs/guides/developer/guidance-provenance.md`, which described the old comparison.
 
 ## Files touched
 
-- `apps/site/src/_data/cliCommands.json5`
-- `apps/site/src/_data/projects.json5`
-- `apps/site/src/projects/ki/*.md`
-- `apps/site/src/projects/ki-agentic-harness/{installing-a-harness,onboarding,repositories}.md`
+- `apps/site/scripts/verify-guidance-sources.ts`
+- `docs/guides/developer/guidance-provenance.md`
+- `docs/roadmap/KI-WEB-SITE-026-compare-refs-against-releases.md`
 
 ## Verify
 
-- `bun run ki:site:clean && bun run ki:site:build` passes with every in-build gate.
-- `bun run --cwd apps/site verify:guidance -- --network` reports no `tools-ki` drift.
-- `grep -rl 'v0\.4\.0' apps/site/src` returns nothing.
-- Spot-read the command inventory page against the chosen release's manual for group and count agreement.
+- `GITHUB_TOKEN="$(gh auth token)" bun run --cwd apps/site verify:guidance -- --network` resolves 35 pages, 38 repository sources and 13 prose links with zero warnings.
+- Repointing one page to `v0.3.6` produces exactly one warning naming `v0.4.0` as the release owed; the page is then restored.
+- `bunx tsc --noEmit -p apps/site/tsconfig.json` passes.
+- `bun run ki:site:clean && bun run ki:site:build` passes.
 
 ## Dependencies / blocks
 
-No local item blocks this. It depends on `tools-ki` having published a release worth adopting, which it has. If the newer manual proves unparseable for reasons the manual owns, the fix belongs in `tools-ki` and this item records the handoff rather than working around it locally.
+Nothing blocks this and it blocks nothing. `KI-WEB-SITE-027` hands the guide contract to `tools-ki`; if that repository later publishes a machine-readable command projection, this sweep is unaffected, because it compares refs rather than content.
 
 ## Documentation impact
 
 ### Decision Records
 
-None expected. `ADR-KI-WEBSITE-003` already records the vendoring contract and states that refreshing means advancing one ref; performing that refresh does not change the decision. A Decision Record becomes necessary only if the parser must be loosened to accept a shape the manual no longer guarantees.
+None. `ADR-KI-WEBSITE-003` records that refreshing means deliberately advancing one ref and is unchanged by making the prompt to do so accurate. No decision about vendoring, provenance, or severity is revisited.
 
 ### Specifications
 
-None. The `/install/<slug>` contract and the release-advance machinery are untouched.
+None. No published interface or machine route is involved.
 
 ### Guides
 
-`docs/guides/developer/guidance-provenance.md` describes the refresh sweep and needs no change unless the sync procedure itself changes.
+`docs/guides/developer/guidance-provenance.md` described the default-branch comparison and now describes the release comparison, including why a commit-pinned source still uses the branch.
 
 ### Roadmap
 
-A handoff item in `tools-ki` only if the manual's shape, rather than the site's parser, is what broke.
+None. The refresh this item was opened to perform does not exist; when `tools-ki` next releases, the sweep will say so by name.
+
+## Review
+
+### Delivered
+
+A drift check that distinguishes unreleased upstream change from a refresh the site actually owes. A page pinned to a release tag is now measured against the newest release rather than the upstream default branch, so it reports work only when work exists. The original scope — advancing twelve pages and two data files past `v0.4.0` — was found on inspection to have no target and was not performed.
+
+### Summary of changes
+
+`verify-guidance-sources.ts` gained `latestRelease`, a per-repository cached lookup of the newest published release, and `checkDrift` now branches on whether the pinned ref matches `tagPattern`. A tag with a newer release warns and names it; a tag that is the newest release returns without reporting; a repository publishing no releases, or a source pinned to a commit, keeps the default-branch comparison unchanged. A refusal from GitHub is not cached as an answer. `guidance-provenance.md` replaced the sentence describing the old comparison.
+
+### Verification
+
+The authenticated sweep resolves 35 pages, 38 repository sources and 13 prose links with zero warnings, where the same sweep previously reported `tools-ki` drift. Repointing `src/projects/ki/commands.md` to `v0.3.6` produced exactly one warning — `cites knowledgeislands/tools-ki/man/ki.1 at v0.3.6, but v0.4.0 is released; a refresh is owed` — and the page was restored, confirmed by `git diff --stat` showing only the script changed. `bunx tsc --noEmit` and the full build pass.
+
+### Outstanding concerns
+
+The release lookup adds one request per repository per sweep, which is cheap but is still a network call the unauthenticated limit counts. Running the sweep without `GITHUB_TOKEN` was already impractical at this corpus size and remains so.
+
+A repository that publishes releases but pins a source to a commit rather than a tag still gets the default-branch comparison, and so still gets the permanent warning this item removed for tags. No current source is in that position, and forcing tags would be a schema change the `sources` contract does not currently make.
+
+The check trusts GitHub's `releases/latest`, which means the newest non-prerelease release. A repository whose newest useful artefact is a prerelease would be reported as current when it is not.
+
+### Post-change review
+
+The goal is met: the sweep is quiet on a correctly pinned corpus and specific when a citation falls behind, and both states were demonstrated rather than reasoned about. The change is read-only against upstream, confined to one script and one guide sentence, and cannot affect the build, because drift remains a warning. The risk it introduces is under-reporting — a repository using prereleases, or a commit-pinned source — which is stated above rather than hidden, and is a smaller failure than the unconditional warning it replaces.
+
+The wider lesson is the one worth keeping: the item's stated premise was wrong, and the only thing that caught it was checking whether the release it assumed existed actually did before editing fourteen files against it.
+
+### Mini recap
+
+`KI-WEB-SITE-026` opened as a refresh and delivered a measurement fix, because the refresh had no target — `v0.4.0` is the newest `tools-ki` release. The drift sweep now compares release-pinned sources against the newest release instead of the default branch, so it warns only when a newer release exists. Proven in both directions; the guide follows the code. Prerelease handling and commit-pinned sources are named as limits rather than solved.
 
 ## Discussion
 
-### Why this is not a find-and-replace
+### Why the premise check mattered more than the work
 
-The version string is the visible part; the inventory behind it is the substance. Replacing `v0.4.0` with a newer tag everywhere would produce a site claiming to describe a release it has not read — the precise failure `ADR-KI-WEBSITE-001` was written about, where hand-written prose described 42 skills against an upstream 61. The sync runs first, the diff is read, and the prose follows the data.
+Acting on the item as written would have produced a `sed` across fourteen files advancing a version string to a release that does not exist, or — marginally better — a sync against a branch, pinning the site to a moving target and breaking the immutability `ADR-KI-WEBSITE-003` rests on. The warning was evidence that something was worth looking at, not evidence of what.
 
-### How often this should recur
+### What a permanent warning costs
 
-Open question worth settling while doing it. A refresh triggered by a person noticing a warning is a refresh that happens when someone happens to look. Whether the site should instead track releases on a cadence, or accept staleness as the honest cost of a reproducible build, is a policy question this item can inform but should not decide unilaterally.
+Nothing measurable, which is the problem. The sweep still passes, the build still succeeds, and the output still scrolls past. The cost is paid later, when a real warning appears in a list the reader has learned to skim.
+
+### Prereleases
+
+Left unhandled deliberately. `releases/latest` excludes prereleases, which is the right default for a site whose readers install what is published. If a Knowledge Islands repository starts shipping prereleases as its usable artefact, the comparison needs a policy — follow them, or keep citing the last stable release and say so — and that is a decision rather than a fix.
