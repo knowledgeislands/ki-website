@@ -1,16 +1,16 @@
 /**
- * Verifies that every published guidance page can be reached by navigating.
+ * Verifies that every published page can be reached by navigating.
  *
  * On the run that first exercised this gate, twenty-one of the thirty-three
- * guidance pages were reachable only by typing their URL — an entire
+ * published pages were reachable only by typing their URL — an entire
  * fourteen-page collection had no inbound link from outside its own subtree.
  * Nothing detected it, because nothing looked (KI-WEB-SITE-019).
  *
  * So this walks the built site from `dist/index.html` the way a reader does,
- * following only `href` attributes, and fails when a guidance page is not on
+ * following only `href` attributes, and fails when a published page is not on
  * the far end of any of them. It fails rather than warns because an orphaned
  * page is entirely within this site's control, unlike the upstream drift that
- * `verify-guidance-sources.ts` reports as a warning.
+ * `verify-provenance.ts` reports as a warning.
  *
  * `dist/guidance/` no longer exists. The guides each project owns moved to
  * `dist/projects/` (KI-WEB-SITE-025), and what was left — the prompting guides
@@ -107,14 +107,14 @@ for (const page of all) {
   }
 }
 
-const guidance = all.filter((page) => published(where(page)))
+const publishedPages = all.filter((page) => published(where(page)))
 
 for (const message of warnings) console.warn(`warning: ${message}`)
 
 if (failures.length > 0) {
   for (const message of failures) console.error(`error: ${message}`)
-  console.error(`\nverify-guidance-reachable: ${failures.length} unreachable guidance page(s)`)
+  console.error(`\nverify-reachable: ${failures.length} unreachable published page(s)`)
   process.exit(1)
 }
 
-console.log(`verify-guidance-reachable: ${guidance.length} published page(s) reachable from the home page`)
+console.log(`verify-reachable: ${publishedPages.length} published page(s) reachable from the home page`)

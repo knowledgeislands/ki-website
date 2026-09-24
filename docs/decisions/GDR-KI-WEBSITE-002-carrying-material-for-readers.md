@@ -31,7 +31,7 @@ Because where material changes per release, carrying it by hand is how the site 
 
 A repository link remains legitimate as a **fact about a project** — where it is developed, where to file an issue. What is removed is the link that stands in for content. The test on any given sentence is whether it transfers information or postpones it.
 
-This decision governs **ownership** only. Provenance — the `sources:` declaration, `partials/sources.njk`, and the `verify:guidance` gate — is untouched, and matters more under the new default rather than less, since the site now restates more of what it cites.
+This decision governs **ownership** only. Provenance — the `sources:` declaration, `partials/sources.njk`, and the `verify:provenance` gate — is untouched, and matters more under the new default rather than less, since the site now restates more of what it cites.
 
 ## Consequences
 

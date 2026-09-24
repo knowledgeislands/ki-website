@@ -14,7 +14,7 @@ This is the same reasoning that made the provenance sweep worth building. A cond
 
 ## The check
 
-`apps/site/scripts/verify-guidance-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/projects/`, `dist/prompting/` or `dist/optional-tools/` that the walk never reaches is a failure.
+`apps/site/scripts/verify-reachable.ts` starts at `dist/index.html` and walks the built site the way a reader does: it follows `href` attributes only, resolving each relative to the document it was found in, and collects every HTML file it arrives at. Anything under `dist/projects/`, `dist/prompting/` or `dist/optional-tools/` that the walk never reaches is a failure.
 
 It follows links, not routes. A `permalink` in frontmatter, an entry in the sitemap, and a redirect in `_redirects` all declare that an address exists; none of them is a way for a reader to find it. Existence is owned elsewhere — `verify-tool-routes.ts` and `verify-projects.ts` check that advertised routes resolve. This gate owns arrival.
 

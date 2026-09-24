@@ -48,7 +48,7 @@ This is the rule the whole arrangement exists for. A page that moved out of `/gu
 
 ### It declares its provenance
 
-`sources` or `sources: original`, exactly as before — see [page provenance](page-provenance.md). `verify:guidance` reads `src/projects/` alongside the trees that belong to no project, so moving a page is not a way to shed its declaration.
+`sources` or `sources: original`, exactly as before — see [page provenance](page-provenance.md). `verify:provenance` reads `src/projects/` alongside the trees that belong to no project, so moving a page is not a way to shed its declaration.
 
 ## How a guide is found
 

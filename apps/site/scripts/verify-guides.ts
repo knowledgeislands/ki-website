@@ -24,7 +24,7 @@
  * GDR-KI-WEBSITE-002 is whether it survives as a fact rather than as a
  * destination, and link text is the part of that a machine can judge: "the full
  * guide" names a destination, while "the installer published at v0.4.0" names a
- * fact. Provenance is `verify-guidance-sources.ts`; this file owns voice.
+ * fact. Provenance is `verify-provenance.ts`; this file owns voice.
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'

@@ -1,5 +1,5 @@
 /**
- * Verifies that every published guidance page declares what it was written from.
+ * Verifies that every published page declares what it was written from.
  *
  * The site deliberately restates material owned by other repositories, so its prose drifts from
  * those sources between refreshes. That is intended; invisible drift is not. Every published
@@ -24,7 +24,7 @@ import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const guidanceDirs = ['src/projects', 'src/prompting', 'src/optional-tools'].map((dir) => resolve(siteRoot, dir))
+const publishedDirs = ['src/projects', 'src/prompting', 'src/optional-tools'].map((dir) => resolve(siteRoot, dir))
 const sourcesPartial = 'partials/sources.njk'
 const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
 const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
@@ -331,7 +331,7 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
 }
 
 const network = process.argv.includes('--network')
-const pages = guidanceDirs.flatMap(markdownFiles).sort()
+const pages = publishedDirs.flatMap(markdownFiles).sort()
 
 if (pages.length === 0) {
   fail('No published pages found; expected Markdown below src/projects/, src/prompting/ or src/optional-tools/.')
@@ -411,7 +411,7 @@ const checkVendoredSnapshot = (): void => {
   )
   if (citing.length === 0) {
     fail(
-      `${relative(siteRoot, vendoredData)}: vendors ${repository}/${path}, but no guidance page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
+      `${relative(siteRoot, vendoredData)}: vendors ${repository}/${path}, but no published page declares it as a source. A vendored snapshot nobody cites is an undeclared copy.`
     )
     return
   }
@@ -444,11 +444,11 @@ if (failures.length > 0) {
   for (const message of failures) {
     console.error(`error: ${message}`)
   }
-  console.error(`\nGuidance provenance check failed with ${failures.length} error(s).`)
+  console.error(`\nProvenance check failed with ${failures.length} error(s).`)
   process.exit(1)
 }
 
 const scope = network
   ? `${pages.length} pages, ${repositorySources.length} repository sources and ${linkTargets.size} prose links resolved`
   : `${pages.length} pages`
-console.log(`Guidance provenance verified (${scope}).`)
+console.log(`Provenance verified (${scope}).`)

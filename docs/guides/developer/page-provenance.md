@@ -98,15 +98,15 @@ It renders as a footer rather than as a `## Sources` heading. As a heading it wa
 ## The sweep
 
 ```bash
-bun run --cwd apps/site verify:guidance            # declaration shape only
-bun run --cwd apps/site verify:guidance -- --network  # additionally compare each ref against upstream
+bun run --cwd apps/site verify:provenance            # declaration shape only
+bun run --cwd apps/site verify:provenance -- --network  # additionally compare each ref against upstream
 ```
 
 Offline, the check confirms that every published page declares `sources`, that entries carry a usable shape, that `repository` entries name a `knowledgeislands` repository and pin an immutable ref, and that `reviewed` is a real date that is not in the future.
 
 With `--network`, it asks the question a page can act on. A source pinned to a release tag is compared against the repository's newest release: if a later one exists, a refresh is owed and the warning names it. If the page already cites the newest release, nothing is reported — upstream commits made since that tag are unreleased, so there is nothing to refresh to, and a warning in that state would fire from the moment upstream merged anything and never clear. A source pinned to a commit has no release to compare against, so it is compared against the upstream default branch instead. Those are reported as **warnings, not failures**, for the same reason tool-route drift is: an upstream repository editing its own guide must never break this site's build. The warning says a refresh is owed, and refusing to publish until someone performs it would punish the wrong repository.
 
-`verify:guidance` runs as part of `bun run ki:site:build`, so a page cannot reach `dist/` without a declaration.
+`verify:provenance` runs as part of `bun run ki:site:build`, so a page cannot reach `dist/` without a declaration.
 
 GitHub allows unauthenticated callers sixty requests an hour, and a full `--network` sweep resolves more than that. Set `GITHUB_TOKEN` (`GITHUB_TOKEN="$(gh auth token)"`) to lift the limit. Without one, the first refusal stops the remaining network checks and says so; a refusal is never reported as a missing document, because "GitHub declined to answer" and "the upstream deleted it" are different facts and only one of them is worth acting on.
 

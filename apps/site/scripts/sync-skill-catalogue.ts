@@ -168,7 +168,7 @@ const header = (ref: string): string => `// Vendored snapshot of the harness's g
 // ki-repo-harness:capability-catalogue markers, which that standard names normatively.
 //
 // The ref below must match the ref declared in the sources frontmatter of
-// src/projects/ki-agentic-harness/skill-catalogue.md; verify:guidance fails the build when they disagree.
+// src/projects/ki-agentic-harness/skill-catalogue.md; verify:provenance fails the build when they disagree.
 // See docs/guides/developer/page-provenance.md.
 //
 // Snapshot taken at ${ref}.
