@@ -32,6 +32,7 @@ const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
 const repositoryOwner = 'knowledgeislands'
 const repositoryPattern = /^knowledgeislands\/[a-z0-9]+(?:[-.][a-z0-9]+)*$/
 const tagPattern = /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/
+const prereleasePattern = /^v\d+\.\d+\.\d+-[0-9A-Za-z.-]+$/
 const commitPattern = /^[0-9a-f]{40}$/
 const datePattern = /^\d{4}-\d{2}-\d{2}$/
 
@@ -300,7 +301,11 @@ const checkDrift = async (page: string, source: Source): Promise<void> => {
   // to refresh to. A warning in that state is permanent, and a permanent warning teaches its reader
   // to skip the whole sweep. So the question becomes the one the page can act on: is there a newer
   // release? (KI-WEB-SITE-026)
-  if (tagPattern.test(source.ref)) {
+  // `releases/latest` answers with the newest non-prerelease, so it is the wrong comparand for a
+  // page pinned to a prerelease: it would report an older stable tag as the refresh that is owed,
+  // which is a refresh backwards. A prerelease pin falls through to the file comparison below,
+  // which asks the question that pin can act on — has the file itself moved? (KI-WEB-SITE-034)
+  if (tagPattern.test(source.ref) && !prereleasePattern.test(source.ref)) {
     const latest = await latestRelease(source.repository)
     if (latest) {
       if (latest !== source.ref) {

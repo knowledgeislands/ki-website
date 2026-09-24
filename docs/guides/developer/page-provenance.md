@@ -108,6 +108,14 @@ With `--network`, it asks the question a page can act on. A source pinned to a r
 
 `verify:provenance` runs as part of `bun run ki:site:build`, so a page cannot reach `dist/` without a declaration.
 
+### What a clean sweep does not prove
+
+Two limits are deliberate, and they are written down because a check that reports success is the hardest kind to distrust.
+
+**A repository whose newest artefact is a prerelease is reported as current.** The release comparison asks GitHub for the newest _non-prerelease_ release, so a page pinned to the newest stable tag is told nothing while a prerelease sits above it. That is the intended answer: the site recommends what an upstream repository stands behind, and a prerelease is by definition not that. A page that wants to cite a prerelease may still pin one, and such a page is not compared against the release list at all — comparing it would report an older stable tag as the refresh owed, which is a refresh backwards. It falls through to the file comparison instead.
+
+**A commit pin is compared against the upstream default branch, and that is the right question for it.** The comparison is per file: it reports that the exact document the page cites has changed, which a commit pin can always act on by advancing to a newer commit. It is not the permanently-unclearable warning a tag pin would get from the same comparison, because there is always something newer to pin to. One source on this site is pinned to a commit, and it warns exactly when that file moves.
+
 GitHub allows unauthenticated callers sixty requests an hour, and a full `--network` sweep resolves more than that. Set `GITHUB_TOKEN` (`GITHUB_TOKEN="$(gh auth token)"`) to lift the limit. Without one, the first refusal stops the remaining network checks and says so; a refusal is never reported as a missing document, because "GitHub declined to answer" and "the upstream deleted it" are different facts and only one of them is worth acting on.
 
 ## Links the prose makes
