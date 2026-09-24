@@ -4,12 +4,12 @@ area: SITE
 title: Hand over guide contract
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: deec9dff3be8c92b00b3b317fba03278282c0440
 created_at: 2026-09-24T08:06:42Z
-updated_at: 2026-09-24T08:50:00Z
+updated_at: 2026-09-24T19:20:00Z
 ---
 
 ## Goal
@@ -34,26 +34,28 @@ This item writes one handoff record in each peer repository and nothing more. It
 
 The contract is written and enforced in `ki-website` only. `docs/guides/developer/project-guides.md` states it in this site's terms — permalinks, project binding, the `guides` collection — much of which is Eleventy-specific and does not transfer. The transferable part is the pair of editorial rules: a page opens by saying what the reader can do, and its link text never stands in for its content.
 
-Half delivered. `tools-ki` now carries `KI-TOOL-CLI-083`, which states both editorial rules, names `ki-website` as its `transferred_from` origin, and says plainly that it is a proposal that binds nothing and blocks nothing. It sits at `triage`, which is the honest horizon for intake another repository has not yet prioritised, and it argues the no-deferral rule's weaker case in a repository whose README is a document a reader should open.
+Both halves are delivered. `tools-ki` carries `KI-TOOL-CLI-083`, which states both editorial rules, names `ki-website` as its `transferred_from` origin, and says plainly that it is a proposal that binds nothing and blocks nothing. It sits at `triage`, which is the honest horizon for intake another repository has not yet prioritised, and it argues the no-deferral rule's weaker case in a repository whose README is a document a reader should open.
 
 Two corrections went with it. `KI-TOOL-CLI-080` cited `ADR-KI-WEBSITE-003` for the specified-versus-published vendoring distinction, and `KI-WEB-SITE-030` merged that record into `ADR-KI-WEBSITE-001`; the citation now resolves. `KI-TOOL-CLI-078` carried `### Summary of changes`, which the roadmap standard spells `### Change Summary`, and its own gate was failing on it.
 
-**The `ki-agentic-harness` half is held.** That checkout had an active writer throughout this session — a dirty tree of in-flight skill work, and commits landing minutes and then seconds before each check, including one that touched `docs/roadmap/`. Adding a record there means creating a file and editing the shared `_ISSUES.md` ledger in a tree somebody else is committing from, which is the collision the one-writer-per-checkout rule exists to prevent. The handoff is not blocked on a decision or a dependency; it is waiting for a quiet checkout, and it is a single record's worth of work when one is available.
+The `ki-agentic-harness` half was held for most of the session and is now delivered. That checkout had an active writer — a dirty tree of in-flight skill work, and commits landing minutes and then seconds before each check, including one that touched `docs/roadmap/`. Adding a record there means creating a file and editing the shared `_ISSUES.md` ledger in a tree somebody else is committing from, which is the collision the one-writer-per-checkout rule exists to prevent. The tree went quiet later the same day and the record went in: `KI-HARNESS-GOV-091`, harness commit `e2ba941d`.
+
+That record is framed differently from its `tools-ki` sibling, because the harness is not merely a recipient. `ki-guides` lives there, so a decision to adopt either editorial rule binds every repository and a decision to refuse does the same. The record says so, and carries the evidence caution this item's Discussion argues for.
 
 ## Steps
 
 - [x] Extract the runtime-neutral core of the contract from `project-guides.md` — the opening claim and the no-deferral rule — separated from the site-specific binding and permalink mechanics.
 - [x] Check each peer repository for an active writer before adding a record to its checkout.
-- [ ] Write a handoff record in `ki-agentic-harness` proposing the editorial rules for its `docs/guides/`, naming this item as the origin and stating that it does not block. **Held: that checkout has an active writer.**
+- [x] Write a handoff record in `ki-agentic-harness` proposing the editorial rules for its `docs/guides/`, naming this item as the origin and stating that it does not block.
 - [x] Write the equivalent record in `tools-ki`, noting that its guides sit beside the code and that a repository link there may be legitimate where one here is not.
-- [ ] Record the two identifiers here and keep the relationship reciprocal. One of the two exists.
+- [x] Record the two identifiers here and keep the relationship reciprocal: `KI-TOOL-CLI-083` and `KI-HARNESS-GOV-091`.
 
 ## Files touched
 
 - `tools-ki/docs/roadmap/KI-TOOL-CLI-083-guide-opening-and-deferral.md` and its `_ISSUES.md` — delivered, `tools-ki` commit `c4e1cd9`
 - `tools-ki/docs/roadmap/KI-TOOL-CLI-080-command-inventory-contract.md` — its citation of `ADR-KI-WEBSITE-003` repointed to `ADR-KI-WEBSITE-001` after the merge in `KI-WEB-SITE-030`
 - `tools-ki/docs/roadmap/KI-TOOL-CLI-078-consolidate-audience-centric-guides.md` — `### Summary of changes` renamed to `### Change Summary`, which its own roadmap gate was failing on
-- `ki-agentic-harness/docs/roadmap/<new record>.md` and its `_ISSUES.md` — not written; see Current state
+- `ki-agentic-harness/docs/roadmap/KI-HARNESS-GOV-091-guide-opening-and-deferral.md` and its `_ISSUES.md` — delivered, harness commit `e2ba941d`
 - `docs/roadmap/KI-WEB-SITE-027-hand-over-guide-contract.md`
 
 ## Verify
@@ -83,6 +85,46 @@ None expected. `project-guides.md` already states the contract; the handoff quot
 ### Roadmap
 
 Two new records, one in each peer repository, are the deliverable of this item.
+
+## Review
+
+### Delivered
+
+Both peer repositories carry a record for the guide contract, each framed for what that repository actually decides. `KI-TOOL-CLI-083` asks `tools-ki` whether to adopt the two editorial rules locally. `KI-HARNESS-GOV-091` asks `ki-agentic-harness` a larger question, because `ki-guides` lives there: adopting either rule binds every repository in the estate and refusing either does the same. Both name `knowledgeislands/ki-website` as their `transferred_from` origin, both sit at `triage`, and both say in terms that they bind nothing and block nothing.
+
+The handoff that was lost when `KI-WEB-SITE-025` was pruned now exists in the repositories that would act on it, which is the only place it survives.
+
+### Change Summary
+
+Three records in two peer repositories and two corrections that came with them.
+
+`KI-TOOL-CLI-083` states the opening-claim rule and the no-deferral rule, separates them from the Eleventy mechanics that do not travel, and argues the no-deferral rule's weaker case in a repository whose `README.md` is a document a reader should open. `KI-TOOL-CLI-080` had cited `ADR-KI-WEBSITE-003` for the specified-versus-published vendoring distinction, which `KI-WEB-SITE-030` merged into `ADR-KI-WEBSITE-001`; the citation was repointed. `KI-TOOL-CLI-078` carried `### Summary of changes` where the roadmap standard spells `### Change Summary`, failing that repository's own gate; renamed.
+
+`KI-HARNESS-GOV-091` states the same two rules and then departs from its sibling, because the harness owns `ki-guides`. It records that a third rule from the same review has already landed there as a standard — a guide reads completely without following a link, mechanical as `GUIDE-4` and graded by audience as `ROUTE-3` — and holds that up as the precedent for how these two would land if adopted. It carries the evidence caution this item's Discussion argues for: one corpus under one set of pressures is thin ground for a rule that binds every repository.
+
+### Verification
+
+`ki repo audit --skill ki-work-roadmap --repo .` passes in all three repositories. `tools-ki` commit `c4e1cd9`; harness commit `e2ba941d`; this record at the head of `ki-website`.
+
+Both peer records were read back after landing and each names the origin, the reciprocal non-blocking relationship, and the sibling record in the other repository. The `ki-agentic-harness` checkout was confirmed quiet before writing — clean tree, last commit hours earlier — which is what the held step was waiting for.
+
+### Outstanding concerns
+
+**This repository now fails the containment standard eleven times.** `GUIDE-4` landed in `ki-guides` while this item was open, and `ki repo audit --skill ki-guides --repo .` names ten links from `docs/guides/developer/` into `docs/decisions/` and one into the root `AGENTS.md`. Carried by `KI-WEB-SITE-035`, which is executing.
+
+**The two editorial rules are still one corpus wide.** Neither peer has decided, and neither is scheduled — `KI-TOOL-CLI-083` and `KI-HARNESS-GOV-091` both sit at `triage`, which is honest for intake nobody has prioritised, and both may be answered "no". That is the outcome this item was built to make possible rather than a gap in it. Neither identifier depends on this record surviving.
+
+### Post-change review
+
+The item took longer than its own Boundary suggests because the held half was a scheduling problem, not a work problem, and scheduling problems are invisible in a plan. Writing two records took under an hour of the session between them; waiting for a checkout to go quiet took most of a day. The Steps recorded the hold with its reason, which is why the work resumed cleanly rather than being rediscovered.
+
+The framing difference between the two records was not anticipated when the item was written and is the more useful part of what it delivered. Treating `ki-agentic-harness` as a peer recipient would have been wrong: it is where the standard would live, so the question it receives is categorically larger than the one `tools-ki` receives. A handoff that sends the same text everywhere is a handoff that has not read its recipients.
+
+The risk introduced is nil. Three records were created, two headings and one citation were corrected, and nothing executable changed in any repository.
+
+### Mini recap
+
+`KI-WEB-SITE-027` wrote the guide contract's two editorial rules into the two repositories that own their own guides, as proposals that bind nothing: `KI-TOOL-CLI-083` in `tools-ki` and `KI-HARNESS-GOV-091` in `ki-agentic-harness`, the second framed as an estate-wide standard question because `ki-guides` lives there. Two unrelated defects in `tools-ki` records were fixed in passing. The harness half was held for most of a day behind an active writer in that checkout and delivered once it went quiet. A third rule from the same review — guide containment — landed separately as a `ki-guides` standard and now fails this repository's own guides eleven times, which `KI-WEB-SITE-035` is fixing.
 
 ## Discussion
 
