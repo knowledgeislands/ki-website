@@ -4,12 +4,12 @@ area: SITE
 title: Hand over guide contract
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: deec9dff3be8c92b00b3b317fba03278282c0440
 created_at: 2026-09-24T08:06:42Z
-updated_at: 2026-09-24T19:20:00Z
+updated_at: 2026-09-24T20:05:00Z
 ---
 
 ## Goal
@@ -110,7 +110,7 @@ Both peer records were read back after landing and each names the origin, the re
 
 ### Outstanding concerns
 
-**This repository now fails the containment standard eleven times.** `GUIDE-4` landed in `ki-guides` while this item was open, and `ki repo audit --skill ki-guides --repo .` names ten links from `docs/guides/developer/` into `docs/decisions/` and one into the root `AGENTS.md`. Carried by `KI-WEB-SITE-035`, which is executing.
+**This repository now fails the containment standard eleven times.** `GUIDE-4` landed in `ki-guides` while this item was open, and `ki repo audit --skill ki-guides --repo .` names ten links from `docs/guides/developer/` into `docs/decisions/` and one into the root `AGENTS.md`. Resolved before acceptance by `KI-WEB-SITE-035`, commit `1d22eef`: all eleven citations became prose names and the collection passes.
 
 **The two editorial rules are still one corpus wide.** Neither peer has decided, and neither is scheduled — `KI-TOOL-CLI-083` and `KI-HARNESS-GOV-091` both sit at `triage`, which is honest for intake nobody has prioritised, and both may be answered "no". That is the outcome this item was built to make possible rather than a gap in it. Neither identifier depends on this record surviving.
 
@@ -125,6 +125,10 @@ The risk introduced is nil. Three records were created, two headings and one cit
 ### Mini recap
 
 `KI-WEB-SITE-027` wrote the guide contract's two editorial rules into the two repositories that own their own guides, as proposals that bind nothing: `KI-TOOL-CLI-083` in `tools-ki` and `KI-HARNESS-GOV-091` in `ki-agentic-harness`, the second framed as an estate-wide standard question because `ki-guides` lives there. Two unrelated defects in `tools-ki` records were fixed in passing. The harness half was held for most of a day behind an active writer in that checkout and delivered once it went quiet. A third rule from the same review — guide containment — landed separately as a `ki-guides` standard and now fails this repository's own guides eleven times, which `KI-WEB-SITE-035` is fixing.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 

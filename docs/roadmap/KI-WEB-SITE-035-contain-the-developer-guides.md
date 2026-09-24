@@ -4,12 +4,12 @@ area: SITE
 title: Contain the developer guides
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: 9d3d158b2094f508a315e308e4d79b65db1cb926
 created_at: 2026-09-24T19:25:00Z
-updated_at: 2026-09-24T19:45:00Z
+updated_at: 2026-09-24T20:05:00Z
 ---
 
 ## Goal
@@ -137,6 +137,10 @@ Risk introduced is nil. No route, permalink, published page, gate or generated f
 ### Mini recap
 
 `KI-WEB-SITE-035` converted eleven document links in `docs/guides/developer/` to prose names, so the collection satisfies the `GUIDE-4` containment rule adopted in `ki-guides` earlier the same day. Ten pointed into `docs/decisions/` and one into `AGENTS.md`; every citation survived as a name, and the `AGENTS.md` sentence now states the handoff convention it used to point at. Links into `apps/site/` source are untouched by design. Three skill audits pass and `apps/` is unchanged.
+
+## Done
+
+Accepted 2026-09-24 by Kris Brown on the review packet above.
 
 ## Discussion
 
