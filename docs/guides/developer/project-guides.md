@@ -26,7 +26,7 @@ Every page beside that file inherits both keys, so a guide added later is owned,
 
 `verify:guides` checks the data file against the registry: the directory name has to be a registered slug, `project` has to match the directory, and the layout has to be the prose layout. A renamed slug therefore fails the build rather than quietly breaking the link.
 
-The page's own frontmatter carries `title`, `description`, `permalink`, its `sources` declaration, and optionally `order` — the position it takes in its project's list, defaulting to last.
+The page's own frontmatter carries `title`, `description`, `permalink`, its `sources` declaration, and `order` — the position it takes in its project's list. `order` is required and must be a positive whole number no other guide in that project holds. It is not optional, because the alternative is a reading order that decays: an unpositioned page sorts last, so every guide added without one appends itself and the sequence drifts toward the order things were written in, with nothing failing to say so.
 
 ## What a guide has to contain
 

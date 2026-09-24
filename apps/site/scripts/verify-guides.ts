@@ -159,10 +159,39 @@ for (const directory of directories) {
     )
   }
 
+  const positions = new Map<number, string>()
+
   for (const file of guidePages(resolve(projectsDir, directory))) {
     pageCount += 1
     const page = relative(siteRoot, file)
-    const { body } = split(readFileSync(file, 'utf-8'))
+    const { frontmatter, body } = split(readFileSync(file, 'utf-8'))
+
+    // The first guide a reader meets under a project decides whether they read a second, so the
+    // list's order is an editorial decision rather than an accident of what was written when.
+    // Eleventy sorts unpositioned pages last, which is a reasonable default and a poor rule: every
+    // page added without one appends, and the reading order decays toward chronology with nothing
+    // failing. Requiring the key makes the decision explicit; requiring it to be unique stops two
+    // pages tying and falling through to a title sort nobody chose. (KI-WEB-SITE-029)
+    const orderLine = frontmatter.match(/^order:[ \t]*(.*)$/m)
+    if (!orderLine) {
+      fail(
+        `${page}: declares no "order"; a project's guides are read in a chosen sequence, not the order they were written.`
+      )
+    } else {
+      const position = Number(orderLine[1]?.trim())
+      if (!Number.isInteger(position) || position < 1) {
+        fail(`${page}: "order: ${orderLine[1]?.trim()}" is not a positive whole number.`)
+      } else {
+        const taken = positions.get(position)
+        if (taken) {
+          fail(
+            `${page}: takes order ${position}, which ${taken} already holds; the tie is broken by title rather than by a decision.`
+          )
+        } else {
+          positions.set(position, page)
+        }
+      }
+    }
 
     const opening = lead(body)
     if (opening.length < minimumLeadLength) {
