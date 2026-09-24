@@ -28,7 +28,7 @@
  * the handoff recorded against KI-WEB-SITE-022.
  *
  * Usage: bun scripts/sync-cli-commands.ts --ref <tag-or-commit>
- * See docs/guides/developer/guidance-provenance.md.
+ * See docs/guides/developer/page-provenance.md.
  */
 
 import { writeFile } from 'node:fs/promises'
@@ -295,7 +295,7 @@ const header = (ref: string): string => `// GENERATED FILE — do not edit by ha
 // parsed out of its COMMAND GROUPS section, reconciled against its SYNOPSIS.
 //
 // The page that renders it is src/projects/ki/command-groups.md; the reason the site
-// vendors rather than paraphrases is in docs/guides/developer/guidance-provenance.md.
+// vendors rather than paraphrases is in docs/guides/developer/page-provenance.md.
 
 `
 

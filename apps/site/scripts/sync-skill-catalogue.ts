@@ -12,7 +12,7 @@
  * caught by the ordinary provenance sweep, because the page still declares the same `sources` entry.
  *
  * Usage: bun scripts/sync-skill-catalogue.ts --ref <tag-or-commit>
- * See docs/guides/developer/guidance-provenance.md.
+ * See docs/guides/developer/page-provenance.md.
  */
 
 import { writeFile } from 'node:fs/promises'
@@ -169,7 +169,7 @@ const header = (ref: string): string => `// Vendored snapshot of the harness's g
 //
 // The ref below must match the ref declared in the sources frontmatter of
 // src/projects/ki-agentic-harness/skill-catalogue.md; verify:guidance fails the build when they disagree.
-// See docs/guides/developer/guidance-provenance.md.
+// See docs/guides/developer/page-provenance.md.
 //
 // Snapshot taken at ${ref}.
 `

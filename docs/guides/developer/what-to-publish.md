@@ -43,7 +43,7 @@ This is the case that makes the new default safe rather than reckless.
 
 Carrying material means the site now owns its accuracy, and hand-written restatements of things that move rot silently. The skill catalogue proved it: hand-written prose describing 42 skills while the harness published 61, and nothing detected the gap because nothing could.
 
-So where a page needs an inventory or a command surface that changes per release, the answer is not to write it out by hand and hope. It is to **vendor a published interface at a pinned ref** — parse it, fail loudly if its shape changes, and refresh by advancing one ref. [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) records how, and [Guidance provenance](guidance-provenance.md) describes the mechanism.
+So where a page needs an inventory or a command surface that changes per release, the answer is not to write it out by hand and hope. It is to **vendor a published interface at a pinned ref** — parse it, fail loudly if its shape changes, and refresh by advancing one ref. [ADR-KI-WEBSITE-001](../../decisions/ADR-KI-WEBSITE-001-vendoring-a-published-inventory.md) records how, and [Page provenance](page-provenance.md) describes the mechanism.
 
 Before designing a request to an upstream repository for a consumable artefact, check whether it already publishes one. The harness did, with its markers named normatively, while this site paraphrased it by hand for months.
 
@@ -61,7 +61,7 @@ Before designing a request to an upstream repository for a consumable artefact, 
 Two tests, easily confused, doing different jobs:
 
 - **Ownership** — this guide — decides **what the site says**.
-- **[Provenance](guidance-provenance.md)** decides **what the site cites**.
+- **[Provenance](page-provenance.md)** decides **what the site cites**.
 
 Carrying more upstream material makes provenance matter _more_, not less. Every published page — under the project that owns it, or under `apps/site/src/prompting/` or `apps/site/src/optional-tools/` where no project does — still declares the sources it was written from, and `verify:guidance` still gates that declaration. Nothing in the new default weakens it, and a page that carries more without declaring more is the failure mode this repository has always gated against.
 

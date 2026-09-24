@@ -48,4 +48,4 @@ A guide to a project is a page of that project, at `apps/site/src/projects/<slug
 - [ADR-KI-WEBSITE-002](ADR-KI-WEBSITE-002-one-section-for-every-project.md) — one section per repository, the principle this extends from repositories to their pages.
 - [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — the ownership test whose failure in the guidance section prompted this.
 - [Project guides](../guides/developer/project-guides.md) — the contract each page meets, and the gate that enforces it.
-- [Guidance reachability](../guides/developer/guidance-reachability.md) — the walk that proves every published page is on the far end of a link.
+- [Page reachability](../guides/developer/page-reachability.md) — the walk that proves every published page is on the far end of a link.

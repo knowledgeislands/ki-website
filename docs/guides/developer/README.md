@@ -1,6 +1,6 @@
 # Developer guides
 
-For the developer maintaining the Knowledge Islands website: how it deploys, how its generated routes are declared, and how its published guidance stays honest about where it came from and reachable once it is there.
+For the developer maintaining the Knowledge Islands website: how it deploys, how its generated routes are declared, and how a published page stays honest about where it came from and reachable once it is there.
 
 ## Deployment
 
@@ -15,9 +15,9 @@ For the developer maintaining the Knowledge Islands website: how it deploys, how
 
 - [Prose styling](prose-styling.md) — where the rules for Markdown elements live, which elements must be covered, and why an inline style on a prose element is a bug.
 
-## Published guidance
+## Published pages
 
 - [Project guides](project-guides.md) — where a project's guides live, what binds one to its project, and the opening claim and no-deferral rules `verify:guides` enforces.
-- [Deciding what this site publishes](guidance-ownership.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.
-- [Guidance provenance](guidance-provenance.md) — the `sources` declaration every published page carries, and how a refresh sweep finds pages whose upstream has moved.
-- [Guidance reachability](guidance-reachability.md) — how the build proves every published page can be reached by navigating, and which link to add when one cannot.
+- [Deciding what this site publishes](what-to-publish.md) — whether a piece of public explanation belongs here or in the repository that holds it, and what the site owes a source it restates.
+- [Page provenance](page-provenance.md) — the `sources` declaration every published page carries, and how a refresh sweep finds pages whose upstream has moved.
+- [Page reachability](page-reachability.md) — how the build proves every published page can be reached by navigating, and which link to add when one cannot.

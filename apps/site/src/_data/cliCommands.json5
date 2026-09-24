@@ -6,7 +6,7 @@
 // parsed out of its COMMAND GROUPS section, reconciled against its SYNOPSIS.
 //
 // The page that renders it is src/projects/ki/command-groups.md; the reason the site
-// vendors rather than paraphrases is in docs/guides/developer/guidance-provenance.md.
+// vendors rather than paraphrases is in docs/guides/developer/page-provenance.md.
 
 {
   "source": {

@@ -15,7 +15,7 @@
  * upstream repository and reports pages whose source document has moved since it was reviewed, and
  * resolves the links a page's prose makes into Knowledge Islands repositories. Both are warnings,
  * never failures: an upstream repository editing or retiring its own guide must not break this
- * site's build. See docs/guides/developer/guidance-provenance.md.
+ * site's build. See docs/guides/developer/page-provenance.md.
  */
 
 import { readdirSync, readFileSync, statSync } from 'node:fs'

@@ -1,8 +1,8 @@
-# Guidance provenance
+# Page provenance
 
-How every published guidance page records what it was written from, and how a refresh sweep finds the pages whose upstream has moved.
+How every published page records what it was written from, and how a refresh sweep finds the pages whose upstream has moved.
 
-[Deciding what this site publishes](guidance-ownership.md) sets out how much of another repository's material the site carries. This guide is the mechanism that makes carrying it safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
+[Deciding what this site publishes](what-to-publish.md) sets out how much of another repository's material the site carries. This guide is the mechanism that makes carrying it safe: the page declares its sources in frontmatter, and a check reads that declaration rather than relying on anyone's memory.
 
 The two are easy to confuse and do different jobs. **Ownership decides what the site says; provenance decides what the site cites.** Since [GDR-KI-WEBSITE-002](../../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) made carrying the default, the site restates more of what it cites than it used to — so this declaration matters more than it did, not less.
 
@@ -64,7 +64,7 @@ A third case sits between the two. A **vendored** page declares its `sources` in
 
 Both follow the same shape, and a third should too: fetch the upstream artefact at an immutable ref, parse it strictly, write a generated data file carrying its own provenance header, and render that file from a page whose prose is still the site's own. Regeneration replaces the inventory and never the framing around it.
 
-Vendoring is the right answer only where the upstream artefact is itself an inventory the site would add nothing by rewording — an inventory reworded is still an inventory, and it ages with every release. Most guidance is not like that, and [the ownership test](guidance-ownership.md#the-test) still decides.
+Vendoring is the right answer only where the upstream artefact is itself an inventory the site would add nothing by rewording — an inventory reworded is still an inventory, and it ages with every release. Most guidance is not like that, and [the ownership test](what-to-publish.md#the-test) still decides.
 
 **The two cases are not equally safe, and the difference is worth stating.** The catalogue vendors a _specified_ interface: `ki-repo-harness` names the markers, normatively fixes the fields, and the harness's own rubric tests assert them, so the site consumes a contract someone maintains. The command reference vendors a _published_ one: `man/ki.1` ships with every release and is complete, but nothing names it an interface and no upstream test asserts its shape.
 
@@ -102,7 +102,7 @@ bun run --cwd apps/site verify:guidance            # declaration shape only
 bun run --cwd apps/site verify:guidance -- --network  # additionally compare each ref against upstream
 ```
 
-Offline, the check confirms that every guidance page declares `sources`, that entries carry a usable shape, that `repository` entries name a `knowledgeislands` repository and pin an immutable ref, and that `reviewed` is a real date that is not in the future.
+Offline, the check confirms that every published page declares `sources`, that entries carry a usable shape, that `repository` entries name a `knowledgeislands` repository and pin an immutable ref, and that `reviewed` is a real date that is not in the future.
 
 With `--network`, it asks the question a page can act on. A source pinned to a release tag is compared against the repository's newest release: if a later one exists, a refresh is owed and the warning names it. If the page already cites the newest release, nothing is reported — upstream commits made since that tag are unreleased, so there is nothing to refresh to, and a warning in that state would fire from the moment upstream merged anything and never clear. A source pinned to a commit has no release to compare against, so it is compared against the upstream default branch instead. Those are reported as **warnings, not failures**, for the same reason tool-route drift is: an upstream repository editing its own guide must never break this site's build. The warning says a refresh is owed, and refusing to publish until someone performs it would punish the wrong repository.
 
@@ -127,7 +127,7 @@ Unlike `sources`, a prose link may point at `main`. A reader following a link wa
 3. Revise the site's prose where the change matters **to this site's reader**. Most upstream changes will not. Deciding that a change does not warrant a revision is a real outcome, not a skipped step.
 4. Advance `ref` and `reviewed` together. Advancing `reviewed` without `ref` records a review of a source you did not look at; advancing `ref` without `reviewed` claims a review that did not happen.
 
-Step 3 is where restating earns its keep. If every upstream change forced a matching edit here, the page would be a copy, and [the ownership test](guidance-ownership.md#the-test) would have told you to link to it instead.
+Step 3 is where restating earns its keep. If every upstream change forced a matching edit here, the page would be a copy, and [the ownership test](what-to-publish.md#the-test) would have told you to link to it instead.
 
 ## What this does not cover
 

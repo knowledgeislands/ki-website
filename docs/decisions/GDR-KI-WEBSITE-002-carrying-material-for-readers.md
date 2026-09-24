@@ -11,7 +11,7 @@ decision_type: governance
 
 ## Context
 
-[Deciding what this site publishes](../guides/developer/guidance-ownership.md) asked one question of every candidate document: does it age with a version? Anything that did stayed in its source repository, and the site linked to it pinned at a tag.
+[Deciding what this site publishes](../guides/developer/what-to-publish.md) asked one question of every candidate document: does it age with a version? Anything that did stayed in its source repository, and the site linked to it pinned at a tag.
 
 The reasoning was sound about **canonical copies**. A guide describing a specific CLI release cannot be copied here and stay true. But the rule was applied to a second question it was never designed for — how much the site should say — and there the answer it gave was consistently "less".
 
@@ -44,6 +44,6 @@ This decision governs **ownership** only. Provenance — the `sources:` declarat
 
 ## References
 
-- [Deciding what this site publishes](../guides/developer/guidance-ownership.md) — the guide this decision rewrites.
-- [Guidance provenance](../guides/developer/guidance-provenance.md) — the citation mechanism this decision leaves intact.
-- [Deciding what this site publishes](../guides/developer/guidance-ownership.md) — where the fourth outcome is written down for the next page that needs it.
+- [Deciding what this site publishes](../guides/developer/what-to-publish.md) — the guide this decision rewrites.
+- [Page provenance](../guides/developer/page-provenance.md) — the citation mechanism this decision leaves intact.
+- [Deciding what this site publishes](../guides/developer/what-to-publish.md) — where the fourth outcome is written down for the next page that needs it.

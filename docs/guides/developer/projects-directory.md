@@ -66,7 +66,7 @@ They render as text, so write plain prose — Markdown syntax appears as literal
 
 `verify:projects` fails a generated entry that omits any of them, and applies two floors: 80 characters for a prose field, and three capability sentences of at least 20 characters each. Those floors exist to catch a placeholder or a restated `tagline` rather than to judge prose, and every entry in the registry clears them by a wide margin. An entry that declares a `route` is exempt from the requirement, but anything it does declare is still checked.
 
-Keeping the material true is a standing obligation rather than a one-off. These fields are written by hand from the upstream repository's own account of itself, and nothing mechanical notices when that account changes — unlike the vendored guidance pages, which pin a `sources` ref and have [a provenance sweep](guidance-provenance.md) behind them. Purpose and posture move slowly, which is what makes hand-written fields defensible here; a command surface would not be.
+Keeping the material true is a standing obligation rather than a one-off. These fields are written by hand from the upstream repository's own account of itself, and nothing mechanical notices when that account changes — unlike the vendored guidance pages, which pin a `sources` ref and have [a provenance sweep](page-provenance.md) behind them. Purpose and posture move slowly, which is what makes hand-written fields defensible here; a command surface would not be.
 
 ## Adding or amending an entry
 

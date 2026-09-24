@@ -1,14 +1,14 @@
-# Guidance reachability
+# Page reachability
 
 How the build proves every published page can be reached by navigating, and what to do when it says one cannot.
 
-[Guidance provenance](guidance-provenance.md) makes the site honest about where a page's material came from. This guide covers the other half of publishing: whether a reader can get to the page at all. A page can be perfectly sourced, perfectly written, and still be invisible.
+[Page provenance](page-provenance.md) makes the site honest about where a page's material came from. This guide covers the other half of publishing: whether a reader can get to the page at all. A page can be perfectly sourced, perfectly written, and still be invisible.
 
 ## The problem it solves
 
 A static site generator will happily write a file nothing links to. The page builds, the build passes, the sitemap lists it, and a reader who does not already know the URL never sees it.
 
-That is not hypothetical here. When the check was first run against a clean build, twenty-one of thirty-three guidance pages were reachable only by typing their address. The whole fourteen-page prompting collection had no inbound link from outside its own subtree — the string `prompting` appeared nowhere else in `dist/`. Those guides had presumably had a way in once and lost it silently, which is exactly the failure a person cannot notice: nothing is broken, there is simply nothing to click.
+That is not hypothetical here. When the check was first run against a clean build, twenty-one of the thirty-three published pages were reachable only by typing their address. The whole fourteen-page prompting collection had no inbound link from outside its own subtree — the string `prompting` appeared nowhere else in `dist/`. Those guides had presumably had a way in once and lost it silently, which is exactly the failure a person cannot notice: nothing is broken, there is simply nothing to click.
 
 This is the same reasoning that made the provenance sweep worth building. A condition nobody can see is a condition nobody fixes.
 
@@ -43,7 +43,7 @@ error: dist/prompting/gemini-3/index.html cannot be reached by following links f
 The fix is a link, and the question is which one. In order of preference:
 
 1. **From its project's page.** A project guide needs no link written by hand: the Guides block on `/projects/<slug>/` is generated from the `guides` collection, so a page in the right directory with the right directory data is listed automatically. An unreachable guide here nearly always means the binding is wrong, not that a link is missing.
-2. **From its collection index.** For the residual guidance pages, the collection index is where a reader looking for that page will be.
+2. **From its collection index.** For a prompting guide, `/prompting/` is where a reader looking for that page will be.
 3. **From a page that has a reason to send the reader there.** `optional-tools` is reached from the `ki` getting-started guide and from the harness tuning guide, because those are where a reader needs it. That is a better link than one written to satisfy the gate.
 4. **From the navigation.** Reserved for a collection index. The navigation is a small fixed set, and a page that needs an entry there is making a claim about the shape of the site, not about its own reachability.
 
@@ -53,4 +53,4 @@ Resist the further option of linking a page from wherever is convenient. A link 
 
 The gate proves a path exists, not that anyone would find it. A link buried in the last paragraph of a page nobody reads passes. Reachability is a floor, not a measure of navigation quality — [GDR-KI-WEBSITE-002](../../decisions/GDR-KI-WEBSITE-002-carrying-material-for-readers.md) governs whether a page earns its place, and this check only guarantees the reader can get to the ones that do.
 
-It also says nothing about outbound links. A page may link to a document that has been deleted upstream; that is the provenance sweep's `--network` mode, described in [guidance provenance](guidance-provenance.md).
+It also says nothing about outbound links. A page may link to a document that has been deleted upstream; that is the provenance sweep's `--network` mode, described in [page provenance](page-provenance.md).
