@@ -3,9 +3,6 @@
   "description": "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources.",
   "version": "1.0.0",
   "author": "kris@kris.me.uk",
-  "bugs": {
-    "url": "https://github.com/knowledgeislands/ki-website/issues"
-  },
   "dependencies": {},
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
