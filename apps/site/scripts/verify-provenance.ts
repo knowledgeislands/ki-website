@@ -6,10 +6,13 @@
  * Markdown page therefore declares a `sources` list — or claims `original` — and this check
  * refuses a page that declares neither.
  *
- * Three directories hold those pages. `src/projects/<slug>/` holds the guides each project owns
- * (KI-WEB-SITE-025); `src/prompting/` and `src/optional-tools/` hold what belongs to no project
- * (KI-WEB-SITE-028). Provenance does not care which: a page restating somebody's material declares
- * it wherever it lives, and moving a page must not be a way to shed the declaration.
+ * Those pages live under `src/docs/`, one directory per section, having been through two moves:
+ * out of a single `/guidance/` collection and under the project each described (KI-WEB-SITE-025),
+ * then out from under the projects and into sections a reader works through (KI-WEB-SITE-037).
+ * Provenance did not change across either, which is the point: a page restating somebody's
+ * material declares it wherever it lives, and moving a page must not be a way to shed the
+ * declaration. Checking the whole tree rather than a list of directories is what makes that true
+ * of the next move as well.
  *
  * Offline checks run by default. `--network` additionally resolves each pinned ref against its
  * upstream repository and reports pages whose source document has moved since it was reviewed, and
@@ -24,7 +27,7 @@ import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const publishedDirs = ['src/projects', 'src/prompting', 'src/optional-tools'].map((dir) => resolve(siteRoot, dir))
+const publishedDirs = ['src/docs'].map((dir) => resolve(siteRoot, dir))
 const sourcesPartial = 'partials/sources.njk'
 const proseLayout = resolve(siteRoot, 'src/_includes/layouts/page.njk')
 const vendoredData = resolve(siteRoot, 'src/_data/skillCatalogue.json5')
@@ -339,7 +342,7 @@ const network = process.argv.includes('--network')
 const pages = publishedDirs.flatMap(markdownFiles).sort()
 
 if (pages.length === 0) {
-  fail('No published pages found; expected Markdown below src/projects/, src/prompting/ or src/optional-tools/.')
+  fail('No published pages found; expected Markdown below src/docs/.')
 }
 
 // A declaration readers never see is not a published citation. Every page here

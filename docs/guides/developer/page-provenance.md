@@ -14,7 +14,7 @@ The [tool routes](tool-routes.md) contract already solved the same problem for v
 
 ## The declaration
 
-Every Markdown page under `apps/site/src/projects/<slug>/`, `apps/site/src/prompting/` or `apps/site/src/optional-tools/` carries a `sources` key in its frontmatter. The three trees hold different things — [the guides each project owns](project-guides.md), the model prompting guides, and the page about a reader's own machine — and provenance does not distinguish between them, because moving a page must not be a way to shed its declaration.
+Every Markdown page under `apps/site/src/docs/` carries a `sources` key in its frontmatter. The sections hold different things — [the ki CLI and harness guides](docs-sections.md), the model prompting guides, and a page about the reader's own machine — but provenance does not distinguish them, because moving a page must not be a way to shed its declaration.
 
 ```yaml
 ---

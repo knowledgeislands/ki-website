@@ -1,0 +1,51 @@
+---
+title: Docs — Knowledge Islands
+description: "Every guide the site publishes, grouped into sections you can work through: getting started, the ki CLI, the agentic harness, prompting, optional tools, and contributing."
+permalink: /docs/
+layout: layouts/base.njk
+---
+{%- set allDocs = collections.docsPages -%}
+
+<section class="section-navy hero-section hero-section-standard">
+  <div class="page-container" style="max-width: 64rem;">
+    <p class="overline-gold">Documentation</p>
+    <h1 class="heading-display-light" style="font-size: clamp(2.25rem, 4vw, 3.25rem); margin-bottom: 1.25rem; max-width: 24ch;">Pick an island and work through it.</h1>
+    <p style="font-size: 1.125rem; color: rgb(245 239 224 / 75%); max-width: 58ch; line-height: 1.7;">Each section below is a finite body of material with a beginning and an end. The page count is on the card, so you know what you are agreeing to before you start. Begin at Get Started, or go straight to whatever you came for.</p>
+  </div>
+</section>
+
+<section class="section-parchment section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="grid-2col" style="gap: 1.5rem;">
+
+{%- for section in docsSections %}
+  {#- Count and entry point are derived from the pages that actually carry this
+      section's binding, never declared, so a card cannot claim a number the
+      section does not hold (KI-WEB-SITE-037). -#}
+  {%- set pages = [] -%}
+  {%- for page in allDocs %}
+    {%- if page.data.section == section.slug %}{% set pages = (pages.push(page), pages) %}{% endif %}
+  {%- endfor %}
+  {%- if pages.length %}
+      <a href="{{ pages[0].url }}" class="card-ki tool-card" style="color: inherit; text-decoration: none;">
+        <p class="overline">{{ pages.length }} page{% if pages.length != 1 %}s{% endif %}</p>
+        <h3 style="font-size: 1.25rem; margin-bottom: 0.625rem;">{{ section.title }}</h3>
+        <p class="text-muted" style="font-size: 0.9375rem; margin: 0;">{{ section.description }}</p>
+        <p class="text-muted" style="font-size: 0.8125rem; margin: 0.625rem 0 0;">Start at {{ pages[0].data.title }} →</p>
+      </a>
+  {%- endif %}
+{%- endfor %}
+
+    </div>
+  </div>
+</section>
+
+<section class="section-mist section-pad">
+  <div class="page-container" style="max-width: 64rem;">
+    <div class="prose-ki" style="max-width: none;">
+      <p class="overline">What is not here</p>
+      <h2>The project directory is a catalogue, not a section.</h2>
+      <p>Every repository in the ecosystem is listed under <a href="/projects/">Projects</a>, with what it owns and where it lives. That page answers <em>what is this</em>. The sections above answer <em>how do I</em>, which is a different question and now has a different home.</p>
+    </div>
+  </div>
+</section>

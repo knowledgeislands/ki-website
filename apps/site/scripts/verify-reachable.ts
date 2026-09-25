@@ -12,12 +12,18 @@
  * page is entirely within this site's control, unlike the upstream drift that
  * `verify-provenance.ts` reports as a warning.
  *
- * `dist/guidance/` no longer exists. The guides each project owns moved to
- * `dist/projects/` (KI-WEB-SITE-025), and what was left — the prompting guides
- * and the optional-tools page — moved to `dist/prompting/` and
- * `dist/optional-tools/` (KI-WEB-SITE-028). All three are held to the same
- * standard: a page that moved must not become unreachable in the move, and the
- * index that lists a collection must itself be on the far end of a link.
+ * The published prose has moved twice since, and the trees below are the record of where it
+ * landed. `dist/guidance/` dissolved into the projects each guide belonged to (KI-WEB-SITE-025),
+ * then those guides, the prompting set and the optional-tools page all gathered into
+ * `dist/docs/` as sections a reader works through (KI-WEB-SITE-037). `dist/projects/` remains as
+ * the catalogue of what exists. Both are held to the same standard: a page that moved must not
+ * become unreachable in the move, and the index that lists a collection must itself be on the far
+ * end of a link.
+ *
+ * That standard bites hardest on `dist/docs/`, because the landing grid links only each section's
+ * first page. Every page after it is reachable through the contents block that closes its
+ * predecessor, which means this gate is what proves the sections are navigable rather than merely
+ * published.
  *
  * Pages outside those trees are reported as warnings. They are reachable today
  * and should stay so, but this gate was built for published prose and should
@@ -93,7 +99,7 @@ const all = pages(distDir)
 const where = (page: string): string => relative(distDir, page)
 
 /** The trees whose pages a reader has to be able to arrive at by navigating. */
-const publishedTrees = ['projects/', 'prompting/', 'optional-tools/']
+const publishedTrees = ['docs/', 'projects/']
 
 const published = (path: string): boolean => publishedTrees.some((tree) => path.startsWith(tree))
 

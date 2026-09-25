@@ -63,7 +63,7 @@ Two tests, easily confused, doing different jobs:
 - **Ownership** — this guide — decides **what the site says**.
 - **[Provenance](page-provenance.md)** decides **what the site cites**.
 
-Carrying more upstream material makes provenance matter _more_, not less. Every published page — under the project that owns it, or under `apps/site/src/prompting/` or `apps/site/src/optional-tools/` where no project does — still declares the sources it was written from, and `verify:provenance` still gates that declaration. Nothing in the new default weakens it, and a page that carries more without declaring more is the failure mode this repository has always gated against.
+Carrying more upstream material makes provenance matter _more_, not less. Every published page — wherever its Docs section sits under `apps/site/src/docs/` — still declares the sources it was written from, and `verify:provenance` still gates that declaration. Nothing in the new default weakens it, and a page that carries more without declaring more is the failure mode this repository has always gated against.
 
 ## Two different problems
 

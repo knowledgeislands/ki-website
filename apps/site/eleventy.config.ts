@@ -6,9 +6,9 @@ import JSON5 from 'json5'
 
 // ─── Eleventy config ──────────────────────────────────────────────────────────
 
-/** One page in the `guides` collection: enough of an Eleventy item to sort it. */
-interface GuidePage {
-  data: { project?: unknown; order?: number; title?: string }
+/** One page in the `docsPages` collection: enough of an Eleventy item to sort it. */
+interface DocsPage {
+  data: { section?: unknown; order?: number; title?: string }
 }
 
 export default function (eleventyConfig: UserConfig) {
@@ -200,20 +200,21 @@ export default function (eleventyConfig: UserConfig) {
   // Standard pattern: tag pages with e.g. `tags: blog` (via front matter or
   // a directory data file) and access them as `collections.blog` in templates.
 
-  // guides - every project guide, keyed by the project it belongs to.
+  // docsPages - every page belonging to a Docs section, in reading order.
   //
   // The binding comes from the directory data file beside the pages
-  // (`src/projects/ki/ki.json5`), never from the page itself, so a guide added
-  // later joins its project's list because of where it lives. `project.njk`
-  // paginates over an *object* of the same name, hence the string test: it
-  // keeps the generated project pages out of their own Guides section.
+  // (`src/docs/ki/ki.json5`), never from the page itself, so a page added later
+  // joins its section because of where it lives rather than because someone
+  // remembered a frontmatter line. This is the same rule the guides collection
+  // used, generalised from `project` to `section` when guides moved out from
+  // under the projects they describe (KI-WEB-SITE-037).
   //
-  // `order` is the reading order a project intends; anything without one sorts
+  // `order` is the reading order a section intends; anything without one sorts
   // after those that have one, then by title (KI-WEB-SITE-025).
-  eleventyConfig.addCollection('guides', (collectionApi: { getAll: () => GuidePage[] }) =>
+  eleventyConfig.addCollection('docsPages', (collectionApi: { getAll: () => DocsPage[] }) =>
     collectionApi
       .getAll()
-      .filter((item) => typeof item.data.project === 'string')
+      .filter((item) => typeof item.data.section === 'string')
       .sort((a, b) => {
         const rank = (a.data.order ?? 99) - (b.data.order ?? 99)
         return rank !== 0 ? rank : String(a.data.title).localeCompare(String(b.data.title))

@@ -28,7 +28,7 @@ Three consequences of walking the built output rather than the source follow fro
 
 The provenance sweep reports upstream drift as a warning, because another repository editing its own README must never break this site's build. An orphaned page is the opposite case: it is entirely this site's own doing, fixable here, and fixable now. So `verify:reachable` exits non-zero, and it is wired into `bun run ki:site:build` alongside the other verify scripts — a page that no route reaches cannot reach production.
 
-All three trees are held to the same standard, because each holds published prose: [the guides each project owns](project-guides.md), the prompting guides, and `optional-tools`. A page that moved between them must not become unreachable in the move, and the index that lists a collection has to be on the far end of a link itself.
+Both trees are held to the same standard, which is what it holds published prose to: [the Docs sections](docs-sections.md) and the project catalogue. A page that moved must not become unreachable in the move, and an index that lists a collection must be on the far end of a link itself. The standard bites hardest on `dist/docs/`, where the landing grid links only each section's first page and every page after it is reachable through the contents block that closes its predecessor.
 
 Pages outside those two trees are reported as warnings instead. They are all reachable today and should stay so, but the gate was built for published prose and says plainly what it holds itself to rather than quietly expanding its remit.
 

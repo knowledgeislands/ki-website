@@ -1,9 +1,0 @@
-// Directory data for the optional-tools page, on the same principle as src/prompting/.
-//
-// One page today. It has a directory of its own so that the layout is a property of where the
-// page lives rather than of what someone remembered to type in its frontmatter, and so a second
-// page about a reader's working environment has somewhere to land already styled.
-
-{
-  layout: 'layouts/page.njk'
-}

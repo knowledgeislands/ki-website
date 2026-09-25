@@ -94,21 +94,25 @@ eleventyComputed:
       <p>{{ project.usage }}</p>
 
       {#
-        A project's guides are its own pages on this site, not a section of
-        their own: they are collected from `src/projects/<slug>/`, so a project
-        with nothing written about it renders nothing here (KI-WEB-SITE-025).
+        Where the guidance about this project now lives. Its guides used to be pages under
+        `src/projects/<slug>/` and were listed here individually (KI-WEB-SITE-025). They now
+        live in a Docs section the reader works through in order, so the useful thing to offer
+        is the section rather than a flat list competing with the section's own contents
+        (KI-WEB-SITE-037). A project with no section renders nothing.
       #}
-      {%- set guides = [] %}
-      {%- for guide in collections.guides %}
-        {%- if guide.data.project == project.slug %}{% set guides = (guides.push(guide), guides) %}{% endif %}
+      {%- set docsSection = null %}
+      {%- for entry in docsSections %}
+        {%- if entry.slug == project.slug %}{% set docsSection = entry %}{% endif %}
       {%- endfor %}
-      {%- if guides.length %}
-      <h2 style="margin-top: 2.5rem;">Guides on this site.</h2>
-      <ul>
-        {%- for guide in guides %}
-        <li><a href="{{ guide.url }}">{{ guide.data.title }}</a> — {{ guide.data.description }}</li>
+      {%- if docsSection %}
+        {%- set sectionPages = [] %}
+        {%- for item in collections.docsPages %}
+          {%- if item.data.section == project.slug %}{% set sectionPages = (sectionPages.push(item), sectionPages) %}{% endif %}
         {%- endfor %}
-      </ul>
+        {%- if sectionPages.length %}
+      <h2 style="margin-top: 2.5rem;">Read the guides.</h2>
+      <p>Everything this site publishes about {{ project.name }} is in <a href="{{ sectionPages[0].url }}">{{ docsSection.title }}</a>, a Docs section of {{ sectionPages.length }} page{% if sectionPages.length != 1 %}s{% endif %} written to be read in order. It starts at <em>{{ sectionPages[0].data.title }}</em>.</p>
+        {%- endif %}
       {%- endif %}
       {%- if released %}
       {% if project.formula %}

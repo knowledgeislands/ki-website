@@ -1,0 +1,51 @@
+{#
+  What else is in this section, and what to read next.
+
+  A section is meant to read as a finite thing a reader can work through, and a page that ends
+  without saying what follows it leaves them at the back button. This block closes every prose
+  page in a Docs section with the section's full contents in reading order, marking where the
+  reader is, followed by an explicit next page (KI-WEB-SITE-037).
+
+  It also carries the reachability of the whole tree. `verify-reachable.ts` walks outward from
+  the home page and fails the build on any page nothing links to; the Docs landing grid links
+  only each section's *first* page, so without this block every page after the first would be
+  orphaned. The contents list is what makes the section navigable and what makes it verifiable,
+  which is the same property twice.
+#}
+{%- if section %}
+  {%- set pages = [] %}
+  {%- for item in collections.docsPages %}
+    {%- if item.data.section == section %}{% set pages = (pages.push(item), pages) %}{% endif %}
+  {%- endfor %}
+  {%- if pages.length > 1 %}
+    {%- set label = '' %}
+    {%- for entry in docsSections %}{% if entry.slug == section %}{% set label = entry.title %}{% endif %}{% endfor %}
+    {%- set nextPage = null %}
+    {%- for item in pages %}
+      {%- if loop.index0 > 0 and pages[loop.index0 - 1].url == page.url %}{% set nextPage = item %}{% endif %}
+    {%- endfor %}
+
+<nav class="prose-provenance" aria-label="Section contents">
+
+<p class="overline">{{ label }} · {{ pages.length }} pages</p>
+
+<ol>
+{%- for item in pages %}
+  {%- if item.url == page.url %}
+  <li><strong>{{ item.data.title }}</strong></li>
+  {%- else %}
+  <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+  {%- endif %}
+{%- endfor %}
+</ol>
+
+{%- if nextPage %}
+<p>Next: <a href="{{ nextPage.url }}">{{ nextPage.data.title }}</a> →</p>
+{%- else %}
+<p>That is the end of this section. <a href="/docs/">Back to Docs</a> for the rest.</p>
+{%- endif %}
+
+</nav>
+
+  {%- endif %}
+{%- endif %}

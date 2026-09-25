@@ -1,0 +1,10 @@
+// Directory data for the Get Started section.
+//
+// Unlike the guide sections, this page carries its own layout in frontmatter — it is a
+// hand-built landing page on `layouts/base.njk`, not prose on `layouts/page.njk`. Only the
+// section binding is declared here, so the page keeps its design and still appears on the
+// Docs landing grid.
+
+{
+  section: 'get-started'
+}

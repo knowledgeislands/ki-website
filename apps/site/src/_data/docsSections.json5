@@ -1,0 +1,46 @@
+// The Docs sections, in the order they appear on the Docs landing grid.
+//
+// A section is a finite body of material a reader can enter, work through, and finish. The
+// grid states how many pages each holds, because "Prompting" says nothing about whether it is
+// an afternoon or a reference you dip into, while "Prompting · 14 pages" tells a reader what
+// they are agreeing to (KI-WEB-SITE-037).
+//
+// Counts and first-page links are NOT declared here. They are derived at build time from the
+// pages that actually carry the matching `section` binding, so a card cannot claim a number
+// the section does not hold. Adding a page to a section directory is the only thing needed to
+// change its count.
+//
+// `slug` is the directory under src/docs/ and the first path segment of every page in it.
+
+[
+  {
+    slug: 'get-started',
+    title: 'Get Started',
+    description: 'Stand up your own island: the harness, the repositories, and the first thing worth doing with them.'
+  },
+  {
+    slug: 'ki',
+    title: 'The ki CLI',
+    description: 'The command line that drives a Knowledge Islands repository — what the commands do and when to reach for them.'
+  },
+  {
+    slug: 'ki-agentic-harness',
+    title: 'The Agentic Harness',
+    description: 'How the harness is put together, how its skills are chosen and tuned, and how work is planned and delivered through it.'
+  },
+  {
+    slug: 'prompting',
+    title: 'Prompting',
+    description: 'Model-specific prompting guidance for the frontier and open-weight models the ecosystem works with.'
+  },
+  {
+    slug: 'optional-tools',
+    title: 'Optional Tools',
+    description: 'The tools on a reader\'s own machine that make working this way easier, and which are genuinely optional.'
+  },
+  {
+    slug: 'contribute',
+    title: 'Contribute',
+    description: 'How an island proposes an improvement to the shared model through the Contribution Process.'
+  }
+]

@@ -1,0 +1,8 @@
+// Directory data for the Contribute section, on the same basis as get-started/.
+//
+// A hand-built landing page rather than a prose article, so only the section binding is
+// declared and the page keeps the layout its own frontmatter sets.
+
+{
+  section: 'contribute'
+}
