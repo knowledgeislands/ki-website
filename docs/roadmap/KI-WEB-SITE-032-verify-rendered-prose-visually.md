@@ -34,13 +34,13 @@ This item is a visual review and the fixes it directly prompts. It does not rede
 
 ## Current state
 
-The site builds clean through seven gates and renders 53 published pages. Nobody has confirmed how any of the restyled elements look. The specific unknowns, in the order they were introduced:
+The site builds clean through six gates and renders 60 published pages. Nobody has confirmed how any of the restyled elements look. The specific unknowns, in the order they were introduced:
 
 - Tables — full-width, collapsed borders, `--color-border-light` row rules, real cell padding. The sharpest page is the `ki` command inventory, which carries both a large table and dense inline code.
 - `pre` blocks — `--color-navy` ground, `--color-parchment` ink, and whether horizontal overflow scrolls rather than clipping on a narrow viewport.
 - Inline `code` — a tinted ground off `--color-mist`, and whether it reads as code without fragmenting a paragraph carrying a hundred of them.
 - `.prose-provenance` — smaller, lighter, separated by a rule, and demonstrably chrome rather than the page's conclusion, which was the whole point of moving it.
-- The Guides block on a project page — spacing against the surrounding `section-parchment`, and the rendered order matching each project's assigned sequence.
+- The section link on a project page — spacing against the surrounding `section-parchment`. It was a list of that project's guides when this item was written; `KI-WEB-SITE-037` made it a single sentence pointing at the project's Docs section.
 - Dark mode for all of the above, which is mirrored in a separate `@media (prefers-color-scheme: dark)` block and is the half most likely to have been missed.
 
 **Contrast has since been measured rather than looked at**, which removes one unknown from the list and narrows another. Every prose foreground/background pair in both schemes was computed against WCAG AA:
@@ -59,6 +59,13 @@ All but one clear 4.5 comfortably, and the dark scheme — the half expected to 
 So the remaining unknowns are the ones a number cannot answer: whether the table rules read as structure rather than clutter, whether a hundred inline `code` elements fragment a paragraph, whether `pre` overflow scrolls rather than clips on a narrow viewport, whether the provenance footer reads as chrome, and whether the Guides block sits right against the section above it. Those still need somebody at a browser.
 
 One more joins them. `KI-WEB-SITE-036` darkened `--color-teal` from `#3d8a8a` to `#317070` to clear AA, which moves every link, every uppercase label and two white-on-teal circles across the whole site, not just the prose. The numbers are settled; whether the site still reads as itself with a deeper accent is a judgment, and this is the item that holds it.
+
+`KI-WEB-SITE-037` then restructured the site, which adds four more of the same kind. None of them is a contrast question and none can be computed:
+
+- **The Docs landing grid** — six cards on `section-parchment`, each carrying an `.overline` page count, a title, a description and a "Start at …" line. Whether six cards of visibly unequal weight read as a library or as an inventory.
+- **The section contents block** at the foot of every prose page — an ordered list of the section's pages inside `.prose-provenance`, with the current page bolded and an explicit Next link. It appears on 41 pages, immediately above the provenance footer, so two pieces of chrome now stack. Whether that reads as helpful or as a wall.
+- **The three-entry top nav.** Six entries became three. Whether the bar reads as confident or as empty.
+- **A one-page section card.** Get Started and Contribute each render "1 page" beside Prompting's "14 pages". `KI-WEB-SITE-039` owns what to do about the content; this item owns whether the grid looks broken while that is unresolved.
 
 ## Steps
 

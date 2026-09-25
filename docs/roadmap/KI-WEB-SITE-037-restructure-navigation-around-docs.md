@@ -4,12 +4,12 @@ area: SITE
 title: Restructure navigation around docs
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: ae5276d789e9aef37b3e434f748d3aba6d013913
 created_at: 2026-09-24T22:30:00Z
-updated_at: 2026-09-25T10:00:00Z
+updated_at: 2026-09-25T14:20:00Z
 ---
 
 ## Goal
@@ -73,30 +73,39 @@ Sixteen of the eighteen projects have no guides at all, which the split handles 
 
 ## Steps
 
-- [ ] Take `baseline_ref` before any edit.
-- [ ] Add a `docs` section registry — a data file declaring each section's slug, title, one-line description, page order, and the page a card deep-links to. Page counts derive from it rather than being written by hand, so a card cannot claim a number the section does not hold.
-- [ ] Build the `/docs/` landing page as a card grid reading from that registry, in the Paperclip shape: name, description, count, deep link to the first page.
-- [ ] Move the two project guide directories to their Docs sections, leaving `/projects/` as the catalogue of registry entries.
-- [ ] Decide how a project page points at its section now that its guides have moved — the Guides block `KI-WEB-SITE-025` added becomes a single link to the section rather than a list.
-- [ ] Move `get-started`, `contribute`, `optional-tools` and `prompting` under `/docs/`.
-- [ ] Reduce the top nav to Philosophy, Model, Docs in `src/_data/site.ts`.
-- [ ] Add a 301 in `src/redirects.njk` for every moved page.
-- [ ] Add within-section navigation, so a reader who finishes a page is offered the next one rather than the back button.
-- [ ] Fix any opening line that refers to a page's old position.
-- [ ] Settle what a section owes a reader, and write it down where the guide contract lives.
-- [ ] Judge each thin section on its own: grow Get Started into a sequence from material that already exists scattered; decide whether Optional Tools has a reason to be a section beyond symmetry; decide whether Contribute is a section at all or site chrome.
-- [ ] Write what the judgments call for, and merge away any section that honestly holds one page.
+- [x] Take `baseline_ref` before any edit.
+- [x] Add a `docs` section registry — a data file declaring each section's slug, title, one-line description, page order, and the page a card deep-links to. Page counts derive from it rather than being written by hand, so a card cannot claim a number the section does not hold.
+- [x] Build the `/docs/` landing page as a card grid reading from that registry, in the Paperclip shape: name, description, count, deep link to the first page.
+- [x] Move the two project guide directories to their Docs sections, leaving `/projects/` as the catalogue of registry entries.
+- [x] Decide how a project page points at its section now that its guides have moved — the Guides block `KI-WEB-SITE-025` added becomes a single link to the section rather than a list.
+- [x] Move `get-started`, `contribute`, `optional-tools` and `prompting` under `/docs/`.
+- [x] Reduce the top nav to Philosophy, Model, Docs in `src/_data/site.ts`.
+- [x] Add a 301 in `src/redirects.njk` for every moved page.
+- [x] Add within-section navigation, so a reader who finishes a page is offered the next one rather than the back button.
+- [x] Fix any opening line that refers to a page's old position.
+- [x] Settle what a section owes a reader, and write it down where the guide contract lives.
+- [x] Judge each thin section on its own: grow Get Started into a sequence from material that already exists scattered; decide whether Optional Tools has a reason to be a section beyond symmetry; decide whether Contribute is a section at all or site chrome.
+- [x] Write what the judgments call for, and merge away any section that honestly holds one page.
 
 ## Files touched
 
-- `apps/site/src/_data/site.ts` — the nav
-- `apps/site/src/_data/` — a new section registry
-- `apps/site/src/docs/` — the landing page and the moved sections
+- `apps/site/src/_data/site.ts` — the nav, reduced to three entries
+- `apps/site/src/_data/docsSections.json5` — new; the section registry
+- `apps/site/src/docs/` — the landing page and all six moved sections
+- `apps/site/src/docs/optional-tools/` — one page split into six
+- `apps/site/src/_includes/partials/section-contents.njk` — new; within-section navigation
+- `apps/site/src/_includes/partials/up-link.njk` — keys on `section` rather than `project`
+- `apps/site/src/_includes/layouts/page.njk` — includes the contents block
+- `apps/site/eleventy.config.ts` — the `guides` collection becomes `docsPages`
 - `apps/site/src/projects/project.njk` — the Guides block becomes a section link
-- `apps/site/src/projects/`, `src/prompting/`, `src/get-started/`, `src/contribute/`, `src/optional-tools/` — the moves
-- `apps/site/src/redirects.njk`
-- `apps/site/scripts/verify-guides.ts` — the guide location rule changes with the move
-- `docs/guides/developer/project-guides.md` — the contract it states is what moved
+- `apps/site/src/sitemap.njk` — two loops become one
+- `apps/site/src/redirects.njk` — 24 new rules, and the older targets repointed
+- `apps/site/scripts/verify-docs-sections.ts` — replaces `verify-guides.ts`
+- `apps/site/scripts/verify-provenance.ts`, `verify-reachable.ts` — the trees they walk
+- `apps/site/package.json` — `verify:guides` becomes `verify:docs`
+- `docs/decisions/ADR-KI-WEBSITE-003-documentation-is-a-thing-you-work-through.md` — rewritten and renamed
+- `docs/guides/developer/docs-sections.md` — replaces `project-guides.md`
+- `docs/guides/developer/{README,page-provenance,page-reachability,projects-directory,what-to-publish}.md`, `docs/guides/README.md`, `AGENTS.md` — the contract they cite
 
 ## Verify
 
@@ -114,13 +123,19 @@ Nothing blocks this and it blocks nothing.
 
 `KI-WEB-SITE-038` was merged into this record rather than sequenced behind it. It held the content half, and while the two were going to be separate passes the `blocked_by` declaration was right; in one pass it would hold executable work behind a review queue, which the roadmap standard names as a dependency that "makes the audit fail for a reason that is not true".
 
+`KI-WEB-SITE-039` receives the half of the merged content scope this item could measure but not execute: what Get Started and Contribute should be. It carries the findings rather than restating the question.
+
 `KI-WEB-SITE-032` reviews the result. It is the visual pass and it needs a person at a browser, which is the one input this session cannot supply — so it stays its own record and its list is rewritten against the restructured site rather than the old one.
+
+`KI-WEB-SITE-040` is unrelated to the restructure but was raised from it: consolidating the nine site scripts, which this item added to and repointed.
 
 ## Documentation impact
 
 ### Decision Records
 
-One is likely. `ADR-KI-WEBSITE-003` and the `KI-WEB-SITE-025` contract place a guide beside the project it describes, and this item moves guides away from their projects into Docs sections. That is a reversal of a recorded decision and needs a record saying why — the reason being that the earlier decision solved ownership, and this one solves reading, which turned out to be a different question.
+`ADR-KI-WEBSITE-003` is rewritten and renamed, from _A Page Lives With What It Is About_ to _Documentation Is A Thing You Work Through_. The decisions directory holds living present-state records rather than supersession chains, so reversing the location contract means rewriting the record that set it rather than adding a fourth. Its filename changed with its title and `docs/decisions/README.md` is repointed.
+
+The reversal is stated as such in the record: the earlier decision solved ownership, this one solves reading, and they turned out to be different questions. What survives intact is the part that was right — that the binding is the directory and never the page's frontmatter.
 
 ### Specifications
 
@@ -128,11 +143,60 @@ None. No published interface is involved.
 
 ### Guides
 
-`docs/guides/developer/project-guides.md` states the location contract that this item changes; it is rewritten rather than repointed. `docs/guides/developer/page-reachability.md` gains whatever the section navigation adds to the reachability graph.
+`docs/guides/developer/project-guides.md` became `docs/guides/developer/docs-sections.md`, rewritten rather than repointed, because the contract it states is what moved. `page-reachability.md` gained the reason the contents block is load-bearing; `page-provenance.md`, `projects-directory.md`, `what-to-publish.md`, both READMEs and `AGENTS.md` were repointed.
 
 ### Roadmap
 
-`KI-WEB-SITE-038` is merged into this record. `KI-WEB-SITE-032` is repointed at the restructured site.
+`KI-WEB-SITE-038` is merged into this record. `KI-WEB-SITE-039` and `KI-WEB-SITE-040` are new. `KI-WEB-SITE-032` is repointed at the restructured site.
+
+## Review
+
+### Delivered
+
+The site's top navigation is three entries — Philosophy, Model, Docs — and everything that teaches lives under `/docs/` in six sections a reader works through in order. A Docs landing grid names each section, states how many pages it holds, and deep-links to its first page. Every page in a section closes with that section's contents in reading order, marking where the reader is and naming what comes next. `/projects/` remains as the catalogue of what exists, linking to a section in one sentence rather than listing its pages.
+
+The last two steps were judged in full and executed in part, which is the honest reading of "judge each on its own". Optional Tools had a reason to be a section and is now six pages. Get Started and Contribute turned out not to be thin articles at all but hand-built landing pages with hero sections, overlapping each other on the Contribution Process, and Get Started does not get anybody started — findings this item could measure and record but not act on, because rewriting a visual composition needs a person at a browser. Both are handed to `KI-WEB-SITE-039` with the measurements attached, rather than being half-rewritten here or leaving this item open behind an approval it cannot ask for.
+
+### Change Summary
+
+Seventy-six files across three commits.
+
+`1053121` moved the structure: six directories under `src/docs/`, forty permalinks and internal links repointed, a new `docsSections.json5` registry, the `guides` collection generalised to `docsPages`, a new landing page and contents partial, the nav reduced, twenty-four new 301s with the older rules repointed at final homes, `verify-guides.ts` rewritten as `verify-docs-sections.ts`, and the decision record and guide contract rewritten to match.
+
+`3aef892` split Optional Tools from one 220-line page into six, promoting the five questions that decide whether a tool is worth adopting from the foot of the watch list to the front of the section.
+
+This record, `KI-WEB-SITE-039` and `KI-WEB-SITE-040` are the third.
+
+The registry declares only a slug, a title and a description. Counts and entry points are derived at build time from the pages that carry the binding, so a card cannot claim a number its section does not hold and adding a page changes the count without anyone editing anything.
+
+### Verification
+
+- `bun run ki:site:clean && bun run ki:site:build` passes, exit 0. All six gates run in-build: `verify-tool-routes` 4 routes, `verify-projects` 18 entries, `verify-provenance` 39 pages, `verify-docs-sections` 41 pages across 6 sections, `verify-reachable` 60 pages, `verify-prose-coverage` 158 regions.
+- **`verify-reachable` was looking at a third of the site and now looks at all of it.** Its `publishedTrees` still named `prompting/` and `optional-tools/`, so after the move it reported 18 reachable pages — the project catalogue — and silently ignored the 37 that had just moved. Widened to `docs/` and `projects/`: 55 pages, then 60 after the split. This is the gate that proves the sections are navigable, because the landing grid links only each section's first page.
+- Every rule in the built `_redirects` was resolved against `dist/`: 0 problems across 98 lines.
+- The card counts were read out of the built HTML and match the directories: Get Started 1, The ki CLI 9, The Agentic Harness 10, Prompting 14, Optional Tools 6, Contribute 1.
+- `bunx tsc --noEmit` clean; `bun test apps/site/scripts` 32 pass, 0 fail.
+- `ki repo audit --skill ki-repo-website-content --repo .`, `--skill ki-engineering --repo .` and `--skill ki-authoring --repo .` all pass.
+
+### Outstanding concerns
+
+**Nobody has looked at it.** The gates prove the tree is navigable, the counts are honest and nothing 404s. They say nothing about whether a six-card grid on the parchment ground looks like this site, whether the contents block at the foot of every page reads as useful or as clutter, or whether the three-entry nav feels sparse. That is `KI-WEB-SITE-032`'s pass and it needs a person at a browser.
+
+**Get Started and Contribute are unresolved and now more visible than they were.** Both are hand-built landing pages with hero sections, not prose articles, and they overlap each other on the Contribution Process. Get Started does not get anybody started — it is an Arcadia explainer, while the pages that actually start someone sit in the `ki` and harness sections. Promoting it to the first card of the Docs grid makes that mismatch more prominent than it was in the old nav, which is an argument for `KI-WEB-SITE-039` being scheduled soon rather than an argument against the move.
+
+**`--network` provenance was not run.** The offline gate passes on all 39 pages, and the six new Optional Tools pages inherit `sources: original`, which needs no network. The upstream drift check is unchanged by this item and was left for a run that is not competing with a restructure.
+
+### Post-change review
+
+The move surfaced two things that had nothing to do with navigation.
+
+The first is that **a gate scoped by a list of directory names stops being a gate the moment the directories change**, and it does so silently and in the reassuring direction. `verify-reachable` reported a pass while ignoring two thirds of the site, and the only reason anyone noticed was that its page count looked too small next to a `find` of `dist/`. The fix here was to widen the list, but the durable lesson is that `verify-provenance` was rewritten to walk `src/docs/` as a tree rather than as an enumeration, which is why it will survive the next move without being edited.
+
+The second is that **three one-page sections were not three instances of one problem.** Optional Tools was a section wearing one page — 220 lines and eight top-level headings — and splitting it was straightforwardly right. Get Started and Contribute were the opposite: not too little material but the wrong material, duplicated. A grid that shows page counts is good at finding the first kind and actively misleading about the second, because it frames every thin card as "needs more pages" when the answer for two of them is "needs to decide what it is".
+
+### Mini recap
+
+`KI-WEB-SITE-037` restructured the site around Docs sections, absorbing the content scope of the merged `KI-WEB-SITE-038`. Sixty published pages are reachable by navigation, every previously published address resolves in one hop, and the decision record that put guides beside their projects was rewritten to say why reading beat ownership. The visual pass belongs to `KI-WEB-SITE-032`; the Get Started and Contribute question belongs to `KI-WEB-SITE-039`; the script duplication the work walked past belongs to `KI-WEB-SITE-040`.
 
 ## Discussion
 
