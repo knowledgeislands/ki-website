@@ -24,9 +24,11 @@
   "homepage": "https://github.com/knowledgeislands/ki-website#readme",
   "keywords": [
     "arcadia",
+    "bun",
     "eleventy",
     "knowledge-islands",
     "tailwindcss",
+    "typescript",
     "website"
   ],
   "license": "MIT",
