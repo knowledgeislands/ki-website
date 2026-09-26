@@ -72,10 +72,37 @@ budgets.mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
 # -----------------------------------------------------------------------------
 
 [skills.ki-trades]
-routes."knowledgeislands/ki-arcadia-principal" = { import = ["knowledge"] }
-routes."knowledgeislands/ki-agentic-harness" = { import = ["knowledge"] }
-routes."knowledgeislands/ki-specifications" = { import = ["knowledge"] }
-routes."knowledgeislands/ki-techne-principal" = { import = ["knowledge"] }
+
+[skills.ki-trades.subtypes.knowledge]
+public-source-change = "Already-public committed KI source changes for documentation provenance review. Excludes unpublished or confidential material; grants no publication or deployment authority."
+
+[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
+export = ["work", "knowledge"]
+import = ["knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness".standing.export]
+knowledge = ["shared-capability-maintenance"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness".standing.import]
+knowledge = ["public-source-change"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal"]
+import = ["knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal".standing.import]
+knowledge = ["public-source-change"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-specifications"]
+import = ["knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-specifications".standing.import]
+knowledge = ["public-source-change"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-techne-principal"]
+import = ["knowledge"]
+
+[skills.ki-trades.routes."knowledgeislands/ki-techne-principal".standing.import]
+knowledge = ["public-source-change"]
 
 [skills.ki-agora]
 memberships.ki-all = { home = "https://github.com/knowledgeislands/ki-arcadia-principal", role = "product" }
