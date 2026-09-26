@@ -4,12 +4,12 @@ area: SITE
 title: Restructure navigation around docs
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: ae5276d789e9aef37b3e434f748d3aba6d013913
 created_at: 2026-09-24T22:30:00Z
-updated_at: 2026-09-25T14:20:00Z
+updated_at: 2026-09-26T18:11:17Z
 ---
 
 ## Goal
@@ -197,6 +197,10 @@ The second is that **three one-page sections were not three instances of one pro
 ### Mini recap
 
 `KI-WEB-SITE-037` restructured the site around Docs sections, absorbing the content scope of the merged `KI-WEB-SITE-038`. Sixty published pages are reachable by navigation, every previously published address resolves in one hop, and the decision record that put guides beside their projects was rewritten to say why reading beat ownership. The visual pass belongs to `KI-WEB-SITE-032`; the Get Started and Contribute question belongs to `KI-WEB-SITE-039`; the script duplication the work walked past belongs to `KI-WEB-SITE-040`.
+
+## Done
+
+Accepted 2026-09-26 by Kris Brown on the review packet above.
 
 ## Discussion
 
