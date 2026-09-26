@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T15:40:00Z
-updated_at: 2026-09-25T15:40:00Z
+updated_at: 2026-09-26T18:18:00Z
 ---
 
 ## Goal
@@ -22,7 +22,7 @@ CI has failed on every push to `main` since 2026-09-22 — five consecutive runs
 
 `ki repo audit` resolves its rubric from the installed harness. In CI that harness is not a clone of the default branch: released `ki` carries an immutable pin, `canonicalHarnessRelease` in `src/core/storage/registry.ts`, which for `v0.4.0` names `knowledgeislands/ki-agentic-harness` at commit `bcdc9919` (2026-09-18) together with its archive digest. The workflow installs `v0.4.0` explicitly and asserts the version, so CI audits against a rubric frozen on 2026-09-18. A contributor's `ki` resolves the local harness checkout instead, which tracks `main`. The two have drifted by six days and two rules.
 
-The rule that renames a heading is `ITEM-3`. Harness commit `a522253c` (2026-09-24) renamed the review-packet section from `### Summary of changes` to `### Change Summary`. `KI-WEB-SITE-037` carries the new heading, passes locally, and fails in CI; `KI-WEB-SITE-036` failed the same way on 2026-09-24 before this session began, which is the evidence that the cause is the pin rather than the item.
+The rule that renames a heading is `ITEM-3`. Harness commit `a522253c` (2026-09-24) renamed the review-packet section from `### Summary of changes` to `### Change Summary`. The accepted navigation delivery carried the new heading, passed locally, and failed in CI; `KI-WEB-SITE-036` failed the same way on 2026-09-24 before this session began, which is the evidence that the cause is the pin rather than the item.
 
 The rule that moves a file is `WCF-26`. The pinned rubric wants `docs/guides/cloudflare.md`; current `main` wants `docs/guides/developer/cloudflare.md`, which is where this repository's developer guides live and where the file already is, linked from `docs/guides/developer/README.md`. Nothing is missing. The harness moved the path deliberately, under its own hand-over commit `2634a273`, so that the guide stays inside the audience route `ki-guides` governs.
 
@@ -71,7 +71,7 @@ The harness fix for both rules is already on `knowledgeislands/ki-agentic-harnes
 
 Blocked by `tools-ki`, which owns `canonicalHarnessRelease` and the release that would move it. That is a handoff to `tools-ki` rather than work this repository can do: nothing here can change what a released `ki` pins, and the registry actively refuses a local override of the canonical harness.
 
-Nothing in this repository blocks on this item. The two failures are checker drift, not defects, so no content work waits behind them — but `KI-WEB-SITE-037` cannot reach a green build while it stands, which is worth knowing when accepting it.
+Nothing in this repository blocks on this item. The two failures are checker drift, not defects, so no content work waits behind them. The accepted navigation delivery exposed the mismatch during review, which remains useful evidence for this pin realignment.
 
 ## Documentation impact
 

@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-09-25T14:00:00Z
+updated_at: 2026-09-26T18:18:00Z
 ---
 
 ## Goal
@@ -18,7 +18,7 @@ A reader who clicks **Get Started** on the Docs grid starts something. A reader 
 
 ## Context
 
-`KI-WEB-SITE-037` gathered everything that teaches into Docs sections and settled four of the six. Optional Tools grew from one page to six. Get Started and Contribute were left, deliberately, because measuring them turned up a problem the restructure could name but not fix.
+The completed Docs restructure gathered everything that teaches into Docs sections and settled four of the six. Optional Tools grew from one page to six. Get Started and Contribute were left, deliberately, because measuring them turned up a problem the restructure could name but not fix.
 
 They are not thin articles waiting to be grown. Both are hand-built Nunjucks pages on `layouts/base.njk` carrying hero sections, full-bleed backgrounds and their own containers — 199 lines and 88 lines of markup respectively, not prose. Converting either into a prose sequence is a visual change, and nothing in this session could see the result.
 
@@ -30,7 +30,7 @@ The sharper finding is that **Get Started does not get anybody started.** It is 
 
 This decides what Get Started and Contribute are, and rewrites them accordingly. It may move material between sections, and it may conclude that one of them is not a Docs section at all — Contribute could reasonably be site chrome, like a footer link, rather than something a reader works through.
 
-It does not touch the other four sections, the grid, the registry or the gates; `KI-WEB-SITE-037` settled those and they hold whatever answer this reaches. It needs a person at a browser, because both pages are visual compositions and the verification is whether the result still looks like the site.
+It does not touch the other four sections, the grid, the registry or the gates; the completed Docs restructure settled those and they hold whatever answer this reaches. It needs a person at a browser, because both pages are visual compositions and the verification is whether the result still looks like the site.
 
 ## Current state
 
@@ -74,7 +74,7 @@ The pages that actually start someone are `/docs/ki/getting-started/` and `/docs
 
 ## Dependencies / blocks
 
-Nothing blocks this. `KI-WEB-SITE-037` delivered the structure this decides the contents of, and is already closed for what it delivered.
+Nothing blocks this. The accepted Docs restructure delivered the structure this decides the contents of and is already closed for what it delivered.
 
 `KI-WEB-SITE-032` owns whether the Docs grid looks right, including whether a "1 page" card looks broken. If this item removes the one-page cards, that question goes away; if it keeps them, 032 still owns it.
 

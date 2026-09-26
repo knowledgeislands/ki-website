@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-09-24T22:05:00Z
+updated_at: 2026-09-26T18:18:00Z
 ---
 
 ## Goal
@@ -40,7 +40,7 @@ The site builds clean through six gates and renders 60 published pages. Nobody h
 - `pre` blocks — `--color-navy` ground, `--color-parchment` ink, and whether horizontal overflow scrolls rather than clipping on a narrow viewport.
 - Inline `code` — a tinted ground off `--color-mist`, and whether it reads as code without fragmenting a paragraph carrying a hundred of them.
 - `.prose-provenance` — smaller, lighter, separated by a rule, and demonstrably chrome rather than the page's conclusion, which was the whole point of moving it.
-- The section link on a project page — spacing against the surrounding `section-parchment`. It was a list of that project's guides when this item was written; `KI-WEB-SITE-037` made it a single sentence pointing at the project's Docs section.
+- The section link on a project page — spacing against the surrounding `section-parchment`. It was a list of that project's guides when this item was written; the completed Docs restructure made it a single sentence pointing at the project's Docs section.
 - Dark mode for all of the above, which is mirrored in a separate `@media (prefers-color-scheme: dark)` block and is the half most likely to have been missed.
 
 **Contrast has since been measured rather than looked at**, which removes one unknown from the list and narrows another. Every prose foreground/background pair in both schemes was computed against WCAG AA:
@@ -60,7 +60,7 @@ So the remaining unknowns are the ones a number cannot answer: whether the table
 
 One more joins them. `KI-WEB-SITE-036` darkened `--color-teal` from `#3d8a8a` to `#317070` to clear AA, which moves every link, every uppercase label and two white-on-teal circles across the whole site, not just the prose. The numbers are settled; whether the site still reads as itself with a deeper accent is a judgment, and this is the item that holds it.
 
-`KI-WEB-SITE-037` then restructured the site, which adds four more of the same kind. None of them is a contrast question and none can be computed:
+The completed Docs restructure adds four more of the same kind. None of them is a contrast question and none can be computed:
 
 - **The Docs landing grid** — six cards on `section-parchment`, each carrying an `.overline` page count, a title, a description and a "Start at …" line. Whether six cards of visibly unequal weight read as a library or as an inventory.
 - **The section contents block** at the foot of every prose page — an ordered list of the section's pages inside `.prose-provenance`, with the current page bolded and an explicit Next link. It appears on 41 pages, immediately above the provenance footer, so two pieces of chrome now stack. Whether that reads as helpful or as a wall.
