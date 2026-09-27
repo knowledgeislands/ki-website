@@ -11,6 +11,8 @@
 harnesses = ["knowledgeislands/ki-agentic-harness"]
 
 [skills.ki-repo]
+repo_type = "project"
+primary_shape = "ki-repo-website"
 repository = "https://github.com/knowledgeislands/ki-website"
 title = "KI Website"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
