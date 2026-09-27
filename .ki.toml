@@ -62,6 +62,7 @@ preferred_model_type = "standard"
 budgets.mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
 
 [skills.ki-housekeeping-claude]
+auto_memory = "transition"
 
 [skills.ki-tokenomics-claude]
 
