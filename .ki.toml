@@ -88,30 +88,20 @@ public-source-change = "Already-public committed KI source changes for documenta
 [skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
 export = ["work", "knowledge"]
 import = ["knowledge"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness".standing.export]
-knowledge = ["shared-capability-maintenance"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness".standing.import]
-knowledge = ["public-source-change"]
+standing.export.knowledge = ["shared-capability-maintenance"]
+standing.import.knowledge = ["public-source-change"]
 
 [skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal"]
 import = ["knowledge"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal".standing.import]
-knowledge = ["public-source-change"]
+standing.import.knowledge = ["public-source-change"]
 
 [skills.ki-trades.routes."knowledgeislands/ki-specifications"]
 import = ["knowledge"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-specifications".standing.import]
-knowledge = ["public-source-change"]
+standing.import.knowledge = ["public-source-change"]
 
 [skills.ki-trades.routes."knowledgeislands/ki-techne-principal"]
 import = ["knowledge"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-techne-principal".standing.import]
-knowledge = ["public-source-change"]
+standing.import.knowledge = ["public-source-change"]
 
 [skills.ki-agora]
 memberships.kis = { home = "https://github.com/knowledgeislands/ki-arcadia-principal", role = "product" }
