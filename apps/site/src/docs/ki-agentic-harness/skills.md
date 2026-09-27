@@ -6,9 +6,9 @@ order: 4
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'The skill domains and the generated capability inventory this page orients readers within'
-    reviewed: '2026-09-21'
+    reviewed: '2026-09-27'
 ---
 
 # Skills and journeys
@@ -86,7 +86,7 @@ The source tree groups capabilities into six semantic domains:
 
 1. **Agentic systems** — `ki-communication` and `ki-subagents`: the shared capability types that equip an agent.
 2. **Change management** — `ki-work`, its Roadmap, Streams, GitHub Issues, and Linear adapters, and the short lifecycle process skills.
-3. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-codex` runtime adapters; and `ki-housekeeping-claude`.
+3. **Environment** — portable `ki-binding` and `ki-tokenomics`; their `-claude` and `-chatgpt` runtime adapters; and `ki-housekeeping-claude`.
 4. **Governance** — `ki-agora`, `ki-authoring`, `ki-checkpoint`, `ki-decision-records`, `ki-delegation`, `ki-engineering`, `ki-git`, `ki-guides`, `ki-specs`, `ki-trade`, and `ki-trades`: reusable standards and instruments that cut across repository shapes.
 5. **Keystone** — `ki-bootstrap`, `ki-repo`, and `ki-skills`: the installation, repository, and skill-quality contracts that hold the set together.
 6. **Repository structure** — the explicit primary structures `ki-repo-project` and `ki-repo-kb`, with composable deltas for harnesses, MCPs, websites, specifications, tools, and Knowledge Base zones.
@@ -132,7 +132,7 @@ ki-housekeeping-claude
 ki-tokenomics-claude
 └─ ki-tokenomics
 
-ki-tokenomics-codex
+ki-tokenomics-chatgpt
 └─ ki-tokenomics
 
 ki-tokenomics
@@ -140,7 +140,7 @@ ki-tokenomics
 ki-binding-claude
 └─ ki-binding
 
-ki-binding-codex
+ki-binding-chatgpt
 └─ ki-binding
 
 ki-binding-chezmoi

@@ -6,9 +6,9 @@ order: 5
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'The skill names and responsibilities the outcome routes resolve to'
-    reviewed: '2026-09-21'
+    reviewed: '2026-09-27'
 ---
 
 # Choose a skill by outcome
@@ -57,7 +57,7 @@ These concerns are related but distinct:
 - **Let the current process use runtime subagents for bounded work** — the active process skill, such as `ki-implement` or `ki-batch`, decides whether delegation is useful and retains coordination, human interaction, review, and integration.
 - **Make a high-risk hand-off durable** — use `ki-delegation` when an approved delegated change needs locked decisions, explicit authority, isolation, escalation, verification, and return boundaries that must survive a runtime hand-off. Ordinary bounded subagent use does not require a durable packet.
 - **Define a reusable subagent role** — use `ki-subagents` for the portable role identity, purpose, lane, grounding, hand-offs, orchestration intent, and outcome evidence.
-- **Project that role into a runtime format** — use `ki-subagents-claude` for Claude Code Markdown/YAML or `ki-subagents-codex` for Codex TOML. A valid source projection does not by itself prove installation, activation, selection, or execution.
+- **Project that role into a runtime format** — use `ki-subagents-claude` for Claude Code Markdown/YAML or `ki-subagents-chatgpt` for Codex TOML. A valid source projection does not by itself prove installation, activation, selection, or execution.
 
 Cross-repository transfer is not subagent delegation. Use the trade route below when another repository owns the work or knowledge.
 
@@ -81,13 +81,13 @@ Repository structures compose with the universal baseline; they do not replace i
 ## Bind runtimes and manage context cost
 
 - **Define a portable MCP inventory** — use `ki-binding` for the canonical XDG source, server schema, client targeting, and vendor-neutral target.
-- **Project bindings into a runtime or user environment** — use `ki-binding-claude`, `ki-binding-codex`, or `ki-binding-chezmoi` for the matching native surface. These adapters do not replace the portable source.
+- **Project bindings into a runtime or user environment** — use `ki-binding-claude`, `ki-binding-chatgpt`, or `ki-binding-chezmoi` for the matching native surface. These adapters do not replace the portable source.
 - **Set runtime-neutral context budgets or model-purpose guidance** — use `ki-tokenomics`.
 - **Assess language models and executable agent routes** — use `ki-model-radar`; it keeps recommendation, support, retirement, and movement state separate and routes approved consumer changes instead of mutating runtime defaults.
 - **Assess agentic protocols, formats, and architectural signals** — use `ki-agentic-radar`; it separates specification maturity, implementation evidence, interoperability evidence, structural patterns, and Knowledge Islands stance without adopting a protocol automatically.
-- **Inspect bounded runtime filesystem evidence** — use `ki-tokenomics-claude` or `ki-tokenomics-codex` after the portable policy. These adapters do not establish undocumented live-session state.
+- **Inspect bounded runtime filesystem evidence** — use `ki-tokenomics-claude` or `ki-tokenomics-chatgpt` after the portable policy. These adapters do not establish undocumented live-session state.
 - **Govern Claude-specific runtime housekeeping** — use `ki-housekeeping-claude`; use `ki-work-housekeeping` instead for portable recurring repository maintenance.
-- **Review and explicitly delete repository-scoped Codex sessions** — use `ki-housekeeping-codex`; it is opt-in while its app-server binding remains experimental, and it never provides automatic retention.
+- **Review and explicitly delete repository-scoped Codex sessions** — use `ki-housekeeping-chatgpt`; it is opt-in while its app-server binding remains experimental, and it never provides automatic retention.
 
 Runtime binding and runtime evidence are separate from capability activation. A source file or clean source audit is not proof that a runtime loaded or executed it.
 

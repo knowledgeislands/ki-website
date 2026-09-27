@@ -6,9 +6,9 @@ order: 7
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'Skill names, trigger descriptions, argument hints, and the invocation forms a runtime accepts'
-    reviewed: '2026-09-22'
+    reviewed: '2026-09-27'
 ---
 
 # Use skills

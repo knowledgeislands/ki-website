@@ -7,15 +7,15 @@
 // ki-repo-harness:capability-catalogue markers, which that standard names normatively.
 //
 // The ref below must match the ref declared in the sources frontmatter of
-// src/projects/ki-agentic-harness/skill-catalogue.md; verify:guidance fails the build when they disagree.
+// src/projects/ki-agentic-harness/skill-catalogue.md; verify:provenance fails the build when they disagree.
 // See docs/guides/developer/page-provenance.md.
 //
-// Snapshot taken at 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb.
+// Snapshot taken at 77ec746d2c16cb0e46d15bd175d8d27c35ca3285.
 {
   "source": {
     "repository": "knowledgeislands/ki-agentic-harness",
     "path": "skills/README.md",
-    "ref": "7dcee9dc3aa33c863c77cb56d1bab762d026dbbb"
+    "ref": "77ec746d2c16cb0e46d15bd175d8d27c35ca3285"
   },
   "counts": {
     "total": 61,
@@ -86,8 +86,35 @@
       "name": "Agentic Systems",
       "skills": [
         {
+          "name": "ki-agent-coordination-paperclip",
+          "description": "Govern how Paperclip coordinates agents around a Knowledge Island group or archipelago while repositories remain knowledge and work authority. Use when designing or auditing Paperclip agents, tasks, direct sessions, or execution workspaces for KI; not for Paperclip API mechanics.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <arrangement> | conform <arrangement> | educate <arrangement> | help | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-git`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Portable"
+            }
+          ]
+        },
+        {
           "name": "ki-subagents",
-          "description": "Define or assess runtime-neutral KI subagent roles: identity, delegation purpose, instructions, lane, grounding, hand-offs, orchestration, and evidence. Use before a native projection; use `ki-subagents-claude` or `ki-subagents-codex` for runtime files.",
+          "description": "Define or assess runtime-neutral KI subagent roles: identity, delegation purpose, instructions, lane, grounding, hand-offs, orchestration, and evidence. Use before a native projection; use `ki-subagents-claude` or `ki-subagents-chatgpt` for runtime files.",
           "kind": "Governance",
           "fields": [
             {
@@ -113,34 +140,7 @@
           ]
         },
         {
-          "name": "ki-subagents-claude",
-          "description": "Audit or write Claude Code Markdown/YAML projections of approved portable KI subagent roles. Use for Claude-native agent source shape and fields; use `ki-subagents` for runtime-neutral role design and `ki-subagents-codex` for Codex TOML.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Detected"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <agent-or-dir> | conform <agent> | help | educate <description> | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-subagents`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Runtime-bound: `claude-code`"
-            }
-          ]
-        },
-        {
-          "name": "ki-subagents-codex",
+          "name": "ki-subagents-chatgpt",
           "description": "Audit or write Codex TOML projections of approved portable KI subagent roles. Use for Codex-native agent source shape and fields; use `ki-subagents` for runtime-neutral role design and `ki-subagents-claude` for Claude Markdown/YAML.",
           "kind": "Governance",
           "fields": [
@@ -163,6 +163,33 @@
             {
               "label": "Runtime",
               "value": "Runtime-bound: `chatgpt-codex`"
+            }
+          ]
+        },
+        {
+          "name": "ki-subagents-claude",
+          "description": "Audit or write Claude Code Markdown/YAML projections of approved portable KI subagent roles. Use for Claude-native agent source shape and fields; use `ki-subagents` for runtime-neutral role design and `ki-subagents-chatgpt` for Codex TOML.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Detected"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit <agent-or-dir> | conform <agent> | help | educate <description> | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-subagents`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Runtime-bound: `claude-code`"
             }
           ]
         }
@@ -560,6 +587,33 @@
           ]
         },
         {
+          "name": "ki-binding-chatgpt",
+          "description": "Audit or safely render KI-targeted MCP servers into Codex native `[mcp_servers]` without taking over unrelated configuration. Use for Codex MCP drift or rendering; `ki-binding` owns portable source and `ki-binding-claude` owns Claude surfaces.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit [project] | conform [project] | help | educate [project] | refresh`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-binding`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Runtime-bound: `chatgpt-codex`"
+            }
+          ]
+        },
+        {
           "name": "ki-binding-chezmoi",
           "description": "Audit or conform the chezmoi rendering path from canonical KI `mcp-servers.yaml` through a renderer partial and `chezmoi apply`. Use for that portable-source-to-dotfiles pipeline; `ki-binding` owns the source contract and `ki-repo-dotfiles-chezmoi` owns general chezmoi structure.",
           "kind": "Governance",
@@ -588,7 +642,7 @@
         },
         {
           "name": "ki-binding-claude",
-          "description": "Audit or safely conform Claude-native MCP configuration across Claude Code, Desktop, web conventions, and the KI Cowork plugin projection. Use when Claude MCP surfaces drift or Cowork needs rebuilding; `ki-binding` owns portable source and `ki-binding-codex` owns Codex.",
+          "description": "Audit or safely conform Claude-native MCP configuration across Claude Code, Desktop, web conventions, and the KI Cowork plugin projection. Use when Claude MCP surfaces drift or Cowork needs rebuilding; `ki-binding` owns portable source and `ki-binding-chatgpt` owns Codex.",
           "kind": "Governance",
           "fields": [
             {
@@ -614,35 +668,8 @@
           ]
         },
         {
-          "name": "ki-binding-codex",
-          "description": "Audit or safely render KI-targeted MCP servers into Codex native `[mcp_servers]` without taking over unrelated configuration. Use for Codex MCP drift or rendering; `ki-binding` owns portable source and `ki-binding-claude` owns Claude surfaces.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit [project] | conform [project] | help | educate [project] | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-binding`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Runtime-bound: `chatgpt-codex`"
-            }
-          ]
-        },
-        {
           "name": "ki-housekeeping-chatgpt",
-          "description": "Audit installed ChatGPT opaque local-store evidence for session identity, hashes, and read-only checkpoints. Use for local ChatGPT store inventory or change detection; `ki-acquire-chatgpt` owns readable project and conversation acquisition.",
+          "description": "Audit ChatGPT opaque local-store evidence and Codex local memory or repository-scoped sessions. Use for ChatGPT store change detection, Codex memory reconciliation, or reviewed Codex thread cleanup; `ki-acquire-chatgpt` owns readable ChatGPT conversation acquisition.",
           "kind": "Governance",
           "fields": [
             {
@@ -695,33 +722,6 @@
           ]
         },
         {
-          "name": "ki-housekeeping-codex",
-          "description": "Acquire, audit, and later clean repository-scoped Codex sessions for one physical repository. Use for Codex session import, thread review, or old-thread cleanup with explicit retention; portable recurring repository maintenance belongs to `ki-work-housekeeping`.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit <repo> | conform <artifact> <thread-id>... | educate <repo> | help | refresh`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "None"
-            },
-            {
-              "label": "Runtime",
-              "value": "Runtime-bound: `chatgpt-codex`"
-            }
-          ]
-        },
-        {
           "name": "ki-tokenomics",
           "description": "Govern portable agent-context budgets, standing-surface attribution, and model-purpose policy. Use runtime adapters for observed Claude or Codex evidence and `ki-skills` for description quality.",
           "kind": "Governance",
@@ -749,34 +749,7 @@
           ]
         },
         {
-          "name": "ki-tokenomics-claude",
-          "description": "Audit non-secret Claude Code repository evidence—instructions, rules, settings, imports, and MCP declarations—for portable tokenomics. Use `ki-tokenomics` for policy and `ki-tokenomics-codex` for Codex evidence; effective session state is outside this filesystem audit.",
-          "kind": "Governance",
-          "fields": [
-            {
-              "label": "Kind",
-              "value": "Governance"
-            },
-            {
-              "label": "Applicability",
-              "value": "Declaration Only"
-            },
-            {
-              "label": "Arguments",
-              "value": "`audit | conform | educate | refresh | help`"
-            },
-            {
-              "label": "Dependencies",
-              "value": "`ki-tokenomics`"
-            },
-            {
-              "label": "Runtime",
-              "value": "Runtime-bound: `claude-code`"
-            }
-          ]
-        },
-        {
-          "name": "ki-tokenomics-codex",
+          "name": "ki-tokenomics-chatgpt",
           "description": "Audit non-secret Codex repository evidence—configuration, AGENTS.md, skills, and custom agents—for portable tokenomics. Use `ki-tokenomics` for policy and `ki-tokenomics-claude` for Claude evidence; effective session state is outside this filesystem audit.",
           "kind": "Governance",
           "fields": [
@@ -799,6 +772,33 @@
             {
               "label": "Runtime",
               "value": "Runtime-bound: `chatgpt-codex`"
+            }
+          ]
+        },
+        {
+          "name": "ki-tokenomics-claude",
+          "description": "Audit non-secret Claude Code repository evidence—instructions, rules, settings, imports, and MCP declarations—for portable tokenomics. Use `ki-tokenomics` for policy and `ki-tokenomics-chatgpt` for Codex evidence; effective session state is outside this filesystem audit.",
+          "kind": "Governance",
+          "fields": [
+            {
+              "label": "Kind",
+              "value": "Governance"
+            },
+            {
+              "label": "Applicability",
+              "value": "Declaration Only"
+            },
+            {
+              "label": "Arguments",
+              "value": "`audit | conform | educate | refresh | help`"
+            },
+            {
+              "label": "Dependencies",
+              "value": "`ki-tokenomics`"
+            },
+            {
+              "label": "Runtime",
+              "value": "Runtime-bound: `claude-code`"
             }
           ]
         }
@@ -1205,7 +1205,7 @@
             },
             {
               "label": "Detects",
-              "value": "`ki-checkpoint`, `ki-decision-records`, `ki-engineering`, `ki-guides`, `ki-repo-homebrew-tap`, `ki-repo-kb`, `ki-repo-kb-streams`, `ki-repo-mcp`, `ki-repo-plugins`, `ki-repo-specifications`, `ki-repo-tools`, `ki-repo-website`, `ki-repo-website-app`, `ki-repo-website-cloudflare`, `ki-repo-website-content`, `ki-skills`, `ki-specs`, `ki-subagents`, `ki-subagents-claude`, `ki-subagents-codex`"
+              "value": "`ki-checkpoint`, `ki-decision-records`, `ki-engineering`, `ki-guides`, `ki-repo-homebrew-tap`, `ki-repo-kb`, `ki-repo-kb-streams`, `ki-repo-mcp`, `ki-repo-plugins`, `ki-repo-specifications`, `ki-repo-tools`, `ki-repo-website`, `ki-repo-website-app`, `ki-repo-website-cloudflare`, `ki-repo-website-content`, `ki-skills`, `ki-specs`, `ki-subagents`, `ki-subagents-chatgpt`, `ki-subagents-claude`"
             },
             {
               "label": "Arguments",
@@ -1282,7 +1282,7 @@
         },
         {
           "name": "ki-repo-harness",
-          "description": "Audit or design a KI-compatible harness that publishes skills, subagents, MCP servers, evals, and hooks as a verified installed payload. Use for source layout, prefix identity, declarations, or catalogue publication; each capability skill owns content quality.",
+          "description": "Audit or design a KI-compatible harness that publishes skills, subagents, evals, and hooks as a verified installed payload. Use for source layout, prefix identity, declarations, or catalogue publication; each capability skill owns content quality.",
           "kind": "Governance",
           "fields": [
             {
@@ -1471,7 +1471,7 @@
         },
         {
           "name": "ki-repo-mcp",
-          "description": "Audit or scaffold KI MCP server code for workspace-MCP layout, dependency injection, tool naming, access gates, logging, and security. Use `ki-engineering` for common toolchains, `ki-skills` for SKILL.md, and `ki-repo` for repository settings.",
+          "description": "Audit or scaffold KI MCP server code for source-release readiness, workspace-MCP layout, dependency injection, tool naming, access gates, logging, and security. Use `ki-engineering` for common toolchains, `ki-skills` for SKILL.md, and `ki-repo` for repository settings.",
           "kind": "Governance",
           "fields": [
             {

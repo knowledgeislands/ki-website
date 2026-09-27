@@ -6,9 +6,9 @@ order: 10
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/environment/ki-tokenomics/references/standards-tokenomics.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'The standing-surface and runtime budget model this operator guide defers to'
-    reviewed: '2026-09-21'
+    reviewed: '2026-09-27'
 ---
 
 # Tune an agent session
@@ -70,7 +70,7 @@ The flag _names_ are confirmed present in the binary; each flag's precise effect
 
 MCP tool schemas are the **largest standing cost** in a session with several servers connected. The lever is _not loading the server_, not compressing it:
 
-- **Per surface** — `ki-binding` governs the single `mcp-servers.yaml` inventory and each server's `clients:` targeting. `ki-binding-claude` and `ki-binding-codex` govern their runtime-native surfaces. A server the current surface never uses should not be enabled on it.
+- **Per surface** — `ki-binding` governs the single `mcp-servers.yaml` inventory and each server's `clients:` targeting. `ki-binding-claude` and `ki-binding-chatgpt` govern their runtime-native surfaces. A server the current surface never uses should not be enabled on it.
 - **Per project** — scope servers to the repos that need them rather than enabling them globally.
 - **Connectors vs plugins** — on claude.ai / Desktop, the MCP tools bucket is driven by _connectors_ (e.g. Google Calendar / Drive / Slack), toggled per-conversation in the compose-bar tools menu. These are distinct from _plugins_ (which surface under Skills / Custom agents). Turn off a connector for a conversation that does not need it. For a SaaS integration, a managed connector is often the lower-friction route than a local MCP server in the first place — see [Optional tools](/docs/optional-tools/#claudeai-connectors--the-managed-alternative).
 - **The mcporter caveat** — mcporter (see [Optional tools](/docs/optional-tools/)) consolidates the `~/.claude.json` `mcpServers` block from many entries to one URL. That trims _config_, not the in-session tool _schemas_ — every consolidated server's tools still load into the prefix. mcporter and schema curation are complementary, not substitutes.

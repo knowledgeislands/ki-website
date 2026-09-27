@@ -6,9 +6,9 @@ order: 6
 sources:
   - repository: knowledgeislands/ki-agentic-harness
     path: skills/README.md
-    ref: 7dcee9dc3aa33c863c77cb56d1bab762d026dbbb
+    ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'The whole inventory below, vendored from the generated capability catalogue rather than restated'
-    reviewed: '2026-09-21'
+    reviewed: '2026-09-27'
 ---
 
 # Skill catalogue
