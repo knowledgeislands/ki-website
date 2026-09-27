@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T15:40:00Z
-updated_at: 2026-09-26T18:18:00Z
+updated_at: 2026-09-27T23:00:23Z
 ---
 
 ## Goal
@@ -92,6 +92,10 @@ None directly. The Cloudflare guide stays where `ki-guides` puts it.
 None beyond this record.
 
 ## Discussion
+
+### Pickup checkpoint — 2026-09-28
+
+At inspected local `main` `d025e8ef22c5cf3ff485149b2cabc67fbae0149b`, `1cb41ea` changed `.github/workflows/ci.yml` to install and assert `tools-ki` `v0.4.1`. The local `tools-ki` `v0.4.1` tag pins harness commit `6378206cd6575e11aad482cf26b30f23f9e08a40` in `src/core/storage/registry.ts`; that commit descends from the two harness fixes this record cites, `a522253c` and `2634a273`. This verifies the new pin contains those rule changes and supersedes the historical claim that no suitable release exists. It does not prove parity with a contributor's moving local harness checkout or that CI reran with `FAIL=0`; no CI run result was checked here. The `AGENTS.md` explanation required by the final Step is still absent. Reconcile the destination branch, linked tasks, and retained worktrees before resuming, then verify the current CI result and contributor rubric source and complete the guidance. This checkpoint is pickup guidance, not an execution block or authority grant; absent evidence does not release any owner or lift a hold. This audit leaves `next`/`draft` and Step checkboxes unchanged; closure requires independent verification, explicit owner acceptance, and retention until explicit pruning selection.
 
 ### The pin is right and the drift is the cost of it
 
