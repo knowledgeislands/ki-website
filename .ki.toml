@@ -104,6 +104,3 @@ standing.import.knowledge = ["public-source-change"]
 [skills.ki-trades.routes."knowledgeislands/ki-techne-principal"]
 import = ["knowledge"]
 standing.import.knowledge = ["public-source-change"]
-
-[skills.ki-agora]
-memberships.kis = { home = "https://github.com/knowledgeislands/ki-arcadia-principal" }
