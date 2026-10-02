@@ -35,7 +35,7 @@ jobs:
           ki --version
           ki manage diag | tee "$KI_ROOT/ki-diag-before-bootstrap.txt"
           grep -F "Installation: local" "$KI_ROOT/ki-diag-before-bootstrap.txt"
-          grep -F "Executable: $KI_CLI_INSTALL_DIR/ki" "$KI_ROOT/ki-diag-before-bootstrap.txt"
+          grep -F "Executable: $RUNNER_TEMP/tools-ki-source/src/main.ts" "$KI_ROOT/ki-diag-before-bootstrap.txt"
           ki bootstrap
           ki registry add --repo .
           ki repo repair --repo .
