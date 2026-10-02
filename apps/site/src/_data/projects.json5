@@ -368,22 +368,23 @@
       'diag: inspect local installation and configuration without contacting infrastructure.',
       'doctor: check operator prerequisites and report actionable diagnostics.',
       'auth login: establish an explicit operator session.',
-      'controller status and bootstrap: inspect or prepare a controller through explicit commands.'
+      'controller status and bootstrap: inspect or prepare a controller through explicit commands.',
+      'completion: print Bash or Zsh definitions for the current command and option surface.'
     ],
     state:
-      'First release v0.1.0, labelled experimental. The command surface and operating guidance are still tentative.',
+      'Published as v0.1.1 and labelled experimental. The command surface and operating guidance are still tentative.',
     limits:
       'The Techne Harness owns controller and fabric applications, infrastructure, and runtime payloads. Remote-environment management remains on hold pending the principal\'s authorisation and remote-delivery policy.',
     role: 'Owns the public techne command grammar, diagnostics, installation, and release artifacts for the Techne Harness.',
     usage: 'Install it from the Homebrew tap or the pinned installer below, then run `techne diag` or `techne --help`.',
     repository: 'https://github.com/knowledgeislands/tools-techne',
     availability: 'published',
-    version: 'v0.1.0',
+    version: 'v0.1.1',
     maturity: 'experimental',
     formula: 'techne',
-    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-techne/v0.1.0/install.sh',
-    manual: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.0/README.md',
-    changelog: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.0/CHANGELOG.md',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-techne/v0.1.1/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.1/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.1/CHANGELOG.md',
     icon: 'compass',
     accent: 'teal'
   },
