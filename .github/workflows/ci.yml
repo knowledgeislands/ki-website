@@ -18,14 +18,16 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p "$HOME/.agents" "$HOME/.claude"
-          printf '{}\n' > "$HOME/.claude/settings.json"
+          printf '{"autoMemoryEnabled": false}\n' > "$HOME/.claude/settings.json"
           export KI_CLI_INSTALL_DIR="$KI_ROOT/bin"
           export KI_MAN_INSTALL_DIR="$KI_ROOT/share/man/man1"
           export XDG_DATA_HOME="$KI_ROOT/data"
           export XDG_CONFIG_HOME="$KI_ROOT/config"
           export XDG_CACHE_HOME="$KI_ROOT/cache"
           export XDG_STATE_HOME="$KI_ROOT/state"
+          export KI_MCP_SOURCE="$KI_ROOT/mcp-servers.yaml"
           mkdir -p "$KI_ROOT"
+          printf 'mcpServers: []\n' > "$KI_MCP_SOURCE"
           git clone --quiet --depth 1 --branch main https://github.com/knowledgeislands/tools-ki.git "$RUNNER_TEMP/tools-ki-source"
           printf 'KI source commit: %s\n' "$(git -C "$RUNNER_TEMP/tools-ki-source" rev-parse HEAD)"
           (cd "$RUNNER_TEMP/tools-ki-source" && bun install --frozen-lockfile)
@@ -39,9 +41,6 @@ jobs:
           ki bootstrap
           ki registry add --repo .
           ki repo repair --repo .
-          project_key=${GITHUB_WORKSPACE//\//-}
-          mkdir -p "$HOME/.claude/projects/$project_key/memory"
-          touch "$HOME/.claude/projects/$project_key/memory/MEMORY.md"
           ki manage diag | tee "$KI_ROOT/ki-diag.txt"
           grep -F "Status: valid" "$KI_ROOT/ki-diag.txt"
           ki harness list | grep -F 'knowledgeislands/ki-agentic-harness'
@@ -52,6 +51,7 @@ jobs:
             echo "XDG_CONFIG_HOME=$XDG_CONFIG_HOME"
             echo "XDG_CACHE_HOME=$XDG_CACHE_HOME"
             echo "XDG_STATE_HOME=$XDG_STATE_HOME"
+            echo "KI_MCP_SOURCE=$KI_MCP_SOURCE"
           } >> "$GITHUB_ENV"
           echo "$KI_CLI_INSTALL_DIR" >> "$GITHUB_PATH"
       - run: ki repo audit --repo .
