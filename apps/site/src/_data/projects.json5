@@ -230,19 +230,19 @@
       'Eighty-eight commands across fourteen groups in total, listed in full on this site rather than left to the manual.'
     ],
     state:
-      'Published as v0.4.0 and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
+      'Published as v0.5.0 and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
     limits:
       'It runs only the operations a repository\'s declared skills register, from harnesses whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
     role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
     usage: 'Install it from the Homebrew tap or the pinned installer below, then run `ki bootstrap` to install a verified harness and activate the core user skills.',
     repository: 'https://github.com/knowledgeislands/tools-ki',
     availability: 'published',
-    version: 'v0.4.0',
+    version: 'v0.5.0',
     maturity: 'preview',
     formula: 'ki',
-    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.4.0/install.sh',
-    manual: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/README.md',
-    changelog: 'https://github.com/knowledgeislands/tools-ki/blob/v0.4.0/CHANGELOG.md',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-ki/v0.5.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-ki/blob/v0.5.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-ki/blob/v0.5.0/CHANGELOG.md',
     icon: 'anchor',
     accent: 'gold'
   },
