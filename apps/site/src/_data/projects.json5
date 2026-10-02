@@ -353,6 +353,41 @@
     accent: 'gold'
   },
 
+  {
+    slug: 'techne',
+    name: 'techne',
+    kind: 'tool',
+    tagline: 'Inspect and operate the Techne Harness from a terminal.',
+    description:
+      'Provides the operator command grammar, offline diagnostics, authentication, and controller status and bootstrap commands for the Techne Harness.',
+    problem:
+      'The Techne Harness needs one deliberate operator interface for diagnostics and controller operations. techne gives those actions a documented command surface with explicit authentication and interactive steps.',
+    audience:
+      'You operate or evaluate the Techne Harness and need to inspect the local CLI setup or follow its documented controller workflows.',
+    capabilities: [
+      'diag: inspect local installation and configuration without contacting infrastructure.',
+      'doctor: check operator prerequisites and report actionable diagnostics.',
+      'auth login: establish an explicit operator session.',
+      'controller status and bootstrap: inspect or prepare a controller through explicit commands.'
+    ],
+    state:
+      'First release v0.1.0, labelled experimental. The command surface and operating guidance are still tentative.',
+    limits:
+      'The Techne Harness owns controller and fabric applications, infrastructure, and runtime payloads. Remote-environment management remains on hold pending the principal\'s authorisation and remote-delivery policy.',
+    role: 'Owns the public techne command grammar, diagnostics, installation, and release artifacts for the Techne Harness.',
+    usage: 'Install it from the Homebrew tap or the pinned installer below, then run `techne diag` or `techne --help`.',
+    repository: 'https://github.com/knowledgeislands/tools-techne',
+    availability: 'published',
+    version: 'v0.1.0',
+    maturity: 'experimental',
+    formula: 'techne',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-techne/v0.1.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-techne/blob/v0.1.0/CHANGELOG.md',
+    icon: 'compass',
+    accent: 'teal'
+  },
+
   // ── MCP servers ─────────────────────────────────────────────────────────
   {
     slug: 'mcp-ki-kb-fs',
@@ -570,12 +605,12 @@
     audience:
       'You want this if you are installing Knowledge Islands tools on macOS or Linux and would rather Homebrew owned them than a script you ran once and forgot.',
     capabilities: [
-      'One validated formula per released tool — currently ki, mgit, rig and git-almanac.',
+      'One validated formula per released tool — currently ki, mgit, rig, git-almanac and techne.',
       'Implicit tapping: naming the tap in the install argument is enough, with no separate tap step.',
       'A verified release event fanned out to the repositories that consume one, this website among them.'
     ],
     state:
-      'Published and in use, with four formulae packaged. A formula is bumped when its tool cuts a release, so the tap follows the tools rather than leading them.',
+      'Published and in use, with five formulae packaged. A formula is bumped when its tool cuts a release, so the tap follows the tools rather than leading them.',
     limits:
       'The tap holds no tool source. A formula points at an upstream release tarball and its checksum, which is why each tool repository remains the authority for what it released and the tap owns only the packaging.',
     role: 'Release transport for the command-line tools. Each tool repository remains the authority for what it released.',
