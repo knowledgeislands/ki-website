@@ -45,7 +45,7 @@ The arrows show responsibility passing between processes. With the Roadmap adapt
 
 Every item keeps its own baseline, lifecycle, verification, and acceptance packet. Ambiguous or out-of-authority work is parked and recorded rather than inferred. The normal batch endpoint is `Acceptance`; `ki-accept` remains the closure owner unless the authorisation expressly grants acceptance authority for named items. Pruning always remains separately confirmed.
 
-`ki-next` checks the current repository's `+/_HANDOFFS/` inbox automatically while grounding the portfolio. An unreviewed handoff, or a parked handoff whose named review trigger has fired, is presented for an adopt, park, clarify, decline, or supersede decision before ordinary work selection. A parked handoff whose trigger has not fired is acknowledged and skipped. No separate handoff invocation is required.
+`ki-trade` receives typed cross-repository submissions into `+/_TRADES/`. `ki-next` considers those records while grounding the portfolio and brings submitted trades to the receiver for disposition before ordinary work selection. Parked trades return for review when their trigger fires.
 
 Adoption creates a recipient-owned work item at its honest horizon. Where transferred detail should be preserved, enrich that same item and name its origin without promoting it into the immediate queue. The inbox copy is then removed; the sender may remove its corresponding outbound copy once the durable destination is confirmed. Agent or model-tier delegation is a separate concern recorded in the item's `## Delegation` section and executed through `ki-delegation`.
 
