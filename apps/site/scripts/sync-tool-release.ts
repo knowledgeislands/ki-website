@@ -105,7 +105,8 @@ export function updateRegistrySource(
   const blockEnd = blockEndMarker + '\n  }'.length
   const block = source.slice(blockStart, blockEnd)
   const occurrences = block.split(tool.version).length - 1
-  if (occurrences < 4) throw new Error(`${request.tool}: registry block does not carry four coherent version pins`)
+  if (occurrences !== 4)
+    throw new Error(`${request.tool}: registry block must carry exactly four coherent version pins`)
 
   const updated = `${source.slice(0, blockStart)}${block.replaceAll(tool.version, request.version)}${source.slice(blockEnd)}`
   const updatedTool = registryTools(updated).find((candidate) => candidate.slug === request.tool)

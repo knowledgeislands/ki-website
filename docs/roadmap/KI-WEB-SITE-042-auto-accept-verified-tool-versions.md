@@ -3,13 +3,13 @@ id: KI-WEB-SITE-042
 area: SITE
 title: Auto-accept verified tool versions
 theme: site-experience
-horizon: next
+horizon: waiting-for
 status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-03T03:56:54Z
+updated_at: 2026-10-03T06:48:30Z
 ---
 
 ## Goal
@@ -26,12 +26,13 @@ The website owns its registry, CI and acceptance policy; the tool and tap retain
 
 ## Current state
 
-The receiver validates release evidence and opens version-update PRs. It does not merge them, and GitHub has no required-check rule for `main`.
+The receiver validates release evidence and opens version-update PRs. Its local CI path assertion and exact-four-pin tests are updated, but the corrected CI has not yet run on the existing PRs. It does not merge them, and GitHub has no required-check rule for `main`.
 
 ## Steps
 
-- [ ] Diagnose and fix failing checks on existing release-update PRs without weakening source verification.
-- [ ] Test exact version-only changes and rejection of first-time, maturity, route, or other unexpected diffs.
+- [x] Diagnose the existing KI release-update PR failure and correct the linked-executable CI assertion without weakening source verification.
+- [x] Test exact version-only changes and rejection of first-time or other unexpected version-bearing fields; retain maturity and route unchanged.
+- [ ] Publish the CI fix and verify passing checks on an updated release PR.
 - [ ] Require passing website CI on `main` without App bypass, then enable guarded auto-merge for qualifying PRs.
 - [ ] Verify successful routine and rejected exceptional handoffs, and update website release guidance.
 
@@ -48,7 +49,7 @@ Run website CI, focused release-sync tests, and positive/negative PR-shape tests
 
 ## Dependencies / blocks
 
-Fix current failing checks before enabling auto-merge. A future tap-validated immutable tool release is required to prove a live event; `BREW-007` owns the preceding formula automation, but existing tap events can test this receiver independently.
+Waiting for the corrected CI to run on a release-update PR, `main` to require its passing build check with no App bypass, and the repository to allow auto-merge. The receiver must then enable auto-merge only for exact version-only PRs and prove a successful routine merge and an exceptional human-review case. A future tap-validated immutable tool release is required for live end-to-end proof; `BREW-007` owns the preceding formula automation.
 
 ## Documentation impact
 
@@ -77,3 +78,7 @@ Resolve the current failing release-update PR checks and add a focused regressio
 ### Source release chain
 
 The upstream immutable release gives standing authority for this matching receiver update only after the tap validates and merges its formula. Tap-side intake and formula gates are tracked separately in `homebrew-tap` `BREW-007`.
+
+### Local preparation
+
+The failing PR build expected KI's wrapper path in diagnostic output, but linked KI reports its resolved source path. CI now compares that path with the wrapper's resolved target. The synchronizer's exact-four-pin gate prevents incidental matching text in an existing entry from being silently rewritten. Hosted check results and protected auto-merge remain unproved.
