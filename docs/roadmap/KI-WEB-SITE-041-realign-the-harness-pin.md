@@ -4,12 +4,12 @@ area: SITE
 title: Realign the harness pin
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: ee4a09df3dce6aa30adb0dfb6f14059883ffb762
 created_at: 2026-09-25T15:40:00Z
-updated_at: 2026-10-04T12:03:12Z
+updated_at: 2026-10-04T12:08:27Z
 ---
 
 ## Goal
@@ -121,6 +121,10 @@ The Goal holds on current evidence: same rubric, same verdict, and a written way
 ### Mini recap
 
 CI green again after a diag-command fix and a `tools-ki` pin bump; `AGENTS.md` now explains rubric resolution. Possible learning route: `ki-repo` CI guidance could name the pin-drift diagnosis generally; not promoted.
+
+## Done
+
+Accepted 2026-10-04 on an independent re-review that returned `ACCEPT`, under the owner's delegated acceptance authority for this session. The first review asked for one correction - the harness archive digest comes from `ki bootstrap`, not `ki harness list` - fixed in `d416c3e`. The re-review confirmed CI run `37200979277` on `d416c3e` green with `tools-ki` `5f7ee0f`, and a local `ki repo audit --repo .` agreeing at `PASS` across 22 skills.
 
 ## Discussion
 
