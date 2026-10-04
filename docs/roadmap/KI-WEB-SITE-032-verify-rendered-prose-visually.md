@@ -4,12 +4,12 @@ area: SITE
 title: Verify rendered prose visually
 theme: site-experience
 horizon: next
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: f4417d50b7b78f656e2af7466363115f57867c6b
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-10-04T11:40:00Z
+updated_at: 2026-10-04T12:05:00Z
 ---
 
 ## Goal
@@ -69,12 +69,12 @@ The completed Docs restructure adds four more of the same kind. None of them is 
 
 ## Steps
 
-- [ ] Build the site locally (`bun run ki:site:clean && bun run ki:site:build`) and serve `apps/site/dist/` over a local static server; nothing is deployed for the review.
-- [ ] Drive a headless Chromium (Playwright, installed in a scratch directory outside the repository) over the pages carrying each element in the Current state list, in light and dark colour schemes, at a 1280 px desktop and a 390 px phone viewport, and look at the captured screenshots.
-- [ ] Measure page-level horizontal overflow at 390 px across every published page, so the narrow-viewport question is answered for the whole corpus rather than a sample.
-- [ ] Record what is wrong as concrete findings against the element, not as impressions.
-- [ ] Fix what is straightforward in the stylesheet, using `tokens.css` semantic tokens only, or at the template or data seam where structure rather than styling is at fault.
-- [ ] Raise anything that turns out to be a design question rather than a defect as its own item.
+- [x] Build the site locally (`bun run ki:site:clean && bun run ki:site:build`) and serve `apps/site/dist/` over a local static server; nothing is deployed for the review.
+- [x] Drive a headless Chromium (Playwright, installed in a scratch directory outside the repository) over the pages carrying each element in the Current state list, in light and dark colour schemes, at a 1280 px desktop and a 390 px phone viewport, and look at the captured screenshots.
+- [x] Measure page-level horizontal overflow at 390 px across every published page, so the narrow-viewport question is answered for the whole corpus rather than a sample.
+- [x] Record what is wrong as concrete findings against the element, not as impressions.
+- [x] Fix what is straightforward in the stylesheet, using `tokens.css` semantic tokens only, or at the template or data seam where structure rather than styling is at fault.
+- [x] Raise anything that turns out to be a design question rather than a defect as its own item.
 
 ## Files touched
 
@@ -110,6 +110,59 @@ None. No published interface is involved.
 ### Roadmap
 
 Possibly one item, if the review surfaces a design question rather than a defect.
+
+## Review
+
+### Delivered
+
+A rendered visual review of every element in Current state, in light and dark schemes at 1280 px and 390 px, from a local build served from `apps/site/dist/` and captured with headless Chromium (Playwright 1.x from a scratch directory outside the repository). A 390 px overflow sweep then covered all 59 published pages. Baseline `f4417d50b7b78f656e2af7466363115f57867c6b`. Nothing was deployed for the review; no browser was added to the build or CI.
+
+Findings, per element:
+
+- **Tables** - on desktop the collapsed borders, `--color-border-light` row rules and cell padding read as structure, not clutter, in both schemes. **Defect at 390 px:** tables sized to unbreakable content (provenance commit hashes, the tuning page's environment-variable names) widened the whole page by up to 167 px, pushing the footer off-screen. Together with the inline `code` defect below this affected 16 of 59 pages. Fixed.
+- **`pre` blocks** - navy ground and parchment ink read well; the dark-scheme darker ground and edge keeps the block distinct. Overflow scrolls inside the block on a phone rather than clipping. No change.
+- **Inline `code`** - reads as code without fragmenting the `ki` command inventory's dense paragraphs. **Defect at 390 px:** a long invocation or URL in inline `code` widened pages such as the `ki` command inventory and the local commands page. Fixed.
+- **`.prose-provenance`** - smaller, lighter and separated by a rule; it reads as page chrome rather than the conclusion in both schemes. No change.
+- **Project page section link** - "Read the guides." sits with normal heading rhythm against the surrounding sections in both schemes. **Adjacent defect:** the `ki` and `ki-agentic-harness` project pages printed literal backticks (`` `ki bootstrap` ``) because registry fields render as plain text, which the registry header already forbids. Fixed in data and gated.
+- **Dark mode** - every element above was inspected in the dark scheme; nothing was missed in the mirrored block.
+- **Deeper teal accent** (`KI-WEB-SITE-036`) - links, overlines and section labels still read as the site's accent in both schemes; no judgement against the darker token.
+- **Docs landing grid** - six cards of unequal height read as a library; the page-count overline does its job.
+- **Section contents block above provenance** - two rule-separated pieces of chrome stack at the foot of 41 pages; they read as navigation then sources rather than a wall. No change.
+- **Three-entry top nav** - reads as confident on the navy bar, not empty.
+- **One-page section cards** - "1 PAGE" beside "14 PAGES" does not make the grid look broken; the content question stays with `KI-WEB-SITE-039`.
+
+No finding was a design question, so no new item was raised.
+
+### Change Summary
+
+- `apps/site/src/assets/css/main.css` - inline prose `code` gains `overflow-wrap: anywhere`; below the 768 px breakpoint `.prose-ki table` becomes a block that scrolls horizontally inside itself. Desktop table layout is unchanged.
+- `apps/site/src/_data/projects.json5` - removed Markdown backticks from two plain-text project fields (`ki-agentic-harness` audience, `ki` usage).
+- `apps/site/scripts/verify-projects.ts` - fails a build when any project prose field (`tagline`, `description`, `usage`, `capabilities`, reader fields) contains a backtick.
+- `docs/guides/developer/prose-styling.md` - new "What the check cannot see" section recording both defects, the rules that fix them, and the pages to look at when a prose rule changes.
+
+Deviation within the Boundary: the data and gate change sits outside the listed stylesheet and template files, because the defect was in the registry data rather than its styling. It is a direct fix the review prompted and touches no other page type.
+
+### Verification
+
+- `bun run ki:site:clean && bun run ki:site:build` - PASS; all six gates (routes, projects, provenance 39 pages, docs 41 pages, reachable 59 pages, prose 153 regions).
+- `verify-projects` with the old data restored - FAILS on both backtick fields, proving the new gate; with the fix - PASS.
+- 390 px overflow sweep over all 59 published pages - 16 pages overflowed before (up to 557 px document width); 0 after.
+- Post-fix screenshots re-inspected: skill catalogue provenance table (light), `ki` getting started `pre` (dark), tuning table (dark) at 390 px.
+- `bun run test`, `bun run self:typecheck` - PASS.
+- `ki repo audit --skill ki-engineering --repo .` and `--skill ki-authoring` - PASS.
+- No inline `style=` attribute was added.
+
+### Outstanding concerns
+
+None blocking. Below 768 px, `display: block` makes a table shrink to its content rather than fill the column; on the pages reviewed this reads well, but a short two-column table on a tablet just under the breakpoint may sit narrower than the prose. The review is one agent's judgement from screenshots, not Kris's; the screenshots were not retained in the repository.
+
+### Post-change review
+
+The goal - a rendered check of the restyled elements in both schemes, with findings recorded per element - is met, and the only defects found were mechanical and fixed within the Boundary. Regression risk is low: the CSS changes are confined to inline `code` wrapping and a phone-width table rule, and the new gate only rejects a character the registry already forbade. Ready for acceptance.
+
+### Mini recap
+
+Delivered a headless rendered review in both schemes and two viewports, fixed phone-width overflow on 16 pages and literal backticks on two project pages, and added a build gate against the latter. All site gates and audits pass. Proposed learning route: the guide section added here is the durable home; a browser in the build remains a separate decision this item does not take.
 
 ## Discussion
 

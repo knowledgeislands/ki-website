@@ -33,6 +33,15 @@ No rule was wrong. They were absent, and nothing looked. Meanwhile the hand-buil
 
 So `verify:prose` reads the selectors the stylesheet declares, walks the built output for the elements that actually appear inside a `.prose-ki` container, and fails on an element no rule reaches. It fails rather than warns, because an unstyled element is entirely within this site's control.
 
+## What the check cannot see
+
+`verify:prose` proves an element has a rule; it cannot prove the rule looks right. The first rendered review (KI-WEB-SITE-032) found two defects that every gate passed:
+
+- **Phone-width overflow.** A commit hash or URL in inline `code` has no break opportunity, and a provenance or inventory table sized to its content, so sixteen pages scrolled sideways at 390 px and pushed the footer off-screen. Inline `code` therefore carries `overflow-wrap: anywhere`, and below the 768 px breakpoint a `.prose-ki` table becomes a block that scrolls inside itself. `pre` already scrolled and needed nothing.
+- **Literal Markdown in project pages.** Project registry fields render as plain text, so backticks reached readers as backticks. `verify:projects` now rejects a backtick in any project prose field.
+
+When a prose rule changes, look at the ki command inventory, a page with a provenance table, and a `pre`-heavy guide at a phone width in both colour schemes before relying on the gates.
+
 ## Adding an element
 
 If a page starts emitting something new — a definition list, a `figure` — the build will fail only if that element is on the list above. Add it to `styledElements` in `apps/site/scripts/verify-prose-coverage.ts` at the same time as you add its rule, so the next page to use it is covered rather than merely lucky.

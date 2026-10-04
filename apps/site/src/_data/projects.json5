@@ -104,7 +104,7 @@
     problem:
       'Working conventions that live only in prose erode. An agent applies them if it happens to be told to, and nobody finds out when it was not; a reviewer catches what they have time to read. Holding each standard as a skill that registers its own mechanical checks makes the clear-cut cases deterministic, so attention goes to the parts that genuinely need judgement.',
     audience:
-      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what `ki bootstrap` installs, and what `ki repo audit` resolves its checks from — you do not read this repository to use it. If you work in a Claude surface that reads plugin marketplaces instead of harnesses, ki-plugins is the projection to reach for.',
+      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what ki bootstrap installs, and what ki repo audit resolves its checks from — you do not read this repository to use it. If you work in a Claude surface that reads plugin marketplaces instead of harnesses, ki-plugins is the projection to reach for.',
     capabilities: [
       'Skills — reusable standards, each registering the operations that audit and conform a target against it.',
       'Subagents — focused specialist roles an agent can delegate a piece of work to.',
@@ -206,7 +206,7 @@
     limits:
       'It runs only the operations a repository\'s declared skills register, from harnesses whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
     role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
-    usage: 'Install it from the Homebrew tap or the pinned installer below, then run `ki bootstrap` to install a verified harness and activate the core user skills.',
+    usage: 'Install it from the Homebrew tap or the pinned installer below, then run ki bootstrap to install a verified harness and activate the core user skills.',
     repository: 'https://github.com/knowledgeislands/tools-ki',
     availability: 'published',
     version: 'v0.4.0',
