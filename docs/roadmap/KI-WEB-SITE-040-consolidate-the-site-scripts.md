@@ -128,6 +128,10 @@ The goal holds: each piece of plumbing now exists once, and the two scripts that
 
 Nine scripts repointed at three helpers (240 lines with tests), 88 duplicated lines removed, gate output unchanged. Possible learning route: `ki-engineering` could name `scripts/lib/` as the home for shared site-script plumbing; not promoted.
 
+## Done
+
+Accepted 2026-10-04 on an independent review that returned `ACCEPT` against the six-part Review packet, under the owner's delegated acceptance authority for this session. The reviewer reproduced the before/after gate output from a `006c465` worktree, the test, typecheck, Biome and `ki-engineering` gates, and the live `sync:cli` and `sync:skills` runs. It noted two further non-material frontmatter edge cases beyond the disclosed CRLF one - an empty block and a closing fence at end of file without a newline now parse - which no page exhibits. Delivery commit `05c209a`.
+
 ## Discussion
 
 ### The token gap is the part with teeth
@@ -141,7 +145,3 @@ The instinct when a scripts directory grows is to ask which ones can go. That in
 ### Readiness check - 2026-10-04
 
 Adopted from Triage into Now under the owner's delegated session authority and re-grounded against `main` at `6e5aabf`. The duplication table still holds: bare `fetch(url)` at `sync-cli-commands.ts:311` and `sync-skill-catalogue.ts:186`, token and `User-Agent` at `sync-tool-release.ts:126` and `verify-provenance.ts:201`, walkers in the five named gates, and frontmatter readers in the three named scripts. `verify-tool-routes.ts:217` fetches a tool's installer URL rather than the GitHub API, so the shared client should expose the common headers for it without forcing an API base URL. The scripts now total 2,894 lines including tests.
-
-## Done
-
-Accepted 2026-10-04 on an independent review that returned `ACCEPT` against the six-part Review packet, under the owner's delegated acceptance authority for this session. The reviewer reproduced the before/after gate output from a `006c465` worktree, the test, typecheck, Biome and `ki-engineering` gates, and the live `sync:cli` and `sync:skills` runs. It noted two further non-material frontmatter edge cases beyond the disclosed CRLF one - an empty block and a closing fence at end of file without a newline now parse - which no page exhibits. Delivery commit `05c209a`.
