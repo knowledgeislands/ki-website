@@ -4,12 +4,12 @@ area: SITE
 title: Verify rendered prose visually
 theme: site-experience
 horizon: next
-status: draft
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-09-26T18:18:00Z
+updated_at: 2026-10-04T11:40:00Z
 ---
 
 ## Goal
@@ -69,10 +69,11 @@ The completed Docs restructure adds four more of the same kind. None of them is 
 
 ## Steps
 
-- [ ] Serve the site — `bun run ki:site:dev`, or review the deployed site after the next push — and work through the list above.
-- [ ] Check each in both colour schemes, and at a narrow viewport where overflow behaviour shows.
+- [ ] Build the site locally (`bun run ki:site:clean && bun run ki:site:build`) and serve `apps/site/dist/` over a local static server; nothing is deployed for the review.
+- [ ] Drive a headless Chromium (Playwright, installed in a scratch directory outside the repository) over the pages carrying each element in the Current state list, in light and dark colour schemes, at a 1280 px desktop and a 390 px phone viewport, and look at the captured screenshots.
+- [ ] Measure page-level horizontal overflow at 390 px across every published page, so the narrow-viewport question is answered for the whole corpus rather than a sample.
 - [ ] Record what is wrong as concrete findings against the element, not as impressions.
-- [ ] Fix what is straightforward in the stylesheet, using `tokens.css` semantic tokens only.
+- [ ] Fix what is straightforward in the stylesheet, using `tokens.css` semantic tokens only, or at the template or data seam where structure rather than styling is at fault.
 - [ ] Raise anything that turns out to be a design question rather than a defect as its own item.
 
 ## Files touched
@@ -90,7 +91,7 @@ The completed Docs restructure adds four more of the same kind. None of them is 
 
 ## Dependencies / blocks
 
-Nothing blocks this and it blocks nothing. It needs a person at a browser, which is the one input an agent session cannot supply, so it sits unscheduled until somebody is in front of the site.
+Nothing blocks this and it blocks nothing. It was held for a person at a browser; on 2026-10-04 Kris directed that the review be done locally with a headless browser on the local build in both colour schemes, with the agent inspecting the rendered screenshots. That substitutes rendered pixels for built markup, which is the gap this item exists to close; it does not add a browser to the build or CI, which the Boundary still excludes.
 
 ## Documentation impact
 
