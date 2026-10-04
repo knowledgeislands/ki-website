@@ -76,6 +76,7 @@
     capabilities: [
       'A Philosophy pillar: the island metaphor, the conceptual model, and the realisation material that connects the two.',
       'A Technē pillar carrying the conceptual tool-ecosystem map the implementation repositories are arranged by.',
+      'An Engineering Practice pillar: the canonical engineering discipline — architecture, operating models and technology posture — adopted from the retired Techne Principal.',
       'An Aesthetics pillar holding the symbol library, logo, diagrams and visual style this website is built from.',
       'The ecosystem decision GDR-KI-FUNDAMENTALS-001, mirrored across six repositories, which fixes who owns what.',
       'A Streams area carrying the live working record, so the reasoning is visible rather than only its conclusions.'
@@ -90,35 +91,6 @@
     availability: 'source',
     icon: 'island',
     accent: 'gold'
-  },
-  {
-    slug: 'ki-techne-principal',
-    name: 'ki-techne-principal',
-    kind: 'principal',
-    tagline: 'The canonical record of the Knowledge Islands engineering discipline.',
-    description:
-      'Techne Principal translates the philosophy into engineering: architecture, operating models, workflows, technology posture, and the implementation patterns the tooling repositories follow. It informs how things are built without owning any repository\'s executable behaviour or its portable normative contracts.',
-    problem:
-      'AI-native engineering practice is mostly folklore. The conventions live in one person\'s head, work well, and evaporate when that person moves on — and an agent cannot read a habit. Techne Principal writes the practice down: what the architecture is, how work is run, what the technology posture is, and why each was chosen.',
-    audience:
-      'Read it if you are building something in this ecosystem and want to know the patterns before you meet them as audit findings, or if you are building your own and want a worked example of engineering discipline held explicitly rather than by habit.',
-    capabilities: [
-      'Foundations: the engineering principles everything else here is derived from.',
-      'Architecture: how systems are structured, where boundaries fall, and what may depend on what.',
-      'Operating model: how work is captured, planned, delivered and reviewed with agents in the loop.',
-      'Technology: the posture on languages, runtimes and tools, with the reasoning kept beside the choice.',
-      'The engineering material this site publishes as guidance is drawn from here.'
-    ],
-    state:
-      'Public and actively developed, revised continuously rather than released. Where this site publishes engineering guidance, Techne Principal is the upstream it restates.',
-    limits:
-      'It shapes implementations without owning them. No executable behaviour is defined here and no portable contract: a repository\'s own code is authoritative for what it does, and KI Specifications for what it must do. It describes one practice honestly rather than prescribing a universal one.',
-    role: 'Canonical source of the engineering discipline. It shapes implementation repositories; it does not define their executables or standards.',
-    usage: 'A public Markdown knowledge base. Read it in the repository alongside the guidance published on this site.',
-    repository: 'https://github.com/knowledgeislands/ki-techne-principal',
-    availability: 'source',
-    icon: 'tree',
-    accent: 'forest'
   },
 
   // ── Agentic capabilities ────────────────────────────────────────────────
@@ -550,7 +522,7 @@
     state:
       'Public source, developed as a product monorepo rather than released as a package. The operator command line is released separately, from tools-techne, which owns the command grammar, installer, diagnostics and manual.',
     limits:
-      'It runs work; it defines neither capability semantics nor standards. It stores no credentials and no canonical operational state, both of which stay in their own systems. Techne Principal remains the authority for the engineering architecture this implements.',
+      'It runs work; it defines neither capability semantics nor standards. It stores no credentials and no canonical operational state, both of which stay in their own systems. Arcadia Principal\'s Engineering Practice remains the authority for the engineering architecture this implements.',
     role: 'Execution infrastructure. It runs work; it defines neither capabilities nor standards.',
     usage: 'Public source. Clone the repository and follow its own operating documentation to stand a fabric up.',
     repository: 'https://github.com/knowledgeislands/ki-techne-harness',
