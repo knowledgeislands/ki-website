@@ -410,8 +410,10 @@
     border-radius: var(--radius-sm);
     padding: 0.1em 0.35em;
     /* Commit hashes, URLs and long invocations have no break opportunity of
-       their own; without this they widen a phone-width page. */
-    overflow-wrap: anywhere;
+       their own; without this they widen a phone-width page. `break-word`,
+       not `anywhere`: `anywhere` lowers min-content width, so auto-layout
+       tables squeeze code columns and split identifiers on desktop. */
+    overflow-wrap: break-word;
   }
 
   .prose-ki pre code {

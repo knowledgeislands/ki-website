@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: f4417d50b7b78f656e2af7466363115f57867c6b
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-10-04T12:05:00Z
+updated_at: 2026-10-04T18:08:40Z
 ---
 
 ## Goal
@@ -119,7 +119,7 @@ A rendered visual review of every element in Current state, in light and dark sc
 
 Findings, per element:
 
-- **Tables** - on desktop the collapsed borders, `--color-border-light` row rules and cell padding read as structure, not clutter, in both schemes. **Defect at 390 px:** tables sized to unbreakable content (provenance commit hashes, the tuning page's environment-variable names) widened the whole page by up to 167 px, pushing the footer off-screen. Together with the inline `code` defect below this affected 16 of 59 pages. Fixed.
+- **Tables** - on desktop the collapsed borders, `--color-border-light` row rules and cell padding read as structure, not clutter, in both schemes. **Defect at 390 px:** tables sized to unbreakable content (provenance commit hashes, the tuning page's environment-variable names) widened the whole page by up to 167 px, pushing the footer off-screen. Together with the inline `code` defect below this affected 17 of 59 pages. Fixed.
 - **`pre` blocks** - navy ground and parchment ink read well; the dark-scheme darker ground and edge keeps the block distinct. Overflow scrolls inside the block on a phone rather than clipping. No change.
 - **Inline `code`** - reads as code without fragmenting the `ki` command inventory's dense paragraphs. **Defect at 390 px:** a long invocation or URL in inline `code` widened pages such as the `ki` command inventory and the local commands page. Fixed.
 - **`.prose-provenance`** - smaller, lighter and separated by a rule; it reads as page chrome rather than the conclusion in both schemes. No change.
@@ -135,7 +135,7 @@ No finding was a design question, so no new item was raised.
 
 ### Change Summary
 
-- `apps/site/src/assets/css/main.css` - inline prose `code` gains `overflow-wrap: anywhere`; below the 768 px breakpoint `.prose-ki table` becomes a block that scrolls horizontally inside itself. Desktop table layout is unchanged.
+- `apps/site/src/assets/css/main.css` - inline prose `code` gains `overflow-wrap: break-word`; below the 768 px breakpoint `.prose-ki table` becomes a block that scrolls horizontally inside itself. Desktop table layout is unchanged (`anywhere`, used in the first submission, squeezed desktop code columns and was replaced after review).
 - `apps/site/src/_data/projects.json5` - removed Markdown backticks from two plain-text project fields (`ki-agentic-harness` audience, `ki` usage).
 - `apps/site/scripts/verify-projects.ts` - fails a build when any project prose field (`tagline`, `description`, `usage`, `capabilities`, reader fields) contains a backtick.
 - `docs/guides/developer/prose-styling.md` - new "What the check cannot see" section recording both defects, the rules that fix them, and the pages to look at when a prose rule changes.
@@ -146,7 +146,7 @@ Deviation within the Boundary: the data and gate change sits outside the listed 
 
 - `bun run ki:site:clean && bun run ki:site:build` - PASS; all six gates (routes, projects, provenance 39 pages, docs 41 pages, reachable 59 pages, prose 153 regions).
 - `verify-projects` with the old data restored - FAILS on both backtick fields, proving the new gate; with the fix - PASS.
-- 390 px overflow sweep over all 59 published pages - 16 pages overflowed before (up to 557 px document width); 0 after.
+- 390 px overflow sweep over all 59 published pages - 17 pages overflowed before (up to 557 px document width); 0 after.
 - Post-fix screenshots re-inspected: skill catalogue provenance table (light), `ki` getting started `pre` (dark), tuning table (dark) at 390 px.
 - `bun run test`, `bun run self:typecheck` - PASS.
 - `ki repo audit --skill ki-engineering --repo .` and `--skill ki-authoring` - PASS.
@@ -162,7 +162,7 @@ The goal - a rendered check of the restyled elements in both schemes, with findi
 
 ### Mini recap
 
-Delivered a headless rendered review in both schemes and two viewports, fixed phone-width overflow on 16 pages and literal backticks on two project pages, and added a build gate against the latter. All site gates and audits pass. Proposed learning route: the guide section added here is the durable home; a browser in the build remains a separate decision this item does not take.
+Delivered a headless rendered review in both schemes and two viewports, fixed phone-width overflow on 17 pages and literal backticks on two project pages, and added a build gate against the latter. All site gates and audits pass. Proposed learning route: the guide section added here is the durable home; a browser in the build remains a separate decision this item does not take.
 
 ## Discussion
 
