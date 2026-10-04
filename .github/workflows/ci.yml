@@ -36,13 +36,13 @@ jobs:
           export PATH="$KI_CLI_INSTALL_DIR:$PATH"
           test "$(command -v ki)" = "$KI_CLI_INSTALL_DIR/ki"
           ki --version
-          ki manage diag | tee "$KI_ROOT/ki-diag-before-bootstrap.txt"
+          ki diag --full | tee "$KI_ROOT/ki-diag-before-bootstrap.txt"
           grep -F "Installation: local" "$KI_ROOT/ki-diag-before-bootstrap.txt"
           grep -F "Executable: $RUNNER_TEMP/tools-ki-source/src/main.ts" "$KI_ROOT/ki-diag-before-bootstrap.txt"
           ki bootstrap
           ki registry add --repo .
           ki repo repair --repo .
-          ki manage diag | tee "$KI_ROOT/ki-diag.txt"
+          ki diag --full | tee "$KI_ROOT/ki-diag.txt"
           grep -F "Status: valid" "$KI_ROOT/ki-diag.txt"
           ki harness list | grep -F 'knowledgeislands/ki-agentic-harness'
           {
