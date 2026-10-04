@@ -64,7 +64,7 @@ The harness fix for both rules is already on `knowledgeislands/ki-agentic-harnes
 ## Verify
 
 - `gh run list --limit 1` shows `success` for a push to `main`.
-- `gh run view <id> --log-failed` is empty, and the audit line reads `FAIL=0`.
+- `gh run view <id> --log-failed` is empty, and the audit summary reads `PASS` with no failures.
 - A local `ki repo audit --repo .` and the CI run agree on the same commit.
 
 ## Dependencies / blocks
@@ -102,6 +102,7 @@ The Goal: CI and a contributor's terminal audit against the same rubric when the
 - `AGENTS.md` - new section "Which rubric an audit resolved": where CI's rubric comes from, how to read it from the job log, how `ki diag --full` shows a local harness's mode, and the rule that a CI-only failure from a newer harness rule is a `tools-ki` pin bump rather than a local workaround.
 - `.github/workflows/ci.yml` (`6e5aabf`, earlier in this session) - `ki manage diag` replaced by `ki diag --full` after `tools-ki` retired the `manage` group.
 - Deviation: the original Steps (pin an installer release) were superseded by `ee7df49`; the replan in Discussion records the rewritten Steps.
+- Review round 1 (`CHANGES`): the archive digest is printed by `ki bootstrap`, not `ki harness list`; `AGENTS.md` corrected, and the Verify literal `FAIL=0` updated to the current audit summary shape.
 
 ### Verification
 
