@@ -3,13 +3,13 @@ id: KI-WEB-SITE-040
 area: SITE
 title: Consolidate the site scripts
 theme: site-experience
-horizon: triage
-status: draft
+horizon: now
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:10:00Z
-updated_at: 2026-09-25T14:10:00Z
+updated_at: 2026-10-04T11:42:56Z
 ---
 
 ## Goal
@@ -100,3 +100,7 @@ Four of the five clients differ only in ceremony. Two of them differ in behaviou
 ### Consolidation is not deletion, and the distinction is worth stating plainly
 
 The instinct when a scripts directory grows is to ask which ones can go. That instinct is right about most directories and wrong about this one, because these scripts are the mechanical half of decisions the repository has already made — and a gate removed for tidiness removes a decision's enforcement while leaving the decision written down, which is worse than never having gated it. What grew here is not the number of things being checked but the number of times the same plumbing was written to check them.
+
+### Readiness check - 2026-10-04
+
+Adopted from Triage into Now under the owner's delegated session authority and re-grounded against `main` at `6e5aabf`. The duplication table still holds: bare `fetch(url)` at `sync-cli-commands.ts:311` and `sync-skill-catalogue.ts:186`, token and `User-Agent` at `sync-tool-release.ts:126` and `verify-provenance.ts:201`, walkers in the five named gates, and frontmatter readers in the three named scripts. `verify-tool-routes.ts:217` fetches a tool's installer URL rather than the GitHub API, so the shared client should expose the common headers for it without forcing an API base URL. The scripts now total 2,894 lines including tests.
