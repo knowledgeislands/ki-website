@@ -4,12 +4,12 @@ area: SITE
 title: Realign the harness pin
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: ee4a09df3dce6aa30adb0dfb6f14059883ffb762
 created_at: 2026-09-25T15:40:00Z
-updated_at: 2026-10-04T12:01:53Z
+updated_at: 2026-10-04T12:03:12Z
 ---
 
 ## Goal
@@ -54,7 +54,7 @@ The harness fix for both rules is already on `knowledgeislands/ki-agentic-harnes
 - [x] Confirm with `tools-ki` that its canonical harness pin carries the current rules, and record which revision carries it.
 - [x] Make CI resolve that pin rather than a frozen installer release, and keep its diagnostic assertions current.
 - [x] Re-run CI on `main` and confirm the audit passes with no failures.
-- [ ] Record in `AGENTS.md` that a local audit and CI can resolve different rubrics, and how to tell.
+- [x] Record in `AGENTS.md` that a local audit and CI can resolve different rubrics, and how to tell.
 
 ## Files touched
 
@@ -90,6 +90,36 @@ None directly. The Cloudflare guide stays where `ki-guides` puts it.
 ### Roadmap
 
 None beyond this record.
+
+## Review
+
+### Delivered
+
+The Goal: CI and a contributor's terminal audit against the same rubric when the `tools-ki` pin is current, and a contributor can tell when they do not. Baseline `ee4a09df3dce6aa30adb0dfb6f14059883ffb762`. Earlier evidence inside the replanned scope: `6e5aabf` (CI diagnostic command), `tools-ki` `5f7ee0f` (pin bump, delivered by `tools-ki`), and the green CI run `37200483963`. Excluded: any change to the pin itself, which `tools-ki` owns.
+
+### Change Summary
+
+- `AGENTS.md` - new section "Which rubric an audit resolved": where CI's rubric comes from, how to read it from the job log, how `ki diag --full` shows a local harness's mode, and the rule that a CI-only failure from a newer harness rule is a `tools-ki` pin bump rather than a local workaround.
+- `.github/workflows/ci.yml` (`6e5aabf`, earlier in this session) - `ki manage diag` replaced by `ki diag --full` after `tools-ki` retired the `manage` group.
+- Deviation: the original Steps (pin an installer release) were superseded by `ee7df49`; the replan in Discussion records the rewritten Steps.
+
+### Verification
+
+- `gh run list`: run `37200483963` on `2e4cdf6` succeeded, with `ki repo audit --repo .` passing all skills; the earlier `FILES-6` failure (run `37199430440`) cleared once `tools-ki` `5f7ee0f` landed.
+- Local `ki repo audit --repo .` passes on the same tree (22 skills), so local and CI agree.
+- `bunx rumdl check AGENTS.md` clean.
+
+### Outstanding concerns
+
+The drift will recur whenever a harness rule lands before `tools-ki` moves its pin; this item makes that recognisable, it does not prevent it. Run `37200455941` failed on a mid-session roadmap section-order slip (`ITEM-3`), fixed by `2e4cdf6`, and is unrelated to the pin.
+
+### Post-change review
+
+The Goal holds on current evidence: same rubric, same verdict, and a written way to tell when they diverge. Scope stayed within this repository; the pin change was a handoff. Regression risk is nil for the site. Ready for review.
+
+### Mini recap
+
+CI green again after a diag-command fix and a `tools-ki` pin bump; `AGENTS.md` now explains rubric resolution. Possible learning route: `ki-repo` CI guidance could name the pin-drift diagnosis generally; not promoted.
 
 ## Discussion
 

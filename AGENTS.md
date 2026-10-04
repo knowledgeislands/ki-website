@@ -31,6 +31,10 @@ ki repo audit --skill ki-authoring --repo .  # rumdl check for authored Markdown
 bun run --cwd apps/site verify:provenance -- --network  # report published pages whose upstream has moved
 ```
 
+## Which rubric an audit resolved
+
+`ki repo audit` checks this repository against the rubric of whichever harness `ki` resolves, and a contributor's terminal and CI can resolve different ones. CI links `tools-ki` `main` from source and audits against its canonical harness pin, `canonicalHarnessRelease` in `src/core/storage/registry.ts`; the job log prints the `KI source commit` and `ki harness list` the archive digest. Locally, `ki diag --full` shows each harness under `locals` with `mode: on` when it resolves a moving checkout and `off` when it resolves the verified archive. When CI fails a rule that passes locally, compare the two before changing the repository: a harness rule newer than the `tools-ki` pin is checker drift, owed to `tools-ki` as a pin bump, not a defect to work around here (`KI-WEB-SITE-041`).
+
 ## Progress and commits
 
 - Give concise progress updates at meaningful checkpoints and at least every few minutes during sustained work.
