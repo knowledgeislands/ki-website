@@ -3,13 +3,13 @@ id: KI-WEB-SITE-041
 area: SITE
 title: Realign the harness pin
 theme: site-experience
-horizon: triage
-status: draft
+horizon: now
+status: ready
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T15:40:00Z
-updated_at: 2026-09-27T23:00:23Z
+updated_at: 2026-10-04T12:01:53Z
 ---
 
 ## Goal
@@ -51,15 +51,15 @@ The harness fix for both rules is already on `knowledgeislands/ki-agentic-harnes
 
 ## Steps
 
-- [ ] Confirm with `tools-ki` that a release bumping `canonicalHarnessRelease` past `a522253c` is planned, and record which version carries it.
-- [ ] Bump the pinned installer version and the `ki --version` assertion in `.github/workflows/ci.yml` to that version.
-- [ ] Re-run CI on `main` and confirm `FAIL=0` across all eighteen skills.
+- [x] Confirm with `tools-ki` that its canonical harness pin carries the current rules, and record which revision carries it.
+- [x] Make CI resolve that pin rather than a frozen installer release, and keep its diagnostic assertions current.
+- [x] Re-run CI on `main` and confirm the audit passes with no failures.
 - [ ] Record in `AGENTS.md` that a local audit and CI can resolve different rubrics, and how to tell.
 
 ## Files touched
 
-- `.github/workflows/ci.yml` — the pinned installer URL and the version assertion
-- `AGENTS.md` — the note about which rubric an audit resolved
+- `.github/workflows/ci.yml` - the linked KI source and its diagnostic assertions
+- `AGENTS.md` - the note about which rubric an audit resolved
 
 ## Verify
 
@@ -69,7 +69,7 @@ The harness fix for both rules is already on `knowledgeislands/ki-agentic-harnes
 
 ## Dependencies / blocks
 
-Blocked by `tools-ki`, which owns `canonicalHarnessRelease` and the release that would move it. That is a handoff to `tools-ki` rather than work this repository can do: nothing here can change what a released `ki` pins, and the registry actively refuses a local override of the canonical harness.
+Formerly blocked by `tools-ki`, which owns `canonicalHarnessRelease`; that handoff was met by `tools-ki` `5f7ee0f` on 2026-10-04. A future rule change in the harness can recur the drift until `tools-ki` moves the pin again, which is what the `AGENTS.md` note explains how to recognise.
 
 Nothing in this repository blocks on this item. The two failures are checker drift, not defects, so no content work waits behind them. The accepted navigation delivery exposed the mismatch during review, which remains useful evidence for this pin realignment.
 
@@ -92,6 +92,10 @@ None directly. The Cloudflare guide stays where `ki-guides` puts it.
 None beyond this record.
 
 ## Discussion
+
+### Replan - 2026-10-04
+
+Adopted from Triage into Now under the owner's delegated session authority. The original Steps assumed CI would keep installing a pinned `ki` release; `ee7df49` instead made CI link `tools-ki` `main` from source, so the rubric CI audits is `canonicalHarnessRelease` on `tools-ki` `main`. The drift recurred in that shape on 2026-10-04: `main` pinned harness `0cad602` (2026-10-02), which predates the `tmp/` ignore block (`654bc4f`, GOV-132) this repository had already adopted, so CI failed `FILES-6` while a local audit passed. On handoff, `tools-ki` `5f7ee0f` moved the pin to harness `b426da8`. Separately, `tools-ki` retired the `ki manage` group, and `6e5aabf` moved CI to the root `ki diag --full`. CI run `37200483963` on `2e4cdf6` passed. The first three Steps are rewritten to that reality and complete; the `AGENTS.md` note remains.
 
 ### Pickup checkpoint — 2026-09-28
 
