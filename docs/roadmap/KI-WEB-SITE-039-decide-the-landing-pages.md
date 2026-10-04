@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-09-26T18:18:00Z
+updated_at: 2026-10-04T12:10:43Z
 ---
 
 ## Goal
@@ -113,3 +113,7 @@ The first is better for a reader who came to learn; the second is better for a r
 ### The overlap is the part that is not optional
 
 Whatever shape the two pages take, the Contribution Process should be explained once. Two explanations drift, and the one nobody is looking at drifts first.
+
+### Blocker - 2026-10-04
+
+Left in Triage during an agent roadmap pass. The first two Steps are editorial choices for the owner - which shape Get Started takes, and where Contribute lives - and nothing here should be planned or executed until one is chosen. The overlap step cannot run first, because where the Contribution Process is explained depends on that choice.
