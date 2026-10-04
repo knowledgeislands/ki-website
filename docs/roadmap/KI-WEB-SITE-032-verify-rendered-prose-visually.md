@@ -4,12 +4,12 @@ area: SITE
 title: Verify rendered prose visually
 theme: site-experience
 horizon: next
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: f4417d50b7b78f656e2af7466363115f57867c6b
 created_at: 2026-09-24T08:18:55Z
-updated_at: 2026-10-04T18:08:40Z
+updated_at: 2026-10-04T18:09:45Z
 ---
 
 ## Goal
@@ -163,6 +163,10 @@ The goal - a rendered check of the restyled elements in both schemes, with findi
 ### Mini recap
 
 Delivered a headless rendered review in both schemes and two viewports, fixed phone-width overflow on 17 pages and literal backticks on two project pages, and added a build gate against the latter. All site gates and audits pass. Proposed learning route: the guide section added here is the durable home; a browser in the build remains a separate decision this item does not take.
+
+## Done
+
+Accepted 2026-10-04 on an independent re-review that returned `ACCEPT`, under the owner's delegated acceptance authority for this session. The first review asked for two corrections - `overflow-wrap: anywhere` squeezed inline-code columns in desktop tables, so the rule became `break-word`, and the overflow count was 17 pages, not 16 - both fixed in `7f687ea`. The re-review rebuilt the site, confirmed zero overflow at 390 px across all published pages, the tuning table back to its baseline single wrap at 1280 px, and `ki repo audit` passing.
 
 ## Discussion
 
