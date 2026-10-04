@@ -21,10 +21,13 @@
  * site's build. See docs/guides/developer/page-provenance.md.
  */
 
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
+import { readFrontmatter } from './lib/frontmatter.ts'
+import { githubFetch, isRateLimited, rateLimitMessage } from './lib/github.ts'
+import { byExtension, walk } from './lib/walk.ts'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const publishedDirs = ['src/docs'].map((dir) => resolve(siteRoot, dir))
@@ -71,18 +74,7 @@ const warn = (message: string): void => {
   warnings.push(message)
 }
 
-const markdownFiles = (dir: string): string[] => {
-  const found: string[] = []
-  for (const entry of readdirSync(dir)) {
-    const full = resolve(dir, entry)
-    if (statSync(full).isDirectory()) {
-      found.push(...markdownFiles(full))
-    } else if (entry.endsWith('.md')) {
-      found.push(full)
-    }
-  }
-  return found.sort()
-}
+const markdownFiles = (dir: string): string[] => walk(dir, byExtension('.md')).sort()
 
 /**
  * Reads the `sources` key out of a page's frontmatter.
@@ -99,14 +91,14 @@ const readSources = (
   | { kind: 'original' }
   | { kind: 'list'; entries: Source[] }
   | { kind: 'malformed'; reason: string } => {
-  if (!contents.startsWith('---\n')) {
+  const frontmatter = readFrontmatter(contents)
+  if (frontmatter.kind === 'none') {
     return { kind: 'malformed', reason: 'the file has no frontmatter block' }
   }
-  const end = contents.indexOf('\n---', 4)
-  if (end === -1) {
+  if (frontmatter.kind === 'unterminated') {
     return { kind: 'malformed', reason: 'the frontmatter block is unterminated' }
   }
-  const lines = contents.slice(4, end).split('\n')
+  const lines = frontmatter.block.split('\n')
 
   const index = lines.findIndex((line) => line === 'sources: original' || line === 'sources:')
   if (index === -1) {
@@ -198,10 +190,6 @@ const checkEntry = (page: string, position: number, source: Source): void => {
   }
 }
 
-const token = process.env.GITHUB_TOKEN ?? process.env.GH_TOKEN
-const apiHeaders: Record<string, string> = { Accept: 'application/vnd.github+json' }
-if (token) apiHeaders.Authorization = `Bearer ${token}`
-
 let refused = false
 
 /**
@@ -214,13 +202,11 @@ let refused = false
  */
 const api = async (url: string): Promise<Response | null> => {
   if (refused) return null
-  const response = await fetch(url, { headers: apiHeaders })
-  if (response.status !== 403 && response.status !== 429) return response
+  const response = await githubFetch(url)
+  if (!isRateLimited(response.status)) return response
 
   refused = true
-  warn(
-    `GitHub declined further requests (HTTP ${response.status}); the remaining network checks were skipped. Set GITHUB_TOKEN to lift the unauthenticated limit of sixty requests an hour.`
-  )
+  warn(`${rateLimitMessage(response.status)} The remaining network checks were skipped.`)
   return null
 }
 

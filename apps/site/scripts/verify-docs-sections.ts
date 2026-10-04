@@ -45,10 +45,12 @@
  * fact. Provenance is `verify-provenance.ts`; this file owns voice.
  */
 
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
+import { readFrontmatter } from './lib/frontmatter.ts'
+import { byExtension, walk } from './lib/walk.ts'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const docsDir = resolve(siteRoot, 'src/docs')
@@ -99,25 +101,12 @@ const fail = (message: string): void => {
 }
 
 /** Every page below a section's directory, Markdown or hand-built. */
-const sectionPages = (dir: string): string[] => {
-  let entries: string[]
-  try {
-    entries = readdirSync(dir)
-  } catch {
-    return []
-  }
-  return entries.flatMap((name) => {
-    const path = resolve(dir, name)
-    if (statSync(path).isDirectory()) return sectionPages(path)
-    return name.endsWith('.md') || name.endsWith('.njk') ? [path] : []
-  })
-}
+const sectionPages = (dir: string): string[] => (existsSync(dir) ? walk(dir, byExtension('.md', '.njk')) : [])
 
 /** The frontmatter block and the body that follows it. */
 const split = (contents: string): { frontmatter: string; body: string } => {
-  const match = contents.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/)
-  if (!match) return { frontmatter: '', body: contents }
-  return { frontmatter: match[1] as string, body: match[2] as string }
+  const read = readFrontmatter(contents)
+  return read.kind === 'block' ? { frontmatter: read.block, body: read.body } : { frontmatter: '', body: contents }
 }
 
 /**

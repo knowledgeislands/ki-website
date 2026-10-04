@@ -33,6 +33,7 @@
 
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { githubFetchOk } from './lib/github.ts'
 
 const SOURCE_REPOSITORY = 'knowledgeislands/tools-ki'
 const SOURCE_PATH = 'man/ki.1'
@@ -308,8 +309,7 @@ async function main(): Promise<void> {
   }
 
   const url = `https://raw.githubusercontent.com/${SOURCE_REPOSITORY}/${ref}/${SOURCE_PATH}`
-  const response = await fetch(url)
-  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`)
+  const response = await githubFetchOk(url)
 
   const inventory = parseCliManual(await response.text())
   const payload = { source: { repository: SOURCE_REPOSITORY, path: SOURCE_PATH, ref }, ...inventory }

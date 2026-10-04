@@ -1,6 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import JSON5 from 'json5'
+import { githubFetchOk, githubToken } from './lib/github.ts'
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const versionPattern = /^v\d+\.\d+\.\d+$/
@@ -105,7 +106,8 @@ export function updateRegistrySource(
   const blockEnd = blockEndMarker + '\n  }'.length
   const block = source.slice(blockStart, blockEnd)
   const occurrences = block.split(tool.version).length - 1
-  if (occurrences < 4) throw new Error(`${request.tool}: registry block does not carry four coherent version pins`)
+  if (occurrences !== 4)
+    throw new Error(`${request.tool}: registry block must carry exactly four coherent version pins`)
 
   const updated = `${source.slice(0, blockStart)}${block.replaceAll(tool.version, request.version)}${source.slice(blockEnd)}`
   const updatedTool = registryTools(updated).find((candidate) => candidate.slug === request.tool)
@@ -118,22 +120,13 @@ export function updateRegistrySource(
   return { source: updated, changed: true }
 }
 
-async function checkedFetch(fetcher: typeof fetch, url: string, token?: string): Promise<Response> {
-  const response = await fetcher(url, {
-    headers: {
-      Accept: 'application/vnd.github+json',
-      'User-Agent': 'ki-website-release-sync',
-      ...(token ? { Authorization: `Bearer ${token}` } : {})
-    }
-  })
-  if (!response.ok) throw new Error(`HTTP ${response.status} for ${url}`)
-  return response
-}
+const checkedFetch = (fetcher: typeof fetch, url: string, token?: string): Promise<Response> =>
+  githubFetchOk(url, { fetcher, token })
 
 export async function verifyRemoteRelease(
   request: ToolReleaseRequest,
   fetcher: typeof fetch = fetch,
-  token = process.env.GITHUB_TOKEN
+  token = githubToken()
 ): Promise<void> {
   validateRequest(request)
   const releaseBase = `https://api.github.com/repos/${request.sourceRepository}/releases`

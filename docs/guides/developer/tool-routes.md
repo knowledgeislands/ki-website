@@ -58,7 +58,7 @@ Website receiver independently requires all following before it writes anything:
 - registry already maps tool slug to source repository; and
 - requested version is not downgrade.
 
-Successful verification changes only selected entry's `version`, `installer`, `manual`, and `changelog` pins. Receiver pushes deterministic `automation/tool-release-<tool>-<version>` branch through the shared `ki-tools-release-bot` GitHub App and opens or updates a pull request. It never commits to `main`, merges, or deploys. Ordinary pull-request CI and human website review remain publication boundary.
+Successful verification changes only selected entry's `version`, `installer`, `manual`, and `changelog` pins. Receiver pushes deterministic `automation/tool-release-<tool>-<version>` branch through the shared `ki-tools-release-bot` GitHub App and opens or updates a pull request. It never commits to `main`, merges, or deploys. Ordinary pull-request CI and human website review remain the publication boundary until protected, CI-gated auto-merge is configured. First-time entries, maturity changes, and editorial changes remain human-reviewed even after that activation.
 
 Configure `KI_TOOLS_RELEASE_BOT_APP_ID` as a repository variable and `KI_TOOLS_RELEASE_BOT_PRIVATE_KEY` as an Actions secret. Install the shared App on `ki-website` with Contents and Pull requests read/write permissions so this receiver can prepare its branch and pull request. The Homebrew tap holds the same settings to mint a token restricted to its committed consumer registry. Never commit or print the private key.
 

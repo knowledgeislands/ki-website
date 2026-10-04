@@ -96,6 +96,22 @@ describe('registry update', () => {
     )
   })
 
+  test('refuses a first-time entry and an unexpected version-bearing field', () => {
+    assert.throws(
+      () => updateRegistrySource(registry, { ...request, tool: 'techne', formulaPath: 'Formula/techne.rb' }),
+      /no entry/
+    )
+    const unexpected = registry.replace("slug: 'ki',", "slug: 'ki',\n    tagline: 'v0.3.6',")
+    assert.throws(() => updateRegistrySource(unexpected, request), /exactly four coherent version pins/)
+  })
+
+  test('leaves maturity and routes unchanged during a version update', () => {
+    const source = registry.replace("slug: 'ki',", "slug: 'ki',\n    maturity: 'preview',\n    route: '/projects/ki/',")
+    const result = updateRegistrySource(source, request).source
+    assert.match(result, /maturity: 'preview'/)
+    assert.match(result, /route: '\/projects\/ki\/'/)
+  })
+
   test('is idempotent and rejects downgrades', () => {
     const updated = updateRegistrySource(registry, request).source
     assert.equal(updateRegistrySource(updated, request).changed, false)

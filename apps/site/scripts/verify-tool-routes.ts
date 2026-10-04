@@ -18,10 +18,12 @@
  * deliberately rather than silently following upstream.
  */
 
-import { existsSync, readdirSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
+import { githubFetch } from './lib/github.ts'
+import { byExtension, walk } from './lib/walk.ts'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const registryPath = resolve(siteRoot, 'src/_data/projects.json5')
@@ -214,7 +216,7 @@ const checkBuild = (tools: Tool[]): void => {
 const checkNetwork = async (tools: Tool[]): Promise<void> => {
   for (const tool of tools) {
     try {
-      const response = await fetch(tool.installer, { redirect: 'follow' })
+      const response = await githubFetch(tool.installer, { init: { redirect: 'follow' } })
       if (!response.ok) {
         fail(`${tool.slug}: installer target returned HTTP ${response.status} — ${tool.installer}`)
       } else if ((await response.text()).trim() === '') {
@@ -227,9 +229,7 @@ const checkNetwork = async (tools: Tool[]): Promise<void> => {
     const repository = repositoryOf(tool.repository)
     if (repository === null) continue
     try {
-      const response = await fetch(`https://api.github.com/repos/${repository}/releases/latest`, {
-        headers: { accept: 'application/vnd.github+json' }
-      })
+      const response = await githubFetch(`https://api.github.com/repos/${repository}/releases/latest`)
       if (!response.ok) {
         warn(`${tool.slug}: could not read the published latest release (HTTP ${response.status})`)
         continue
@@ -253,14 +253,7 @@ const checkNetwork = async (tools: Tool[]): Promise<void> => {
  */
 const checkRetiredRoutes = (): void => {
   const retired = ['/tooling/', '/harness/install']
-  const walk = (dir: string): string[] =>
-    readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-      const path = resolve(dir, entry.name)
-      if (entry.isDirectory()) return walk(path)
-      return /\.(njk|md|ts)$/.test(entry.name) ? [path] : []
-    })
-
-  for (const path of walk(resolve(siteRoot, 'src'))) {
+  for (const path of walk(resolve(siteRoot, 'src'), byExtension('.njk', '.md', '.ts'))) {
     const source = readFileSync(path, 'utf-8')
     for (const route of retired) {
       const escaped = route.replace(/[/]/g, '\\/')
