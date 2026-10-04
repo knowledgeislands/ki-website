@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-03T06:48:30Z
+updated_at: 2026-10-04T12:10:18Z
 ---
 
 ## Goal
@@ -32,7 +32,7 @@ The receiver validates release evidence and opens version-update PRs. Its local 
 
 - [x] Diagnose the existing KI release-update PR failure and correct the linked-executable CI assertion without weakening source verification.
 - [x] Test exact version-only changes and rejection of first-time or other unexpected version-bearing fields; retain maturity and route unchanged.
-- [ ] Publish the CI fix and verify passing checks on an updated release PR.
+- [x] Publish the CI fix and verify passing checks on an updated release PR.
 - [ ] Require passing website CI on `main` without App bypass, then enable guarded auto-merge for qualifying PRs.
 - [ ] Verify successful routine and rejected exceptional handoffs, and update website release guidance.
 
@@ -82,3 +82,9 @@ The upstream immutable release gives standing authority for this matching receiv
 ### Local preparation
 
 The failing PR build expected KI's wrapper path in diagnostic output, but linked KI reports its resolved source path. CI now compares that path with the wrapper's resolved target. The synchronizer's exact-four-pin gate prevents incidental matching text in an existing entry from being silently rewritten. Hosted check results and protected auto-merge remain unproved.
+
+### Checkpoint - 2026-10-04
+
+Step 3 is evidenced: `main` CI is green again (`6e5aabf` moved CI to `ki diag --full`; `tools-ki` `5f7ee0f` moved the harness pin), and updating release PR #7 (`ki` v0.5.1, a one-file `projects.json5` change) from `main` produced passing check run `37201130000`. PR #7 and the superseded v0.5.0 PR #5 remain open for human review; neither was merged or closed.
+
+Step 4 now waits for an owner decision, not for evidence. GitHub reports `allow_auto_merge: false`, no rulesets and no branch protection on `main`. Requiring the build check on `main` changes how every contributor and agent lands work - this repository currently pushes directly to `main` - so the ruleset's shape (required check only, or also pull requests; who may bypass, with the App explicitly excluded) and enabling auto-merge are repository-setting choices for the owner. Once decided, the receiver change and the live routine and exceptional handoffs in Step 5 can proceed.
