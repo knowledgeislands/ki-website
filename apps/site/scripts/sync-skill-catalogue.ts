@@ -17,6 +17,7 @@
 
 import { writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
+import { githubFetchOk } from './lib/github.ts'
 
 export const CATALOGUE_START = '<!-- ki-repo-harness:capability-catalogue:start -->'
 export const CATALOGUE_END = '<!-- ki-repo-harness:capability-catalogue:end -->'
@@ -183,8 +184,7 @@ async function main(): Promise<void> {
   }
 
   const url = `https://raw.githubusercontent.com/${SOURCE_REPOSITORY}/${ref}/${SOURCE_PATH}`
-  const response = await fetch(url)
-  if (!response.ok) throw new Error(`${url} returned HTTP ${response.status}`)
+  const response = await githubFetchOk(url)
 
   const catalogue = parseCatalogue(await response.text())
   const payload = {

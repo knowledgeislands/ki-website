@@ -30,9 +30,10 @@
  * say plainly what it holds to.
  */
 
-import { readdirSync, readFileSync, statSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { byExtension, walk } from './lib/walk.ts'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const distDir = resolve(siteRoot, 'dist')
@@ -42,12 +43,7 @@ const failures: string[] = []
 const warnings: string[] = []
 
 /** Every HTML document the build wrote, as absolute paths. */
-const pages = (dir: string): string[] =>
-  readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const path = resolve(dir, entry.name)
-    if (entry.isDirectory()) return pages(path)
-    return entry.name.endsWith('.html') ? [path] : []
-  })
+const pages = (dir: string): string[] => walk(dir, byExtension('.html'))
 
 /**
  * The href targets of one document, resolved to absolute paths in `dist/`.

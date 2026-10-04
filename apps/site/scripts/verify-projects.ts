@@ -26,6 +26,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import JSON5 from 'json5'
+import { githubFetch } from './lib/github.ts'
 
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const registryPath = resolve(siteRoot, 'src/_data/projects.json5')
@@ -270,9 +271,7 @@ const checkNetwork = async (projects: Project[]): Promise<void> => {
   for (const project of projects) {
     const repository = project.repository.slice('https://github.com/'.length)
     try {
-      const response = await fetch(`https://api.github.com/repos/${repository}`, {
-        headers: { accept: 'application/vnd.github+json' }
-      })
+      const response = await githubFetch(`https://api.github.com/repos/${repository}`)
       if (response.status === 404) {
         fail(`${project.slug}: ${project.repository} is not publicly visible`)
         continue

@@ -4,12 +4,12 @@ area: SITE
 title: Consolidate the site scripts
 theme: site-experience
 horizon: now
-status: ready
+status: awaiting-review
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: 006c465a48a7acb3f46c9058be42581ae867065b
 created_at: 2026-09-25T14:10:00Z
-updated_at: 2026-10-04T11:42:56Z
+updated_at: 2026-10-04T11:51:26Z
 ---
 
 ## Goal
@@ -46,14 +46,14 @@ The six gates together take 1.79 seconds.
 
 ## Steps
 
-- [ ] Take `baseline_ref` before any edit.
-- [ ] Capture each gate's current output verbatim, so the change can be proved to alter nothing.
-- [ ] Extract `scripts/lib/github.ts` — one client, one token resolution, one `User-Agent`, one rate-limit message.
-- [ ] Extract `scripts/lib/walk.ts` — one recursive walker taking an extension filter.
-- [ ] Extract `scripts/lib/frontmatter.ts` — one reader returning the block and the body.
-- [ ] Repoint all nine scripts, one at a time, re-running its gate after each.
-- [ ] Add tests for the shared helpers, and keep the existing script tests passing unchanged.
-- [ ] Diff each gate's output against the capture from step two.
+- [x] Take `baseline_ref` before any edit.
+- [x] Capture each gate's current output verbatim, so the change can be proved to alter nothing.
+- [x] Extract `scripts/lib/github.ts` — one client, one token resolution, one `User-Agent`, one rate-limit message.
+- [x] Extract `scripts/lib/walk.ts` — one recursive walker taking an extension filter.
+- [x] Extract `scripts/lib/frontmatter.ts` — one reader returning the block and the body.
+- [x] Repoint all nine scripts, one at a time, re-running its gate after each.
+- [x] Add tests for the shared helpers, and keep the existing script tests passing unchanged.
+- [x] Diff each gate's output against the capture from step two.
 
 ## Files touched
 
@@ -90,6 +90,43 @@ None.
 ### Roadmap
 
 None.
+
+## Review
+
+### Delivered
+
+The approved boundary: three shared helpers under `apps/site/scripts/lib/` and every duplicated client, walker and frontmatter reader in the nine scripts repointed at them, with no gate deleted, weakened or changed in what it concludes. Baseline `006c465a48a7acb3f46c9058be42581ae867065b`; the resulting change is the commit that carries this packet.
+
+### Change Summary
+
+- `apps/site/scripts/lib/github.ts` - one GitHub client: token from `GITHUB_TOKEN` then `GH_TOKEN`, one `User-Agent` (`ki-website-scripts`), the API media type only for `api.github.com`, the token only for GitHub-owned hosts, and one rate-limit sentence. `githubFetchOk` throws with that sentence on 403/429.
+- `apps/site/scripts/lib/walk.ts` - one recursive walker taking an extension filter; `apps/site/scripts/lib/frontmatter.ts` - one reader returning `none`, `unterminated` or the block and body.
+- Repointed: `sync-cli-commands.ts` and `sync-skill-catalogue.ts` (bare `fetch` replaced, so both now send a token and `User-Agent` and explain a refusal), `sync-tool-release.ts`, `verify-projects.ts`, `verify-tool-routes.ts`, `verify-provenance.ts` (client, walker, reader), `verify-docs-sections.ts` (walker, reader), `verify-reachable.ts` and `verify-prose-coverage.ts` (walker).
+- New tests: `lib/github.test.ts`, `lib/walk.test.ts`, `lib/frontmatter.test.ts`. The three existing test files are unchanged.
+- `docs/guides/developer/page-provenance.md` - the rate-limit paragraph now describes the one client rather than one script.
+- Deviation, recorded rather than approved separately: `sync-skill-catalogue.ts` no longer reads frontmatter (it parses the harness catalogue between markers), so the reader replaced two copies, not three. `sync-tool-release.ts` now also honours `GH_TOKEN` and identifies itself with the shared `User-Agent`.
+
+### Verification
+
+- `bun run ki:site:clean && bun run ki:site:build` passes; the six gates' outputs, captured before any edit and again after, are identical line for line (`diff` empty).
+- `bun test scripts` in `apps/site`: 45 pass, 0 fail across 6 files (34 before, all still passing).
+- `bunx tsc --noEmit` in `apps/site` clean; `bunx biome check apps/site/scripts` clean.
+- With `GITHUB_TOKEN` set, `sync:cli -- --ref v0.4.0` and `sync:skills -- --ref 77ec746d…` both succeed and regenerate byte-identical data files; `verify:provenance`, `verify:projects` and `verify:routes` with `--network` complete with the same warnings as before.
+- `ki repo audit --skill ki-engineering --repo .` and `--skill ki-authoring` pass.
+
+### Outstanding concerns
+
+- A rate-limited sync run was proved by unit test with a stubbed 403/429, not against live GitHub.
+- The shared reader accepts CRLF files that `verify-provenance.ts` previously reported as having no frontmatter; no published page uses CRLF, so no conclusion changes today.
+- Hosted CI is red on `main` for an unrelated pinned-harness drift (`FILES-6`), tracked by `KI-WEB-SITE-041`.
+
+### Post-change review
+
+The goal holds: each piece of plumbing now exists once, and the two scripts that called bare `fetch` gained the token handling the item named as the real defect. Scope stayed inside `apps/site/scripts/` plus the one guide paragraph. Regression risk is low - unchanged gate output and unchanged existing tests are the item's own acceptance test. Ready for review.
+
+### Mini recap
+
+Nine scripts repointed at three helpers (240 lines with tests), 88 duplicated lines removed, gate output unchanged. Possible learning route: `ki-engineering` could name `scripts/lib/` as the home for shared site-script plumbing; not promoted.
 
 ## Discussion
 
