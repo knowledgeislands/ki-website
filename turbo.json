@@ -5,8 +5,16 @@
   // Remote caching reaches an external service, so it is declared explicitly
   // rather than by omission — turning it on later is a visible change.
   "remoteCache": { "enabled": false },
-  // Files that govern every workspace while living outside all of them.
-  "globalDependencies": ["tsconfig.json", "biome.json"],
+  // Files that govern every workspace while living outside all of them. The
+  // boundary rules and their tooling root are read by apps/site's suite from
+  // outside that workspace, so they move every hash rather than none.
+  "globalDependencies": [
+    "tsconfig.json",
+    "biome.json",
+    ".dependency-cruiser.ts",
+    "tooling/boundaries/package.json",
+    "tooling/boundaries/bun.lock"
+  ],
   "tasks": {
     // The site is a deployable: its input set is large and implicit (content,
     // assets, data, the Eleventy config and its plugins, the route verifiers),

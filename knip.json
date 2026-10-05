@@ -3,6 +3,9 @@
   "ignore": [".ncurc.cjs", ".claude/skills/**", ".agents/skills/**"],
   "ignoreExportsUsedInFile": true,
   "workspaces": {
+    ".": {
+      "entry": [".dependency-cruiser.ts"]
+    },
     "apps/site": {
       "entry": ["eleventy.config.ts!", "src/_data/**/*.ts!", "scripts/**/*.ts!"],
       "project": ["**/*.ts", "**/*.css"]
