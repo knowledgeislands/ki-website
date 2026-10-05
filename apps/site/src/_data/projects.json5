@@ -174,7 +174,7 @@
       'Eighty-eight commands across fourteen groups in total, listed in full on this site rather than left to the manual.'
     ],
     state:
-      'Published as v0.5.1 and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
+      'Published and labelled preview. The command surface is settled enough to build habits on — bootstrap, skill activation and the audit loop have been stable for several releases — and the version number is the honest signal that it is still moving.',
     limits:
       'It runs only the operations a repository\'s declared skills register, from harnesses whose payloads verified. It will not run a repository-local wrapper script, a copied rubric runner, a package alias, or a checkout that happens to be nearby. That is what makes "the audit passed" a precise claim and a narrow one: it says nothing about rules nobody declared. It originates no capability content and no standard.',
     role: 'Canonical implementation of the ki command surface. It installs and governs; it originates neither capability content nor portable standards.',
@@ -209,7 +209,7 @@
       'register: write that workspace document, for a container directory or for a repository that owns cross-repository metadata.'
     ],
     state:
-      'Published as v0.13.0 and labelled preview — the most exercised of the four tools day to day. It is a standalone Bash script whose only runtime dependencies are Bash 3.2 or later and Git.',
+      'Published and labelled preview — the most exercised of the four tools day to day. It is a standalone Bash script whose only runtime dependencies are Bash 3.2 or later and Git.',
     limits:
       'It executes commands and reports what happened. It holds no authority over the repositories it sweeps and changes none of their governance, and it is not a forge client: pull requests, issues and reviews are outside what it can see.',
     role: 'Owns multi-repository command execution across a working set. It holds no authority over the repositories it sweeps and changes none of their governance.',
@@ -244,7 +244,7 @@
       'Output to a file, a directory or standard output, with the format inferred from the extension unless you state it.'
     ],
     state:
-      'Published as v0.1.0 and labelled preview — the newest of the four tools, and the one most likely to gain options. The counting contract and the report manifest are the settled parts.',
+      'Published and labelled preview — the newest of the four tools, and the one most likely to gain options. The counting contract and the report manifest are the settled parts.',
     limits:
       'It reads one local repository and writes only where you point it. It makes no network request and contacts no forge, so it reports nothing about pull requests, issues or reviews: none of that lives in the checkout. It never modifies repository history.',
     role: 'Owns offline reporting over a single Git checkout. It contacts no forge, writes nothing, and holds no authority over how a repository is governed.',
@@ -280,7 +280,7 @@
       'export and publish: one deliberately public, allow-listed profile, shareable without exposing private machine state.'
     ],
     state:
-      'Published as v0.2.0 and labelled preview. Configuration is inert TOML that Rig never sources as shell code, external provider operations require an explicit allow-listed declaration, and read-only inspection stays separate from mutation and publication.',
+      'Published and labelled preview. Configuration is inert TOML that Rig never sources as shell code, external provider operations require an explicit allow-listed declaration, and read-only inspection stays separate from mutation and publication.',
     limits:
       'Rig is a manager of managers: it describes the whole and coordinates the parts, while the native systems still install and configure their own tools. It replaces no package manifest, no chezmoi source state, no provider credential store and no native configuration — and it installs nothing on your behalf without an explicit apply.',
     role: 'Owns the declared description of a working setup and the comparison between that intent and what providers observe. It installs nothing on your behalf.',
