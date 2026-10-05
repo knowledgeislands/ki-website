@@ -9,7 +9,7 @@ blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-04T12:10:18Z
+updated_at: 2026-10-05T07:56:00Z
 ---
 
 ## Goal
@@ -88,3 +88,9 @@ The failing PR build expected KI's wrapper path in diagnostic output, but linked
 Step 3 is evidenced: `main` CI is green again (`6e5aabf` moved CI to `ki diag --full`; `tools-ki` `5f7ee0f` moved the harness pin), and updating release PR #7 (`ki` v0.5.1, a one-file `projects.json5` change) from `main` produced passing check run `37201130000`. PR #7 and the superseded v0.5.0 PR #5 remain open for human review; neither was merged or closed.
 
 Step 4 now waits for an owner decision, not for evidence. GitHub reports `allow_auto_merge: false`, no rulesets and no branch protection on `main`. Requiring the build check on `main` changes how every contributor and agent lands work - this repository currently pushes directly to `main` - so the ruleset's shape (required check only, or also pull requests; who may bypass, with the App explicitly excluded) and enabling auto-merge are repository-setting choices for the owner. Once decided, the receiver change and the live routine and exceptional handoffs in Step 5 can proceed.
+
+### Owner question - 2026-10-05
+
+Triaged by the Fable reviewer as needing Kris: Step 4 is a repository-settings and security choice. GitHub still reports `allow_auto_merge: false` and no rulesets; PR #7's build is green, so only the settings decision blocks Step 4. Step 5's live proof also needs a future tap-validated release, so the item returns to waiting-for after the answer.
+
+**Question for Kris:** May I add a `main` ruleset requiring the `build` check and pull requests, with the repository-admin role as the only bypass actor (so direct pushes keep working and the GitHub App explicitly cannot bypass), and enable repository auto-merge? Recommended: yes. The alternative - required check only, with no bypass - would reject every direct push to `main`, which is how this repository currently lands work.
