@@ -1,0 +1,25 @@
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    // The suite cruises the site workspace with the root ruleset through the
+    // isolated checker, so its cache must move when any of them changes — not
+    // only when this package does.
+    "test": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/.dependency-cruiser.ts",
+        "$TURBO_ROOT$/tsconfig.json",
+        "$TURBO_ROOT$/package.json",
+        "$TURBO_ROOT$/tooling/boundaries/package.json",
+        "$TURBO_ROOT$/tooling/boundaries/bun.lock",
+        "$TURBO_ROOT$/apps/*/package.json",
+        "$TURBO_ROOT$/apps/**/*.ts",
+        "$TURBO_ROOT$/packages/*/package.json",
+        "$TURBO_ROOT$/packages/**/*.ts",
+        "!$TURBO_ROOT$/**/node_modules/**",
+        "!$TURBO_ROOT$/**/dist/**"
+      ]
+    }
+  }
+}
