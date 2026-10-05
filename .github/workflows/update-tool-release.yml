@@ -127,12 +127,20 @@ jobs:
           git push --force-with-lease origin "HEAD:refs/heads/$branch"
 
           # shellcheck disable=SC2016
-          body=$(printf 'Advances `%s` to immutable release `%s`.\n\nSource: `%s@%s`\nTap evidence: `knowledgeislands/homebrew-tap@%s`\n\nCreated by the verified tool-release registry workflow; ordinary website review and CI still apply.\n' "$TOOL" "$VERSION" "$SOURCE_REPOSITORY" "$VERSION" "$TAP_COMMIT")
+          body=$(printf 'Advances `%s` to immutable release `%s`.\n\nSource: `%s@%s`\nTap evidence: `knowledgeislands/homebrew-tap@%s`\n\nCreated by the verified tool-release registry workflow. The immutable release is the human gate: this version-only update auto-merges once the required `build` check passes on `main`.\n' "$TOOL" "$VERSION" "$SOURCE_REPOSITORY" "$VERSION" "$TAP_COMMIT")
           existing=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
           if [[ -n "$existing" ]]; then
             gh pr edit "$existing" --title "chore(tooling): advertise $TOOL $VERSION" --body "$body"
+            pr=$existing
             echo "Updated PR #$existing for $TOOL $VERSION." >> "$GITHUB_STEP_SUMMARY"
           else
             url=$(gh pr create --base main --head "$branch" --title "chore(tooling): advertise $TOOL $VERSION" --body "$body")
+            pr=$url
             echo "Created $url for $TOOL $VERSION." >> "$GITHUB_STEP_SUMMARY"
           fi
+
+          # The synchronizer only ever produces an exact version-only update to an
+          # existing entry, so every bot PR qualifies. The `main` ruleset still
+          # requires the `build` check; the App cannot bypass it.
+          gh pr merge "$pr" --auto --squash
+          echo "Requested CI-gated auto-merge (squash) for $TOOL $VERSION." >> "$GITHUB_STEP_SUMMARY"

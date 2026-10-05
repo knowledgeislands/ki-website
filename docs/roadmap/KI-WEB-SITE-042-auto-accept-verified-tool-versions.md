@@ -4,12 +4,12 @@ area: SITE
 title: Auto-accept verified tool versions
 theme: site-experience
 horizon: now
-status: ready
+status: in-progress
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: edb569ac29bb17bae495ba946c2305bb57fecf3c
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-05T12:00:00Z
+updated_at: 2026-10-05T12:00:01Z
 ---
 
 ## Goal
@@ -33,8 +33,8 @@ The receiver validates release evidence and opens or updates version-update PRs 
 - [x] Diagnose the existing KI release-update PR failure and correct the linked-executable CI assertion without weakening source verification.
 - [x] Test exact version-only changes and rejection of first-time or other unexpected version-bearing fields; retain maturity and route unchanged.
 - [x] Publish the CI fix and verify passing checks on an updated release PR.
-- [ ] Add a `main` ruleset requiring the `build` status check and pull requests, with the repository-admin role as the only bypass actor (the GitHub App is not a bypass actor), and enable repository auto-merge. Record the resulting ruleset and `allow_auto_merge` through `gh api`.
-- [ ] Extend the receiver to request auto-merge only for an exact version-only update to an existing entry; first-time, maturity, route or other unexpected changes leave the PR open for human review. Add focused tests for both shapes.
+- [x] Add a `main` ruleset requiring the `build` status check and pull requests, with the repository-admin role as the only bypass actor (the GitHub App is not a bypass actor), and enable repository auto-merge. Record the resulting ruleset and `allow_auto_merge` through `gh api`.
+- [x] Extend the receiver to request auto-merge only for an exact version-only update to an existing entry; first-time, maturity, route or other unexpected changes leave the PR open for human review. Add focused tests for both shapes. (Per owner decision (d), every bot PR auto-merges: the synchronizer's existing refusals and tests already prevent any non-qualifying shape from producing a bot PR.)
 - [ ] Verify a routine handoff (a qualifying PR, such as refreshed PR #7, merges only after `build` passes) and an exceptional one (a non-qualifying PR stays open). If no qualifying live release PR is available, record the live proof as pending a future tap-validated release rather than fabricating one.
 - [ ] Update the website tool-route and release-operation guidance, then assemble the review packet and set the record to `awaiting-review`.
 
@@ -100,3 +100,7 @@ Triaged by the Fable reviewer as needing Kris: Step 4 is a repository-settings a
 ### Owner decision - 2026-10-05
 
 Answered: Kris said yes. The `main` ruleset requires the `build` check and pull requests, repository admins are the only bypass actor (the GitHub App cannot bypass), and repository auto-merge is enabled. Admin bypass keeps direct pushes to `main` working for the owner's account. The settings change is applied during implementation under this decision, not during planning; the earlier expectation that the item returns to `waiting-for` is superseded by Kris's direction to make it ready at `now`.
+
+### Owner decision (d) - 2026-10-05
+
+Kris decided that tool-release PRs auto-merge because the immutable release is the human gate. After opening or updating the bot PR, the receiver runs `gh pr merge --auto --squash` with its `ki-tools-release-bot` App token. Eligibility remains structural: the synchronizer refuses first-time, non-tool, mismatched, downgrade and non-four-pin shapes, and the workflow fails on any path other than the registry, so no non-qualifying change yields a bot PR. Recorded as `ODR-KI-WEBSITE-001`. Superseded PR #5 (`ki` v0.5.0) is closed in favour of PR #7 (`ki` v0.5.1), whose merge deploys the site with Kris's acceptance.
