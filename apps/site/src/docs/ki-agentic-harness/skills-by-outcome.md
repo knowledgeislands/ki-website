@@ -72,7 +72,6 @@ Start with `ki-repo` for the common baseline, then select the structural capabil
 - **Website** — start with `ki-repo-website`, then choose exactly one purpose-specific implementation: `ki-repo-website-content` for a Markdown/data page collection or `ki-repo-website-app` for one interactive React/Vite app. Add `ki-repo-website-cloudflare` independently for Workers Static Assets hosting.
 - **CLI or developer tooling repository** — `ki-repo-tools`.
 - **Specification repository** — `ki-repo-specifications`.
-- **Plugin repository** — `ki-repo-plugins`.
 - **Dotfiles managed by chezmoi** — `ki-repo-dotfiles-chezmoi`.
 - **Homebrew tap** — `ki-repo-homebrew-tap`.
 
