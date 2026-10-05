@@ -1,6 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "stream",
+  "agentGuidance": false,
   // Remote caching reaches an external service, so it is declared explicitly
   // rather than by omission — turning it on later is a visible change.
   "remoteCache": { "enabled": false },

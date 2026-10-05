@@ -100,7 +100,3 @@ standing.import.knowledge = ["public-source-change"]
 [skills.ki-trades.routes."knowledgeislands/ki-specifications"]
 import = ["knowledge"]
 standing.import.knowledge = ["public-source-change"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-techne-principal"]
-import = ["knowledge"]
-standing.import.knowledge = ["public-source-change"]

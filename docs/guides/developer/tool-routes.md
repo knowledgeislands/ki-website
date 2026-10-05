@@ -46,7 +46,7 @@ Because the handoff is explicit, a newer upstream release does not change the si
 
 ### Automated release advances
 
-The manual handoff above remains only for first-time registry entries and maturity changes. Existing tool versions advance through an event-driven website review. After a `tools-*` repository publishes an immutable release and Homebrew tap validates its formula, the shared tools release bot dispatches `tool-release-published` with the tool slug, exact tag, source repository, formula path, and full tap commit.
+The manual handoff above remains only for first-time registry entries and maturity changes. Existing tool versions advance through event-driven, CI-gated automation. After a `tools-*` repository publishes an immutable release and Homebrew tap validates its formula, the shared tools release bot dispatches `tool-release-published` with the tool slug, exact tag, source repository, formula path, and full tap commit.
 
 The tap fans the same verified event out to an explicit registry of consumer repositories. KI Website is one consumer, not the owner of the bot or event. Every consumer defines its own response and authority boundary; repository declaration never authorises a consumer to mutate another repository.
 
@@ -58,9 +58,11 @@ Website receiver independently requires all following before it writes anything:
 - registry already maps tool slug to source repository; and
 - requested version is not downgrade.
 
-Successful verification changes only selected entry's `version`, `installer`, `manual`, and `changelog` pins. Receiver pushes deterministic `automation/tool-release-<tool>-<version>` branch through the shared `ki-tools-release-bot` GitHub App and opens or updates a pull request. It never commits to `main`, merges, or deploys. Ordinary pull-request CI and human website review remain the publication boundary until protected, CI-gated auto-merge is configured. First-time entries, maturity changes, and editorial changes remain human-reviewed even after that activation.
+Successful verification changes only selected entry's `version`, `installer`, `manual`, and `changelog` pins. Receiver pushes deterministic `automation/tool-release-<tool>-<version>` branch through the shared `ki-tools-release-bot` GitHub App and opens or updates a pull request, then requests squash auto-merge with `gh pr merge --auto --squash`. It never commits to `main` directly. The immutable upstream release is the human gate, so a verified version-only update needs no further website review: the `main` ruleset requires pull requests and the `build` check, only repository admins may bypass it, and the App is not a bypass actor, so the PR merges - and the site deploys - only after `build` passes. A failing check leaves the PR open for a human.
 
-Configure `KI_TOOLS_RELEASE_BOT_APP_ID` as a repository variable and `KI_TOOLS_RELEASE_BOT_PRIVATE_KEY` as an Actions secret. Install the shared App on `ki-website` with Contents and Pull requests read/write permissions so this receiver can prepare its branch and pull request. The Homebrew tap holds the same settings to mint a token restricted to its committed consumer registry. Never commit or print the private key.
+First-time entries, maturity changes, and editorial changes never take this path. The synchronizer refuses an unregistered slug, a non-tool entry, a repository mismatch, a downgrade, or a block without exactly four coherent version pins, and the workflow fails on any changed path other than the registry, so none of these produces a bot PR. Such changes arrive as ordinary human-authored PRs, which nothing auto-merges.
+
+Configure `KI_TOOLS_RELEASE_BOT_APP_ID` as a repository variable and `KI_TOOLS_RELEASE_BOT_PRIVATE_KEY` as an Actions secret. Install the shared App on `ki-website` with Contents and Pull requests read/write permissions so this receiver can prepare its branch, open its pull request and enable auto-merge. Repository auto-merge (`allow_auto_merge`) must stay enabled. The Homebrew tap holds the same settings to mint a token restricted to its committed consumer registry. Never commit or print the private key.
 
 Use receiver's manual workflow only to retry verified event, supplying same exact values. Repeated delivery is idempotent: already-current registry produces no commit or pull request. If dispatch is missed, network verifier continues to report upstream drift without silently changing recommendation.
 

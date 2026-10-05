@@ -3,13 +3,13 @@ id: KI-WEB-SITE-042
 area: SITE
 title: Auto-accept verified tool versions
 theme: site-experience
-horizon: waiting-for
-status: draft
+horizon: now
+status: in-progress
 blocks: []
 blocked_by: []
-baseline_ref: null
+baseline_ref: edb569ac29bb17bae495ba946c2305bb57fecf3c
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-03T06:48:30Z
+updated_at: 2026-10-05T12:00:01Z
 ---
 
 ## Goal
@@ -26,15 +26,17 @@ The website owns its registry, CI and acceptance policy; the tool and tap retain
 
 ## Current state
 
-The receiver validates release evidence and opens version-update PRs. Its local CI path assertion and exact-four-pin tests are updated, but the corrected CI has not yet run on the existing PRs. It does not merge them, and GitHub has no required-check rule for `main`.
+The receiver validates release evidence and opens or updates version-update PRs (`.github/workflows/update-tool-release.yml`); it does not request merging. The corrected CI (job `build` in `.github/workflows/ci.yml`) is green on `main` and on release PR #7 (check run `37201130000`). As of 2026-10-05 GitHub reports `allow_auto_merge: false`, no rulesets and no branch protection on `main`. Kris approved the ruleset and auto-merge shape on 2026-10-05 (see Discussion); no setting has yet been changed.
 
 ## Steps
 
 - [x] Diagnose the existing KI release-update PR failure and correct the linked-executable CI assertion without weakening source verification.
 - [x] Test exact version-only changes and rejection of first-time or other unexpected version-bearing fields; retain maturity and route unchanged.
-- [ ] Publish the CI fix and verify passing checks on an updated release PR.
-- [ ] Require passing website CI on `main` without App bypass, then enable guarded auto-merge for qualifying PRs.
-- [ ] Verify successful routine and rejected exceptional handoffs, and update website release guidance.
+- [x] Publish the CI fix and verify passing checks on an updated release PR.
+- [x] Add a `main` ruleset requiring the `build` status check and pull requests, with the repository-admin role as the only bypass actor (the GitHub App is not a bypass actor), and enable repository auto-merge. Record the resulting ruleset and `allow_auto_merge` through `gh api`.
+- [x] Extend the receiver to request auto-merge only for an exact version-only update to an existing entry; first-time, maturity, route or other unexpected changes leave the PR open for human review. Add focused tests for both shapes. (Per owner decision (d), every bot PR auto-merges: the synchronizer's existing refusals and tests already prevent any non-qualifying shape from producing a bot PR.)
+- [ ] Verify a routine handoff (a qualifying PR, such as refreshed PR #7, merges only after `build` passes) and an exceptional one (a non-qualifying PR stays open). If no qualifying live release PR is available, record the live proof as pending a future tap-validated release rather than fabricating one.
+- [ ] Update the website tool-route and release-operation guidance, then assemble the review packet and set the record to `awaiting-review`.
 
 ## Files touched
 
@@ -45,11 +47,11 @@ The receiver validates release evidence and opens version-update PRs. Its local 
 
 ## Verify
 
-Run website CI, focused release-sync tests, and positive/negative PR-shape tests. Inspect required-check and App-bypass settings through GitHub. Confirm a qualifying PR merges only after checks pass and an exceptional PR remains open for human review.
+Run website CI, focused release-sync tests, and positive/negative PR-shape tests. Inspect through `gh api` that the `main` ruleset requires `build` and pull requests, lists only the repository-admin role as a bypass actor, and that `allow_auto_merge` is true. Run `ki repo audit --progress never`. Confirm a qualifying PR merges only after checks pass and an exceptional PR remains open for human review.
 
 ## Dependencies / blocks
 
-Waiting for the corrected CI to run on a release-update PR, `main` to require its passing build check with no App bypass, and the repository to allow auto-merge. The receiver must then enable auto-merge only for exact version-only PRs and prove a successful routine merge and an exceptional human-review case. A future tap-validated immutable tool release is required for live end-to-end proof; `BREW-007` owns the preceding formula automation.
+No blocking dependency: the corrected CI is green and the owner settings decision is made. Live end-to-end proof of a newly dispatched release needs a future tap-validated immutable tool release; `BREW-007` owns the preceding formula automation and is not a prerequisite for the settings and receiver steps.
 
 ## Documentation impact
 
@@ -82,3 +84,23 @@ The upstream immutable release gives standing authority for this matching receiv
 ### Local preparation
 
 The failing PR build expected KI's wrapper path in diagnostic output, but linked KI reports its resolved source path. CI now compares that path with the wrapper's resolved target. The synchronizer's exact-four-pin gate prevents incidental matching text in an existing entry from being silently rewritten. Hosted check results and protected auto-merge remain unproved.
+
+### Checkpoint - 2026-10-04
+
+Step 3 is evidenced: `main` CI is green again (`6e5aabf` moved CI to `ki diag --full`; `tools-ki` `5f7ee0f` moved the harness pin), and updating release PR #7 (`ki` v0.5.1, a one-file `projects.json5` change) from `main` produced passing check run `37201130000`. PR #7 and the superseded v0.5.0 PR #5 remain open for human review; neither was merged or closed.
+
+Step 4 now waits for an owner decision, not for evidence. GitHub reports `allow_auto_merge: false`, no rulesets and no branch protection on `main`. Requiring the build check on `main` changes how every contributor and agent lands work - this repository currently pushes directly to `main` - so the ruleset's shape (required check only, or also pull requests; who may bypass, with the App explicitly excluded) and enabling auto-merge are repository-setting choices for the owner. Once decided, the receiver change and the live routine and exceptional handoffs in Step 5 can proceed.
+
+### Owner question - 2026-10-05
+
+Triaged by the Fable reviewer as needing Kris: Step 4 is a repository-settings and security choice. GitHub still reports `allow_auto_merge: false` and no rulesets; PR #7's build is green, so only the settings decision blocks Step 4. Step 5's live proof also needs a future tap-validated release, so the item returns to waiting-for after the answer.
+
+**Question for Kris:** May I add a `main` ruleset requiring the `build` check and pull requests, with the repository-admin role as the only bypass actor (so direct pushes keep working and the GitHub App explicitly cannot bypass), and enable repository auto-merge? Recommended: yes. The alternative - required check only, with no bypass - would reject every direct push to `main`, which is how this repository currently lands work.
+
+### Owner decision - 2026-10-05
+
+Answered: Kris said yes. The `main` ruleset requires the `build` check and pull requests, repository admins are the only bypass actor (the GitHub App cannot bypass), and repository auto-merge is enabled. Admin bypass keeps direct pushes to `main` working for the owner's account. The settings change is applied during implementation under this decision, not during planning; the earlier expectation that the item returns to `waiting-for` is superseded by Kris's direction to make it ready at `now`.
+
+### Owner decision (d) - 2026-10-05
+
+Kris decided that tool-release PRs auto-merge because the immutable release is the human gate. After opening or updating the bot PR, the receiver runs `gh pr merge --auto --squash` with its `ki-tools-release-bot` App token. Eligibility remains structural: the synchronizer refuses first-time, non-tool, mismatched, downgrade and non-four-pin shapes, and the workflow fails on any path other than the registry, so no non-qualifying change yields a bot PR. Recorded as `ODR-KI-WEBSITE-001`. Superseded PR #5 (`ki` v0.5.0) is closed in favour of PR #7 (`ki` v0.5.1), whose merge deploys the site with Kris's acceptance.
