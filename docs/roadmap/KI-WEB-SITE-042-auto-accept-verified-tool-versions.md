@@ -4,12 +4,12 @@ area: SITE
 title: Auto-accept verified tool versions
 theme: site-experience
 horizon: now
-status: in-progress
+status: awaiting-review
 blocks: []
 blocked_by: []
 baseline_ref: edb569ac29bb17bae495ba946c2305bb57fecf3c
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-05T12:00:01Z
+updated_at: 2026-10-05T12:00:02Z
 ---
 
 ## Goal
@@ -26,7 +26,7 @@ The website owns its registry, CI and acceptance policy; the tool and tap retain
 
 ## Current state
 
-The receiver validates release evidence and opens or updates version-update PRs (`.github/workflows/update-tool-release.yml`); it does not request merging. The corrected CI (job `build` in `.github/workflows/ci.yml`) is green on `main` and on release PR #7 (check run `37201130000`). As of 2026-10-05 GitHub reports `allow_auto_merge: false`, no rulesets and no branch protection on `main`. Kris approved the ruleset and auto-merge shape on 2026-10-05 (see Discussion); no setting has yet been changed.
+Delivered on 2026-10-05. `main` carries ruleset `24496358` requiring pull requests and the `build` check with the repository-admin role as the only bypass actor, `allow_auto_merge` is `true`, and the receiver requests squash auto-merge on every bot PR it opens or updates. PR #7 (`ki` v0.5.1) merged through auto-merge after `build` passed; superseded PR #5 is closed.
 
 ## Steps
 
@@ -35,8 +35,8 @@ The receiver validates release evidence and opens or updates version-update PRs 
 - [x] Publish the CI fix and verify passing checks on an updated release PR.
 - [x] Add a `main` ruleset requiring the `build` status check and pull requests, with the repository-admin role as the only bypass actor (the GitHub App is not a bypass actor), and enable repository auto-merge. Record the resulting ruleset and `allow_auto_merge` through `gh api`.
 - [x] Extend the receiver to request auto-merge only for an exact version-only update to an existing entry; first-time, maturity, route or other unexpected changes leave the PR open for human review. Add focused tests for both shapes. (Per owner decision (d), every bot PR auto-merges: the synchronizer's existing refusals and tests already prevent any non-qualifying shape from producing a bot PR.)
-- [ ] Verify a routine handoff (a qualifying PR, such as refreshed PR #7, merges only after `build` passes) and an exceptional one (a non-qualifying PR stays open). If no qualifying live release PR is available, record the live proof as pending a future tap-validated release rather than fabricating one.
-- [ ] Update the website tool-route and release-operation guidance, then assemble the review packet and set the record to `awaiting-review`.
+- [x] Verify a routine handoff (a qualifying PR, such as refreshed PR #7, merges only after `build` passes) and an exceptional one (a non-qualifying PR stays open). If no qualifying live release PR is available, record the live proof as pending a future tap-validated release rather than fabricating one.
+- [x] Update the website tool-route and release-operation guidance, then assemble the review packet and set the record to `awaiting-review`.
 
 ## Files touched
 
@@ -70,6 +70,42 @@ Update the website tool-route and release-operation guides to distinguish automa
 ### Roadmap
 
 Record implementation and live verification evidence here.
+
+## Review
+
+### Delivered
+
+Approved boundary: the `main` ruleset and repository auto-merge setting, receiver auto-merge for tool-release bot PRs under owner decision (d), guidance and decision record, and the live handoff for PRs #5 and #7. Excluded: PR #6 (first-time `techne` entry, left open for human review), tap-side `BREW-007`, and any App permission change. Immutable baseline `edb569ac29bb17bae495ba946c2305bb57fecf3c`; resulting evidence `f935585` (implementation) and `987f252` (PR #7 squash merge).
+
+### Change Summary
+
+- GitHub settings (via `gh api`): ruleset `24496358` "main: require build and pull requests" on `~DEFAULT_BRANCH`, `enforcement: active`, rules `pull_request` (0 required approvals) and `required_status_checks` (`build`, integration `15368` GitHub Actions, taken from the check run on `edb569a`); sole bypass actor `RepositoryRole` 5 (admin), `bypass_mode: always`. `allow_auto_merge: true`.
+- `.github/workflows/update-tool-release.yml`: after creating or editing the bot PR, runs `gh pr merge "$pr" --auto --squash` with the `ki-tools-release-bot` App token; PR body states the immutable release is the human gate.
+- `docs/guides/developer/tool-routes.md`: automated path now CI-gated auto-merge; first-time, maturity and editorial changes never produce a bot PR and arrive as human PRs.
+- `docs/decisions/ODR-KI-WEBSITE-001-tool-release-updates-auto-merge.md` and the decisions README.
+- Deviation approved by decision (d): no separate per-PR eligibility classifier. The synchronizer's existing refusals (unregistered slug, non-tool, repository mismatch, downgrade, not exactly four pins) and the workflow's single-path check already make every bot PR an exact version-only update; their existing tests (`refuses first-time entry and unexpected version-bearing field`, `leaves maturity and routes unchanged during version update`) cover both shapes.
+
+### Verification
+
+- `ki repo audit --progress never`: PASS (exit 0).
+- `bun test apps/site/scripts/sync-tool-release.test.ts`: 10 pass, 0 fail. `actionlint` 1.7.12 on the workflow: clean.
+- `gh api` ruleset `24496358` and repository settings read back as above.
+- Routine handoff: PR #7 updated from `main` (head `0f4cae7`), auto-merge (squash) enabled, state `BLOCKED` until `build` run `37296694182` succeeded at 10:27:46Z; merged at 10:28:13Z as `987f252`. CI on `main` succeeded for `f935585` (run `37296658405`) and `987f252` (run `37296781215`).
+- Exceptional handoff: PR #6 (human-authored first-time entry) remains open with no auto-merge request. PR #5 closed with a supersession comment.
+- Direct push of `f935585` to `main` succeeded through the admin bypass (GitHub reported the `build` expectation as bypassed).
+
+### Outstanding concerns
+
+- The new workflow step has not yet run live: PR #7's auto-merge was enabled manually because it predates the change. End-to-end proof of the bot itself requesting auto-merge awaits the next tap-validated release (`BREW-007`).
+- Non-admin contributors and agents without admin credentials must now land through PRs that pass `build`.
+
+### Post-change review
+
+The goal - verified version-only releases reach the site without manual merging while CI cannot be bypassed by the App - is met, with scope held to the website. Regression risk is low: human-authored PRs are unaffected beyond needing `build`, and admin pushes continue. Ready for acceptance, with the live bot run noted as pending future release evidence.
+
+### Mini recap
+
+Ruleset and auto-merge enabled, receiver requests auto-merge, PR #5 closed, PR #7 auto-merged after green `build`, guide and `ODR-KI-WEBSITE-001` updated; audit PASS. Learning route: the App inventory is recorded in Arcadia (`KI-ARCADIA-GOV-014`).
 
 ## Discussion
 
