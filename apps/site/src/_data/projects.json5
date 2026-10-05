@@ -104,7 +104,7 @@
     problem:
       'Working conventions that live only in prose erode. An agent applies them if it happens to be told to, and nobody finds out when it was not; a reviewer catches what they have time to read. Holding each standard as a skill that registers its own mechanical checks makes the clear-cut cases deterministic, so attention goes to the parts that genuinely need judgement.',
     audience:
-      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what ki bootstrap installs, and what ki repo audit resolves its checks from — you do not read this repository to use it. If you work in a Claude surface that reads plugin marketplaces instead of harnesses, ki-plugins is the projection to reach for.',
+      'Install it if you want the Knowledge Islands standards applied and checked in your own repositories. It is what ki bootstrap installs, and what ki repo audit resolves its checks from — you do not read this repository to use it. Outside a Knowledge Islands setup, npx skills add knowledgeislands/ki-agentic-harness installs individual skills directly.',
     capabilities: [
       'Skills — reusable standards, each registering the operations that audit and conform a target against it.',
       'Subagents — focused specialist roles an agent can delegate a piece of work to.',
@@ -122,34 +122,6 @@
     availability: 'source',
     icon: 'archipelago',
     accent: 'teal'
-  },
-  {
-    slug: 'ki-plugins',
-    name: 'ki-plugins',
-    kind: 'capability',
-    tagline: 'A Claude plugin marketplace projecting harness skills and agents onto the Cowork surface.',
-    description:
-      'The same capabilities the harness publishes, reprojected as a Claude plugin marketplace so they can be installed on surfaces that consume plugins rather than harnesses. It is a projection, not a second authority: the harness remains the source for what each skill and agent contains.',
-    problem:
-      'Some Claude surfaces install plugins and know nothing about harnesses. Without a projection, the governance skills simply are not available there — so this repository republishes the harness\'s skills and agents in the shape a plugin marketplace expects.',
-    audience:
-      'Reach for it only if you work in a Claude surface that reads plugin marketplaces and want the Knowledge Islands skills there. If you use the ki CLI, install the harness instead: it is the same content without the lossy projection in between.',
-    capabilities: [
-      'A marketplace manifest publishing a single plugin, knowledge-islands.',
-      'The ki governance skills, generated verbatim from the harness rather than rewritten.',
-      'The governance agents, flattened into the layout the plugin surface expects.',
-      'Registration handled by the harness\'s own binding skill, which adds the marketplace and toggles the plugin rather than leaving you to wire it by hand.'
-    ],
-    state:
-      'Paused. The projection is retained for possible future use and its generated contents are intact, but it is not currently refreshed, developed, or treated as an active distribution surface. Expect it to lag the harness until it is resumed.',
-    limits:
-      'It is generated, never hand-edited, and deliberately lossy: MCP servers are excluded because they read host filesystem paths and resolve secrets locally, while the plugin sandbox cannot reach the host. Bundled skill scripts ship as files but are not expected to run there. Public visibility does not grant a licence to use, copy or redistribute.',
-    role: 'Delivery projection of harness capabilities onto the Claude plugin surface. It defines no capability of its own.',
-    usage: 'Add the marketplace in a Claude client that supports plugins, then install the skills and agents you want.',
-    repository: 'https://github.com/knowledgeislands/ki-plugins',
-    availability: 'source',
-    icon: 'stellar',
-    accent: 'gold'
   },
 
   // ── Portable standards ──────────────────────────────────────────────────
