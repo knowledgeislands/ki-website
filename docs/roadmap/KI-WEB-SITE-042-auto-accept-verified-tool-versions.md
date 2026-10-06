@@ -4,12 +4,12 @@ area: SITE
 title: Auto-accept verified tool versions
 theme: site-experience
 horizon: now
-status: awaiting-review
+status: done
 blocks: []
 blocked_by: []
 baseline_ref: edb569ac29bb17bae495ba946c2305bb57fecf3c
 created_at: 2026-10-03T03:56:54Z
-updated_at: 2026-10-05T12:00:02Z
+updated_at: 2026-10-06T21:20:15Z
 ---
 
 ## Goal
@@ -106,6 +106,10 @@ The goal - verified version-only releases reach the site without manual merging 
 ### Mini recap
 
 Ruleset and auto-merge enabled, receiver requests auto-merge, PR #5 closed, PR #7 auto-merged after green `build`, guide and `ODR-KI-WEBSITE-001` updated; audit PASS. Learning route: the App inventory is recorded in Arcadia (`KI-ARCADIA-GOV-014`).
+
+## Done
+
+Accepted 2026-10-06 by Kris Brown on the review packet above.
 
 ## Discussion
 
