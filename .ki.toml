@@ -15,6 +15,7 @@ repo_type = "project"
 primary_shape = "ki-repo-website"
 repository = "https://github.com/knowledgeislands/ki-website"
 title = "KI Website"
+capital = "https://github.com/knowledgeislands/ki-arcadia-principal"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
 repo_code = "KI-WEB"
 supported_runtimes = ["claude-code", "claude-desktop", "chatgpt-codex"]
@@ -83,20 +84,3 @@ auto_memory = "disabled"
 # -----------------------------------------------------------------------------
 
 [skills.ki-trades]
-
-[skills.ki-trades.subtypes.knowledge]
-public-source-change = "Already-public committed KI source changes for documentation provenance review. Excludes unpublished or confidential material; grants no publication or deployment authority."
-
-[skills.ki-trades.routes."knowledgeislands/ki-agentic-harness"]
-export = ["work", "knowledge"]
-import = ["knowledge"]
-standing.export.knowledge = ["shared-capability-maintenance"]
-standing.import.knowledge = ["public-source-change"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-arcadia-principal"]
-import = ["knowledge"]
-standing.import.knowledge = ["public-source-change"]
-
-[skills.ki-trades.routes."knowledgeislands/ki-specifications"]
-import = ["knowledge"]
-standing.import.knowledge = ["public-source-change"]
