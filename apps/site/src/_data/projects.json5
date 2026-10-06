@@ -209,7 +209,7 @@
       'register: write that workspace document, for a container directory or for a repository that owns cross-repository metadata.'
     ],
     state:
-      'Published and labelled preview — the most exercised of the four tools day to day. It is a standalone Bash script whose only runtime dependencies are Bash 3.2 or later and Git.',
+      'Published and labelled preview — the most exercised of the five tools day to day. It is a standalone Bash script whose only runtime dependencies are Bash 3.2 or later and Git.',
     limits:
       'It executes commands and reports what happened. It holds no authority over the repositories it sweeps and changes none of their governance, and it is not a forge client: pull requests, issues and reviews are outside what it can see.',
     role: 'Owns multi-repository command execution across a working set. It holds no authority over the repositories it sweeps and changes none of their governance.',
@@ -244,7 +244,7 @@
       'Output to a file, a directory or standard output, with the format inferred from the extension unless you state it.'
     ],
     state:
-      'Published and labelled preview — the newest of the four tools, and the one most likely to gain options. The counting contract and the report manifest are the settled parts.',
+      'Published and labelled preview — the most likely of the five tools to gain options. The counting contract and the report manifest are the settled parts.',
     limits:
       'It reads one local repository and writes only where you point it. It makes no network request and contacts no forge, so it reports nothing about pull requests, issues or reviews: none of that lives in the checkout. It never modifies repository history.',
     role: 'Owns offline reporting over a single Git checkout. It contacts no forge, writes nothing, and holds no authority over how a repository is governed.',
@@ -295,6 +295,41 @@
     changelog: 'https://github.com/knowledgeislands/tools-rig/blob/v0.4.0/CHANGELOG.md',
     icon: 'compass',
     accent: 'gold'
+  },
+  {
+    slug: 'techne',
+    name: 'techne',
+    kind: 'tool',
+    tagline: 'Inspect and operate the Techne Harness from a terminal.',
+    description:
+      'Provides the operator command grammar for the Techne Harness: share-safe offline diagnostics, local health checks, explicit authentication, and controller status and bootstrap commands.',
+    problem:
+      'A personal execution harness needs one deliberate operator interface, or its diagnostics and controller operations end up scattered across ad hoc scripts and provider consoles. techne gives those actions a single documented command surface, with authentication and bootstrap kept explicit and interactive rather than implied.',
+    audience:
+      'You want this if you operate or evaluate the Techne Harness and need to check your local setup or follow its documented controller workflows. If you are not running the Techne Harness, it has nothing to operate.',
+    capabilities: [
+      'diag: report tool version, installation mode, platform, runtime and configuration presence offline, in a form safe to share, with a deliberate full mode for local detail.',
+      'doctor: run read-only operator checks and report actionable findings with a healthy or unhealthy verdict.',
+      'auth login: establish an operator session explicitly and interactively.',
+      'controller status and bootstrap: inspect a controller, or prepare one through an explicit interactive step.',
+      'completion: print Bash or Zsh definitions for the current commands and options without touching shell startup files.'
+    ],
+    state:
+      'Published and labelled experimental — the newest of the five tools. Its command surface and operating guidance are still tentative, so expect them to move between releases.',
+    limits:
+      'The Techne Harness owns the controller and fabric applications, infrastructure, runtime payloads and provider adapters; techne owns only the command surface over them. Remote-environment management remains on hold pending the principal\'s authorisation and a remote-delivery policy.',
+    role: 'Owns the public techne command grammar, diagnostics, installation and release artefacts. The Techne Harness owns everything it operates.',
+    usage: 'Install it from the Homebrew tap or the pinned installer below, then run techne diag to check the local setup or techne --help for the full command reference.',
+    repository: 'https://github.com/knowledgeislands/tools-techne',
+    availability: 'published',
+    version: 'v0.2.0',
+    maturity: 'experimental',
+    formula: 'techne',
+    installer: 'https://raw.githubusercontent.com/knowledgeislands/tools-techne/v0.2.0/install.sh',
+    manual: 'https://github.com/knowledgeislands/tools-techne/blob/v0.2.0/README.md',
+    changelog: 'https://github.com/knowledgeislands/tools-techne/blob/v0.2.0/CHANGELOG.md',
+    icon: 'grid',
+    accent: 'teal'
   },
 
   // ── MCP servers ─────────────────────────────────────────────────────────
@@ -514,12 +549,12 @@
     audience:
       'You want this if you are installing Knowledge Islands tools on macOS or Linux and would rather Homebrew owned them than a script you ran once and forgot.',
     capabilities: [
-      'One validated formula per released tool — currently ki, mgit, rig and git-almanac.',
+      'One validated formula per released tool — currently ki, mgit, rig, git-almanac and techne.',
       'Implicit tapping: naming the tap in the install argument is enough, with no separate tap step.',
       'A verified release event fanned out to the repositories that consume one, this website among them.'
     ],
     state:
-      'Published and in use, with four formulae packaged. A formula is bumped when its tool cuts a release, so the tap follows the tools rather than leading them.',
+      'Published and in use, with five formulae packaged. A formula is bumped when its tool cuts a release, so the tap follows the tools rather than leading them.',
     limits:
       'The tap holds no tool source. A formula points at an upstream release tarball and its checksum, which is why each tool repository remains the authority for what it released and the tap owns only the packaging.',
     role: 'Release transport for the command-line tools. Each tool repository remains the authority for what it released.',
