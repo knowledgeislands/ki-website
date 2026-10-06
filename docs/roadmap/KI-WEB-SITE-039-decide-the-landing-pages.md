@@ -3,13 +3,13 @@ id: KI-WEB-SITE-039
 area: SITE
 title: Decide the landing pages
 theme: site-experience
-horizon: now
-status: ready
+horizon: waiting-for
+status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-10-05T08:02:00Z
+updated_at: 2026-10-06T21:34:13Z
 ---
 
 ## Goal
@@ -90,7 +90,7 @@ The pages that actually start someone are `/docs/ki/getting-started/` and `/docs
 
 ## Dependencies / blocks
 
-Nothing blocks this. The accepted Docs restructure delivered the structure this decides the contents of and is already closed for what it delivered.
+Waiting for Kris to confirm the editorial choices recorded in the 2026-10-05 Decision below; see the Deferral entry under Discussion. No local item blocks this. The accepted Docs restructure delivered the structure this decides the contents of and is already closed for what it delivered.
 
 `KI-WEB-SITE-032` owns whether the Docs grid looks right, including whether a "1 page" card looks broken. If this item removes the one-page cards, that question goes away; if it keeps them, 032 still owns it.
 
@@ -143,3 +143,15 @@ The editorial choices were decided by the Fable reviewer under delegated autonom
 3. **The Contribution Process is explained once, on `/contribute/`.** `/model/#processes` keeps its definition card and links there.
 
 Moving one page out of the `ki` section is material moving between sections, which the Boundary permits; removing the `contribute` registry entry is the removal it anticipated. Top navigation stays at three entries. With no one-page card left, the `KI-WEB-SITE-032` "1 page" question also goes away. The earlier Blocker is resolved by this decision; the item was adopted to `now` and made Ready.
+
+### Deferral - 2026-10-06
+
+Moved from `now` to `waiting-for` during the roadmap clearance that precedes the cross-repository review in the `state-of-play` checkpoint of `knowledgeislands/ki-arcadia-principal` (`+/_CHECKPOINTS/state-of-play.md`). The 2026-10-05 Decision was taken by a reviewer under delegated autonomy and marked reversible; the choice of landing pages is Kris's to confirm before any of the Steps run. Waiting-for work must be draft, so the status returns from `ready` to `draft`; the plan above stays as written and `baseline_ref` stays unset.
+
+The waiting-for condition is discharged when Kris answers these questions, recorded here:
+
+1. Should Get Started become the install-and-first-run sequence (shape one), or stay a conversion page outside the Docs grid (shape two)?
+2. Should Contribute leave the Docs grid for a standalone `/contribute/` page linked from the footer?
+3. Should the Contribution Process be explained once, on `/contribute/`, with the Arcadia explainer moving to `/model/`?
+
+If all three are confirmed, return the item to `now` and re-mark it Ready through `ki-plan` with the Steps unchanged. If any answer changes, replan the Steps through `ki-plan` first.

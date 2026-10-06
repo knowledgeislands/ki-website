@@ -35,5 +35,5 @@ The repository had no required check, no ruleset, no branch protection and auto-
 ## References
 
 - [Tool routes](../guides/developer/tool-routes.md) - the receiver's verification and the automated release path.
-- `KI-WEB-SITE-042` in [the roadmap](../roadmap/) - implementation and verification evidence.
+- `KI-WEB-SITE-042`, [as delivered](https://github.com/knowledgeislands/ki-website/blob/fa6bc4428d2f4835c3e95b129338584602f120ab/docs/roadmap/KI-WEB-SITE-042-auto-accept-verified-tool-versions.md) - implementation and verification evidence; accepted 2026-10-06.
 - `BREW-007` in `knowledgeislands/homebrew-tap` - the tap-side formula automation that precedes this receiver.
