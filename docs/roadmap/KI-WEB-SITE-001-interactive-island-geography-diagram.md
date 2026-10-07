@@ -2,14 +2,19 @@
 id: KI-WEB-SITE-001
 area: SITE
 title: Interactive island diagram
-theme: site-experience
-horizon: parked
+kind: deliver
+purpose: capability
+project: website
+horizon: hold
+hold:
+  reason: parked
+  condition: Kris restarts website work and KI-ARCADIA-MOD-003 delivers the geography model and approved tile set
 status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-07-29T00:11:08Z
-updated_at: 2026-10-07T08:18:00Z
+updated_at: 2026-10-07T14:12:30Z
 ---
 
 ## Goal

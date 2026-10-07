@@ -2,14 +2,18 @@
 id: KI-WEB-SITE-039
 area: SITE
 title: Decide the landing pages
-theme: site-experience
-horizon: parked
+kind: deliver
+project: website
+horizon: hold
+hold:
+  reason: parked
+  condition: Kris restarts website work; on return the record goes to now and is re-marked Ready through ki-plan with Steps unchanged
 status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-10-07T08:18:00Z
+updated_at: 2026-10-07T14:12:30Z
 ---
 
 ## Goal
