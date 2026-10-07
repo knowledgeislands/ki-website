@@ -64,7 +64,9 @@ organisation_code = "KIS"
 adapter = "roadmap"
 
 [skills.ki-work-roadmap]
-areas = ["SITE"]
+
+[skills.ki-work-roadmap.areas]
+SITE = "Site experience"
 
 [skills.ki-tokenomics]
 headroom = "recommended"
