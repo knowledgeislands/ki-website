@@ -3,13 +3,13 @@ id: KI-WEB-SITE-001
 area: SITE
 title: Interactive island diagram
 theme: site-experience
-horizon: waiting-for
+horizon: parked
 status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-07-29T00:11:08Z
-updated_at: 2026-10-06T01:20:57Z
+updated_at: 2026-10-07T08:18:00Z
 ---
 
 ## Goal
@@ -47,6 +47,8 @@ The geography model and an approved, web-suitable tile set are not yet available
 
 ## Dependencies / blocks
 
+Parked. Return trigger: Kris restarts website work after the state-of-play roadmap review. On return, move it back to `waiting-for` unless the Arcadia condition below has already been met.
+
 Blocked by `KI-ARCADIA-MOD-003` in `knowledgeislands/ki-arcadia-principal`. This is genuine build order: the diagram cannot be built until Arcadia publishes the geography model and approves a web-suitable tile set. The waiting-for condition is discharged when those outputs land in Arcadia's `Pillars/`, regardless of that record's later review or acceptance. The relationship is recorded in prose on both records because `blocks` and `blocked_by` hold local identifiers only. No local roadmap item is blocked by this one.
 
 ## Discussion
@@ -54,6 +56,10 @@ Blocked by `KI-ARCADIA-MOD-003` in `knowledgeislands/ki-arcadia-principal`. This
 ### Owner decision (2026-10-06)
 
 The 2026-10-06 roadmap consolidation found this record overlapping `KI-ARCADIA-MOD-003`. Both are adopted, so neither was merged. The owner decided to keep both and split them by ownership: this record owns the rendered, interactive diagram, and Arcadia owns the aesthetics and knowledge model behind it. The generic Goal was restated and the waiting-for condition now names the Arcadia record.
+
+### Parking - 2026-10-07
+
+In the state-of-play roadmap review on 2026-10-07, Kris put website work back while the roadmaps are brought under control, so this item moves from `waiting-for` to `parked`. Return trigger: Kris restarts website work after the state-of-play roadmap review. The `KI-ARCADIA-MOD-003` dependency under Dependencies / blocks is unchanged.
 
 ### Related work
 

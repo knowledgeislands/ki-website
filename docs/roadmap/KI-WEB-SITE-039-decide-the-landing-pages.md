@@ -3,13 +3,13 @@ id: KI-WEB-SITE-039
 area: SITE
 title: Decide the landing pages
 theme: site-experience
-horizon: waiting-for
+horizon: parked
 status: draft
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-09-25T14:00:00Z
-updated_at: 2026-10-06T21:34:13Z
+updated_at: 2026-10-07T08:18:00Z
 ---
 
 ## Goal
@@ -90,7 +90,7 @@ The pages that actually start someone are `/docs/ki/getting-started/` and `/docs
 
 ## Dependencies / blocks
 
-Waiting for Kris to confirm the editorial choices recorded in the 2026-10-05 Decision below; see the Deferral entry under Discussion. No local item blocks this. The accepted Docs restructure delivered the structure this decides the contents of and is already closed for what it delivered.
+Parked. Return trigger: Kris restarts website work after the state-of-play roadmap review. Kris confirmed the editorial choices on 2026-10-07 (see Discussion), so the earlier waiting-for condition is discharged; on return, the item goes to `now` and is re-marked Ready through `ki-plan` with the Steps unchanged. No local item blocks this. The accepted Docs restructure delivered the structure this decides the contents of and is already closed for what it delivered.
 
 `KI-WEB-SITE-032` owns whether the Docs grid looks right, including whether a "1 page" card looks broken. If this item removes the one-page cards, that question goes away; if it keeps them, 032 still owns it.
 
@@ -155,3 +155,9 @@ The waiting-for condition is discharged when Kris answers these questions, recor
 3. Should the Contribution Process be explained once, on `/contribute/`, with the Arcadia explainer moving to `/model/`?
 
 If all three are confirmed, return the item to `now` and re-mark it Ready through `ki-plan` with the Steps unchanged. If any answer changes, replan the Steps through `ki-plan` first.
+
+### Owner confirmation and parking - 2026-10-07
+
+In the state-of-play roadmap review on 2026-10-07, Kris confirmed all three landing-page choices from the 2026-10-05 Decision: Get Started becomes the install-and-first-run sequence; Contribute leaves the Docs grid as a standalone `/contribute/` page linked from the footer; and the Contribution Process is explained once, on `/contribute/`, with the Arcadia explainer moving to `/model/`. The Steps stay unchanged.
+
+Kris also said website work is not a priority while the roadmaps are brought under control, so the item moves from `waiting-for` to `parked` rather than to `now`. Return trigger: Kris restarts website work after the state-of-play roadmap review. On return, move it to `now` and re-mark it Ready through `ki-plan` with the Steps unchanged; `status` stays `draft` and `baseline_ref` stays unset until then.
