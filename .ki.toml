@@ -1,14 +1,14 @@
 # Knowledge Islands repository configuration.
 # Its presence declares conformance with the Knowledge Islands repository standard.
 
-# =============================================================================
-
 # -----------------------------------------------------------------------------
 # Foundation
 # -----------------------------------------------------------------------------
 
 [repo]
-harnesses = ["knowledgeislands/ki-agentic-harness"]
+harnesses = [
+  "knowledgeislands/ki-agentic-harness",
+]
 
 [skills.ki-repo]
 repo_type = "project"
@@ -18,16 +18,15 @@ title = "KI Website"
 capital = "https://github.com/knowledgeislands/ki-arcadia-principal"
 description = "Public-facing portal for Knowledge Islands — shares project knowledge and links out to key resources."
 repo_code = "KI-WEB"
-supported_runtimes = ["claude-code", "claude-desktop", "chatgpt-codex"]
+supported_runtimes = [
+  "claude-code",
+  "claude-desktop",
+  "chatgpt-codex",
+]
 visibility = "public"
 license = "MIT"
 
 [skills.ki-authoring]
-[skills.ki-binding]
-[skills.ki-binding-claude]
-[skills.ki-binding-chatgpt]
-[skills.ki-housekeeping-chatgpt]
-auto_memory = "disabled"
 
 # -----------------------------------------------------------------------------
 # Repository shape
@@ -51,6 +50,28 @@ auto_memory = "disabled"
 
 [skills.ki-guides]
 
+[skills.ki-binding]
+
+[skills.ki-binding-claude]
+
+[skills.ki-binding-chatgpt]
+
+[skills.ki-housekeeping-claude]
+auto_memory = "disabled"
+
+[skills.ki-housekeeping-chatgpt]
+auto_memory = "disabled"
+
+[skills.ki-tokenomics]
+headroom = "recommended"
+preferred_model_type = "standard"
+# User-scoped; revisit if the global MCP set is pruned.
+budgets.mcp_servers = 20
+
+[skills.ki-tokenomics-claude]
+
+[skills.ki-tokenomics-chatgpt]
+
 # -----------------------------------------------------------------------------
 # Change management
 # -----------------------------------------------------------------------------
@@ -67,18 +88,6 @@ adapter = "roadmap"
 
 [skills.ki-work-roadmap.areas]
 SITE = "Website content and delivery"
-
-[skills.ki-tokenomics]
-headroom = "recommended"
-preferred_model_type = "standard"
-budgets.mcp_servers = 20 # User-scoped; revisit if the global MCP set is pruned.
-
-[skills.ki-housekeeping-claude]
-auto_memory = "disabled"
-
-[skills.ki-tokenomics-claude]
-
-[skills.ki-tokenomics-chatgpt]
 
 # -----------------------------------------------------------------------------
 # Relationships
