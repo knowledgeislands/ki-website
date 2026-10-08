@@ -1,14 +1,14 @@
 ---
 id: KI-WEB-SITE-043
 area: SITE
-title: Add a skills-by-outcome entry for keeping diagrams
+title: Diagrams skills-by-outcome entry
 kind: deliver
 status: triage
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-10-08T13:32:54Z
-updated_at: 2026-10-08T13:32:54Z
+updated_at: 2026-10-08T16:29:52Z
 ---
 
 ## Goal
@@ -26,3 +26,7 @@ Originating repository and item: `ki-agentic-harness` KI-HARNESS-GOV-164, which 
 ## Boundary
 
 In scope: one skills-by-outcome entry for keeping diagrams, pointing at the Diagrams standard. Out of scope: any wider documentation of the skill. This repository owns whether and when to act; the `website` Project is currently paused.
+
+## Discussion
+
+- Which row of the routing table fits best: an existing outcome group, or a new one for keeping a system's explanation current?
