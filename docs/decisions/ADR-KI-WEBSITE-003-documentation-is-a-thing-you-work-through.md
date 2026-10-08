@@ -54,5 +54,5 @@ The top-level navigation is three entries — **Philosophy**, **Model**, **Docs*
 
 - [ADR-KI-WEBSITE-002](ADR-KI-WEBSITE-002-one-section-for-every-project.md) — one section per repository, which this leaves standing as the shape of the catalogue while moving the teaching material out of it.
 - [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — the ownership test whose failure in the guidance section prompted the first move.
-- [Docs sections](../guides/developer/docs-sections.md) — the contract each page meets, and the gate that enforces it.
-- [Page reachability](../guides/developer/page-reachability.md) — the walk that proves every published page is on the far end of a link.
+- Docs sections (`docs/guides/developer/docs-sections.md`) — the contract each page meets, and the gate that enforces it.
+- Page reachability (`docs/guides/developer/page-reachability.md`) — the walk that proves every published page is on the far end of a link.

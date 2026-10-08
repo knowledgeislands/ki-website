@@ -34,11 +34,11 @@ A second registry also carried a cost the reader never saw: `verify-projects.ts`
 - A reader has one question to answer, not two. "Where is this repository described" has a single answer for every public repository the site lists.
 - The gate inverts rather than disappears. `verify-projects.ts` now requires all six release fields on a `tool` entry and forbids every one of them elsewhere. Requiring them matters as much as forbidding them: a half-declared tool would render an install block with a missing link instead of failing the build.
 - `verify-tool-routes.ts` and `sync-tool-release.ts` read `projects.json5`. The release-advance machinery — the `tool-release-published` event, the receiver's five independent checks, the pull-request boundary — is unchanged; only the file it edits moved. The sync additionally refuses an entry that is not `kind: 'tool'`, which was previously implicit in the registry it read.
-- The site keeps no page whose purpose is to explain the contract two sections shared, because there is one section. What `/tooling/` said about discoverability and indirection now lives in [tool routes](../guides/developer/tool-routes.md), which is where a contributor looks.
+- The site keeps no page whose purpose is to explain the contract two sections shared, because there is one section. What `/tooling/` said about discoverability and indirection now lives in tool routes, which is where a contributor looks.
 - This is structural, not editorial. The merged pages carry across intact at around two hundred words each; giving them the depth [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) now requires is separate work.
 
 ## References
 
-- [Tool routes](../guides/developer/tool-routes.md) — the `/install/<tool>` contract, the release fields, and the release handoff.
-- [The projects directory](../guides/developer/projects-directory.md) — the registry every entry answers to.
+- Tool routes (`docs/guides/developer/tool-routes.md`) — the `/install/<tool>` contract, the release fields, and the release handoff.
+- The projects directory (`docs/guides/developer/projects-directory.md`) — the registry every entry answers to.
 - [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — why these pages are too thin, which this record does not fix.
