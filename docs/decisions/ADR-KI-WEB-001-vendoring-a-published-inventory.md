@@ -1,14 +1,14 @@
 ---
-id: ADR-KI-WEBSITE-001
+id: ADR-KI-WEB-001
 title: 'Vendoring a Published Inventory'
 date: 2026-09-22
 status: current
 decision_type_url: https://knowledgeislands.info/specifications/decision-records/adr
 decision_type: architecture
-decision_depends_on: ['GDR-KI-WEBSITE-002']
+decision_depends_on: ['GDR-KI-WEB-002']
 ---
 
-# ADR-KI-WEBSITE-001: Vendoring a Published Inventory
+# ADR-KI-WEB-001: Vendoring a Published Inventory
 
 ## Context
 
@@ -18,7 +18,7 @@ The skill catalogue published every harness skill as hand-written prose. It was 
 
 The `ki` command reference had the opposite symptom and the same cause. It was the shortest page on the site: 133 words and a link to `tools-ki`. A reader who wanted to know what `ki` can do had to leave. Writing the inventory out by hand was the option to reject — eighty-eight commands across fourteen groups change every release, which is exactly the material that rotted in the catalogue.
 
-[GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) requires the site to carry what a reader needs and names vendoring a published interface as the outcome for material that changes per release. This record decides how that is done, for both inventories, and what the site owes when the upstream interface is weaker.
+[GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) requires the site to carry what a reader needs and names vendoring a published interface as the outcome for material that changes per release. This record decides how that is done, for both inventories, and what the site owes when the upstream interface is weaker.
 
 **The two upstreams are not equally strong, and the difference is the whole of this record's second half.**
 
@@ -52,7 +52,7 @@ Four properties hold in both cases:
 
 ## References
 
-- [GDR-KI-WEBSITE-002](GDR-KI-WEBSITE-002-carrying-material-for-readers.md) — the ownership rule that makes carrying an inventory the requirement and names vendoring as its outcome.
+- [GDR-KI-WEB-002](GDR-KI-WEB-002-carrying-material-for-readers.md) — the ownership rule that makes carrying an inventory the requirement and names vendoring as its outcome.
 - Page provenance (`docs/guides/developer/page-provenance.md`) — the declaration, the sweep, and the vendored case.
 - Deciding what this site publishes (`docs/guides/developer/what-to-publish.md`) — the ownership test this decision applies.
 - `ki-repo-harness`, `references/standards-compatible-harness.md` — the normative definition of the catalogue block.

@@ -1,5 +1,5 @@
 ---
-id: GDR-KI-WEBSITE-002
+id: GDR-KI-WEB-002
 title: 'Carrying Material for Readers'
 date: 2026-09-22
 status: current
@@ -7,7 +7,7 @@ decision_type_url: https://knowledgeislands.info/specifications/decision-records
 decision_type: governance
 ---
 
-# GDR-KI-WEBSITE-002: Carrying Material for Readers
+# GDR-KI-WEB-002: Carrying Material for Readers
 
 ## Context
 

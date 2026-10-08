@@ -65,7 +65,7 @@ The pages that actually start someone are `/docs/ki/getting-started/` and `/docs
 - [ ] Footer: `apps/site/src/_includes/partials/footer.njk` builds its Explore column from `site.nav`. Add a `footer` list to `apps/site/src/_data/site.ts` (the three `nav` entries plus `{ label: 'Contribute', href: '/contribute/' }`) and iterate it in `footer.njk`; leave the three-entry top navigation unchanged.
 - [ ] `apps/site/src/redirects.njk`: replace `/contribute /docs/contribute/ 301` with `/docs/contribute /contribute/ 301`; add `/docs/ki/getting-started /docs/get-started/install/ 301`; repoint `/guidance/using-ki/getting-started` and `/projects/ki/getting-started` at the new address in one hop; update the trailing comment that says Get Started, Contribute and Optional Tools kept their page names.
 - [ ] Restate the answer wherever the hand-built sections are described: both paragraphs in `docs/guides/developer/docs-sections.md` (around lines 31 and 55) and the header comment in `apps/site/scripts/verify-docs-sections.ts` (comment only; gate logic unchanged).
-- [ ] `docs/decisions/ADR-KI-WEBSITE-003-documentation-is-a-thing-you-work-through.md`: amend the "two hand-built landing pages" Consequences bullet - Get Started is a sequence; Contribute is site chrome - drawing the boundary the record left implicit (amend, not supersede).
+- [ ] `docs/decisions/ADR-KI-WEB-003-documentation-is-a-thing-you-work-through.md`: amend the "two hand-built landing pages" Consequences bullet - Get Started is a sequence; Contribute is site chrome - drawing the boundary the record left implicit (amend, not supersede).
 - [ ] Run Verify, then request the person-at-a-browser check before Awaiting review.
 
 ## Files touched
@@ -80,7 +80,7 @@ The pages that actually start someone are `/docs/ki/getting-started/` and `/docs
 - `apps/site/scripts/verify-docs-sections.ts` - header comment only
 - `apps/site/src/index.njk` - check the home Get Started button copy; target unchanged
 - `docs/guides/developer/docs-sections.md`
-- `docs/decisions/ADR-KI-WEBSITE-003-documentation-is-a-thing-you-work-through.md`
+- `docs/decisions/ADR-KI-WEB-003-documentation-is-a-thing-you-work-through.md`
 - This roadmap record
 
 ## Verify
@@ -102,7 +102,7 @@ Parked. Return trigger: Kris restarts website work after the state-of-play roadm
 
 ### Decision Records
 
-Possible. `ADR-KI-WEBSITE-003` states that everything which teaches lives in a Docs section. Concluding that Contribute is site chrome rather than documentation is consistent with that record but worth a sentence in it, because it draws the boundary the record left implicit.
+Possible. `ADR-KI-WEB-003` states that everything which teaches lives in a Docs section. Concluding that Contribute is site chrome rather than documentation is consistent with that record but worth a sentence in it, because it draws the boundary the record left implicit.
 
 ### Specifications
 
@@ -142,7 +142,7 @@ Left in Triage during an agent roadmap pass. The first two Steps are editorial c
 
 The editorial choices were decided by the Fable reviewer under delegated autonomy, reversible:
 
-1. **Get Started becomes the sequence it promises** (shape one). `ADR-KI-WEBSITE-003` defines Docs as a thing you work through, so the first card should be true. The `/docs/ki/getting-started/` first-run walkthrough already exists and moves in; the Arcadia explainer (Charter, Council, Territories, Archipelagos, glossary) moves to `/model/`, whose closing block already says Arcadia implements the model.
+1. **Get Started becomes the sequence it promises** (shape one). `ADR-KI-WEB-003` defines Docs as a thing you work through, so the first card should be true. The `/docs/ki/getting-started/` first-run walkthrough already exists and moves in; the Arcadia explainer (Charter, Council, Territories, Archipelagos, glossary) moves to `/model/`, whose closing block already says Arcadia implements the model.
 2. **Contribute leaves the Docs grid and becomes site chrome**: a standalone `/contribute/` page, its pre-037 address, linked from the footer. It is a conversion page about proposing to the shared model, not a sequence.
 3. **The Contribution Process is explained once, on `/contribute/`.** `/model/#processes` keeps its definition card and links there.
 

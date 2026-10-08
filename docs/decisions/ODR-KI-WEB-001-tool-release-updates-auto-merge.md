@@ -1,5 +1,5 @@
 ---
-id: ODR-KI-WEBSITE-001
+id: ODR-KI-WEB-001
 title: 'Tool Release Updates Auto-Merge'
 date: 2026-10-05
 status: current
@@ -7,7 +7,7 @@ decision_type_url: https://knowledgeislands.info/specifications/decision-records
 decision_type: operations
 ---
 
-# ODR-KI-WEBSITE-001: Tool Release Updates Auto-Merge
+# ODR-KI-WEB-001: Tool Release Updates Auto-Merge
 
 ## Context
 

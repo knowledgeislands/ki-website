@@ -39,7 +39,7 @@
  * they have. They are still sections, still bound, and still ordered.
  *
  * A repository link is not banned and should not be. The test from
- * GDR-KI-WEBSITE-002 is whether it survives as a fact rather than as a
+ * GDR-KI-WEB-002 is whether it survives as a fact rather than as a
  * destination, and link text is the part of that a machine can judge: "the full
  * guide" names a destination, while "the installer published at v0.4.0" names a
  * fact. Provenance is `verify-provenance.ts`; this file owns voice.
