@@ -9,6 +9,11 @@ sources:
     ref: 77ec746d2c16cb0e46d15bd175d8d27c35ca3285
     governs: 'The skill names and responsibilities the outcome routes resolve to'
     reviewed: '2026-09-27'
+  - repository: knowledgeislands/ki-agentic-harness
+    path: skills/governance/ki-diagrams/references/standards-diagrams.md
+    ref: f70599fc8a122c5b56ec34245749d668e1774d80
+    governs: 'The ki-diagrams route and what the Diagrams standard keeps'
+    reviewed: '2026-10-09'
 ---
 
 # Choose a skill by outcome
@@ -33,6 +38,7 @@ A normal repository-governance journey is `ki-repo` plus the structure skill mat
 - **Why was a durable choice made?** Use `ki-decision-records` for a living Decision Record.
 - **What behaviour must a system provide?** Use `ki-specs` for testable requirements and verification hooks.
 - **How does a reader use, operate, contribute to, or maintain it?** Use `ki-guides` for practical instructions under `docs/guides/`.
+- **What does the system look like, and is the picture still true?** Use `ki-diagrams` to keep diagrams that explain it: traced from the code, committed as a source and a self-contained SVG under `docs/diagrams/`, listed in one manifest, and refreshed when what they draw changes. The [Diagrams standard](https://github.com/knowledgeislands/ki-agentic-harness/blob/main/skills/governance/ki-diagrams/references/standards-diagrams.md) sets the rules.
 - **When should repository work happen?** Use `ki-work` to select the adapter, then the matching adapter skill: `ki-work-roadmap`, `ki-work-github-issues`, or `ki-work-linear`.
 - **What recurring maintenance is due?** Use `ki-work-housekeeping` to govern templates and due-run spawning.
 - **How can a live thread resume in fresh context?** Use `ki-checkpoint` for one concise repository-owned reconstruction snapshot. Use `ki-recap` instead when summarising the current live session and routing durable learning. When explicitly authorised, `ki-recap checkpoint <thread>` supplies grounded recap evidence to the separately owned checkpoint update procedure and refuses an incomplete hand-off.
