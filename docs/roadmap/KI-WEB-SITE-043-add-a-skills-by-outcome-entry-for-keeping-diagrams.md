@@ -3,12 +3,13 @@ id: KI-WEB-SITE-043
 area: SITE
 title: Diagrams skills-by-outcome entry
 kind: deliver
-status: triage
+status: cancelled
+resolution: obsolete
 blocks: []
 blocked_by: []
 baseline_ref: null
 created_at: 2026-10-08T13:32:54Z
-updated_at: 2026-10-08T16:29:52Z
+updated_at: 2026-10-09T21:40:00Z
 ---
 
 ## Goal
@@ -26,6 +27,10 @@ Originating repository and item: `ki-agentic-harness` KI-HARNESS-GOV-164, which 
 ## Boundary
 
 In scope: one skills-by-outcome entry for keeping diagrams, pointing at the Diagrams standard. Out of scope: any wider documentation of the skill. This repository owns whether and when to act; the `website` Project is currently paused.
+
+## Cancelled
+
+Cancelled 2026-10-09 as obsolete, approved by Kris Brown (state-of-play decisions log, Decision 31): the entry was made directly as a minor change in commit db3f668, which adds a ki-diagrams route under "Record why, what, how, or when" in `apps/site/src/docs/ki-agentic-harness/skills-by-outcome.md` and cites the Diagrams standard as a page source. That settles the Discussion question. It leaves no outstanding change.
 
 ## Discussion
 
